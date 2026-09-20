@@ -84,6 +84,9 @@ const current = must(
     .order('version', { ascending: false })
     .limit(1),
 )[0].version;
+const actualsBeforeAssignment = must(
+  await planner.from('activity_actuals').select('*').eq('project_id', p),
+);
 const cmd = {
   p_project: p,
   p_activity: activity,
@@ -251,9 +254,14 @@ check(
   'concurrent assignment writers produce one success and one conflict',
 );
 check(
-  must(await planner.from('activity_actuals').select('*').eq('project_id', p)).every(
-    (r) => r.actual_start === null && r.actual_finish === null,
-  ),
+  JSON.stringify(
+    must(await planner.from('activity_actuals').select('*').eq('project_id', p)).sort((a, b) =>
+      a.activity_id.localeCompare(b.activity_id),
+    ),
+  ) ===
+    JSON.stringify(
+      actualsBeforeAssignment.sort((a, b) => a.activity_id.localeCompare(b.activity_id)),
+    ),
   'assignment commands never imply actual progress',
 );
 const plannerMember = must(

@@ -1,15 +1,44 @@
-import { pipelineVersion } from '@intelligrid/contracts';
-
-if (!process.argv.includes('--check')) {
-  throw new Error(
-    'Phase 1 only supports --check. The database job consumer is implemented in Phase 3.',
+import { existsSync } from 'node:fs';
+import { resolve } from 'node:path';
+import { OpenAIExtractor } from '@intelligrid/adapters';
+import { processOne, workerDatabase } from './processor';
+if (process.argv.includes('--check')) {
+  console.log(
+    JSON.stringify({
+      service: 'worker',
+      mode: 'configuration-check',
+      pipelineVersion: 'text-v1',
+      provider: 'openai',
+      consumesJobs: false,
+    }),
   );
+} else {
+  for (const path of [resolve('.env.local'), resolve('apps/worker/.env.local')])
+    if (existsSync(path)) process.loadEnvFile(path);
+  const url = process.env.SUPABASE_URL,
+    key = process.env.SUPABASE_SERVICE_ROLE_KEY,
+    apiKey = process.env.OPENAI_API_KEY;
+  if (!url || !key || !apiKey)
+    throw new Error(
+      'Configure SUPABASE_URL, SUPABASE_SERVICE_ROLE_KEY and OPENAI_API_KEY for the worker.',
+    );
+  const db = workerDatabase(url, key),
+    extractor = new OpenAIExtractor(apiKey);
+  let stopping = false;
+  process.on('SIGINT', () => {
+    stopping = true;
+  });
+  process.on('SIGTERM', () => {
+    stopping = true;
+  });
+  do {
+    try {
+      const worked = await processOne(db, extractor);
+      if (process.argv.includes('--once')) break;
+      if (!worked) await new Promise((r) => setTimeout(r, 2000));
+    } catch {
+      console.error('Worker database unavailable; retrying in 5 seconds.');
+      await new Promise((r) => setTimeout(r, 5000));
+    }
+  } while (!stopping);
 }
-console.log(
-  JSON.stringify({
-    service: 'worker',
-    mode: 'configuration-check',
-    pipelineVersion,
-    consumesJobs: false,
-  }),
-);

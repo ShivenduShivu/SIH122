@@ -1,36 +1,19 @@
-import { plannerContext, projectSchedule } from '../../../lib/project';
-import { ScheduleRegister } from '../../../components/schedule-register';
-import Link from 'next/link';
-
-export default async function SchedulePage({
-  searchParams,
-}: {
-  searchParams: Promise<{ discipline?: string }>;
-}) {
-  await plannerContext();
-  const { activities } = await projectSchedule();
-  const { discipline } = await searchParams;
-  const initial = ['Civil', 'Piping', 'Electrical'].includes(discipline ?? '')
-    ? discipline!
-    : 'All';
+import { plannerContext, siteToday } from '../../../lib/project';
+import { ProjectTimeline } from '../../../components/project-timeline';
+import { RefreshPage } from '../../../components/refresh-page';
+export default async function SchedulePage() {
+  const { db, project } = await plannerContext();
+  const { data, error, count } = await db
+    .from('accepted_events')
+    .select('*', { count: 'exact' })
+    .eq('project_id', project.id)
+    .order('created_at', { ascending: false });
+  if (error || (count ?? 0) > (data?.length ?? 0))
+    throw new Error('Could not load accepted evidence.');
   return (
     <>
-      <div className="breadcrumb">Project workspace / Schedule</div>
-      <div className="page-heading">
-        <div>
-          <div className="eyebrow">REVISION 01 / DEVELOPMENT FIXTURE</div>
-          <h1>Schedule register</h1>
-          <p>Detailed activities, locations and planned dates across three disciplines.</p>
-        </div>
-        <Link className="button" href="/planner/assignments">
-          Manage assignments
-        </Link>
-      </div>
-      <ScheduleRegister key={initial} activities={activities} initialDiscipline={initial} />
-      <div className="inline-note">
-        <strong>Next milestone:</strong> add accepted actuals and a synchronized Gantt. Planned
-        dates do not indicate completion.
-      </div>
+      <RefreshPage />
+      <ProjectTimeline today={siteToday()} events={data ?? []} />
     </>
   );
 }

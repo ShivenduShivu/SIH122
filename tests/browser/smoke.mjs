@@ -26,26 +26,39 @@ try {
   await page.waitForURL('**/login');
   checks.push('Unauthenticated routes redirect to sign in');
   await login(page, 5);
-  assert.equal(
-    await page.getByRole('heading', { level: 1 }).textContent(),
-    'Duliajan Facility Expansion',
-  );
+  assert.equal(await page.getByRole('heading', { level: 1 }).textContent(), 'Execution overview');
   await page.screenshot({ path: 'test-results/planner-overview.png', fullPage: true });
   checks.push('Root redirects to the branded planner overview');
   await page.getByRole('link', { name: 'Schedule', exact: true }).click();
-  await page.getByRole('heading', { name: 'Schedule register' }).waitFor();
-  assert.equal(await page.locator('tbody tr').count(), 12);
-  await page.getByLabel('Discipline', { exact: true }).selectOption('Piping');
+  await page.getByRole('heading', { name: 'Project schedule' }).waitFor();
+  assert.equal(await page.locator('.activity-label').count(), 12);
+  await page.locator('#schedule-discipline').selectOption('Piping');
+  assert.equal(await page.locator('.activity-label').count(), 4);
+  await page.getByRole('button', { name: 'Table', exact: true }).click();
   assert.equal(await page.locator('tbody tr').count(), 4);
-  await page.getByLabel('Find activity').fill('24-P-1202');
-  assert.equal(await page.locator('tbody tr').count(), 1);
-  await page.getByLabel('Find activity').fill('no-such-location');
-  await page.getByRole('heading', { name: 'No matching activities' }).waitFor();
-  await page.getByRole('button', { name: 'Clear filters' }).click();
+  await page.locator('#schedule-discipline').selectOption('All');
   assert.equal(await page.locator('tbody tr').count(), 12);
-  checks.push('Discipline, location search and empty-state recovery');
+  await page.getByRole('button', { name: 'Timeline', exact: true }).click();
+  checks.push('Grouped Gantt, discipline filter and table use the same schedule');
+  await page.getByLabel('Baseline', { exact: true }).uncheck();
+  assert.equal(await page.locator('.baseline-bar').count(), 0);
+  await page.getByLabel('Baseline', { exact: true }).check();
+  assert.equal(await page.locator('.baseline-bar').count(), 12);
+  await page.getByRole('button', { name: /Civil works/ }).click();
+  assert.equal(await page.locator('.activity-label').count(), 8);
+  await page.getByRole('button', { name: /Civil works/ }).click();
+  assert.equal(await page.locator('.activity-label').count(), 12);
+  await page.locator('.activity-label').first().click();
+  await page.getByRole('dialog').waitFor();
+  await page.getByRole('tab', { name: 'Details', exact: true }).click();
+  await page.getByRole('tab', { name: 'Evidence', exact: true }).click();
+  await page.getByRole('tab', { name: 'Audit trail', exact: true }).click();
+  await page.keyboard.press('Escape');
+  assert.equal(await page.getByRole('dialog').isVisible(), false);
+  checks.push('Baseline toggle, discipline collapse and keyboard-dismissed activity drawer');
+
   await page.screenshot({ path: 'test-results/planner-schedule.png', fullPage: true });
-  await page.getByRole('link', { name: 'Manage assignments' }).click();
+  await page.getByRole('link', { name: 'Assign work' }).click();
   await page.getByRole('heading', { name: 'Field assignments', exact: true }).waitFor();
   await page
     .getByLabel('Reason for this assignment')
@@ -125,10 +138,10 @@ try {
     .getByLabel('Active project', { exact: true })
     .selectOption('10000000-0000-4000-8000-000000000002');
   await page.getByRole('button', { name: 'Switch project', exact: true }).click();
-  await page.getByRole('heading', { name: 'Isolation Test Project', exact: true }).waitFor();
+  await page.locator('.breadcrumb').filter({ hasText: 'Isolation Test Project' }).waitFor();
   await page.getByRole('link', { name: 'Schedule', exact: true }).click();
-  await page.getByRole('heading', { name: 'Schedule register', exact: true }).waitFor();
-  assert.equal(await page.locator('tbody tr').count(), 1);
+  await page.getByRole('heading', { name: 'Project schedule', exact: true }).waitFor();
+  assert.equal(await page.locator('.activity-label').count(), 1);
   checks.push('Authorized project switch loads only that project schedule');
   assert.deepEqual(errors, []);
   await writeFile(

@@ -57,25 +57,25 @@ export default async function FieldPage() {
             <strong>Speak a progress report</strong>
             <small>Hindi, English, or a mix of both</small>
           </button>
-          <button disabled>
+          <Link href="/field/report" className="capture-link">
             <Icon name="pen" />
             <strong>Type instead</strong>
-          </button>
+          </Link>
           <button disabled>
             <Icon name="camera" />
             <strong>Add a photo</strong>
           </button>
         </div>
         <p className="field-explanation">
-          Reporting opens in the next phases. Check the location and details before you send.
+          Text reporting is available. Voice and photo capture arrive in a later phase.
         </p>
       </section>
       <div className="field-callout">
         <Icon name="clipboard" />
-        <strong>No accepted reports yet</strong>
+        <strong>Keep track of your reports</strong>
         <p>
-          Only approved field updates will change actual progress. Scheduled work does not mean
-          completed work.
+          Submitted and accepted are separate steps.{' '}
+          <Link href="/field/reports">Open My reports →</Link>
         </p>
       </div>
       {['planner', 'manager'].includes(member.role) && (

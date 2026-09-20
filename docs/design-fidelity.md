@@ -31,3 +31,7 @@ The name and IG identity mark replace Nirmaan. Fixture dates, people, quantities
 ## Phase 2 review evidence
 
 Real identity, protected schedule reads and mobile Current work / Today / Up next are implemented. The mobile comparison against page 8 and 390px/320px browser checks are recorded in `docs/reports/phase-02.md`. Actual accepted quantities and connectivity indicators remain deferred to their data-backed phases; no illustrative percentages or sync claims were inserted. Phase 3 must still replace the overview content and build the grouped Gantt described above.
+
+## Phase 3 review evidence
+
+The execution overview, grouped Gantt, baseline toggle, Today marker, Timeline/Table switch, activity Evidence/Audit drawer, report register, review panel and mobile text confirmation now use persisted reporting data. Top navigation and bottom mobile navigation retain outline icons and the approved order. Desktop and 390px/320px checks and screenshots are linked in `docs/reports/phase-03.md`. Import/export, speech, photos, offline delivery, language selection and execution history remain at their planned later gates.

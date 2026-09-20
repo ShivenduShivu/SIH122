@@ -10,18 +10,21 @@ export function FieldNav() {
         <Icon name="home" size={18} />
         Home
       </Link>
-      <span aria-disabled="true" title="Reporting will be connected in Phase 3">
+      <Link href="/field/report" aria-current={path === '/field/report' ? 'page' : undefined}>
         <Icon name="microphone" size={18} />
         Report
-      </span>
+      </Link>
       <Link href="/field/work" aria-current={path === '/field/work' ? 'page' : undefined}>
         <Icon name="clipboard" size={18} />
         My work
       </Link>
-      <span aria-disabled="true" title="Report history will be connected in Phase 3">
+      <Link
+        href="/field/reports"
+        aria-current={path.startsWith('/field/reports') ? 'page' : undefined}
+      >
         <Icon name="reports" size={18} />
         My reports
-      </span>
+      </Link>
     </nav>
   );
 }

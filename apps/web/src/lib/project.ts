@@ -2,7 +2,7 @@ import 'server-only';
 import { cache } from 'react';
 import { cookies } from 'next/headers';
 import { redirect } from 'next/navigation';
-import { PlannedActivity } from '@intelligrid/contracts';
+import { ScheduleSnapshot } from '@intelligrid/contracts/reports';
 import { database } from './supabase';
 
 export const projectContext = cache(async () => {
@@ -34,44 +34,26 @@ export async function plannerContext() {
 }
 export const projectSchedule = cache(async () => {
   const c = await projectContext();
-  const [plans, activityRows, assignments] = await Promise.all([
-    c.db
-      .from('activity_plan_versions')
-      .select('*')
-      .eq('project_id', c.project.id)
-      .eq('revision_id', c.project.active_revision_id),
-    c.db.from('activities').select('id,external_id').eq('project_id', c.project.id),
+  const [schedule, assignments] = await Promise.all([
+    c.db.rpc('schedule_snapshot', { p_project: c.project.id }),
     c.db
       .from('assignment_versions')
-      .select('*')
+      .select('*', { count: 'exact' })
       .eq('project_id', c.project.id)
-      .order('version', { ascending: false }),
+      .order('version', { ascending: false })
+      .limit(200),
   ]);
-  if (plans.error || activityRows.error || assignments.error)
-    throw new Error('Could not load the schedule. No sample fallback is used.');
+  if (
+    schedule.error ||
+    assignments.error ||
+    (assignments.count ?? 0) > (assignments.data?.length ?? 0)
+  )
+    throw new Error('Could not load the complete authorized schedule.');
+  const snapshot = ScheduleSnapshot.parse(schedule.data);
   const currentAssignments = new Map<string, NonNullable<typeof assignments.data>[number]>();
   for (const row of assignments.data ?? [])
     if (!currentAssignments.has(row.activity_id)) currentAssignments.set(row.activity_id, row);
-  const activities = (plans.data ?? [])
-    .map((p) =>
-      PlannedActivity.parse({
-        id: p.activity_id,
-        projectId: p.project_id,
-        revisionId: p.revision_id,
-        externalId: activityRows.data?.find((a) => a.id === p.activity_id)?.external_id,
-        name: p.name,
-        discipline: p.discipline,
-        location: p.location,
-        stage: p.stage,
-        plannedStart: p.planned_start,
-        plannedFinish: p.planned_finish,
-        targetQuantity: p.target_quantity,
-        unit: p.unit,
-        assignedReporterId: currentAssignments.get(p.activity_id)?.reporter_id ?? null,
-      }),
-    )
-    .sort((a, b) => a.externalId.localeCompare(b.externalId));
-  return { ...c, activities, currentAssignments };
+  return { ...c, activities: snapshot.activities, currentAssignments, snapshot };
 });
 export function siteToday() {
   return new Intl.DateTimeFormat('en-CA', {

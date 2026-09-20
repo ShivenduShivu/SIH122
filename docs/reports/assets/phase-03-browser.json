@@ -1,0 +1,38 @@
+{
+  "passed": true,
+  "checks": [
+    "Mobile raw-text confirmation creates a persisted report; real OpenAI extraction leaves the schedule unchanged",
+    "A second browser receives the committed schedule version and actual start without a reload; baseline remains unchanged",
+    "Activity drawer shows retained source and accepted event audit; Escape closes it",
+    "Overview and reporter receipt show the accepted result from the same committed version",
+    "Ambiguous painting report retains missing details and never changes the schedule",
+    "Field reporting and receipts fit 390px without page overflow",
+    "Field reporting and receipts fit 320px without page overflow",
+    "Report retrieval endpoint denies a foreign-project reporter"
+  ],
+  "browserErrors": [],
+  "reportId": "150562bd-d679-4e65-a256-7e55477af2ba",
+  "ambiguousReportId": "79865c63-b13e-4604-b813-074f7e1ead5d",
+  "claimId": "8cb06a7f-59e8-460d-8276-ae4689ca75fd",
+  "activityId": "50000000-0000-4000-8000-000000000002",
+  "scheduleVersion": 4,
+  "approvalRoundTripMs": 178,
+  "secondBrowserConvergenceMs": 858,
+  "provider": {
+    "provider": "openai",
+    "model_id": "gpt-5.4-mini-2026-03-17",
+    "latency_ms": 1621,
+    "usage": {
+      "input_tokens": 637,
+      "total_tokens": 779,
+      "output_tokens": 142,
+      "input_tokens_details": {
+        "cached_tokens": 0,
+        "cache_write_tokens": 0
+      },
+      "output_tokens_details": {
+        "reasoning_tokens": 34
+      }
+    }
+  }
+}

@@ -2,9 +2,19 @@ import { PlannerNav } from '../../components/planner-nav';
 import { brand } from '../../lib/brand';
 import { plannerContext } from '../../lib/project';
 import { ProjectSwitcher } from '../../components/project-switcher';
+import { scheduleSnapshot } from '../../lib/reports';
+import { ScheduleProvider } from '../../components/schedule-context';
 
 export default async function PlannerLayout({ children }: { children: React.ReactNode }) {
-  const { member, project } = await plannerContext();
+  const { db, member, project } = await plannerContext();
+  const snapshot = await scheduleSnapshot();
+  const pending = await db
+    .from('claims')
+    .select('report_id', { count: 'exact' })
+    .eq('project_id', project.id)
+    .eq('state', 'pending');
+  if (pending.error || (pending.count ?? 0) > (pending.data?.length ?? 0))
+    throw new Error('Could not load review queue count.');
   return (
     <div className="desktop-shell">
       <a className="skip-link" href="#main-content">
@@ -48,17 +58,17 @@ export default async function PlannerLayout({ children }: { children: React.Reac
           </div>
         </div>
       </header>
-      <PlannerNav />
+      <PlannerNav pendingCount={new Set(pending.data!.map((c) => c.report_id)).size} />
       <ProjectSwitcher />
       <div className="context-strip">
         <span>
           <i className="dot" />
           Synthetic schedule · Revision 01
         </span>
-        <span>Protected workspace · Plan dates only</span>
+        <span>Protected workspace · Accepted progress only</span>
       </div>
       <main id="main-content" className="planner-main">
-        {children}
+        <ScheduleProvider initial={snapshot}>{children}</ScheduleProvider>
       </main>
       <footer className="footer">
         <span>{brand.name} / Planning-to-execution bridge</span>

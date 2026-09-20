@@ -1,0 +1,50 @@
+[
+  {
+    "kind": "START",
+    "reportId": "9682b175-96d5-48b9-acbf-e835b02f5ebe",
+    "claimId": "01a6e496-bfc1-4940-978a-847dcce678d0",
+    "provider": "openai",
+    "model_id": "gpt-5.4-mini-2026-03-17",
+    "latency_ms": 1573,
+    "usage": {
+      "input_tokens": 632,
+      "total_tokens": 786,
+      "output_tokens": 154,
+      "input_tokens_details": {
+        "cached_tokens": 0,
+        "cache_write_tokens": 0
+      },
+      "output_tokens_details": {
+        "reasoning_tokens": 40
+      }
+    },
+    "approvalMs": 39,
+    "snapshotMs": 46,
+    "scheduleVersion": 1,
+    "eventId": "b292eac7-655e-408b-8dbd-ba24217057ff"
+  },
+  {
+    "kind": "FINISH",
+    "reportId": "a17d7b7d-207f-4b25-bee0-5e9ce84b9843",
+    "claimId": "18a1ec97-1eef-4066-83a5-b19a8945e2fe",
+    "provider": "openai",
+    "model_id": "gpt-5.4-mini-2026-03-17",
+    "latency_ms": 1786,
+    "usage": {
+      "input_tokens": 651,
+      "total_tokens": 819,
+      "output_tokens": 168,
+      "input_tokens_details": {
+        "cached_tokens": 0,
+        "cache_write_tokens": 0
+      },
+      "output_tokens_details": {
+        "reasoning_tokens": 41
+      }
+    },
+    "approvalMs": 32,
+    "snapshotMs": 20,
+    "scheduleVersion": 2,
+    "eventId": "05bb195f-e667-449b-9845-d25bfd115138"
+  }
+]

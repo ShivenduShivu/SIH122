@@ -26,7 +26,11 @@
     "test:seed": "node scripts/test-seed-idempotency.mjs",
     "admin:member": "node scripts/admin-member.mjs",
     "local:bind": "node scripts/bind-local-docker.mjs",
-    "db:reset:local": "supabase db reset --local --network-id intelligrid-local --yes"
+    "db:reset:local": "supabase db reset --local --network-id intelligrid-local --yes",
+    "worker:start": "tsx scripts/run-local-worker.ts",
+    "test:reconciliation-db": "tsx scripts/test-reconciliation-db.ts",
+    "test:live": "tsx scripts/verify-live-flow.ts",
+    "test:browser:live": "tsx tests/browser/reconciliation.ts"
   },
   "devDependencies": {
     "@playwright/test": "1.63.0",

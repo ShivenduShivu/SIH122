@@ -1,6 +1,17 @@
 import type { ReactNode } from 'react';
 
 const shapes: Record<string, ReactNode> = {
+  timeline: (
+    <>
+      <path d="M3 5h9M7 10h13M4 15h10M10 20h11M3 3v4M7 8v4M4 13v4M10 18v4" />
+    </>
+  ),
+  table: (
+    <>
+      <rect x="3" y="3" width="18" height="18" rx="1" />
+      <path d="M3 9h18M3 15h18M9 3v18" />
+    </>
+  ),
   overview: (
     <>
       <rect x="3" y="3" width="7" height="7" rx="1" />
@@ -62,6 +73,8 @@ const shapes: Record<string, ReactNode> = {
 };
 
 export type IconName =
+  | 'timeline'
+  | 'table'
   | 'overview'
   | 'calendar'
   | 'reports'

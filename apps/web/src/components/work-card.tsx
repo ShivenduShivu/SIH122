@@ -1,10 +1,12 @@
 import type { PlannedActivity } from '@intelligrid/contracts';
 import { formatDateOnly } from '@intelligrid/domain';
+import type { ScheduleActivity } from '@intelligrid/contracts/reports';
 export function WorkCard({
   activity: a,
   assignment: x,
 }: {
-  activity: PlannedActivity;
+  activity: PlannedActivity &
+    Partial<Pick<ScheduleActivity, 'actualStart' | 'actualFinish' | 'acceptedQuantity'>>;
   assignment: { effective_from: string; effective_to: string; version: number };
 }) {
   return (
@@ -13,7 +15,9 @@ export function WorkCard({
         <span className="activity-id">
           {a.externalId} · {a.discipline}
         </span>
-        <span className="tag">Assigned</span>
+        <span className="tag">
+          {a.actualFinish ? 'Complete' : a.actualStart ? 'In progress' : 'Assigned'}
+        </span>
       </div>
       <h2>{a.name}</h2>
       <p>{a.location}</p>
@@ -25,7 +29,14 @@ export function WorkCard({
           {a.targetQuantity} {a.unit} planned
         </span>
       </div>
-      <div className="task-evidence">No accepted progress recorded · Assignment v{x.version}</div>
+      <div className="task-evidence">
+        {a.acceptedQuantity === undefined
+          ? 'Progress unavailable'
+          : a.acceptedQuantity === 0
+            ? 'No quantity recorded'
+            : `${a.acceptedQuantity} / ${a.targetQuantity} ${a.unit} accepted`}{' '}
+        · Assignment v{x.version}
+      </div>
     </article>
   );
 }

@@ -89,7 +89,7 @@ For an operator change, create an ignored `.cache/member-change.json`, then run 
 }
 ```
 
-Use the current membership version from the database. An empty work-front array means all locations within the allowed contractor and disciplines. Capabilities are reserved data in Phase 2; they grant no extra permissions. Roles and scopes enforce all current actions. Report review/verification capabilities will be defined with those operations in later phases. Broadening a member's discipline or location scope is an operator action; the assignment endpoint cannot change that scope.
+Use the current membership version from the database. An empty work-front array means all locations within the allowed contractor and disciplines. Capabilities are reserved data in Phase 2; they grant no extra permissions. Roles and scopes enforce all current actions. Phase 3 review is restricted to current planner/manager members; supervisor verification is Phase 4. Broadening a member's discipline or location scope is an operator action; the assignment endpoint cannot change that scope.
 
 ## Current web API
 
@@ -110,4 +110,26 @@ Plan revisions and assignment history are append-only. Same-project foreign keys
 
 The private evidence bucket currently supports a personal namespace: `projectId/userId/file`. The reporter can upload/read their own objects; an authorized project planner/manager can read them. Other reporters cannot. This is a tested Storage policy foundation, **not** a finished report-evidence API. Report-bound reservations, signed-download endpoints and stricter evidence routing arrive with reporting. A signed URL is a temporary bearer capability: already issued URLs remain usable until expiry even after membership revocation; newly requested URLs are denied immediately.
 
-No actual-progress writes are granted to browser roles, including planners. The acceptance transaction arrives in Phase 3. Do not add direct client updates to `activity_actuals`. The worker still performs a configuration check only. Live Primavera access, offline capture, speech and hosted production deployment are outside Phase 2.
+No direct actual-progress writes are granted to browser roles, including planners. Phase 3 writes through the guarded `decide_claim` transaction. Do not add direct client updates to `activity_actuals`. Live Primavera access, offline capture, speech and hosted production deployment remain outside the implemented slice.
+
+## Phase 3 worker and text reporting
+
+Apply all four migrations before starting the current app. On a disposable local database, `npm run db:reset:local` applies them in order, then `npm run local:bind` restores loopback-only published ports and `npm run seed:local` creates synthetic accounts. Reset erases existing local reports and decisions; do not use it merely to restart the app. Preserve the `intelligrid-local` Docker network setting described above.
+
+Set `OPENAI_API_KEY` in the worker process environment or ignored `apps/worker/.env.local`. Never put it in `NEXT_PUBLIC_*`, web source, screenshots, or Git. The local launcher loads Supabase credentials from ignored `.cache/supabase.env`; the standalone worker instead requires `SUPABASE_URL` and `SUPABASE_SERVICE_ROLE_KEY`. See `apps/worker/.env.example`. Default model: `gpt-5.4-mini-2026-03-17`; change `OPENAI_MODEL` only after testing.
+
+Run `npm run worker:start` alongside the web server. `npm run worker:start -- --once` handles at most one available job. The worker's `--check` path validates configuration boundaries without consuming jobs or calling the provider. The web process never receives the privileged worker credentials through application imports.
+
+For a manual demo:
+
+1. Sign in as a seeded field reporter. Choose **Type instead**, describe an assigned activity and a real work date, then **Check report** and **Send for review**. You may leave task selection blank to exercise matching.
+2. Keep a second planner browser on **Schedule**. Its version must not advance while the report is merely submitted or extracted.
+3. In a separate planner session, open **Review queue**, compare original wording with the candidate, enter a reason and accept an unambiguous event. FINISH needs a previously accepted START.
+4. The schedule and overview refresh from accepted actuals. The reporter sees **Accepted**. The original baseline stays intact; external delivery remains pending.
+5. Submit “Painting is finished.” without a location/date. Check the missing-detail flags and unchanged schedule. Follow-up questions are implemented in Phase 4, after this phase's review.
+
+`npm run test:reconciliation-db` uses a disposable activity inside the synthetic isolation project, marks it inactive on completion, and retains test reports/audit history. Its injected provider is explicitly named `test-fixture`; it measures database rules, not model accuracy. Run database mutation suites sequentially and keep the worker stopped during these checks so it cannot take their controlled leases.
+
+`npm run test:live` exercises real START and FINISH calls on CIV-0401; existing accepted dates are preserved on reruns. `npm run test:browser:live` uses the real provider and browser, accepts a start on an untouched civil activity and submits an ambiguous report. These commands consume API tokens and alter synthetic history. The browser test requires at least one untouched civil activity; use a deliberately reset disposable database when repeating it extensively. Live-test provider keys currently come from the process environment.
+
+The versioned report/schedule/decision routes, bounded-read limits and failure behavior are documented in [Phase 3 technical notes](phase-03-technical-notes.md). Start the worker normally after controlled tests if you want newly submitted reports to process during the demo.

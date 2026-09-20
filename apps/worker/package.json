@@ -4,9 +4,13 @@
   "private": true,
   "type": "module",
   "scripts": {
-    "check": "tsx src/index.ts --check"
+    "check": "tsx src/index.ts --check",
+    "start": "tsx src/index.ts"
   },
   "dependencies": {
-    "@intelligrid/contracts": "0.1.0"
+    "@intelligrid/contracts": "0.1.0",
+    "@intelligrid/domain": "0.1.0",
+    "@intelligrid/adapters": "0.1.0",
+    "@supabase/supabase-js": "2.116.0"
   }
 }

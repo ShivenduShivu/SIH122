@@ -13,13 +13,32 @@ const tables = [
   'assignment_versions',
   'assignment_commands',
   'admin_audit',
+  'reports',
+  'report_versions',
+  'processing_runs',
+  'jobs',
+  'claims',
+  'candidate_matches',
+  'review_decisions',
+  'accepted_events',
+  'delivery_outbox',
 ];
 async function snapshot() {
   const rows = {};
-  for (const t of tables)
-    rows[t] = must(await admin.from(t).select('*')).sort((a, b) =>
-      JSON.stringify(a).localeCompare(JSON.stringify(b)),
-    );
+  for (const t of tables) {
+    const all = [];
+    for (let offset = 0; ; offset += 200) {
+      const page = must(
+        await admin
+          .from(t)
+          .select('*')
+          .range(offset, offset + 199),
+      );
+      all.push(...page);
+      if (page.length < 200) break;
+    }
+    rows[t] = all.sort((a, b) => JSON.stringify(a).localeCompare(JSON.stringify(b)));
+  }
   return rows;
 }
 const before = await snapshot();

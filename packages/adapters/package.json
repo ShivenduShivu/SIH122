@@ -1,0 +1,11 @@
+{
+  "name": "@intelligrid/adapters",
+  "version": "0.1.0",
+  "private": true,
+  "type": "module",
+  "exports": "./src/openai.ts",
+  "dependencies": {
+    "@intelligrid/contracts": "0.1.0",
+    "zod": "4.6.5"
+  }
+}
