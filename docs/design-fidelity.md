@@ -26,6 +26,14 @@ Authority: `output/pdf/Nirmaan-Website-and-Mobile-Design.pdf` (12 pages), the or
 
 ## Accepted differences
 
+### Proposed Phase 4A gate mapping
+
+The historical phase numbers in the screen table above describe the original plan. Subject to Phase 4A approval, `implementation-phases.md` replaces the remaining gates: **5A** schedule import/hierarchy/dynamic disciplines/milestones; **5B** source-row review, progress basis, approval preview, unresolved filters and per-claim receipts; **6A** exchange and execution history; **6B** voice/photo/transcript and recoverable drafts. Full offline media remains optional. No completed screenshot is evidence of these future additions.
+
+The richer schedule must keep the approved masthead, navigation order/icons, baseline control, Timeline/Table switch, restrained colour system and source drawer. Nested area/package groups and a usable date-range/zoom control extend the existing Gantt. Count only reporting leaves in activity totals. Milestones must not look like positive-duration bars. Reported but unresolved progress must be visually distinct from accepted progress, including missing dates; absence of an actual start must not erase the observation.
+
+Extend the current review panel with an exact before/after approval preview and a readable source path (file/sheet/row or original message). Keep uploader and named reporter distinct for imported reports. Keep simple language in mobile questions and show per-claim results when only part of a report is accepted. No new primary AI/chat navigation is proposed. At implementation, compare each changed screen against the original PDF and capture desktop, 390px and 320px evidence as usual.
+
 The name and IG identity mark replace Nirmaan. Fixture dates, people, quantities and counts can differ from the design illustration. Additional security, missing-detail, verification and stale-data states are required by architecture v1.1. A change to screen structure or action hierarchy needs an explicit reason in the phase report; convenience alone is not a reason to drift from the reference.
 
 ## Phase 2 review evidence

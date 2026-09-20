@@ -1,5 +1,7 @@
-# Nirmaan
+# IntelliGrid (original working title: Nirmaan)
 ## Technical architecture & implementation blueprint
+
+> **Historical v1.1 baseline.** The supplied Oil India reference pack has now been reviewed. [Architecture alignment v1.2](09-architecture-alignment-v1.2.md) proposes the updated scope, data semantics and remaining work, pending Phase 4A approval. On approval it takes precedence where this document differs. In particular, IntelliGrid is the chosen name, the implemented extraction provider is OpenAI (not the original Gemini proposal), and the new phase plan prioritizes supplied data and planner exchange before optional offline media. This document is retained for design history; its planned features are not evidence of current implementation.
 
 BITS Pilani | Smart India Hackathon | Problem statement 26122
 
