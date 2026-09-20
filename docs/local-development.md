@@ -89,7 +89,7 @@ For an operator change, create an ignored `.cache/member-change.json`, then run 
 }
 ```
 
-Use the current membership version from the database. An empty work-front array means all locations within the allowed contractor and disciplines. Capabilities are reserved data in Phase 2; they grant no extra permissions. Roles and scopes enforce all current actions. Phase 3 review is restricted to current planner/manager members; supervisor verification is Phase 4. Broadening a member's discipline or location scope is an operator action; the assignment endpoint cannot change that scope.
+Use the current membership version from the database. An empty work-front array means all locations within the allowed contractor and disciplines. Phase 3 review is restricted to current planner/manager members. Phase 4 introduces explicit `field_verify` and `cross_contractor_verify` capabilities for independent verification; see the Phase 4 notes before granting either. Broadening a member's discipline or location scope is an operator action; the assignment endpoint cannot change that scope.
 
 ## Current web API
 
@@ -108,7 +108,7 @@ Assignment JSON: `activityId`, `commandId` (UUID), `expectedVersion` (integer), 
 
 Plan revisions and assignment history are append-only. Same-project foreign keys prevent linking an activity to another project's member or WBS. Reporter activity access requires the latest assignment plus current membership, contractor, discipline and location scope. Historical/planned assignment dates control the Today/Up next grouping, not access expiration; earlier assigned activities remain visible for late reporting. Supervisor activity visibility is scoped; planner/manager access is project-wide. A reporter is never their own verifying supervisor.
 
-The private evidence bucket currently supports a personal namespace: `projectId/userId/file`. The reporter can upload/read their own objects; an authorized project planner/manager can read them. Other reporters cannot. This is a tested Storage policy foundation, **not** a finished report-evidence API. Report-bound reservations, signed-download endpoints and stricter evidence routing arrive with reporting. A signed URL is a temporary bearer capability: already issued URLs remain usable until expiry even after membership revocation; newly requested URLs are denied immediately.
+The private evidence bucket currently supports a personal namespace: `projectId/userId/file`. The reporter can upload/read their own objects; an authorized project planner/manager can read them. Other reporters cannot. This is a tested Storage policy foundation, **not** a finished report-evidence API. Phase 4 adds report-bound received-evidence retrieval and scoped routed-supervisor access. Upload reservations/finalization remain Phase 5. A signed URL is a temporary bearer capability: already issued URLs remain usable until expiry even after membership revocation; newly requested URLs are denied immediately.
 
 No direct actual-progress writes are granted to browser roles, including planners. Phase 3 writes through the guarded `decide_claim` transaction. Do not add direct client updates to `activity_actuals`. Live Primavera access, offline capture, speech and hosted production deployment remain outside the implemented slice.
 
@@ -133,3 +133,11 @@ For a manual demo:
 `npm run test:live` exercises real START and FINISH calls on CIV-0401; existing accepted dates are preserved on reruns. `npm run test:browser:live` uses the real provider and browser, accepts a start on an untouched civil activity and submits an ambiguous report. These commands consume API tokens and alter synthetic history. The browser test requires at least one untouched civil activity; use a deliberately reset disposable database when repeating it extensively. Live-test provider keys currently come from the process environment.
 
 The versioned report/schedule/decision routes, bounded-read limits and failure behavior are documented in [Phase 3 technical notes](phase-03-technical-notes.md). Start the worker normally after controlled tests if you want newly submitted reports to process during the demo.
+
+## Phase 4 clarification demo
+
+See [Phase 4 technical notes](phase-04-technical-notes.md) for the current API and authority rules. `npm run seed:clarification` creates a separate room-demo project and four real local identities in ignored `.cache/clarification-accounts.json`. It preserves existing credentials and accepted progress. The original oil/gas project remains separate.
+
+Run `npm run test:clarification-db` with the worker stopped. It uses a separate contract-test project and keeps immutable test history. `npm run test:browser:clarification` requires the web server, `OPENAI_API_KEY`, and uncompleted demo rooms; it refuses to overwrite an already completed demo. `npm run test:browser:clarification-review` checks the saved browser run and the final UI, and creates/withdraws a separate synthetic report. Start `npm run worker:start` again after controlled tests for normal interactive reporting.
+
+Answers are stored when the server acknowledges them; they are not yet durable offline drafts. Only a planner's acceptance changes current actuals. Voice, photos, spreadsheet imports and offline storage remain Phase 5.

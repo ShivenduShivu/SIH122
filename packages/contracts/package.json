@@ -5,7 +5,8 @@
   "type": "module",
   "exports": {
     ".": "./src/index.ts",
-    "./reports": "./src/reports.ts"
+    "./reports": "./src/reports.ts",
+    "./followups": "./src/followups.ts"
   },
   "dependencies": {
     "zod": "4.6.5"

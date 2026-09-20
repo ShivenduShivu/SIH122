@@ -35,3 +35,7 @@ Real identity, protected schedule reads and mobile Current work / Today / Up nex
 ## Phase 3 review evidence
 
 The execution overview, grouped Gantt, baseline toggle, Today marker, Timeline/Table switch, activity Evidence/Audit drawer, report register, review panel and mobile text confirmation now use persisted reporting data. Top navigation and bottom mobile navigation retain outline icons and the approved order. Desktop and 390px/320px checks and screenshots are linked in `docs/reports/phase-03.md`. Import/export, speech, photos, offline delivery, language selection and execution history remain at their planned later gates.
+
+## Phase 4 review evidence
+
+Clarification cards, reply history, scoped supervisor checks, evidence links and correction/withdrawal controls extend the approved review and mobile visual system. Compared PDF pages 2, 3, 5 and 8 against final browser screenshots; top navigation icons, overview columns, grouped Gantt and mobile bottom tabs remain intact. Status tags and reply history were checked at 320 px; original source and subsequent answers are labelled separately. See `docs/reports/phase-04.md` for rendered evidence and test results.

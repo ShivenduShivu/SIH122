@@ -1,10 +1,16 @@
 export function reportStatus(
   reportId: string,
   claims: Array<{ report_id: string; state: string }>,
-  jobs: Array<{ report_id: string; status: string }>,
+  jobs: Array<{ report_id: string; status: string; error_code?: string | null }>,
 ) {
-  const rows = claims.filter((c) => c.report_id === reportId);
+  const rows = claims.filter((c) => c.report_id === reportId && c.state !== 'superseded');
+  if (jobs.some((j) => j.report_id === reportId && j.error_code === 'report_withdrawn'))
+    return 'Withdrawn';
   if (rows.length) {
+    if (rows.every((c) => c.state === 'withdrawn')) return 'Withdrawn';
+    if (rows.some((c) => c.state === 'disputed')) return 'Needs planner attention';
+    if (rows.some((c) => c.state === 'clarification')) return 'Answer needed';
+    if (rows.some((c) => c.state === 'verification')) return 'Supervisor check';
     if (rows.every((c) => c.state === 'accepted')) return 'Accepted';
     if (rows.some((c) => c.state === 'accepted')) return 'Partly accepted';
     if (rows.every((c) => c.state === 'rejected')) return 'Rejected';

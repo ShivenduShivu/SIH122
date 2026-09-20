@@ -3,7 +3,7 @@ export function GET() {
     {
       service: 'intelligrid-web',
       status: 'ok',
-      phase: 3,
+      phase: 4,
       mode: 'authenticated-synthetic-project',
       check: 'web-process-liveness',
     },

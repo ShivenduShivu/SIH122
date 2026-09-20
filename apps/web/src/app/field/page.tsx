@@ -1,4 +1,5 @@
 import Link from 'next/link';
+import { followupWorkbench } from '../../lib/followups';
 import { Icon } from '../../components/icon';
 import { WorkCard } from '../../components/work-card';
 import { projectSchedule, siteToday } from '../../lib/project';
@@ -17,6 +18,11 @@ export default async function FieldPage() {
         .get(a.id)!
         .effective_from.localeCompare(currentAssignments.get(b.id)!.effective_from),
     )[0];
+  const followups = await followupWorkbench();
+  const questions = followups.questions.filter((q) => q.status === 'open');
+  const verifications = followups.verifications.filter(
+    (v) => v.verifier_id === member.user_id && ['open', 'needs_info'].includes(v.status),
+  );
   return (
     <>
       <div className="field-greeting">
@@ -28,6 +34,23 @@ export default async function FieldPage() {
             : 'Your field workspace. Personal assignments appear here.'}
         </p>
       </div>
+      {questions.length > 0 && (
+        <Link className="field-callout followup-alert" href="/field/reports">
+          <strong>{questions.length} report details to confirm</strong>
+          <span>Open your reports and answer the short questions →</span>
+        </Link>
+      )}
+      {verifications.length > 0 && (
+        <Link className="field-callout followup-alert" href="/field/verifications">
+          <strong>{verifications.length} supervisor checks waiting</strong>
+          <span>Check the reported work and location →</span>
+        </Link>
+      )}
+      {member.role === 'supervisor' && verifications.length === 0 && (
+        <Link className="back-link" href="/field/verifications">
+          Supervisor checks →
+        </Link>
+      )}
       <section aria-labelledby="current-heading">
         <div className="field-section-heading">
           <h2 id="current-heading">Your current work</h2>

@@ -115,34 +115,30 @@ try {
       .insert({ project_id: project, revision_id: revision, id: wbs, name: 'Synthetic test work' }),
   );
   must(
-    await admin
-      .from('activities')
-      .insert({
-        project_id: project,
-        id: activity,
-        external_id: `TEST-${activity.slice(0, 8)}`,
-        contractor_id: '40000000-0000-4000-8000-000000000002',
-      }),
+    await admin.from('activities').insert({
+      project_id: project,
+      id: activity,
+      external_id: `TEST-${activity.slice(0, 8)}`,
+      contractor_id: '40000000-0000-4000-8000-000000000002',
+    }),
   );
   must(
-    await admin
-      .from('activity_plan_versions')
-      .insert({
-        project_id: project,
-        activity_id: activity,
-        revision_id: revision,
-        wbs_id: wbs,
-        name: 'Test activity',
-        discipline: 'Civil',
-        location: 'Test work area',
-        stage: 'excavation',
-        baseline_start: '2026-09-20',
-        baseline_finish: '2026-09-25',
-        planned_start: '2026-09-20',
-        planned_finish: '2026-09-25',
-        target_quantity: 2,
-        unit: 'foundation',
-      }),
+    await admin.from('activity_plan_versions').insert({
+      project_id: project,
+      activity_id: activity,
+      revision_id: revision,
+      wbs_id: wbs,
+      name: 'Test activity',
+      discipline: 'Civil',
+      location: 'Test work area',
+      stage: 'excavation',
+      baseline_start: '2026-09-20',
+      baseline_finish: '2026-09-25',
+      planned_start: '2026-09-20',
+      planned_finish: '2026-09-25',
+      target_quantity: 2,
+      unit: 'foundation',
+    }),
   );
   must(await admin.from('activity_actuals').insert({ project_id: project, activity_id: activity }));
   must(
@@ -276,7 +272,7 @@ try {
   );
   check(
     (await planner.rpc('decide_claim', { p_command: await command(missingDate) })).error
-      ?.message === 'MISSING_OR_UNRESOLVED_FACTS',
+      ?.message === 'STALE_REVIEW',
     'missing date blocks acceptance',
   );
   check(
@@ -284,8 +280,8 @@ try {
       await planner.rpc('decide_claim', {
         p_command: await command(missingDate, { correctedDate: '2026-09-20' }),
       })
-    ).error?.message === 'MISSING_ACTUAL_START',
-    'a reasoned date correction clears only the date gap, not the start requirement',
+    ).error?.message === 'STALE_REVIEW',
+    'a planner date override cannot bypass an open reporter question',
   );
   const prior = must(await planner.rpc('schedule_snapshot', { p_project: project }));
   const accepted = must(await planner.rpc('decide_claim', { p_command: startCommand }));

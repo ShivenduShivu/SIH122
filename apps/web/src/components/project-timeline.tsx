@@ -12,6 +12,7 @@ type RecordEvent = {
   facts: { eventDate: string; evidenceQuote: string };
   created_at: string;
   claim_id: string;
+  supersedes_event_id?: string | null;
 };
 const daysBetween = (a: string, b: string) =>
   Math.round((Date.parse(b + 'T00:00:00Z') - Date.parse(a + 'T00:00:00Z')) / 86400000);
@@ -375,6 +376,12 @@ export function ProjectTimeline({ events, today }: { events: RecordEvent[]; toda
                           <strong>
                             {e.event_kind.replaceAll('_', ' ')} · {e.facts.eventDate}
                           </strong>
+                          {e.supersedes_event_id && (
+                            <p>
+                              Correction of an earlier accepted event. Original evidence is
+                              retained.
+                            </p>
+                          )}
                           {tab === 'Evidence' ? (
                             <blockquote>{e.facts.evidenceQuote}</blockquote>
                           ) : (

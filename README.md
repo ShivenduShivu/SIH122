@@ -4,7 +4,7 @@ BITS Pilani / SIH 26122. Fictional oil/gas facility data. This is a student prot
 
 ## Current scope
 
-Phase 3 adds typed field reports, real OpenAI extraction, evidence-based matching, planner review and atomic schedule acceptance. The grouped Gantt, table and overview use committed actuals while preserving baseline dates. Ambiguous reports stay unresolved. See [Phase 3 report](docs/reports/phase-03.md) and [technical notes](docs/phase-03-technical-notes.md). This phase is awaiting user review; clarification, voice/offline and external schedule delivery are not complete.
+Phase 4 adds simple reporter questions, independent supervisor verification, scoped date corrections, pre-acceptance withdrawal and protected evidence retrieval to the existing OpenAI/report-to-schedule flow. The Gantt changes only after planner acceptance. See the [Phase 4 report](docs/reports/phase-04.md) and [technical notes](docs/phase-04-technical-notes.md). Phase 4 is approved; further implementation is on hold at the user’s request; voice, durable offline reporting, general uploads and external schedule delivery remain later phases.
 
 ## Run locally
 
@@ -23,6 +23,10 @@ npm run check        # strict types, domain/contracts, fixtures, worker boundary
 npm run test:database # real-user RLS, assignment and Storage checks; local seed required
 npm run test:reconciliation-db # acceptance/worker invariants; local synthetic test data
 npm run test:browser:live # real OpenAI + browser approval; consumes API tokens
+npm run seed:clarification # separate room demo; ignored local credentials
+npm run test:clarification-db # question, verification, correction and withdrawal checks
+npm run test:browser:clarification # real provider room flow; fresh uncompleted demo required
+npm run test:browser:clarification-review # inspect saved room run and final screens
 npm run test:seed     # verify repeated seed has no database changes
 npm run build        # production Next.js build
 npm run test:browser # running app on :3000; see browser prerequisites below
@@ -43,4 +47,4 @@ Browser checks use Playwright and Chromium. Install it once with `npx playwright
 - `docs/implementation-phases.md`: detailed phase instructions, gates and commit messages.
 - `docs/reports`: phase completion evidence and review status.
 
-Only approved phases are staged and committed. Do not commit `.env`, provider keys, `node_modules`, browser output or scratch files. Package patches are pinned by `package-lock.json`. `.github/workflows/checks.yml` repeats foundation checks on GitHub. Phases 1 and 2 are pushed to `ShivenduShivu/SIH122`. Phase 2 commit: `23d13e1`. Phase 3 remains uncommitted until its review gate.
+Only approved phases are staged and committed. Do not commit `.env`, provider keys, `node_modules`, browser output or scratch files. Package patches are pinned by `package-lock.json`. `.github/workflows/checks.yml` repeats foundation checks on GitHub. Phases 1–3 are pushed to `ShivenduShivu/SIH122`. Latest approved commit: `d2feff5` (Phase 3). Phase 4 is approved for commit and push; wait for the user’s new information before starting Phase 5.

@@ -9,6 +9,30 @@ export async function apiSession(request?: Request) {
   return { db, user: data.user } as const;
 }
 const messages: Record<string, string> = {
+  MIXED_LOCATION_REPLY:
+    'Choose listed work areas or type another location. Please use one method so the answer is clear.',
+  SCOPE_REPLY_NEEDS_REVIEW:
+    'If work remains or needs checking, choose No and describe it. For Yes, leave the details box empty.',
+  STALE_QUESTION:
+    'This question changed or was already answered. Review the current question before replying.',
+  STALE_VERIFICATION:
+    'The work, assignment or authority changed. A planner must request a fresh check.',
+  VERIFICATION_REQUIRED_OR_STALE:
+    'An independent supervisor must confirm this exact work before acceptance.',
+  REPORTER_CONFIRMATION_REQUIRED:
+    'Ask the reporter to confirm the changed assignment before requesting a supervisor check.',
+  VERIFICATION_ALREADY_OPEN: 'A supervisor check already exists for this claim.',
+  NO_AUTHORIZED_VERIFIER:
+    'No independent supervisor currently has the required work-area authority. Ask the project manager to check routing.',
+  OPEN_QUESTION: 'The reporter must answer the open question before this claim can be accepted.',
+  REPORT_HAS_ACCEPTED_EVENTS:
+    'This report has accepted work and cannot be withdrawn. Request a scoped correction instead.',
+  STALE_CORRECTION:
+    'This accepted event already has a newer correction. Review the current record.',
+  CORRECTION_DATE_CONFLICT:
+    'That date conflicts with accepted work on this activity. Review the other dates first.',
+  AMENDMENT_PROCESSING: 'A correction for this claim is already processing.',
+
   STALE_REVIEW: 'This report or its review policy changed. Refresh and check it again.',
   STALE_ACTUALS: 'Another update changed this activity. Refresh before deciding.',
   COMMAND_ID_REUSED: 'This retry contains different details. Refresh and submit a new decision.',

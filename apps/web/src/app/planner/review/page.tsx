@@ -1,6 +1,8 @@
+import { replySummary } from '@intelligrid/contracts/followups';
 import { plannerContext } from '../../../lib/project';
 import { reportWorkbench } from '../../../lib/reports';
 import { ReviewPanel } from '../../../components/review-panel';
+import { followupWorkbench } from '../../../lib/followups';
 import { RefreshPage } from '../../../components/refresh-page';
 export default async function ReviewPage({
   searchParams,
@@ -9,6 +11,7 @@ export default async function ReviewPage({
 }) {
   await plannerContext();
   const w = await reportWorkbench();
+  const followups = await followupWorkbench();
   const { claim } = await searchParams;
   const [members, decisions] = await Promise.all([
     w.db.from('project_members').select('user_id,display_name').eq('project_id', w.project.id),
@@ -28,16 +31,44 @@ export default async function ReviewPage({
       <ReviewPanel
         initialClaim={claim}
         entries={w.claims
+          .filter((c) => c.state !== 'superseded' && c.state !== 'withdrawn')
           .sort((a, b) => Number(b.state === 'pending') - Number(a.state === 'pending'))
           .map((c) => {
             const r = w.reports.find((r) => r.id === c.report_id)!;
+            const lineage = new Set<string>();
+            let ancestor = c;
+            while (ancestor && !lineage.has(ancestor.id)) {
+              lineage.add(ancestor.id);
+              ancestor = w.claims.find((row) => row.id === ancestor.parent_claim_id);
+            }
+            const verification = followups.verifications.find(
+              (v) => v.claim_id === c.id && !['superseded', 'cancelled'].includes(v.status),
+            );
             return {
               claim: c,
+              attachments: followups.attachments.filter(
+                (a) => a.report_id === c.report_id && a.state === 'received',
+              ),
+              questions: followups.questions
+                .filter((q) => lineage.has(q.claim_id))
+                .map((q) => {
+                  const reply = followups.responses.find((a) => a.request_id === q.id);
+                  return { ...q, replyText: reply ? replySummary(q, reply) : undefined };
+                }),
+              verification: verification
+                ? {
+                    ...verification,
+                    verifier_name: members.data.find((m) => m.user_id === verification.verifier_id)
+                      ?.display_name,
+                    checks: followups.decisions
+                      .filter((d) => d.request_id === verification.id)
+                      .sort((a, b) => a.created_at.localeCompare(b.created_at)),
+                  }
+                : undefined,
               candidates: w.candidates.filter((m) => m.claim_id === c.id),
               source:
-                w.versions.find(
-                  (v) => v.report_id === c.report_id && v.version === c.report_version,
-                )?.source_text ?? '',
+                w.versions.find((v) => v.report_id === c.report_id && v.version === 1)
+                  ?.source_text ?? '',
               reporter:
                 members.data.find((m) => m.user_id === r.author_id)?.display_name ??
                 'Project member',

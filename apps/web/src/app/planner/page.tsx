@@ -17,7 +17,9 @@ export default async function OverviewPage() {
   ]);
   if (events.error || decisions.error || members.error)
     throw new Error('Could not load accepted field records.');
-  const pending = w.claims.filter((c) => c.state === 'pending');
+  const pending = w.claims.filter((c) =>
+    ['pending', 'clarification', 'verification', 'disputed'].includes(c.state),
+  );
   return (
     <>
       <RefreshPage />
@@ -28,7 +30,15 @@ export default async function OverviewPage() {
           return {
             id: c.id,
             title: c.facts.activityHint ?? c.facts.evidenceQuote,
-            reason: c.validation_flags[0] ?? 'Planner decision required',
+            reason: c.manual_review
+              ? 'Planner follow-up needed'
+              : c.state === 'verification'
+                ? 'Supervisor check pending'
+                : c.state === 'disputed'
+                  ? 'Supervisor could not confirm'
+                  : c.state === 'clarification'
+                    ? 'Reporter answer needed'
+                    : (c.validation_flags[0] ?? 'Planner decision required'),
             source:
               members.data.find((m) => m.user_id === r?.author_id)?.display_name ??
               'Project member',

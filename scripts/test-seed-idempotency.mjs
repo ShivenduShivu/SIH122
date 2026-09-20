@@ -22,6 +22,12 @@ const tables = [
   'review_decisions',
   'accepted_events',
   'delivery_outbox',
+  'followup_commands',
+  'clarification_requests',
+  'clarification_responses',
+  'verification_requests',
+  'verification_decisions',
+  'attachments',
 ];
 async function snapshot() {
   const rows = {};

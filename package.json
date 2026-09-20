@@ -30,7 +30,11 @@
     "worker:start": "tsx scripts/run-local-worker.ts",
     "test:reconciliation-db": "tsx scripts/test-reconciliation-db.ts",
     "test:live": "tsx scripts/verify-live-flow.ts",
-    "test:browser:live": "tsx tests/browser/reconciliation.ts"
+    "test:browser:live": "tsx tests/browser/reconciliation.ts",
+    "seed:clarification": "tsx scripts/seed-clarification-lab.ts",
+    "test:clarification-db": "tsx scripts/test-clarification-db.ts",
+    "test:browser:clarification": "tsx tests/browser/clarification.ts",
+    "test:browser:clarification-review": "tsx tests/browser/clarification-review.ts"
   },
   "devDependencies": {
     "@playwright/test": "1.63.0",

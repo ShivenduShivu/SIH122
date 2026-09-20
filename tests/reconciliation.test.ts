@@ -115,26 +115,24 @@ describe('Provider boundary (mock transport, not live model evaluation)', () => 
   it('rejects unsupported source quotes', async () => {
     vi.stubGlobal(
       'fetch',
-      vi
-        .fn()
-        .mockResolvedValue(
-          Response.json({
-            status: 'completed',
-            output: [
-              {
-                type: 'message',
-                content: [
-                  {
-                    type: 'output_text',
-                    text: JSON.stringify({
-                      claims: [{ ...claim, evidenceQuote: 'invented evidence' }],
-                    }),
-                  },
-                ],
-              },
-            ],
-          }),
-        ),
+      vi.fn().mockResolvedValue(
+        Response.json({
+          status: 'completed',
+          output: [
+            {
+              type: 'message',
+              content: [
+                {
+                  type: 'output_text',
+                  text: JSON.stringify({
+                    claims: [{ ...claim, evidenceQuote: 'invented evidence' }],
+                  }),
+                },
+              ],
+            },
+          ],
+        }),
+      ),
     );
     await expect(
       new OpenAIExtractor('test-only-key').extract({ sourceText: source, workDate: null }),
@@ -162,14 +160,12 @@ describe('Provider boundary (mock transport, not live model evaluation)', () => 
   it('rejects model refusal', async () => {
     vi.stubGlobal(
       'fetch',
-      vi
-        .fn()
-        .mockResolvedValue(
-          Response.json({
-            status: 'completed',
-            output: [{ type: 'message', content: [{ type: 'refusal' }] }],
-          }),
-        ),
+      vi.fn().mockResolvedValue(
+        Response.json({
+          status: 'completed',
+          output: [{ type: 'message', content: [{ type: 'refusal' }] }],
+        }),
+      ),
     );
     await expect(
       new OpenAIExtractor('test-only-key').extract({ sourceText: source, workDate: null }),

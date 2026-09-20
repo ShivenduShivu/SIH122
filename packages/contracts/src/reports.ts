@@ -42,6 +42,8 @@ export const Decision = z
     expectedPolicyVersion: z.number().int().positive(),
     reason: z.string().trim().min(1).max(1000),
     correctedDate: WorkDate.nullable(),
+    expectedVerificationId: Id.nullable().optional(),
+    expectedVerificationVersion: z.number().int().positive().nullable().optional(),
   })
   .strict();
 export const ScheduleActivity = PlannedActivity.safeExtend({

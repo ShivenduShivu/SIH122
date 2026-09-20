@@ -1,6 +1,6 @@
 # IntelliGrid — Phase 3 completion report
 
-**Status: approved by the user on 21 September 2026. Approved changes are being committed before Phase 4 begins.**
+**Status: approved by the user on 21 September 2026. Committed and pushed as `d2feff5` before Phase 4 began.**
 
 Date: 20 September 2026. BITS Pilani / SIH 26122. Approved Phase 2 was committed and pushed as `23d13e1` — `feat: add project identity and protected schedule storage` before this work began.
 
@@ -84,4 +84,4 @@ Open [the local app](http://localhost:3000/login). Generated synthetic account c
 
 Review the overview, schedule, clear accepted records and the unresolved painting report. For a new report, choose an activity without an accepted start, or deliberately verify that a conflicting/duplicate update is blocked.
 
-**Please approve Phase 3 or request changes.** After approval, inspect/stage the intended changes, commit as `feat: connect text reports to approved schedule actuals`, push to `origin/main`, and then begin Phase 4. No Phase 4 implementation has started.
+**Phase 3 gate is closed.** User approval was followed by commit/push `d2feff5`. See [Phase 4 report](phase-04.md) for the current review gate. The implementation details and limitations above describe the Phase 3 delivery.

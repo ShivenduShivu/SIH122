@@ -41,7 +41,13 @@ export default async function ReportsPage() {
             </thead>
             <tbody>
               {w.reports.map((r) => {
-                const c = w.claims.find((c) => c.report_id === r.id);
+                const reportClaims = w.claims.filter(
+                  (c) => c.report_id === r.id && !['superseded', 'withdrawn'].includes(c.state),
+                );
+                const c =
+                  reportClaims.find((c) =>
+                    ['pending', 'clarification', 'verification', 'disputed'].includes(c.state),
+                  ) ?? reportClaims[0];
                 return (
                   <tr key={r.id}>
                     <td>

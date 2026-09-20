@@ -1,0 +1,11 @@
+{
+  "passed": true,
+  "checks": [
+    "Recorded room choice and status remain readable at 320px",
+    "Planner sees original wording, ancestor reply, verifier identity and both recorded reasons",
+    "Register opens the accepted child claim instead of the superseded claim",
+    "Supervisor sees reporter identity and evidence route; reporter reply controls are absent",
+    "Pre-acceptance withdrawal works through the mobile form"
+  ],
+  "browserErrors": []
+}

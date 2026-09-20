@@ -1,3 +1,4 @@
+import { readRows } from '../../lib/read-rows';
 import { PlannerNav } from '../../components/planner-nav';
 import { brand } from '../../lib/brand';
 import { plannerContext } from '../../lib/project';
@@ -8,13 +9,15 @@ import { ScheduleProvider } from '../../components/schedule-context';
 export default async function PlannerLayout({ children }: { children: React.ReactNode }) {
   const { db, member, project } = await plannerContext();
   const snapshot = await scheduleSnapshot();
-  const pending = await db
-    .from('claims')
-    .select('report_id', { count: 'exact' })
-    .eq('project_id', project.id)
-    .eq('state', 'pending');
-  if (pending.error || (pending.count ?? 0) > (pending.data?.length ?? 0))
-    throw new Error('Could not load review queue count.');
+  const pending = await readRows((from, to) =>
+    db
+      .from('claims')
+      .select('id,report_id', { count: 'exact' })
+      .eq('project_id', project.id)
+      .in('state', ['pending', 'clarification', 'verification', 'disputed'])
+      .order('id')
+      .range(from, to),
+  );
   return (
     <div className="desktop-shell">
       <a className="skip-link" href="#main-content">
@@ -58,7 +61,7 @@ export default async function PlannerLayout({ children }: { children: React.Reac
           </div>
         </div>
       </header>
-      <PlannerNav pendingCount={new Set(pending.data!.map((c) => c.report_id)).size} />
+      <PlannerNav pendingCount={new Set(pending.map((c) => c.report_id)).size} />
       <ProjectSwitcher />
       <div className="context-strip">
         <span>

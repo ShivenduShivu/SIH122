@@ -23,7 +23,9 @@ export function rankClaim(
         !!claim.activityHint && compact(claim.activityHint) === compact(a.externalId);
       const assetMatches =
         !!claim.assetTag &&
-        ` ${normalize(`${a.name} ${a.location}`)} `.includes(` ${normalize(claim.assetTag)} `);
+        ` ${normalize(`${a.externalId} ${a.name} ${a.location}`)} `.includes(
+          ` ${normalize(claim.assetTag)} `,
+        );
       const tag = explicit || assetMatches;
       const location =
         !!claim.location && ` ${normalize(a.location)} `.includes(` ${normalize(claim.location)} `);

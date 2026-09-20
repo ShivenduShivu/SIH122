@@ -1,0 +1,37 @@
+{
+  "passed": true,
+  "checks": [
+    "Real OpenAI ambiguous report asks a plain location question, exposes only assigned choices, and completes only Room 1 after planner approval",
+    "Reporter confirmation and supervisor allocation-only confirmation leave the Gantt unchanged",
+    "Independent supervisor confirmation plus planner acceptance completes Room 2; a second browser converges",
+    "Author, planner and routed scoped supervisor can retrieve received evidence; foreign reporter gets 404",
+    "Reporter receipt retains the original report, question history, accepted claim and correction route"
+  ],
+  "browserErrors": [],
+  "projectId": "10000000-0000-4000-8000-000000000004",
+  "room1ReportId": "5d09b9f4-4cb4-4085-9b2f-80851c389144",
+  "room2ReportId": "57068835-b325-4879-9539-6e026e5611de",
+  "approvalToObserverMs": 1458,
+  "runs": [
+    {
+      "provider": "openai",
+      "model_id": "gpt-5.4-mini-2026-03-17",
+      "latency_ms": 3813
+    },
+    {
+      "provider": "structured-input",
+      "model_id": "validated-form-v1",
+      "latency_ms": 0
+    },
+    {
+      "provider": "openai",
+      "model_id": "gpt-5.4-mini-2026-03-17",
+      "latency_ms": 2667
+    },
+    {
+      "provider": "structured-input",
+      "model_id": "validated-form-v1",
+      "latency_ms": 0
+    }
+  ]
+}

@@ -1,0 +1,6 @@
+{
+  "passed": true,
+  "checks": 36,
+  "fixtureProvider": "database-contract-fixture (not a live model evaluation)",
+  "testActivity": "8337f782-a5b8-4fa4-a3f5-3d83c26ee003"
+}

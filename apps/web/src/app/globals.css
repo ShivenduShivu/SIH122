@@ -2058,3 +2058,131 @@ textarea:focus-visible {
   outline: 2px solid var(--accent);
   outline-offset: 3px;
 }
+
+/* Follow-ups extend the approved register and field-card layout. */
+.followup-card {
+  border: 1px solid var(--line);
+  background: white;
+  margin: 18px 0;
+  overflow: hidden;
+}
+.followup-card h2 {
+  font-size: 19px;
+}
+.followup-card .section-heading {
+  padding: 15px;
+  gap: 8px;
+}
+.followup-body {
+  padding: 16px;
+  font-size: 13px;
+  line-height: 1.6;
+  overflow-wrap: anywhere;
+}
+.question-text {
+  font:
+    18px/1.45 Georgia,
+    serif;
+  margin-bottom: 18px;
+  color: var(--navy);
+}
+.followup-body form {
+  display: grid;
+  gap: 14px;
+}
+.followup-body label:not(.choice-row),
+.report-corrections label {
+  display: grid;
+  gap: 6px;
+  margin: 10px 0;
+}
+.followup-body input:not([type='radio']):not([type='checkbox']),
+.followup-body textarea,
+.report-corrections input,
+.report-corrections textarea,
+.report-corrections select,
+.planner-followup input,
+.planner-followup select {
+  width: 100%;
+  min-width: 0;
+  padding: 10px;
+  border: 1px solid var(--line);
+  background: white;
+  font-size: 14px;
+}
+.followup-body fieldset {
+  padding: 12px;
+  border: 1px solid var(--line);
+  min-width: 0;
+}
+.followup-body legend {
+  padding: 0 5px;
+  font-size: 12px;
+}
+.choice-row {
+  display: flex;
+  gap: 9px;
+  align-items: flex-start;
+  padding: 8px 2px;
+}
+.choice-row input {
+  margin-top: 4px;
+  flex-shrink: 0;
+}
+.planner-followup {
+  border-top: 1px solid var(--line);
+  border-bottom: 1px solid var(--line);
+  margin: 20px 0;
+  padding-bottom: 20px;
+}
+.planner-followup .form-actions {
+  align-items: end;
+}
+.planner-followup label {
+  display: grid;
+  gap: 6px;
+  font-size: 12px;
+}
+.followup-history {
+  font-size: 12px;
+  padding: 10px;
+  background: #f5f8fa;
+  margin: 8px 0;
+}
+.report-corrections {
+  border: 1px solid var(--line);
+  padding: 15px;
+  margin-top: 24px;
+  font-size: 12px;
+}
+.report-corrections summary {
+  font-weight: 600;
+  color: var(--navy);
+  cursor: pointer;
+}
+.report-corrections p {
+  margin-top: 12px;
+}
+.followup-alert {
+  margin: 18px 0;
+}
+.followup-alert span {
+  display: block;
+  margin-top: 6px;
+  font-size: 12px;
+}
+.button:disabled {
+  opacity: 0.55;
+}
+.button.primary:disabled:hover {
+  background: var(--navy);
+}
+
+.followup-card .section-heading .tag {
+  display: inline-flex;
+  flex-shrink: 0;
+}
+.reply-history {
+  display: block;
+  margin-top: 6px;
+}

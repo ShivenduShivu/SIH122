@@ -19,16 +19,11 @@ export async function GET(
       .eq('report_id', reportId)
       .eq('version', report.data.current_version)
       .single(),
-    s.db
-      .from('claims')
-      .select('*', { count: 'exact' })
-      .eq('report_id', reportId)
-      .eq('report_version', report.data.current_version),
+    s.db.from('claims').select('*', { count: 'exact' }).eq('report_id', reportId),
     s.db
       .from('jobs')
       .select('id,status,attempts,error_code', { count: 'exact' })
-      .eq('report_id', reportId)
-      .eq('report_version', report.data.current_version),
+      .eq('report_id', reportId),
   ]);
   if (
     version.error ||

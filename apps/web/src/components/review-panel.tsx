@@ -3,6 +3,8 @@ import { useState, useRef, useEffect } from 'react';
 import { useRouter } from 'next/navigation';
 import type { ExtractedClaim } from '@intelligrid/contracts/reports';
 import { useSchedule } from './schedule-context';
+import { PlannerFollowup, EvidenceLink } from './followup-actions';
+import type { Question, Verification } from '@intelligrid/contracts/followups';
 type Candidate = {
   activity_id: string;
   rank: number;
@@ -21,10 +23,15 @@ type ReviewClaim = {
   validation_flags: string[];
   plan_revision_id: string;
   policy_version: number;
+  manual_review?: boolean;
+  correction_of_event_id?: string | null;
 };
 export type ReviewEntry = {
   claim: ReviewClaim;
   candidates: Candidate[];
+  questions: Array<Question & { replyText?: string }>;
+  attachments: Array<{ id: string; file_name: string }>;
+  verification?: Verification;
   source: string;
   reporter: string;
   received: string;
@@ -93,6 +100,8 @@ export function ReviewPanel({
       expectedPolicyVersion: reviewSnapshot.policyVersion,
       reason,
       correctedDate: date || null,
+      expectedVerificationId: entry.verification?.id ?? null,
+      expectedVerificationVersion: entry.verification?.version ?? null,
     };
     const serialized = JSON.stringify(payload);
     if (command.current?.serialized !== serialized)
@@ -167,6 +176,9 @@ export function ReviewPanel({
             {entry.reporter} · Received {entry.received} IST
           </p>
           <blockquote className="source-quote">{entry.source}</blockquote>
+          {entry.attachments.map((a) => (
+            <EvidenceLink key={a.id} id={a.id} name={a.file_name} />
+          ))}
           <dl className="review-facts">
             <div>
               <dt>Reported work</dt>
@@ -238,11 +250,27 @@ export function ReviewPanel({
               </p>
             )}
           </div>
+          {c.correction_of_event_id && (
+            <p className="validation-notice">
+              Date correction proposal. The earlier accepted event stays visible; accepting this
+              proposal records its replacement.
+            </p>
+          )}
+          <PlannerFollowup
+            key={c.id}
+            claimId={c.id}
+            version={c.version}
+            state={c.state}
+            activityId={chosen}
+            questions={entry.questions}
+            verification={entry.verification}
+            manualReview={c.manual_review}
+          />
           <p className="score-note">
             Scores rank matches; they are not probabilities. Assignment context is not proof of
             completion.
           </p>
-          {c.state === 'pending' ? (
+          {['pending', 'clarification', 'verification', 'disputed'].includes(c.state) ? (
             <>
               {staleReview && (
                 <div role="alert" className="validation-notice">
@@ -282,7 +310,9 @@ export function ReviewPanel({
               <div className="form-actions">
                 <button
                   className="button primary"
-                  disabled={busy || staleReview || !chosen || !reason.trim()}
+                  disabled={
+                    busy || staleReview || c.state !== 'pending' || !chosen || !reason.trim()
+                  }
                   onClick={() => void decide('accept')}
                 >
                   ✓ Accept verified event

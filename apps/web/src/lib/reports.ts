@@ -1,4 +1,5 @@
 import 'server-only';
+import { readRows } from './read-rows';
 import { cache } from 'react';
 import { ScheduleSnapshot } from '@intelligrid/contracts/reports';
 import { projectContext } from './project';
@@ -10,39 +11,54 @@ export const scheduleSnapshot = cache(async () => {
 });
 export const reportWorkbench = cache(async () => {
   const c = await projectContext();
-  const reports = await c.db
-    .from('reports')
-    .select('*', { count: 'exact' })
-    .eq('project_id', c.project.id)
-    .order('received_at', { ascending: false })
-    .limit(200);
-  if (reports.error || (reports.count ?? 0) > (reports.data?.length ?? 0))
-    throw new Error('Could not load the complete report register.');
-  const ids = reports.data.map((r) => r.id);
-  if (!ids.length) return { ...c, reports: [], versions: [], claims: [], candidates: [], jobs: [] };
-  const [versions, claims, jobs] = await Promise.all([
-    c.db.from('report_versions').select('*', { count: 'exact' }).in('report_id', ids),
-    c.db.from('claims').select('*', { count: 'exact' }).eq('project_id', c.project.id),
+  const reports = await readRows((from, to) =>
     c.db
-      .from('jobs')
-      .select('id,report_id,status,attempts,error_code', { count: 'exact' })
-      .in('report_id', ids),
+      .from('reports')
+      .select('*', { count: 'exact' })
+      .eq('project_id', c.project.id)
+      .order('id')
+      .range(from, to),
+  );
+  reports.sort((a, b) => b.received_at.localeCompare(a.received_at));
+  const ids = reports.map((r) => r.id);
+  if (!ids.length) return { ...c, reports: [], versions: [], claims: [], candidates: [], jobs: [] };
+  // Report-bound tables use authorizing RLS; project claims limit which historical records are joined.
+  const [versions, claims, jobs, candidates] = await Promise.all([
+    readRows((from, to) =>
+      c.db
+        .from('report_versions')
+        .select('*', { count: 'exact' })
+        .in('report_id', ids)
+        .order('report_id')
+        .order('version')
+        .range(from, to),
+    ),
+    readRows((from, to) =>
+      c.db
+        .from('claims')
+        .select('*', { count: 'exact' })
+        .eq('project_id', c.project.id)
+        .order('id')
+        .range(from, to),
+    ),
+    readRows((from, to) =>
+      c.db
+        .from('jobs')
+        .select('id,report_id,status,attempts,error_code', { count: 'exact' })
+        .in('report_id', ids)
+        .order('id')
+        .range(from, to),
+    ),
+    readRows((from, to) =>
+      c.db
+        .from('candidate_matches')
+        .select('*', { count: 'exact' })
+        .eq('project_id', c.project.id)
+        .order('claim_id')
+        .order('activity_id')
+        .range(from, to),
+    ),
   ]);
-  if ([versions, claims, jobs].some((r) => r.error || (r.count ?? 0) > (r.data?.length ?? 0)))
-    throw new Error('Could not load report evidence and processing state.');
-  const candidates = await c.db
-    .from('candidate_matches')
-    .select('*', { count: 'exact' })
-    .eq('project_id', c.project.id)
-    .order('rank');
-  if (candidates.error || (candidates.count ?? 0) > (candidates.data?.length ?? 0))
-    throw new Error('Could not load report matches.');
-  return {
-    ...c,
-    reports: reports.data,
-    versions: versions.data!,
-    claims: claims.data!,
-    candidates: candidates.data!,
-    jobs: jobs.data!,
-  };
+  candidates.sort((a, b) => a.rank - b.rank);
+  return { ...c, reports, versions, claims, candidates, jobs };
 });
