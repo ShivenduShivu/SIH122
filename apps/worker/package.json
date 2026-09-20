@@ -1,0 +1,12 @@
+{
+  "name": "@intelligrid/worker",
+  "version": "0.1.0",
+  "private": true,
+  "type": "module",
+  "scripts": {
+    "check": "tsx src/index.ts --check"
+  },
+  "dependencies": {
+    "@intelligrid/contracts": "0.1.0"
+  }
+}

@@ -1,0 +1,10 @@
+node_modules/
+.next/
+**/.next/
+apps/web/next-env.d.ts
+package-lock.json
+output/
+planning/
+tmp/
+test-results/
+coverage/

@@ -1,0 +1,11 @@
+{
+  "checks": [
+    "Root redirects to the branded planner overview",
+    "Discipline, location search and empty-state recovery",
+    "Health endpoint explicitly reports no database connection",
+    "Field home/tasks and planner contained layout at 390px",
+    "Field home/tasks and planner contained layout at 320px"
+  ],
+  "browserErrors": [],
+  "passed": true
+}
