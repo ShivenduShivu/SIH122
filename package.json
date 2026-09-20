@@ -20,14 +20,22 @@
     "check:fixtures": "tsx fixtures/check.ts",
     "worker:check": "npm run check --workspace=@intelligrid/worker",
     "check": "npm run typecheck && npm test && npm run check:fixtures && npm run worker:check",
-    "test:browser": "node tests/browser/smoke.mjs"
+    "test:browser": "node tests/browser/smoke.mjs",
+    "seed:local": "tsx scripts/seed-local.ts",
+    "test:database": "node scripts/test-database.mjs",
+    "test:seed": "node scripts/test-seed-idempotency.mjs",
+    "admin:member": "node scripts/admin-member.mjs",
+    "local:bind": "node scripts/bind-local-docker.mjs",
+    "db:reset:local": "supabase db reset --local --network-id intelligrid-local --yes"
   },
   "devDependencies": {
     "@playwright/test": "1.63.0",
+    "@supabase/supabase-js": "2.116.0",
     "@types/node": "24.13.6",
     "@types/react": "19.3.0",
     "@types/react-dom": "19.3.0",
     "prettier": "3.9.8",
+    "supabase": "2.117.0",
     "tsx": "4.23.15",
     "typescript": "5.9.3",
     "vitest": "5.0.1"

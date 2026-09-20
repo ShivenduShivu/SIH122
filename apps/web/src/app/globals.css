@@ -709,16 +709,24 @@ td small {
   margin-top: 4px;
 }
 .field-section-heading {
-  margin-bottom: 14px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  gap: 10px;
+  margin: 22px 0 12px;
 }
 .field-section-heading h2 {
-  font-size: 20px;
+  font:
+    600 11px/1.4 'Segoe UI',
+    Arial,
+    sans-serif;
+  text-transform: uppercase;
+  letter-spacing: 0.35px;
 }
 .field-section-heading > span {
   font-size: 10px;
   color: var(--muted);
-  display: block;
-  margin-top: 4px;
+  display: inline;
 }
 .capture-options {
   display: grid;
@@ -777,8 +785,9 @@ td small {
 .field-callout {
   margin-top: 23px;
   padding: 15px;
-  border-left: 3px solid var(--gold);
-  background: #f1eee7;
+  border: 1px solid #d6e1e7;
+  background: #eaf0f3;
+  border-radius: 4px;
 }
 .field-callout strong {
   font-size: 12px;
@@ -1075,4 +1084,128 @@ td small {
   * {
     scroll-behavior: auto !important;
   }
+}
+.login-shell {
+  max-width: 640px;
+  margin: 8vh auto;
+  padding: 16px;
+}
+.login-panel {
+  padding: 32px;
+}
+.login-panel h1 {
+  font-size: 28px;
+  margin: 20px 0 12px;
+}
+.login-panel p {
+  margin: 14px 0;
+  line-height: 1.6;
+}
+.login-panel form {
+  display: grid;
+  gap: 10px;
+  margin: 24px 0;
+}
+.login-panel input {
+  min-width: 0;
+  padding: 12px;
+  border: 1px solid var(--line);
+  background: white;
+  font: inherit;
+}
+.login-panel button {
+  margin-top: 12px;
+  justify-content: center;
+}
+.login-error {
+  border-left: 3px solid #ae493c;
+  padding: 10px;
+  background: #fff1ed;
+}
+.text-button {
+  padding: 3px 0;
+  border: 0;
+  background: none;
+  color: var(--navy);
+  font: inherit;
+  font-size: 11px;
+  text-decoration: underline;
+  cursor: pointer;
+}
+.field-session {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 8px;
+  padding: 9px 20px;
+  background: #eaf0f2;
+  color: #526976;
+  font-size: 10px;
+}
+.field-empty {
+  border: 1px solid var(--line);
+  padding: 16px;
+  color: #526976;
+  font-size: 12px;
+  line-height: 1.6;
+  background: white;
+}
+.work-group {
+  margin-bottom: 22px;
+}
+.task-evidence {
+  border-top: 1px solid var(--line);
+  margin-top: 12px;
+  padding-top: 10px;
+  font-size: 10px;
+  color: #667e8a;
+}
+.small-heading {
+  font-size: 12px;
+  margin: 16px 0 10px;
+}
+.field-section-heading a {
+  font-size: 11px;
+}
+.field-callout > svg {
+  display: inline-block;
+  vertical-align: middle;
+  margin-right: 8px;
+}
+.project-switch {
+  display: flex;
+  gap: 10px;
+  padding: 10px 24px;
+  flex-wrap: wrap;
+  align-items: center;
+}
+.assignment-panel {
+  padding: 24px;
+  max-width: 760px;
+}
+.assignment-panel h2 {
+  margin-bottom: 12px;
+}
+.assignment-panel p {
+  margin: 12px 0;
+  line-height: 1.6;
+}
+.assignment-panel label {
+  display: block;
+  font-size: 12px;
+  margin: 16px 0 6px;
+}
+.assignment-panel input,
+.assignment-panel select {
+  width: 100%;
+  padding: 11px;
+  font: inherit;
+  border: 1px solid var(--line);
+  background: white;
+  min-width: 0;
+}
+.assignment-dates {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 12px;
 }

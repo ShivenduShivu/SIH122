@@ -1,0 +1,45 @@
+project_id = "intelligrid"
+[api]
+enabled = true
+port = 56321
+schemas = ["public"]
+extra_search_path = ["public", "extensions"]
+max_rows = 200
+auto_expose_new_tables = false
+[db]
+port = 56322
+shadow_port = 56320
+major_version = 17
+[db.migrations]
+enabled = true
+schema_paths = []
+[db.seed]
+enabled = false
+sql_paths = []
+[realtime]
+enabled = false
+[studio]
+enabled = false
+port = 56323
+[local_smtp]
+enabled = false
+port = 56324
+[storage]
+enabled = true
+file_size_limit = "5MiB"
+[storage.s3_protocol]
+enabled = false
+[storage.vector]
+enabled = false
+[auth]
+enabled = true
+site_url = "http://localhost:3000"
+additional_redirect_urls = ["http://127.0.0.1:3000"]
+jwt_expiry = 3600
+enable_signup = false
+enable_anonymous_sign_ins = false
+minimum_password_length = 12
+[edge_runtime]
+enabled = false
+[analytics]
+enabled = false

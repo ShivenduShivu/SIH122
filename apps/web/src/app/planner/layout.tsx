@@ -1,7 +1,10 @@
 import { PlannerNav } from '../../components/planner-nav';
 import { brand } from '../../lib/brand';
+import { plannerContext } from '../../lib/project';
+import { ProjectSwitcher } from '../../components/project-switcher';
 
-export default function PlannerLayout({ children }: { children: React.ReactNode }) {
+export default async function PlannerLayout({ children }: { children: React.ReactNode }) {
+  const { member, project } = await plannerContext();
   return (
     <div className="desktop-shell">
       <a className="skip-link" href="#main-content">
@@ -26,26 +29,33 @@ export default function PlannerLayout({ children }: { children: React.ReactNode 
         </div>
         <div className="project-identity">
           <div className="eyebrow">DEMONSTRATION PROJECT</div>
-          <strong>Duliajan Facility Expansion</strong>
-          <div className="muted">Assam · Civil / Piping / Electrical</div>
+          <strong>{project.name}</strong>
+          <div className="muted">Synthetic project · India Standard Time</div>
         </div>
         <div className="viewer">
           <span className="avatar" aria-hidden="true">
-            PV
+            {member.display_name
+              .split(' ')
+              .map((s: string) => s[0])
+              .join('')}
           </span>
           <div>
-            <strong>Planner preview</strong>
-            <small>No signed-in session</small>
+            <strong>{member.display_name}</strong>
+            <small>{member.role}</small>
+            <form method="post" action="/api/auth/logout">
+              <button className="text-button">Sign out</button>
+            </form>
           </div>
         </div>
       </header>
       <PlannerNav />
+      <ProjectSwitcher />
       <div className="context-strip">
         <span>
           <i className="dot" />
           Synthetic schedule · Revision 01
         </span>
-        <span>Foundation preview · Read only</span>
+        <span>Protected workspace · Plan dates only</span>
       </div>
       <main id="main-content" className="planner-main">
         {children}

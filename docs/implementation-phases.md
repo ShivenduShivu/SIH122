@@ -96,4 +96,4 @@ Each phase is a review boundary, not necessarily a full day. Approximate seven-d
 
 ## Current gate
 
-Phase 1 is approved with the user's design-fidelity feedback incorporated and tracked in `docs/design-fidelity.md`. See `docs/reports/phase-01.md`. Complete the approved commit/push, then start Phase 2. Phase 2 requires its own completion report and review before any Phase 2 commit.
+Phase 1 is approved and pushed as `0c9b3df`. Phase 2 is implemented and locally verified; see `docs/reports/phase-02.md` for the completed report and screenshots. The user approved Phase 2 on 20 September 2026. Commit and push the approved changes, then begin Phase 3; Phase 3 retains its own review gate.

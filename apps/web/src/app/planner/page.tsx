@@ -1,14 +1,16 @@
 import Link from 'next/link';
-import { activities } from '../../../../../fixtures/development';
+import { plannerContext, projectSchedule } from '../../lib/project';
 
-export default function OverviewPage() {
+export default async function OverviewPage() {
+  await plannerContext();
+  const { activities, project } = await projectSchedule();
   return (
     <>
       <div className="breadcrumb">Project workspace / Overview</div>
       <div className="page-heading">
         <div>
           <div className="eyebrow">PROJECT REGISTER</div>
-          <h1>Duliajan Facility Expansion</h1>
+          <h1>{project.name}</h1>
           <p>A shared view of planned work, field evidence and verified execution.</p>
         </div>
         <Link className="button primary" href="/planner/schedule">
@@ -23,7 +25,9 @@ export default function OverviewPage() {
         </div>
         <div>
           <span>Engineering disciplines</span>
-          <strong>03</strong>
+          <strong>
+            {new Set(activities.map((a) => a.discipline)).size.toString().padStart(2, '0')}
+          </strong>
           <small>Civil, piping and electrical</small>
         </div>
         <div>
@@ -44,7 +48,7 @@ export default function OverviewPage() {
               <div className="eyebrow">WORK BREAKDOWN</div>
               <h2>Discipline register</h2>
             </div>
-            <span className="tag">12 planned activities</span>
+            <span className="tag">{activities.length} planned activities</span>
           </div>
           {(['Civil', 'Piping', 'Electrical'] as const).map((d, i) => (
             <Link className="discipline-row" key={d} href={`/planner/schedule?discipline=${d}`}>
@@ -60,7 +64,8 @@ export default function OverviewPage() {
                 </p>
               </div>
               <span className="row-count">
-                04 activities <span aria-hidden="true">→</span>
+                {activities.filter((a) => a.discipline === d).length} activities{' '}
+                <span aria-hidden="true">→</span>
               </span>
             </Link>
           ))}
@@ -95,8 +100,8 @@ export default function OverviewPage() {
             </li>
           </ol>
           <div className="build-note">
-            Phase 1 establishes the interface and contracts. Reporting and approvals arrive in later
-            phases.
+            Project access and assignments are connected. Reporting, approvals and the Gantt arrive
+            in Phase 3.
           </div>
         </aside>
       </div>
@@ -107,7 +112,7 @@ export default function OverviewPage() {
           <p>Inspect the mobile task view built around clear locations and simple actions.</p>
         </div>
         <Link className="button" href="/field">
-          Open field preview <span aria-hidden="true">↗</span>
+          Open field view <span aria-hidden="true">↗</span>
         </Link>
       </section>
     </>

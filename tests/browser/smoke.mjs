@@ -1,6 +1,15 @@
 import { chromium } from '@playwright/test';
 import assert from 'node:assert/strict';
-import { mkdir, writeFile } from 'node:fs/promises';
+import { mkdir, writeFile, readFile } from 'node:fs/promises';
+const accounts = JSON.parse(await readFile('.cache/demo-accounts.json', 'utf8'));
+const account = (n) => accounts[`30000000-0000-4000-8000-${String(n).padStart(12, '0')}`];
+async function login(page, n) {
+  await page.goto(`${base}/login`);
+  await page.getByLabel('Email', { exact: true }).fill(account(n).email);
+  await page.getByLabel('Password', { exact: true }).fill(account(n).password);
+  await page.getByRole('button', { name: 'Sign in', exact: true }).click();
+  await page.waitForURL(n === 1 ? '**/field' : '**/planner');
+}
 
 const base = process.env.BASE_URL || 'http://localhost:3000';
 const browser = await chromium.launch({
@@ -14,7 +23,9 @@ try {
   const page = await browser.newPage({ viewport: { width: 1440, height: 1000 } });
   page.on('pageerror', (error) => errors.push(error.message));
   await page.goto(base);
-  await page.waitForURL('**/planner');
+  await page.waitForURL('**/login');
+  checks.push('Unauthenticated routes redirect to sign in');
+  await login(page, 5);
   assert.equal(
     await page.getByRole('heading', { level: 1 }).textContent(),
     'Duliajan Facility Expansion',
@@ -34,15 +45,28 @@ try {
   assert.equal(await page.locator('tbody tr').count(), 12);
   checks.push('Discipline, location search and empty-state recovery');
   await page.screenshot({ path: 'test-results/planner-schedule.png', fullPage: true });
+  await page.getByRole('link', { name: 'Manage assignments' }).click();
+  await page.getByRole('heading', { name: 'Field assignments', exact: true }).waitFor();
+  await page
+    .getByLabel('Reason for this assignment')
+    .fill('Browser check: confirm the initial work allocation');
+  await page.getByRole('button', { name: 'Save assignment', exact: true }).click();
+  await page.getByRole('status').filter({ hasText: 'Assignment saved as version' }).waitFor();
+  const savedVersion = (await page.getByRole('status').textContent()).match(/version (\d+)/)[1];
+  await page.getByText(`Current assignment version ${savedVersion}.`, { exact: false }).waitFor();
+  await page.screenshot({ path: 'test-results/planner-assignments.png', fullPage: true });
+  checks.push('Planner saves an audited assignment through the protected API');
   const health = await (await page.request.get(`${base}/api/health`)).json();
-  assert.equal(health.databaseConnected, false);
+  assert.equal(health.mode, 'authenticated-synthetic-project');
   assert.equal(health.service, 'intelligrid-web');
-  checks.push('Health endpoint explicitly reports no database connection');
+  checks.push('Health endpoint distinguishes web liveness from database readiness');
 
+  await page.getByRole('button', { name: 'Sign out', exact: true }).click();
+  await login(page, 1);
   for (const width of [390, 320]) {
     await page.setViewportSize({ width, height: 844 });
     await page.goto(`${base}/field`);
-    await page.getByRole('heading', { name: 'Hello, Arun.' }).waitFor();
+    await page.getByRole('heading', { name: 'Namaste, Arun.' }).waitFor();
     assert.equal(
       await page.getByRole('button', { name: /Speak a progress report/ }).isDisabled(),
       true,
@@ -52,7 +76,8 @@ try {
       true,
     );
     await page.screenshot({ path: `test-results/field-home-${width}.png`, fullPage: true });
-    await page.getByRole('link', { name: /View my work/ }).click();
+    await page.getByRole('link', { name: 'My work', exact: true }).click();
+    await page.getByRole('heading', { name: 'My work', exact: true }).waitFor();
     assert.equal(await page.locator('.field-task').count(), 4);
     assert.equal(
       await page.evaluate(() => document.documentElement.scrollWidth <= window.innerWidth),
@@ -60,13 +85,51 @@ try {
     );
     await page.screenshot({ path: `test-results/field-work-${width}.png`, fullPage: true });
     await page.goto(`${base}/planner/schedule`);
-    await page.getByRole('heading', { name: 'Schedule register' }).waitFor();
+    await page.waitForURL('**/field');
     assert.equal(
       await page.evaluate(() => document.documentElement.scrollWidth <= window.innerWidth),
       true,
     );
-    checks.push(`Field home/tasks and planner contained layout at ${width}px`);
+    checks.push(`Field home/tasks, planner role redirect and contained layout at ${width}px`);
   }
+  const csrf = await page.request.post(`${base}/api/projects`, {
+    headers: { Origin: 'https://foreign.example' },
+    form: { projectId: '10000000-0000-4000-8000-000000000001' },
+  });
+  assert.equal(csrf.status(), 403);
+  const forbidden = await page.request.post(
+    `${base}/api/projects/10000000-0000-4000-8000-000000000001/assignments`,
+    {
+      headers: { Origin: base },
+      data: {
+        activityId: '50000000-0000-4000-8000-000000000001',
+        commandId: crypto.randomUUID(),
+        expectedVersion: 1,
+        reporterId: account(1).id,
+        supervisorId: account(4).id,
+        from: '2026-09-14',
+        to: '2026-09-16',
+        reason: 'Unauthorized test',
+      },
+    },
+  );
+  assert.equal(forbidden.status(), 403);
+  checks.push('Foreign-origin mutation and reporter assignment API denied');
+  await page.getByRole('button', { name: 'Sign out', exact: true }).click();
+  assert.equal((await page.request.get(`${base}/api/projects`)).status(), 401);
+  await page.goto(`${base}/field/work`);
+  await page.waitForURL('**/login');
+  checks.push('Sign out clears authenticated access');
+  await login(page, 7);
+  await page
+    .getByLabel('Active project', { exact: true })
+    .selectOption('10000000-0000-4000-8000-000000000002');
+  await page.getByRole('button', { name: 'Switch project', exact: true }).click();
+  await page.getByRole('heading', { name: 'Isolation Test Project', exact: true }).waitFor();
+  await page.getByRole('link', { name: 'Schedule', exact: true }).click();
+  await page.getByRole('heading', { name: 'Schedule register', exact: true }).waitFor();
+  assert.equal(await page.locator('tbody tr').count(), 1);
+  checks.push('Authorized project switch loads only that project schedule');
   assert.deepEqual(errors, []);
   await writeFile(
     'test-results/browser-report.json',

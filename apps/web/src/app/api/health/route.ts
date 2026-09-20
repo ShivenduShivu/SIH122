@@ -3,9 +3,9 @@ export function GET() {
     {
       service: 'intelligrid-web',
       status: 'ok',
-      phase: 1,
-      mode: 'synthetic-preview',
-      databaseConnected: false,
+      phase: 2,
+      mode: 'authenticated-synthetic-project',
+      check: 'web-process-liveness',
     },
     { headers: { 'Cache-Control': 'no-store' } },
   );

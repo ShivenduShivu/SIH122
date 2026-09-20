@@ -1,32 +1,55 @@
 import Link from 'next/link';
 import { Icon } from '../../components/icon';
-export default function FieldPage() {
+import { WorkCard } from '../../components/work-card';
+import { projectSchedule, siteToday } from '../../lib/project';
+export default async function FieldPage() {
+  const { member, activities, currentAssignments, user } = await projectSchedule();
+  const today = siteToday();
+  const mine = activities.filter((a) => a.assignedReporterId === user.id);
+  const current = mine.find((a) => {
+    const x = currentAssignments.get(a.id);
+    return x && x.effective_from <= today && x.effective_to >= today;
+  });
+  const next = mine
+    .filter((a) => currentAssignments.get(a.id)!.effective_from > today)
+    .sort((a, b) =>
+      currentAssignments
+        .get(a.id)!
+        .effective_from.localeCompare(currentAssignments.get(b.id)!.effective_from),
+    )[0];
   return (
     <>
       <div className="field-greeting">
-        <p className="eyebrow">DEMONSTRATION PROFILE</p>
-        <h1>Hello, Arun.</h1>
-        <p>Your assigned work, in one place.</p>
+        <p className="eyebrow">{today} · INDIA STANDARD TIME</p>
+        <h1>Namaste, {member.display_name.split(' ')[0]}.</h1>
+        <p>
+          {member.role === 'reporter'
+            ? 'Your current work and field reports.'
+            : 'Your field workspace. Personal assignments appear here.'}
+        </p>
       </div>
-      <section className="site-card">
-        <div className="eyebrow">DULIAJAN FACILITY EXPANSION</div>
-        <h2>Pump bay / P-101</h2>
-        <div className="site-card-bottom">
-          <span>Civil works</span>
-          <strong>04 assigned activities</strong>
+      <section aria-labelledby="current-heading">
+        <div className="field-section-heading">
+          <h2 id="current-heading">Your current work</h2>
+          <Link href="/field/work">View all</Link>
         </div>
+        {current ? (
+          <WorkCard activity={current} assignment={currentAssignments.get(current.id)!} />
+        ) : (
+          <p className="field-empty">
+            No assignment scheduled for today. Check My work for upcoming and earlier assignments.
+          </p>
+        )}
+        {!current && next && (
+          <>
+            <h2 className="small-heading">Next assignment</h2>
+            <WorkCard activity={next} assignment={currentAssignments.get(next.id)!} />
+          </>
+        )}
       </section>
-      <Link className="field-work-link" href="/field/work">
-        <div>
-          <strong>View my work</strong>
-          <span>Check the location and planned dates</span>
-        </div>
-        <span aria-hidden="true">→</span>
-      </Link>
       <section aria-labelledby="report-heading">
         <div className="field-section-heading">
           <h2 id="report-heading">Report from the site</h2>
-          <span>Coming in later phases</span>
         </div>
         <div className="capture-options">
           <button disabled className="voice-primary">
@@ -44,24 +67,22 @@ export default function FieldPage() {
           </button>
         </div>
         <p className="field-explanation">
-          Capture is not connected yet. The completed flow will ask for missing details before
-          sending your update for review.
+          Reporting opens in the next phases. Check the location and details before you send.
         </p>
       </section>
       <div className="field-callout">
-        <strong>A clear location matters.</strong>
+        <Icon name="clipboard" />
+        <strong>No accepted reports yet</strong>
         <p>
-          “Painting is finished” could mean more than one room. IntelliGrid will ask which room you
-          mean.
+          Only approved field updates will change actual progress. Scheduled work does not mean
+          completed work.
         </p>
       </div>
-      <p className="field-disclaimer">
-        Synthetic sample profile · Not signed in
-        <br />
-        No reports are collected in this phase.
-        <br />
-        <Link href="/planner">Back to planner preview</Link>
-      </p>
+      {['planner', 'manager'].includes(member.role) && (
+        <p className="field-disclaimer">
+          <Link href="/planner">Open planner workspace</Link>
+        </p>
+      )}
     </>
   );
 }

@@ -1,46 +1,68 @@
-import { assignedActivities, formatDateOnly } from '@intelligrid/domain';
-import { activities, members } from '../../../../../../fixtures/development';
-export default function FieldWorkPage() {
-  const assigned = assignedActivities(activities, members[0]!);
+import { projectSchedule, siteToday } from '../../../lib/project';
+import { WorkCard } from '../../../components/work-card';
+export default async function FieldWorkPage() {
+  const { member, user, activities, currentAssignments } = await projectSchedule();
+  const today = siteToday(),
+    mine = activities.filter((a) => a.assignedReporterId === user.id);
+  const groups = [
+    {
+      name: 'Today',
+      rows: mine.filter((a) => {
+        const x = currentAssignments.get(a.id)!;
+        return x.effective_from <= today && x.effective_to >= today;
+      }),
+    },
+    {
+      name: 'Up next',
+      rows: mine.filter((a) => currentAssignments.get(a.id)!.effective_from > today),
+    },
+    {
+      name: 'Earlier assignments',
+      rows: mine.filter((a) => currentAssignments.get(a.id)!.effective_to < today),
+    },
+  ];
   return (
     <>
       <div className="field-greeting">
-        <p className="eyebrow">ARUN SAIKIA / SAMPLE ASSIGNMENTS</p>
+        <p className="eyebrow">
+          {member.display_name} · {today}
+        </p>
         <h1>My work</h1>
-        <p>Planned work for the project period.</p>
+        <p>Confirm the work area before reporting.</p>
       </div>
       <div className="field-work-count">
-        04 activities <span>September 2026</span>
+        {mine.length} assigned activities<span>India Standard Time</span>
       </div>
-      <div className="field-tasks">
-        {assigned.map((a) => (
-          <article className="field-task" key={a.id}>
-            <div>
-              <span className="activity-id">{a.externalId}</span>
-              <span className="tag">Planned</span>
-            </div>
-            <h2>{a.name}</h2>
-            <p>{a.location}</p>
-            <div className="task-date">
-              <span>
-                {formatDateOnly(a.plannedStart)} – {formatDateOnly(a.plannedFinish)}
-              </span>
-              <span>
-                {a.targetQuantity} {a.unit}
-              </span>
-            </div>
-          </article>
-        ))}
-      </div>
+      {groups.map((g) => (
+        <section className="work-group" key={g.name} aria-label={g.name}>
+          <div className="field-section-heading">
+            <h2>{g.name}</h2>
+            <span>{g.rows.length}</span>
+          </div>
+          <div className="field-tasks">
+            {g.rows
+              .sort((a, b) =>
+                currentAssignments
+                  .get(a.id)!
+                  .effective_from.localeCompare(currentAssignments.get(b.id)!.effective_from),
+              )
+              .map((a) => (
+                <WorkCard key={a.id} activity={a} assignment={currentAssignments.get(a.id)!} />
+              ))}
+          </div>
+          {!g.rows.length && <p className="field-empty">No assignments in this period.</p>}
+        </section>
+      ))}
       <div className="field-callout">
         <strong>Assigned work can change.</strong>
         <p>
-          If your supervisor sends you to another location, the reporting flow will preserve your
-          update and request verification.
+          If your supervisor asks you to work elsewhere, the reporting flow will keep your update
+          and request verification.
         </p>
       </div>
       <p className="field-disclaimer">
-        Assignments are synthetic. Planned dates do not indicate actual completion.
+        Earlier assignments are not automatically complete. Actual progress requires an approved
+        field report.
       </p>
     </>
   );
