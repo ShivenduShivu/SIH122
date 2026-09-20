@@ -1,6 +1,7 @@
 import { createClient, type SupabaseClient } from '@supabase/supabase-js';
 import { rankClaim } from '@intelligrid/domain/matching';
 import { PlannedActivity } from '@intelligrid/contracts';
+import { readComplete } from './read-complete';
 import { Extraction } from '@intelligrid/contracts/reports';
 import { ProviderError, type Extractor } from '@intelligrid/adapters';
 const must = <T>(r: {
@@ -56,28 +57,32 @@ export async function processOne(db: SupabaseClient, extractor: Extractor): Prom
       await db.from('projects').select('*').eq('id', report.project_id).single(),
     );
     // Worker performs planner reconciliation only inside the report's project. No plan is sent to the provider.
-    const plans = must(
-      await db
+    const plans = await readComplete((from, to) =>
+      db
         .from('activity_plan_versions')
         .select('*', { count: 'exact' })
         .eq('project_id', project.id)
         .eq('revision_id', project.active_revision_id)
-        .limit(200),
+        .order('activity_id')
+        .range(from, to),
     );
-
-    const activityRows = must(
-      await db
+    const activityRows = await readComplete((from, to) =>
+      db
         .from('activities')
         .select('*', { count: 'exact' })
         .eq('project_id', project.id)
-        .eq('active', true),
+        .eq('active', true)
+        .order('id')
+        .range(from, to),
     );
-    const assignments = must(
-      await db
+    const assignments = await readComplete((from, to) =>
+      db
         .from('assignment_versions')
         .select('*', { count: 'exact' })
         .eq('project_id', project.id)
-        .order('version', { ascending: false }),
+        .order('activity_id')
+        .order('version', { ascending: false })
+        .range(from, to),
     );
     const catalog = plans
       .filter((p) => activityRows.some((a) => a.id === p.activity_id))
@@ -95,6 +100,14 @@ export async function processOne(db: SupabaseClient, extractor: Extractor): Prom
           plannedFinish: p.planned_finish,
           targetQuantity: p.target_quantity,
           unit: p.unit,
+          nodeKind: p.node_kind,
+          hierarchyPath: p.source_metadata?.hierarchyPath ?? [],
+          sourceLevel: p.source_metadata?.sourceLevel ?? null,
+          sourceWbs: p.source_metadata?.sourceWbs ?? null,
+          sourceDiscipline: p.source_metadata?.sourceDiscipline ?? null,
+          duration: p.source_metadata?.duration ?? null,
+          predecessors: p.source_metadata?.predecessors ?? '',
+          calendar: p.source_metadata?.calendar ?? 'Source calendar not specified',
           assignedReporterId:
             assignments.find((a) => a.activity_id === p.activity_id)?.reporter_id ?? null,
         }),

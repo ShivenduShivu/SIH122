@@ -159,4 +159,4 @@ Each phase or lettered subphase is a separate review boundary. The original seve
 
 ## Current gate
 
-Phases 1–4 are approved and pushed as `0c9b3df`, `23d13e1`, `d2feff5` and `d9fb8ea`. The user approved Phase 4A on 21 September 2026 and authorized commit/push followed by Phase 5A. Publish the approved documentation, then implement 5A only. Stop at `docs/reports/phase-05a.md` for review before committing or advancing; every later lettered subphase has its own report and gate.
+Phases 1–4 are approved and pushed as `0c9b3df`, `23d13e1`, `d2feff5` and `d9fb8ea`. Phase 4A was approved and pushed as `7d07770`. Phase 5A is approved by the user on 21 September 2026. Commit/push the reviewed implementation, then implement Phase 5B and stop for review at `docs/reports/phase-05b.md`. Every later lettered subphase retains its own report and review boundary.

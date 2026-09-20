@@ -2,6 +2,7 @@ import { existsSync } from 'node:fs';
 import { resolve } from 'node:path';
 import { OpenAIExtractor } from '@intelligrid/adapters';
 import { processOne, workerDatabase } from './processor';
+import { processImport } from './imports';
 if (process.argv.includes('--check')) {
   console.log(
     JSON.stringify({
@@ -33,7 +34,8 @@ if (process.argv.includes('--check')) {
   });
   do {
     try {
-      const worked = await processOne(db, extractor);
+      const imported = await processImport(db);
+      const worked = (await processOne(db, extractor)) || imported;
       if (process.argv.includes('--once')) break;
       if (!worked) await new Promise((r) => setTimeout(r, 2000));
     } catch {

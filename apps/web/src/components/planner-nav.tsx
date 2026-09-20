@@ -13,7 +13,9 @@ export function PlannerNav({ pendingCount = 0 }: { pendingCount?: number }) {
       <Link
         href="/planner/schedule"
         aria-current={
-          ['/planner/schedule', '/planner/assignments'].includes(path) ? 'page' : undefined
+          path.startsWith('/planner/schedule') || path === '/planner/assignments'
+            ? 'page'
+            : undefined
         }
       >
         <Icon name="calendar" /> Schedule

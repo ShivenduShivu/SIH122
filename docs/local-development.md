@@ -141,3 +141,11 @@ See [Phase 4 technical notes](phase-04-technical-notes.md) for the current API a
 Run `npm run test:clarification-db` with the worker stopped. It uses a separate contract-test project and keeps immutable test history. `npm run test:browser:clarification` requires the web server, `OPENAI_API_KEY`, and uncompleted demo rooms; it refuses to overwrite an already completed demo. `npm run test:browser:clarification-review` checks the saved browser run and the final UI, and creates/withdraws a separate synthetic report. Start `npm run worker:start` again after controlled tests for normal interactive reporting.
 
 Answers are stored when the server acknowledges them; they are not yet durable offline drafts. Only a planner's acceptance changes current actuals. Voice, photos, spreadsheet imports and offline storage remain Phase 5.
+
+## Phase 5A schedule import
+
+Apply migration `202609210007_schedule_imports.sql` once after 001–006 using the existing local migration process; do not reset a populated demo database. All seven files apply in order on a fresh disposable stack. Run `npm run seed:gwp` to provision the separate synthetic plant with explicit planner/manager/supervisor authority, then run the normal web and worker processes. Existing accounts and accepted progress are preserved.
+
+Select **Urban Garbage Treatment Plant · Town XYZ**, open **Schedule → Import schedule**, and upload both supplied schedule files from `fixtures/schedules/`. Choose the explicit profiles and contractor, inspect the counts and original cells, then confirm activation. Source dates run in 2027–2028; use week scale/date navigation. An activated project cannot be imported again through the initial-import workflow.
+
+Run `test:import-db` and `test:import-paging` with the normal worker stopped. Both retain isolated synthetic test history and deactivate their temporary memberships. `test:browser:import` needs the web server and processes its own controlled import job; it skips initial upload on a previously activated plant. The combined worker still requires its existing OpenAI configuration, although schedule parsing itself calls no model. See [Phase 5A technical notes](phase-05a-technical-notes.md) for profile limits and API details.

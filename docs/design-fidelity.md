@@ -26,9 +26,9 @@ Authority: `output/pdf/Nirmaan-Website-and-Mobile-Design.pdf` (12 pages), the or
 
 ## Accepted differences
 
-### Proposed Phase 4A gate mapping
+### Approved Phase 4A gate mapping
 
-The historical phase numbers in the screen table above describe the original plan. Subject to Phase 4A approval, `implementation-phases.md` replaces the remaining gates: **5A** schedule import/hierarchy/dynamic disciplines/milestones; **5B** source-row review, progress basis, approval preview, unresolved filters and per-claim receipts; **6A** exchange and execution history; **6B** voice/photo/transcript and recoverable drafts. Full offline media remains optional. No completed screenshot is evidence of these future additions.
+The historical phase numbers in the screen table above describe the original plan. Following Phase 4A approval, `implementation-phases.md` replaces the remaining gates: **5A** schedule import/hierarchy/dynamic disciplines/milestones; **5B** source-row review, progress basis, approval preview, unresolved filters and per-claim receipts; **6A** exchange and execution history; **6B** voice/photo/transcript and recoverable drafts. Full offline media remains optional. No completed screenshot is evidence of these future additions.
 
 The richer schedule must keep the approved masthead, navigation order/icons, baseline control, Timeline/Table switch, restrained colour system and source drawer. Nested area/package groups and a usable date-range/zoom control extend the existing Gantt. Count only reporting leaves in activity totals. Milestones must not look like positive-duration bars. Reported but unresolved progress must be visually distinct from accepted progress, including missing dates; absence of an actual start must not erase the observation.
 
@@ -47,3 +47,7 @@ The execution overview, grouped Gantt, baseline toggle, Today marker, Timeline/T
 ## Phase 4 review evidence
 
 Clarification cards, reply history, scoped supervisor checks, evidence links and correction/withdrawal controls extend the approved review and mobile visual system. Compared PDF pages 2, 3, 5 and 8 against final browser screenshots; top navigation icons, overview columns, grouped Gantt and mobile bottom tabs remain intact. Status tags and reply history were checked at 320 px; original source and subsequent answers are labelled separately. See `docs/reports/phase-04.md` for rendered evidence and test results.
+
+## Phase 5A review evidence
+
+The supplied schedule retains the formal top navigation and icons, baseline switch, Timeline/Table controls and evidence drawer. Nested phase/L3/L4/L5 context and milestone points extend the page-3 design for the actual reference data. Days/weeks and date navigation make the 2027–2028 schedule usable without changing source dates. Source-row preview uses a plain register with visible errors and explicit activation confirmation. Production browser checks cover desktop, 390px and 320px; the original field action hierarchy and bottom tabs passed regression checks. See `reports/phase-05a.md` for screenshots and limits. Voice/photo controls remain disabled until their implementation gate.

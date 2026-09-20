@@ -34,7 +34,11 @@
     "seed:clarification": "tsx scripts/seed-clarification-lab.ts",
     "test:clarification-db": "tsx scripts/test-clarification-db.ts",
     "test:browser:clarification": "tsx tests/browser/clarification.ts",
-    "test:browser:clarification-review": "tsx tests/browser/clarification-review.ts"
+    "test:browser:clarification-review": "tsx tests/browser/clarification-review.ts",
+    "seed:gwp": "tsx scripts/seed-gwp.ts",
+    "test:import-db": "tsx scripts/test-schedule-import-db.ts",
+    "test:browser:import": "tsx tests/browser/schedule-import.ts",
+    "test:import-paging": "tsx scripts/test-import-paging.ts"
   },
   "devDependencies": {
     "@playwright/test": "1.63.0",
@@ -42,10 +46,16 @@
     "@types/node": "24.13.6",
     "@types/react": "19.3.0",
     "@types/react-dom": "19.3.0",
+    "@types/yauzl": "2.10.3",
     "prettier": "3.9.8",
     "supabase": "2.117.0",
     "tsx": "4.23.15",
     "typescript": "5.9.3",
     "vitest": "5.0.1"
+  },
+  "overrides": {
+    "exceljs": {
+      "uuid": "11.1.1"
+    }
   }
 }

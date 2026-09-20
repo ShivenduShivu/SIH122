@@ -4,7 +4,17 @@ export const pipelineVersion = 'foundation-v1';
 export const Id = z.uuid();
 // z.iso.date validates calendar dates as well as shape, including leap years.
 export const WorkDate = z.iso.date();
-export const Discipline = z.enum(['Civil', 'Piping', 'Electrical']);
+export const Discipline = z.enum([
+  'Civil',
+  'Piping',
+  'Electrical',
+  'General',
+  'HSE',
+  'Quality',
+  'Structural',
+  'Mechanical',
+  'Instrumentation',
+]);
 export const Role = z.enum(['reporter', 'supervisor', 'planner', 'manager']);
 export const ReviewState = z.enum([
   'pending',
@@ -49,8 +59,16 @@ export const PlannedActivity = z
     plannedStart: WorkDate,
     plannedFinish: WorkDate,
     assignedReporterId: Id.nullable(),
-    targetQuantity: z.number().positive(),
-    unit: z.string().min(1),
+    targetQuantity: z.number().positive().nullable(),
+    unit: z.string().min(1).nullable(),
+    nodeKind: z.enum(['task', 'milestone']).default('task'),
+    hierarchyPath: z.array(z.object({ id: z.string(), name: z.string() })).default([]),
+    sourceLevel: z.string().nullable().default(null),
+    sourceWbs: z.string().nullable().default(null),
+    sourceDiscipline: z.string().nullable().default(null),
+    duration: z.number().nonnegative().nullable().default(null),
+    predecessors: z.string().default(''),
+    calendar: z.string().default('Source calendar not specified'),
   })
   .strict()
   .refine((a) => a.plannedFinish >= a.plannedStart, {

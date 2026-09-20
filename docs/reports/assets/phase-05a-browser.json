@@ -1,0 +1,12 @@
+{
+  "project": "10000000-0000-4000-8000-000000000005",
+  "checks": [
+    "Existing accepted initial import retained; repeat activation deliberately skipped",
+    "149 leaf count; dynamic civil filter 70; nested collapse/expand; source hierarchy, quantity and revision in drawer",
+    "Milestone is a point with no fabricated quantity or progress denominator",
+    "Table mode and 390px/320px pages remain contained with internal table scrolling",
+    "Used project cannot start a replacing initial import",
+    "Anonymous import API requires login"
+  ],
+  "errors": []
+}

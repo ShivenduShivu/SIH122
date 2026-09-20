@@ -1,10 +1,10 @@
 # IntelliGrid - planning-to-execution bridge
 
-BITS Pilani / SIH 26122. Fictional oil/gas facility data. This is a student prototype, not an official Oil India service. The team selected IntelliGrid on 20 September 2026; earlier planning PDFs retain the previous name, Nirmaan.
+BITS Pilani / SIH 26122. Synthetic oil/gas and supplied waste-plant project data. This is a student prototype, not an official Oil India service. The team selected IntelliGrid on 20 September 2026; earlier planning PDFs retain the previous name, Nirmaan.
 
 ## Current scope
 
-Phase 4 adds simple reporter questions, independent supervisor verification, scoped date corrections, pre-acceptance withdrawal and protected evidence retrieval to the existing OpenAI/report-to-schedule flow. The Gantt changes only after planner acceptance. See the [Phase 4 report](docs/reports/phase-04.md) and [technical notes](docs/phase-04-technical-notes.md). Phase 4 is approved; further implementation is on hold at the user’s request; voice, durable offline reporting, general uploads and external schedule delivery remain later phases.
+Phase 5A adds protected schedule import, original-row preview, initial baseline activation and a nested Gantt for the supplied waste-plant schedules. Existing text reporting, simple clarification, supervisor verification and planner-only acceptance remain in place. See the [Phase 5A report](docs/reports/phase-05a.md) and [technical notes](docs/phase-05a-technical-notes.md). Phase 5A is awaiting review; the richer field-input/progress workflow is Phase 5B, external exchange is 6A, and voice/photo is 6B.
 
 ## Run locally
 
@@ -27,6 +27,10 @@ npm run seed:clarification # separate room demo; ignored local credentials
 npm run test:clarification-db # question, verification, correction and withdrawal checks
 npm run test:browser:clarification # real provider room flow; fresh uncompleted demo required
 npm run test:browser:clarification-review # inspect saved room run and final screens
+npm run seed:gwp     # separate synthetic plant; preserves existing data
+npm run test:import-db # file/preview/activation and authority checks
+npm run test:import-paging # 260 leaves and 241 assignment-history records
+npm run test:browser:import # running app; uploads only if plant is still empty
 npm run test:seed     # verify repeated seed has no database changes
 npm run build        # production Next.js build
 npm run test:browser # running app on :3000; see browser prerequisites below
@@ -47,4 +51,4 @@ Browser checks use Playwright and Chromium. Install it once with `npx playwright
 - `docs/implementation-phases.md`: detailed phase instructions, gates and commit messages.
 - `docs/reports`: phase completion evidence and review status.
 
-Only approved phases are staged and committed. Do not commit `.env`, provider keys, `node_modules`, browser output or scratch files. Package patches are pinned by `package-lock.json`. `.github/workflows/checks.yml` repeats foundation checks on GitHub. Phases 1–3 are pushed to `ShivenduShivu/SIH122`. Latest approved commit: `d2feff5` (Phase 3). Phase 4 is approved for commit and push; wait for the user’s new information before starting Phase 5.
+Only approved phases are staged and committed. Do not commit `.env`, provider keys, `node_modules`, raw browser output or scratch files. Selected reviewed screenshots belong in phase reports. Package patches are pinned by `package-lock.json`. `.github/workflows/checks.yml` repeats foundation checks on GitHub. Latest approved/pushed commit: `7d07770` (Phase 4A). Phase 5A remains uncommitted pending review.

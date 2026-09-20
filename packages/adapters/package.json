@@ -3,9 +3,15 @@
   "version": "0.1.0",
   "private": true,
   "type": "module",
-  "exports": "./src/openai.ts",
+  "exports": {
+    ".": "./src/openai.ts",
+    "./schedule-import": "./src/schedule-import.ts"
+  },
   "dependencies": {
     "@intelligrid/contracts": "0.1.0",
+    "csv-parse": "7.0.2",
+    "exceljs": "4.4.0",
+    "yauzl": "3.4.0",
     "zod": "4.6.5"
   }
 }

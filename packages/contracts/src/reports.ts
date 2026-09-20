@@ -57,7 +57,23 @@ export const ScheduleActivity = PlannedActivity.safeExtend({
 export const ScheduleSnapshot = z.object({
   projectId: Id,
   projectName: z.string(),
-  revisionId: Id,
+  revisionId: Id.nullable(),
+  revisionLabel: z.string().nullable().default(null),
+  nodes: z
+    .array(
+      z.object({
+        externalId: z.string(),
+        parentId: z.string().nullable(),
+        name: z.string(),
+        kind: z.string(),
+        sourceLevel: z.string(),
+        sourceWbs: z.string(),
+        plannedStart: WorkDate,
+        plannedFinish: WorkDate,
+        reportable: z.boolean(),
+      }),
+    )
+    .default([]),
   policyVersion: z.number().int(),
   scheduleVersion: z.number().int().nonnegative(),
   activities: z.array(ScheduleActivity),

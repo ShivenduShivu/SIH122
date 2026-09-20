@@ -26,7 +26,11 @@ export function WorkCard({
           {formatDateOnly(x.effective_from)} – {formatDateOnly(x.effective_to)}
         </span>
         <span>
-          {a.targetQuantity} {a.unit} planned
+          {a.targetQuantity === null
+            ? a.nodeKind === 'milestone'
+              ? 'Milestone'
+              : 'Quantity not specified'
+            : `${a.targetQuantity} ${a.unit} planned`}
         </span>
       </div>
       <div className="task-evidence">

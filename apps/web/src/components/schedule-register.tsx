@@ -28,9 +28,9 @@ export function ScheduleRegister({
             onChange={(e) => setDiscipline(e.target.value)}
           >
             <option>All</option>
-            <option>Civil</option>
-            <option>Piping</option>
-            <option>Electrical</option>
+            {[...new Set(activities.map((a) => a.discipline))].map((d) => (
+              <option key={d}>{d}</option>
+            ))}
           </select>
         </div>
         <div className="filter-field search-label">
@@ -83,7 +83,7 @@ export function ScheduleRegister({
                 <td>{formatDateOnly(a.plannedStart)}</td>
                 <td>{formatDateOnly(a.plannedFinish)}</td>
                 <td>
-                  {a.targetQuantity} {a.unit}
+                  {a.targetQuantity === null ? 'Not specified' : `${a.targetQuantity} ${a.unit}`}
                 </td>
                 <td>
                   <span className="muted">Not connected</span>

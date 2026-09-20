@@ -1,4 +1,5 @@
 import 'server-only';
+import { readRows } from './read-rows';
 import { cache } from 'react';
 import { cookies } from 'next/headers';
 import { redirect } from 'next/navigation';
@@ -34,21 +35,20 @@ export async function plannerContext() {
 }
 export const projectSchedule = cache(async () => {
   const c = await projectContext();
-  const [schedule, assignments] = await Promise.all([
+  const [schedule, assignmentRows] = await Promise.all([
     c.db.rpc('schedule_snapshot', { p_project: c.project.id }),
-    c.db
-      .from('assignment_versions')
-      .select('*', { count: 'exact' })
-      .eq('project_id', c.project.id)
-      .order('version', { ascending: false })
-      .limit(200),
+    readRows((from, to) =>
+      c.db
+        .from('assignment_versions')
+        .select('*', { count: 'exact' })
+        .eq('project_id', c.project.id)
+        .order('activity_id')
+        .order('version', { ascending: false })
+        .range(from, to),
+    ),
   ]);
-  if (
-    schedule.error ||
-    assignments.error ||
-    (assignments.count ?? 0) > (assignments.data?.length ?? 0)
-  )
-    throw new Error('Could not load the complete authorized schedule.');
+  if (schedule.error) throw new Error('Could not load the complete authorized schedule.');
+  const assignments = { data: assignmentRows };
   const snapshot = ScheduleSnapshot.parse(schedule.data);
   const currentAssignments = new Map<string, NonNullable<typeof assignments.data>[number]>();
   for (const row of assignments.data ?? [])

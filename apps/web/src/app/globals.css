@@ -2186,3 +2186,216 @@ textarea:focus-visible {
   display: block;
   margin-top: 6px;
 }
+/* Schedule import preserves the formal register layout and source hierarchy. */
+.import-setup,
+.import-history {
+  padding: 22px;
+  margin-bottom: 20px;
+}
+.import-setup h2,
+.import-history h2 {
+  margin-top: 0;
+}
+.import-setup > label,
+.import-body > label {
+  display: grid;
+  gap: 7px;
+  max-width: 580px;
+  margin: 15px 0;
+}
+.import-setup input,
+.import-setup select,
+.import-body input[type='search'] {
+  max-width: 100%;
+  min-width: 0;
+  padding: 9px;
+  border: 1px solid var(--line);
+  background: white;
+}
+.import-file {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  gap: 16px;
+  padding: 12px 0;
+  border-bottom: 1px solid var(--line);
+  overflow-wrap: anywhere;
+}
+.import-file label {
+  display: grid;
+  gap: 6px;
+}
+.import-preview {
+  margin-bottom: 20px;
+}
+.import-body {
+  padding: 20px;
+}
+.import-totals {
+  display: flex;
+  gap: 20px;
+  flex-wrap: wrap;
+  padding: 14px;
+  background: #edf2f4;
+}
+.import-confirm {
+  display: grid;
+  gap: 15px;
+  margin-top: 22px;
+  padding: 16px;
+  border: 1px solid var(--line);
+}
+.import-confirm input {
+  margin-right: 8px;
+}
+.import-confirm .button {
+  justify-self: start;
+}
+.source-cells {
+  max-width: 440px;
+  max-height: 300px;
+  overflow: auto;
+  font-size: 11px;
+  white-space: pre-wrap;
+  overflow-wrap: anywhere;
+}
+.import-history-row {
+  display: flex;
+  align-items: center;
+  gap: 16px;
+  width: 100%;
+  text-align: left;
+  padding: 12px 0;
+  background: none;
+  border: 0;
+  border-bottom: 1px solid var(--line);
+  color: var(--text);
+}
+.import-history-row span:last-child {
+  margin-left: auto;
+}
+.hierarchy-tools {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  background: #f5f8f9;
+  padding: 9px 14px;
+  font-size: 11px;
+}
+.hierarchy-tools button {
+  background: white;
+  border: 1px solid var(--line);
+  padding: 5px 8px;
+}
+.hierarchy-summary {
+  min-height: 36px;
+  background: #edf2f4;
+}
+.hierarchy-label {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  border: 0;
+  border-right: 1px solid var(--line);
+  background: #edf2f4;
+  font-size: 11px;
+  color: var(--text);
+}
+.hierarchy-label strong {
+  flex: 1;
+}
+.hierarchy-label small {
+  font-size: 9px;
+  color: var(--muted);
+  white-space: nowrap;
+}
+.hierarchy-label:disabled {
+  opacity: 1;
+  cursor: default;
+}
+.summary-plan-bar {
+  position: absolute;
+  top: 19px;
+  height: 3px;
+  background: #6a7f8b;
+}
+.plan-bar.milestone-bar {
+  width: 18px;
+  padding: 0;
+  background: transparent;
+  color: #846429;
+  font-size: 19px;
+  top: 5px;
+  transform: translateX(-50%);
+  overflow: visible;
+}
+.general,
+.hse,
+.quality {
+  --bar: #d7e1e5;
+  --bar-text: #334d5a;
+}
+.structural,
+.mechanical {
+  --bar: #dbddd0;
+  --bar-text: #4b5034;
+}
+.instrumentation {
+  --bar: #d5dcec;
+  --bar-text: #3b4f72;
+}
+.jump-date {
+  display: flex;
+  align-items: center;
+  gap: 7px;
+  font-size: 11px;
+}
+.jump-date input {
+  border: 1px solid var(--line);
+  background: white;
+  padding: 4px;
+}
+@media (max-width: 600px) {
+  .import-setup,
+  .import-body,
+  .import-history {
+    padding: 14px;
+  }
+  .import-file {
+    flex-direction: column;
+    align-items: stretch;
+  }
+  .import-totals {
+    gap: 10px;
+    font-size: 12px;
+  }
+  .import-history-row {
+    flex-wrap: wrap;
+    gap: 8px;
+  }
+  .import-setup .form-actions,
+  .import-body .form-actions {
+    flex-wrap: wrap;
+  }
+  .gantt-range,
+  .gantt-tools {
+    flex-wrap: wrap;
+    gap: 10px;
+  }
+  .gantt-view-options {
+    flex-wrap: wrap;
+  }
+}
+
+.legend-general,
+.legend-hse,
+.legend-quality {
+  background: #d7e1e5;
+}
+.legend-structural,
+.legend-mechanical {
+  background: #dbddd0;
+}
+.legend-instrumentation {
+  background: #d5dcec;
+}

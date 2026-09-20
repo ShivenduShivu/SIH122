@@ -5,6 +5,7 @@ import type { ScheduleActivity } from '@intelligrid/contracts/reports';
 import { formatDateOnly } from '@intelligrid/domain';
 import { useSchedule } from './schedule-context';
 import { Icon } from './icon';
+import { HierarchyTimeline } from './hierarchy-timeline';
 type RecordEvent = {
   id: string;
   activity_id: string;
@@ -28,7 +29,8 @@ export function ProjectTimeline({ events, today }: { events: RecordEvent[]; toda
     [collapsed, setCollapsed] = useState<string[]>([]),
     [selected, setSelected] = useState<string | null>(null),
     [tab, setTab] = useState('Details'),
-    [offset, setOffset] = useState(0);
+    [offset, setOffset] = useState(0),
+    [step, setStep] = useState(1);
   const dialog = useRef<HTMLDialogElement>(null);
   useEffect(() => {
     if (selected) {
@@ -39,13 +41,15 @@ export function ProjectTimeline({ events, today }: { events: RecordEvent[]; toda
   const all = snapshot.activities,
     rows = all.filter((a) => discipline === 'All' || a.discipline === discipline),
     start = addDay(all.map((a) => a.plannedStart).sort()[0] ?? today, offset),
-    end = addDay(start, 15),
-    days = Array.from({ length: 16 }, (_, i) => addDay(start, i));
+    end = addDay(start, 16 * step - 1),
+    days = Array.from({ length: 16 }, (_, i) => addDay(start, i * step));
   const activity = all.find((a) => a.id === selected);
   const range = (from: string, to: string) => {
     const l = Math.max(0, daysBetween(start, from)),
-      r = Math.min(15, daysBetween(start, to));
-    return r < l ? null : { left: `${(l / 16) * 100}%`, width: `${((r - l + 1) / 16) * 100}%` };
+      r = Math.min(16 * step - 1, daysBetween(start, to));
+    return r < l
+      ? null
+      : { left: `${(l / (16 * step)) * 100}%`, width: `${((r - l + 1) / (16 * step)) * 100}%` };
   };
   return (
     <>
@@ -56,6 +60,9 @@ export function ProjectTimeline({ events, today }: { events: RecordEvent[]; toda
           <p>Baseline and accepted field progress, in one view.</p>
         </div>
         <div className="form-actions">
+          <Link className="button" href="/planner/schedule/import">
+            <Icon name="reports" /> Import schedule
+          </Link>
           <Link className="button" href="/planner/assignments">
             <Icon name="calendar" /> Assign work
           </Link>
@@ -64,6 +71,11 @@ export function ProjectTimeline({ events, today }: { events: RecordEvent[]; toda
           </Link>
         </div>
       </div>
+      {!all.length && (
+        <p className="validation-notice">
+          No active reporting schedule. Import and activate the initial schedule to begin.
+        </p>
+      )}
       <section className="gantt-panel" aria-label="Project schedule">
         <div className="gantt-tools">
           <label htmlFor="schedule-discipline">
@@ -74,7 +86,7 @@ export function ProjectTimeline({ events, today }: { events: RecordEvent[]; toda
               value={discipline}
               onChange={(e) => setDiscipline(e.target.value)}
             >
-              {['All', 'Civil', 'Piping', 'Electrical'].map((d) => (
+              {['All', ...new Set(all.map((a) => a.discipline))].map((d) => (
                 <option key={d} value={d}>
                   {d === 'All' ? 'All disciplines' : d}
                 </option>
@@ -83,6 +95,17 @@ export function ProjectTimeline({ events, today }: { events: RecordEvent[]; toda
           </label>
           <span className="muted">{rows.length} activities</span>
           <div className="gantt-view-options">
+            <label>
+              Scale{' '}
+              <select
+                aria-label="Scale"
+                value={step}
+                onChange={(e) => setStep(Number(e.target.value))}
+              >
+                <option value={1}>Days</option>
+                <option value={7}>Weeks</option>
+              </select>
+            </label>
             <label>
               <input
                 type="checkbox"
@@ -102,6 +125,20 @@ export function ProjectTimeline({ events, today }: { events: RecordEvent[]; toda
           </div>
         </div>
         <div className="gantt-range">
+          <label className="jump-date">
+            Go to date{' '}
+            <input
+              aria-label="Go to date"
+              type="date"
+              value={start}
+              onChange={(e) => {
+                if (e.target.value)
+                  setOffset(
+                    daysBetween(all.map((a) => a.plannedStart).sort()[0] ?? today, e.target.value),
+                  );
+              }}
+            />
+          </label>
           <strong>
             {new Date(start + 'T00:00:00Z').toLocaleString('en-GB', {
               month: 'long',
@@ -110,23 +147,18 @@ export function ProjectTimeline({ events, today }: { events: RecordEvent[]; toda
             })}
           </strong>
           <div>
-            <button aria-label="Previous dates" onClick={() => setOffset((o) => o - 14)}>
+            <button aria-label="Previous dates" onClick={() => setOffset((o) => o - 14 * step)}>
               ←
             </button>
             <span>
               {formatDateOnly(start)}–{formatDateOnly(end)}
             </span>
-            <button aria-label="Next dates" onClick={() => setOffset((o) => o + 14)}>
+            <button aria-label="Next dates" onClick={() => setOffset((o) => o + 14 * step)}>
               →
             </button>
             <button
               onClick={() =>
-                setOffset(
-                  Math.max(
-                    0,
-                    daysBetween(all.map((a) => a.plannedStart).sort()[0] ?? today, today) - 5,
-                  ),
-                )
+                setOffset(daysBetween(all.map((a) => a.plannedStart).sort()[0] ?? today, today) - 5)
               }
             >
               Today
@@ -142,102 +174,128 @@ export function ProjectTimeline({ events, today }: { events: RecordEvent[]; toda
                   {days.map((d) => (
                     <div key={d} className={d === today ? 'today-day' : ''}>
                       <span>
-                        {new Date(d + 'T00:00:00Z')
-                          .toLocaleDateString('en-GB', { weekday: 'short', timeZone: 'UTC' })
-                          .slice(0, 1)}
+                        {step === 7
+                          ? new Date(d + 'T00:00:00Z').toLocaleDateString('en-GB', {
+                              month: 'short',
+                              year: '2-digit',
+                              timeZone: 'UTC',
+                            })
+                          : new Date(d + 'T00:00:00Z')
+                              .toLocaleDateString('en-GB', { weekday: 'short', timeZone: 'UTC' })
+                              .slice(0, 1)}
                       </span>
                       <strong>{Number(d.slice(-2))}</strong>
                     </div>
                   ))}
                 </div>
               </div>
-              {(['Civil', 'Piping', 'Electrical'] as const)
-                .filter((d) => rows.some((a) => a.discipline === d))
-                .map((d) => (
-                  <div key={d} className={`discipline-group ${d.toLowerCase()}`}>
-                    <button
-                      className="gantt-group"
-                      onClick={() =>
-                        setCollapsed((c) => (c.includes(d) ? c.filter((x) => x !== d) : [...c, d]))
-                      }
-                      aria-expanded={!collapsed.includes(d)}
-                    >
-                      <span>{collapsed.includes(d) ? '›' : '⌄'}</span>
-                      <i className="discipline-swatch" />
-                      <strong>{d} works</strong>
-                      <small>{rows.filter((a) => a.discipline === d).length} activities</small>
-                    </button>
-                    {!collapsed.includes(d) &&
-                      rows
-                        .filter((a) => a.discipline === d)
-                        .map((a) => {
-                          const planned = range(a.plannedStart, a.plannedFinish),
-                            base = range(a.baselineStart, a.baselineFinish),
-                            actual =
-                              a.actualStart && a.actualFinish
-                                ? range(a.actualStart, a.actualFinish)
-                                : null;
-                          return (
-                            <div
-                              className={`gantt-row ${selected === a.id ? 'selected-row' : ''}`}
-                              key={a.id}
-                            >
-                              <button
-                                className="gantt-label activity-label"
-                                onClick={() => setSelected(a.id)}
+              {snapshot.nodes.length ? (
+                <HierarchyTimeline
+                  nodes={snapshot.nodes}
+                  activities={rows}
+                  start={start}
+                  span={16 * step}
+                  today={today}
+                  baseline={baseline}
+                  filtered={discipline !== 'All'}
+                  onSelect={setSelected}
+                />
+              ) : (
+                (['Civil', 'Piping', 'Electrical'] as const)
+                  .filter((d) => rows.some((a) => a.discipline === d))
+                  .map((d) => (
+                    <div key={d} className={`discipline-group ${d.toLowerCase()}`}>
+                      <button
+                        className="gantt-group"
+                        onClick={() =>
+                          setCollapsed((c) =>
+                            c.includes(d) ? c.filter((x) => x !== d) : [...c, d],
+                          )
+                        }
+                        aria-expanded={!collapsed.includes(d)}
+                      >
+                        <span>{collapsed.includes(d) ? '›' : '⌄'}</span>
+                        <i className="discipline-swatch" />
+                        <strong>{d} works</strong>
+                        <small>{rows.filter((a) => a.discipline === d).length} activities</small>
+                      </button>
+                      {!collapsed.includes(d) &&
+                        rows
+                          .filter((a) => a.discipline === d)
+                          .map((a) => {
+                            const planned = range(a.plannedStart, a.plannedFinish),
+                              base = range(a.baselineStart, a.baselineFinish),
+                              actual =
+                                a.actualStart && a.actualFinish
+                                  ? range(a.actualStart, a.actualFinish)
+                                  : null;
+                            return (
+                              <div
+                                className={`gantt-row ${selected === a.id ? 'selected-row' : ''}`}
+                                key={a.id}
                               >
-                                <i
-                                  className={`status-dot ${a.actualFinish ? 'complete' : a.actualStart ? 'started' : ''}`}
-                                />
-                                <span>{a.externalId}</span>
-                                <strong>{a.name}</strong>
-                              </button>
-                              <div className="gantt-track activity-track">
-                                {days.includes(today) && (
-                                  <span
-                                    className="today-line"
-                                    style={{ left: `${(daysBetween(start, today) / 16) * 100}%` }}
+                                <button
+                                  className="gantt-label activity-label"
+                                  onClick={() => setSelected(a.id)}
+                                >
+                                  <i
+                                    className={`status-dot ${a.actualFinish ? 'complete' : a.actualStart ? 'started' : ''}`}
                                   />
-                                )}
-                                {planned && (
-                                  <button
-                                    className="plan-bar"
-                                    style={planned}
-                                    title={`${a.name}: planned ${a.plannedStart} to ${a.plannedFinish}. ${status(a)}`}
-                                    onClick={() => setSelected(a.id)}
-                                  >
-                                    {a.actualFinish ? 'Complete ✓' : a.name}
-                                  </button>
-                                )}
-                                {baseline && base && (
-                                  <span
-                                    className="baseline-bar"
-                                    style={base}
-                                    title={`Baseline ${a.baselineStart} to ${a.baselineFinish}`}
-                                  />
-                                )}{' '}
-                                {actual && (
-                                  <span
-                                    className="actual-bar"
-                                    style={actual}
-                                    title={`Accepted interval ${a.actualStart} to ${a.actualFinish}`}
-                                  />
-                                )}{' '}
-                                {a.actualStart && days.includes(a.actualStart) && (
-                                  <span
-                                    className="actual-start-marker"
-                                    style={{
-                                      left: `${(daysBetween(start, a.actualStart) / 16) * 100}%`,
-                                    }}
-                                    title={`Accepted start ${a.actualStart}`}
-                                  />
-                                )}
+                                  <span>{a.externalId}</span>
+                                  <strong>{a.name}</strong>
+                                </button>
+                                <div className="gantt-track activity-track">
+                                  {daysBetween(start, today) >= 0 &&
+                                    daysBetween(start, today) < 16 * step && (
+                                      <span
+                                        className="today-line"
+                                        style={{
+                                          left: `${(daysBetween(start, today) / (16 * step)) * 100}%`,
+                                        }}
+                                      />
+                                    )}
+                                  {planned && (
+                                    <button
+                                      className="plan-bar"
+                                      style={planned}
+                                      title={`${a.name}: planned ${a.plannedStart} to ${a.plannedFinish}. ${status(a)}`}
+                                      onClick={() => setSelected(a.id)}
+                                    >
+                                      {a.actualFinish ? 'Complete ✓' : a.name}
+                                    </button>
+                                  )}
+                                  {baseline && base && (
+                                    <span
+                                      className="baseline-bar"
+                                      style={base}
+                                      title={`Baseline ${a.baselineStart} to ${a.baselineFinish}`}
+                                    />
+                                  )}{' '}
+                                  {actual && (
+                                    <span
+                                      className="actual-bar"
+                                      style={actual}
+                                      title={`Accepted interval ${a.actualStart} to ${a.actualFinish}`}
+                                    />
+                                  )}{' '}
+                                  {a.actualStart &&
+                                    daysBetween(start, a.actualStart) >= 0 &&
+                                    daysBetween(start, a.actualStart) < 16 * step && (
+                                      <span
+                                        className="actual-start-marker"
+                                        style={{
+                                          left: `${(daysBetween(start, a.actualStart) / (16 * step)) * 100}%`,
+                                        }}
+                                        title={`Accepted start ${a.actualStart}`}
+                                      />
+                                    )}
+                                </div>
                               </div>
-                            </div>
-                          );
-                        })}
-                  </div>
-                ))}
+                            );
+                          })}
+                    </div>
+                  ))
+              )}
             </div>
           </div>
         ) : (
@@ -284,15 +342,18 @@ export function ProjectTimeline({ events, today }: { events: RecordEvent[]; toda
           </div>
         )}
         <div className="gantt-legend">
-          <span>
-            <i className="legend-civil" /> Civil
-          </span>
-          <span>
-            <i className="legend-piping" /> Piping
-          </span>
-          <span>
-            <i className="legend-electrical" /> Electrical
-          </span>
+          {[...new Set(all.map((a) => a.discipline))].map((d) => (
+            <span key={d}>
+              <i className={`legend-${d.toLowerCase()}`} />
+              {d}
+            </span>
+          ))}
+          {snapshot.nodes.length > 0 && (
+            <>
+              <span>━ Summary / source context</span>
+              <span>◆ Milestone</span>
+            </>
+          )}
           <span>— Baseline</span>
           <span>━ Accepted start–finish</span>
           <span>✓ Complete</span>
@@ -345,6 +406,18 @@ export function ProjectTimeline({ events, today }: { events: RecordEvent[]; toda
                     <dl className="record-facts">
                       <dt>Discipline</dt>
                       <dd>{activity.discipline}</dd>
+                      <dt>Source hierarchy</dt>
+                      <dd>
+                        {activity.hierarchyPath.map((p) => p.name).join(' / ') || activity.location}
+                      </dd>
+                      <dt>Source WBS / level</dt>
+                      <dd>
+                        {activity.sourceWbs ?? 'Fixture'} · {activity.sourceLevel ?? 'Task'}
+                      </dd>
+                      <dt>Calendar</dt>
+                      <dd>{activity.calendar}</dd>
+                      <dt>Predecessors</dt>
+                      <dd>{activity.predecessors || 'None stated'}</dd>
                       <dt>Work location / tag</dt>
                       <dd>{activity.location}</dd>
                       <dt>Baseline</dt>
@@ -359,10 +432,16 @@ export function ProjectTimeline({ events, today }: { events: RecordEvent[]; toda
                     <div className="quantity-record">
                       <span>Accepted quantity</span>
                       <strong>
-                        {activity.acceptedQuantity} / {activity.targetQuantity} {activity.unit}
+                        {activity.targetQuantity === null
+                          ? activity.nodeKind === 'milestone'
+                            ? 'Milestone — no quantity'
+                            : 'No planned quantity supplied'
+                          : `${activity.acceptedQuantity} / ${activity.targetQuantity} ${activity.unit}`}
                       </strong>
                     </div>
-                    <progress max={activity.targetQuantity} value={activity.acceptedQuantity} />
+                    {activity.targetQuantity !== null && (
+                      <progress max={activity.targetQuantity} value={activity.acceptedQuantity} />
+                    )}
                     <p className="muted">
                       Physical quantity is recorded separately from activity completion.
                     </p>

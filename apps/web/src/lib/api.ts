@@ -9,6 +9,13 @@ export async function apiSession(request?: Request) {
   return { db, user: data.user } as const;
 }
 const messages: Record<string, string> = {
+  INITIAL_IMPORT_ONLY:
+    'This project already has a schedule. Replacing a used revision is not enabled; use a new project for an initial import.',
+  STALE_IMPORT_PREVIEW:
+    'This preview or project revision changed. Reload the import before activating.',
+  UPLOAD_INCOMPLETE:
+    'One or more source files are missing or incomplete. Retry the upload before processing.',
+  IMPORT_NOT_READY: 'Fix the listed import errors and upload a corrected file before activation.',
   MIXED_LOCATION_REPLY:
     'Choose listed work areas or type another location. Please use one method so the answer is clear.',
   SCOPE_REPLY_NEEDS_REVIEW:

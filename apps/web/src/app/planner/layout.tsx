@@ -66,7 +66,8 @@ export default async function PlannerLayout({ children }: { children: React.Reac
       <div className="context-strip">
         <span>
           <i className="dot" />
-          Synthetic schedule · Revision 01
+          Synthetic schedule ·{' '}
+          {snapshot.revisionLabel ?? (snapshot.revisionId ? 'Revision 01' : 'No active revision')}
         </span>
         <span>Protected workspace · Accepted progress only</span>
       </div>

@@ -29,7 +29,8 @@ for (const [client, count, label] of [
   [manager, 13, 'manager'],
 ])
   check(
-    must(await client.from('activities').select('id')).length === count,
+    must(await client.from('activities').select('id').in('project_id', [p, other])).length ===
+      count,
     `${label} sees only authorized activity rows`,
   );
 check(
