@@ -51,3 +51,7 @@ Clarification cards, reply history, scoped supervisor checks, evidence links and
 ## Phase 5A review evidence
 
 The supplied schedule retains the formal top navigation and icons, baseline switch, Timeline/Table controls and evidence drawer. Nested phase/L3/L4/L5 context and milestone points extend the page-3 design for the actual reference data. Days/weeks and date navigation make the 2027–2028 schedule usable without changing source dates. Source-row preview uses a plain register with visible errors and explicit activation confirmation. Production browser checks cover desktop, 390px and 320px; the original field action hierarchy and bottom tabs passed regression checks. See `reports/phase-05a.md` for screenshots and limits. Voice/photo controls remain disabled until their implementation gate.
+
+## Phase 5B review evidence
+
+Compared approved PDF pages 5 and 8 and the retained schedule reference with the final production screenshots. Source provenance, cumulative/percentage basis, explicit approval preview and per-claim question context extend the same formal layout. The review inbox now scrolls independently for the 82-row corpus. Submitted rows retain their outcomes; accepted milestone actuals are points. Mobile questions and receipts were checked at 390px and 320px. See `reports/phase-05b.md`; speech and photo capture remain Phase 6B.

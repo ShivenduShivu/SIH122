@@ -1,6 +1,7 @@
 import { z } from 'zod';
 import { EventKind, Id, WorkDate, Discipline, PlannedActivity } from './index';
-export const extractionVersion = 'text-v1';
+import { Observation } from './observations';
+export const extractionVersion = 'observations-v2';
 export const ExtractedClaim = z
   .object({
     kind: EventKind,
@@ -12,7 +13,15 @@ export const ExtractedClaim = z
     scope: z.enum(['activity', 'item', 'unknown']),
     fullScope: z.boolean(),
     eventDate: WorkDate.nullable(),
-    dateOrigin: z.enum(['source_text', 'reporter_confirmed', 'unknown']),
+    dateOrigin: z.enum([
+      'source_text',
+      'reporter_confirmed',
+      'unknown',
+      'source_work_date',
+      'message_date',
+      'relative',
+      'planner_corrected',
+    ]),
     quantity: z
       .object({
         value: z.number().nonnegative(),
@@ -24,16 +33,28 @@ export const ExtractedClaim = z
     evidenceQuote: z.string().min(1),
     qualifiers: z.array(z.string()),
     missingFields: z.array(z.string()),
+    observation: Observation.nullable().optional(),
   })
   .strict();
-export const Extraction = z.object({ claims: z.array(ExtractedClaim).min(1).max(20) }).strict();
+export const Extraction = z
+  .object({ claims: z.array(ExtractedClaim).min(1).max(100), overflow: z.boolean().optional() })
+  .strict();
+export const ProviderExtraction = z
+  .object({
+    claims: z
+      .array(ExtractedClaim.safeExtend({ observation: Observation.nullable() }))
+      .min(1)
+      .max(100),
+    overflow: z.boolean(),
+  })
+  .strict();
 export type ExtractedClaim = z.infer<typeof ExtractedClaim>;
 export const Decision = z
   .object({
     commandId: Id,
     claimId: Id,
     activityId: Id.nullable(),
-    action: z.enum(['accept', 'reject', 'unplanned']),
+    action: z.enum(['accept', 'reject', 'unplanned', 'observe']),
     expectedReportVersion: z.number().int().positive(),
     expectedRunId: Id,
     expectedClaimVersion: z.number().int().positive(),
@@ -42,6 +63,11 @@ export const Decision = z
     expectedPolicyVersion: z.number().int().positive(),
     reason: z.string().trim().min(1).max(1000),
     correctedDate: WorkDate.nullable(),
+    reconciliation: z.enum(['apply', 'corroborate']).optional(),
+    previewHash: z
+      .string()
+      .regex(/^[a-f0-9]{64}$/)
+      .optional(),
     expectedVerificationId: Id.nullable().optional(),
     expectedVerificationVersion: z.number().int().positive().nullable().optional(),
   })
@@ -53,6 +79,11 @@ export const ScheduleActivity = PlannedActivity.safeExtend({
   actualFinish: WorkDate.nullable(),
   acceptedQuantity: z.number().nonnegative(),
   actualsVersion: z.number().int().nonnegative(),
+  acceptedPercent: z.number().min(0).max(100).nullable().default(null),
+  reportedProgress: z.boolean().default(false),
+  percentBasis: z.string().nullable().default(null),
+  milestoneDate: WorkDate.nullable().default(null),
+  progressAsOf: WorkDate.nullable().default(null),
 });
 export const ScheduleSnapshot = z.object({
   projectId: Id,

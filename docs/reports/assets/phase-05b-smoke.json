@@ -1,0 +1,17 @@
+{
+  "checks": [
+    "Unauthenticated routes redirect to sign in",
+    "Root redirects to the branded planner overview",
+    "Grouped Gantt, discipline filter and table use the same schedule",
+    "Baseline toggle, discipline collapse and keyboard-dismissed activity drawer",
+    "Planner saves an audited assignment through the protected API",
+    "Health endpoint distinguishes web liveness from database readiness",
+    "Field home/tasks, planner role redirect and contained layout at 390px",
+    "Field home/tasks, planner role redirect and contained layout at 320px",
+    "Foreign-origin mutation and reporter assignment API denied",
+    "Sign out clears authenticated access",
+    "Authorized project switch loads only that project schedule"
+  ],
+  "browserErrors": [],
+  "passed": true
+}

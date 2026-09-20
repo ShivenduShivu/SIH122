@@ -38,7 +38,11 @@
     "seed:gwp": "tsx scripts/seed-gwp.ts",
     "test:import-db": "tsx scripts/test-schedule-import-db.ts",
     "test:browser:import": "tsx tests/browser/schedule-import.ts",
-    "test:import-paging": "tsx scripts/test-import-paging.ts"
+    "test:import-paging": "tsx scripts/test-import-paging.ts",
+    "test:observations-db": "tsx scripts/test-observations-db.ts",
+    "test:browser:field-import": "tsx tests/browser/field-import.ts",
+    "evaluate:field": "tsx scripts/evaluate-field-corpus.ts",
+    "test:browser:observations": "tsx tests/browser/observations.ts"
   },
   "devDependencies": {
     "@playwright/test": "1.63.0",

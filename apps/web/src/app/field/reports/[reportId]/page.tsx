@@ -15,7 +15,7 @@ export default async function ReportDetail({ params }: { params: Promise<{ repor
     r = w.reports.find((r) => r.id === reportId);
   if (!r) notFound();
   const followups = await followupWorkbench();
-  const version = w.versions.find((v) => v.report_id === reportId),
+  const version = w.versions.find((v) => v.report_id === reportId && v.version === 1),
     claims = w.claims.filter((c) => c.report_id === reportId);
   return (
     <>
@@ -24,7 +24,11 @@ export default async function ReportDetail({ params }: { params: Promise<{ repor
         ← My reports
       </Link>
       <div className="field-greeting">
-        <p className="eyebrow">FR-{reportId.slice(0, 8).toUpperCase()}</p>
+        <p className="eyebrow">
+          {version?.context?.sourceEnvelope?.sourceRecordId &&
+            `${version.context.sourceEnvelope.sourceRecordId} · `}
+          FR-{reportId.slice(0, 8).toUpperCase()}
+        </p>
         <h1>{r.lifecycle === 'withdrawn' ? 'Report withdrawn' : 'Report received'}</h1>
         <p>{reportStatus(reportId, w.claims, w.jobs)}</p>
       </div>
@@ -43,6 +47,7 @@ export default async function ReportDetail({ params }: { params: Promise<{ repor
           <QuestionCard
             key={q.id}
             question={q}
+            contextText={claims.find((c) => c.id === q.claim_id)?.facts.evidenceQuote}
             canAnswer={r.author_id === w.user.id}
             reply={followups.responses.find((a) => a.request_id === q.id)}
           />
@@ -66,6 +71,26 @@ export default async function ReportDetail({ params }: { params: Promise<{ repor
           <h2>{c.facts.kind.replaceAll('_', ' ')}</h2>
           <p>{c.facts.evidenceQuote}</p>
           <p>Event date: {c.facts.eventDate ?? 'Needs clarification'}</p>
+          {c.facts.quantity && (
+            <p>
+              Reported quantity: {c.facts.quantity.value} {c.facts.quantity.unit} ·{' '}
+              {c.facts.quantity.mode}
+            </p>
+          )}
+          {c.facts.observation?.percent && (
+            <p>
+              Reported percentage: {c.facts.observation.percent.value}% ·{' '}
+              {c.facts.observation.percent.basis}
+            </p>
+          )}
+          {c.state === 'observed' && (
+            <p>Evidence recorded. The accepted schedule has not changed.</p>
+          )}
+          {c.state === 'accepted' && (
+            <p>
+              This claim was accepted. Other claims in this report have their own review status.
+            </p>
+          )}
           {c.validation_flags.map((f: string) => (
             <p key={f} className="attention-text">
               {f}

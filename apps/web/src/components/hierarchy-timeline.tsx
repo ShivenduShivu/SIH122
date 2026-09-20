@@ -1,5 +1,5 @@
 'use client';
-import { useState } from 'react';
+import type { Dispatch, SetStateAction } from 'react';
 import type { ScheduleSnapshot, ScheduleActivity } from '@intelligrid/contracts/reports';
 const diff = (a: string, b: string) =>
   (Date.parse(b + 'T00:00:00Z') - Date.parse(a + 'T00:00:00Z')) / 86400000;
@@ -12,6 +12,8 @@ export function HierarchyTimeline({
   baseline,
   filtered,
   onSelect,
+  closed,
+  setClosed,
 }: {
   nodes: ScheduleSnapshot['nodes'];
   activities: ScheduleActivity[];
@@ -21,8 +23,9 @@ export function HierarchyTimeline({
   baseline: boolean;
   filtered: boolean;
   onSelect: (id: string) => void;
+  closed: string[];
+  setClosed: Dispatch<SetStateAction<string[]>>;
 }) {
-  const [closed, setClosed] = useState<string[]>([]);
   const activityMap = new Map(activities.map((a) => [a.externalId, a]));
   const allowed = new Set(
     activities.flatMap((a) => [a.externalId, ...a.hierarchyPath.map((p) => p.id)]),
@@ -119,8 +122,17 @@ export function HierarchyTimeline({
               {baseline && base && a?.nodeKind !== 'milestone' && (
                 <span className="baseline-bar" style={base} />
               )}
-              {actual && <span className="actual-bar" style={actual} />}
-              {a?.actualStart && point(a.actualStart) && (
+              {actual && a?.nodeKind !== 'milestone' && (
+                <span className="actual-bar" style={actual} />
+              )}
+              {a?.milestoneDate && point(a.milestoneDate) && (
+                <span
+                  className="actual-milestone-marker"
+                  title={`Accepted milestone: ${a.milestoneDate}`}
+                  style={{ left: `${(diff(start, a.milestoneDate) / span) * 100}%` }}
+                />
+              )}
+              {a?.actualStart && a.nodeKind !== 'milestone' && point(a.actualStart) && (
                 <span
                   className="actual-start-marker"
                   style={{ left: `${(diff(start, a.actualStart) / span) * 100}%` }}

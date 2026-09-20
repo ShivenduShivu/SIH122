@@ -1,7 +1,12 @@
 export function reportStatus(
   reportId: string,
   claims: Array<{ report_id: string; state: string }>,
-  jobs: Array<{ report_id: string; status: string; error_code?: string | null }>,
+  jobs: Array<{
+    report_id: string;
+    report_version?: number;
+    status: string;
+    error_code?: string | null;
+  }>,
 ) {
   const rows = claims.filter((c) => c.report_id === reportId && c.state !== 'superseded');
   if (jobs.some((j) => j.report_id === reportId && j.error_code === 'report_withdrawn'))
@@ -14,10 +19,13 @@ export function reportStatus(
     if (rows.every((c) => c.state === 'accepted')) return 'Accepted';
     if (rows.some((c) => c.state === 'accepted')) return 'Partly accepted';
     if (rows.every((c) => c.state === 'rejected')) return 'Rejected';
+    if (rows.every((c) => c.state === 'observed')) return 'Observed — schedule unchanged';
     if (rows.every((c) => c.state === 'unplanned')) return 'Kept as unplanned';
     return 'Needs review';
   }
-  const job = jobs.find((j) => j.report_id === reportId);
+  const job = jobs
+    .filter((j) => j.report_id === reportId)
+    .sort((a, b) => (b.report_version ?? 0) - (a.report_version ?? 0))[0];
   return job?.status === 'failed'
     ? 'Processing needs attention'
     : job?.status === 'retry_wait'

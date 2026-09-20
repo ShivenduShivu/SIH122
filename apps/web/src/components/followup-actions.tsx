@@ -42,12 +42,35 @@ function useCommand() {
   return { send, busy, message };
 }
 
+export function ReprocessReport({ reportId, version }: { reportId: string; version: number }) {
+  const { send, busy, message } = useCommand();
+  return (
+    <>
+      <button
+        className="button compact"
+        disabled={busy}
+        onClick={() =>
+          void send(`/api/v1/reports/${reportId}/reprocess`, {
+            expectedReportVersion: version,
+            reason:
+              'Planner requested fresh extraction of the unchanged source; previous results retained.',
+          })
+        }
+      >
+        Re-extract source
+      </button>
+      {message && <p role="status">{message}</p>}
+    </>
+  );
+}
 export function QuestionCard({
   question: q,
   reply,
+  contextText,
   canAnswer = true,
 }: {
   question: Question;
+  contextText?: string;
   canAnswer?: boolean;
   reply?: { input: { text?: string; answer?: string; eventDate?: string; activityIds?: string[] } };
 }) {
@@ -84,6 +107,7 @@ export function QuestionCard({
         <span className="tag">{q.status === 'open' ? 'Your answer needed' : q.status}</span>
       </div>
       <div className="followup-body">
+        {contextText && <blockquote>{contextText}</blockquote>}
         <p className="question-text">{q.question_text}</p>
         {q.status === 'open' && canAnswer ? (
           <>
@@ -182,7 +206,9 @@ export function QuestionCard({
             <p className="muted">
               {reply
                 ? `Recorded reply: ${replySummary(q, reply)}`
-                : 'The earlier question is retained with this report.'}
+                : q.status === 'open' && !canAnswer
+                  ? 'Waiting for the person who submitted this report. Only that signed-in person can send the answer.'
+                  : 'The earlier question is retained with this report.'}
             </p>
             {!sent && (text || date || ids.length > 0) && (
               <div className="validation-notice">
@@ -214,6 +240,8 @@ export function QuestionCard({
 }
 
 export function PlannerFollowup({
+  reportId,
+  reporter,
   claimId,
   version,
   state,
@@ -222,6 +250,8 @@ export function PlannerFollowup({
   verification,
   manualReview,
 }: {
+  reportId: string;
+  reporter: string;
   claimId: string;
   version: number;
   state: string;
@@ -237,6 +267,24 @@ export function PlannerFollowup({
   return (
     <section className="planner-followup">
       <h3>Confirm missing details</h3>
+      {open && (
+        <div className="followup-routing">
+          <p>
+            Waiting for {reporter}, who submitted this report. They can open{' '}
+            <strong>Field view → My reports</strong>, choose this report, select the area or type
+            the missing detail, then send their answer. If unsure, they can choose{' '}
+            <strong>Not sure</strong>.
+          </p>
+          <p>
+            For imported records, the uploader should confirm the detail with the person named in
+            the source. An answer is checked again before planner approval; it does not approve the
+            work.
+          </p>
+          <Link className="button compact" href={`/field/reports/${reportId}`}>
+            Open field report and question
+          </Link>
+        </div>
+      )}
       {manualReview && (
         <p className="validation-notice">
           Two questions have not settled all required details. A planner must check the report and
@@ -448,24 +496,31 @@ export function ReportLifecycleActions({
   const { send, busy, message } = useCommand();
   const [reason, setReason] = useState(''),
     [date, setDate] = useState(''),
+    [value, setValue] = useState(''),
     [claimId, setClaimId] = useState('');
   const eligible = claims.filter(
     (c) =>
-      ['START', 'FINISH'].includes(c.facts.kind) &&
+      ['START', 'FINISH', 'ITEM_PROGRESS', 'PERCENT_PROGRESS'].includes(c.facts.kind) &&
       !['superseded', 'withdrawn', 'rejected', 'unplanned'].includes(c.state),
   );
   const selected = eligible.find((c) => c.id === claimId);
   return (
     <details className="report-corrections">
-      <summary>Correct a date{canWithdraw ? ' or withdraw this report' : ''}</summary>
-      <p>
-        Original evidence stays in the record. A corrected date is a new proposal for the planner.
-      </p>
+      <summary>
+        Correct a date or progress reading{canWithdraw ? ' or withdraw this report' : ''}
+      </summary>
+      <p>Original evidence stays in the record. A correction is a new proposal for the planner.</p>
       {eligible.length > 0 && (
         <>
           <label>
             Event to correct
-            <select value={claimId} onChange={(e) => setClaimId(e.target.value)}>
+            <select
+              value={claimId}
+              onChange={(e) => {
+                setClaimId(e.target.value);
+                setValue('');
+              }}
+            >
               <option value="">Choose an event</option>
               {eligible.map((c) => (
                 <option key={c.id} value={c.id}>
@@ -478,6 +533,20 @@ export function ReportLifecycleActions({
             Correct work date
             <input type="date" value={date} onChange={(e) => setDate(e.target.value)} />
           </label>
+          {selected && ['ITEM_PROGRESS', 'PERCENT_PROGRESS'].includes(selected.facts.kind) && (
+            <label>
+              Correct {selected.facts.kind === 'PERCENT_PROGRESS' ? 'percentage' : 'quantity'}{' '}
+              (leave empty to keep the reading)
+              <input
+                type="number"
+                min="0"
+                max={selected.facts.kind === 'PERCENT_PROGRESS' ? 100 : undefined}
+                step="any"
+                value={value}
+                onChange={(e) => setValue(e.target.value)}
+              />
+            </label>
+          )}
         </>
       )}
       <label>
@@ -500,11 +569,17 @@ export function ReportLifecycleActions({
                 claimId: selected!.id,
                 expectedClaimVersion: selected!.version,
                 eventDate: date,
+                ...(value !== '' && selected?.facts.kind === 'ITEM_PROGRESS'
+                  ? { quantityValue: Number(value) }
+                  : {}),
+                ...(value !== '' && selected?.facts.kind === 'PERCENT_PROGRESS'
+                  ? { percentValue: Number(value) }
+                  : {}),
                 reason,
               })
             }
           >
-            Request date correction
+            Request correction
           </button>
         )}
         {canWithdraw && (

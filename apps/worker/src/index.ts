@@ -8,7 +8,7 @@ if (process.argv.includes('--check')) {
     JSON.stringify({
       service: 'worker',
       mode: 'configuration-check',
-      pipelineVersion: 'text-v1',
+      pipelineVersion: 'observations-v2',
       provider: 'openai',
       consumesJobs: false,
     }),

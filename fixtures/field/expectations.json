@@ -1,0 +1,585 @@
+{
+  "status": "Team development expectations, authored before Phase 5B model measurements; not an official answer key. Ambiguous alternatives and non-exhaustive event kinds require human review.",
+  "records": [
+    {
+      "recordId": "TXT-001",
+      "candidateLeaves": ["GWP-GEN-1030"],
+      "expectedKinds": ["START"],
+      "reviewNote": "Handover/survey share one compound activity",
+      "missingDate": false
+    },
+    {
+      "recordId": "TXT-002",
+      "candidateLeaves": ["GWP-GEN-1030"],
+      "expectedKinds": ["FINISH"],
+      "reviewNote": "Both scope elements complete",
+      "missingDate": false
+    },
+    {
+      "recordId": "TXT-003",
+      "candidateLeaves": ["GWP-GEN-1040", "GWP-GEN-1070", "GWP-GEN-1100"],
+      "expectedKinds": ["START", "START", "START"],
+      "reviewNote": "Three separate starts",
+      "missingDate": false
+    },
+    {
+      "recordId": "TXT-004",
+      "candidateLeaves": ["GWP-GEN-1050", "GWP-QAQC-1010"],
+      "expectedKinds": ["START", "ITEM_PROGRESS"],
+      "reviewNote": "DG arrival is not installed temporary power; QAP submission is not approval",
+      "missingDate": false
+    },
+    {
+      "recordId": "TXT-005",
+      "candidateLeaves": ["GWP-GEN-1070"],
+      "expectedKinds": ["FINISH"],
+      "reviewNote": "All three named elements reported",
+      "missingDate": false
+    },
+    {
+      "recordId": "TXT-006",
+      "candidateLeaves": ["GWP-GEN-1100"],
+      "expectedKinds": ["FINISH"],
+      "reviewNote": "Benchmarks checked and signed",
+      "missingDate": false
+    },
+    {
+      "recordId": "TXT-007",
+      "candidateLeaves": ["GWP-GEN-1040"],
+      "expectedKinds": ["FINISH"],
+      "reviewNote": "Office/stores reported complete; scope review remains",
+      "missingDate": false
+    },
+    {
+      "recordId": "TXT-008",
+      "candidateLeaves": ["GWP-GEN-1080"],
+      "expectedKinds": ["ITEM_PROGRESS", "PLANNED_INTENT"],
+      "reviewNote": "Partial mobilization and future crane arrival",
+      "missingDate": false
+    },
+    {
+      "recordId": "TXT-009",
+      "candidateLeaves": ["GWP-HSE-1010"],
+      "expectedKinds": ["ITEM_PROGRESS", "PLANNED_INTENT"],
+      "reviewNote": "Plan approval alone cannot finish induction scope",
+      "missingDate": false
+    },
+    {
+      "recordId": "TXT-010",
+      "candidateLeaves": ["GWP-GEN-1050", "GWP-GEN-1060"],
+      "expectedKinds": ["FINISH", "FINISH"],
+      "reviewNote": "Separate camp and temporary services scopes",
+      "missingDate": false
+    },
+    {
+      "recordId": "TXT-011",
+      "candidateLeaves": ["GWP-HSE-1010"],
+      "expectedKinds": ["ITEM_PROGRESS"],
+      "reviewNote": "Induction alone does not prove entire compound scope",
+      "missingDate": false
+    },
+    {
+      "recordId": "TXT-012",
+      "candidateLeaves": ["GWP-QAQC-1020"],
+      "expectedKinds": ["FINISH"],
+      "reviewNote": "Lab setup explicit",
+      "missingDate": false
+    },
+    {
+      "recordId": "TXT-013",
+      "candidateLeaves": ["GWP-GEN-1080"],
+      "expectedKinds": ["FINISH"],
+      "reviewNote": "All equipment reported available",
+      "missingDate": false
+    },
+    {
+      "recordId": "TXT-014",
+      "candidateLeaves": ["GWP-CIV-1030"],
+      "expectedKinds": ["START", "UNKNOWN"],
+      "reviewNote": "Temporary haul road must not map automatically to permanent internal road",
+      "missingDate": false
+    },
+    {
+      "recordId": "TXT-015",
+      "candidateLeaves": ["GWP-QAQC-1010"],
+      "expectedKinds": ["FINISH"],
+      "reviewNote": "Approval explicit",
+      "missingDate": false
+    },
+    {
+      "recordId": "TXT-016",
+      "candidateLeaves": ["GWP-CIV-1030"],
+      "expectedKinds": ["FINISH"],
+      "reviewNote": "Clearing and debris done",
+      "missingDate": false
+    },
+    {
+      "recordId": "TXT-017",
+      "candidateLeaves": ["GWP-CIV-1040", "GWP-CIV-1070", "GWP-STR-1030"],
+      "expectedKinds": ["START", "START", "ITEM_PROGRESS"],
+      "reviewNote": "Three events; purchase order is not material delivery",
+      "missingDate": false
+    },
+    {
+      "recordId": "TXT-018",
+      "candidateLeaves": ["GWP-CIV-1040", "GWP-CIV-1070"],
+      "expectedKinds": ["ITEM_PROGRESS", "ITEM_PROGRESS"],
+      "reviewNote": "3500 m3 cumulative; 700/1200 m partial trench",
+      "missingDate": false
+    },
+    {
+      "recordId": "TXT-019",
+      "candidateLeaves": ["GWP-PIP-1060"],
+      "expectedKinds": ["BLOCKED"],
+      "reviewNote": "No fabrication start",
+      "missingDate": false
+    },
+    {
+      "recordId": "TXT-020",
+      "candidateLeaves": ["GWP-PIP-1060"],
+      "expectedKinds": ["PLANNED_INTENT"],
+      "reviewNote": "Pipe arrival is not fabrication start",
+      "missingDate": false
+    },
+    {
+      "recordId": "TXT-021",
+      "candidateLeaves": ["GWP-CIV-1070"],
+      "expectedKinds": ["FINISH"],
+      "reviewNote": "Rain is separate hindrance",
+      "missingDate": false
+    },
+    {
+      "recordId": "TXT-022",
+      "candidateLeaves": ["GWP-CIV-1080"],
+      "expectedKinds": ["START", "ITEM_PROGRESS"],
+      "reviewNote": "60 m does not complete boundary PCC/footing",
+      "missingDate": false
+    },
+    {
+      "recordId": "TXT-023",
+      "candidateLeaves": ["GWP-CIV-1040"],
+      "expectedKinds": ["BLOCKED"],
+      "reviewNote": "Stopped earthwork; do not invent finish",
+      "missingDate": false
+    },
+    {
+      "recordId": "TXT-024",
+      "candidateLeaves": ["GWP-STR-1030"],
+      "expectedKinds": ["ITEM_PROGRESS"],
+      "reviewNote": "90 MT partial, 150 MT future",
+      "missingDate": false
+    },
+    {
+      "recordId": "TXT-025",
+      "candidateLeaves": ["GWP-CIV-1040", "GWP-CIV-1050"],
+      "expectedKinds": ["FINISH", "PLANNED_INTENT"],
+      "reviewNote": "Compaction tomorrow is not start",
+      "missingDate": false
+    },
+    {
+      "recordId": "TXT-026",
+      "candidateLeaves": ["GWP-CIV-1050"],
+      "expectedKinds": ["START"],
+      "reviewNote": "Samples taken not passed yet",
+      "missingDate": false
+    },
+    {
+      "recordId": "TXT-027",
+      "candidateLeaves": ["GWP-CIV-1050", "GWP-STR-1030"],
+      "expectedKinds": ["FINISH", "FINISH"],
+      "reviewNote": "98% density result is not progress percent",
+      "missingDate": false
+    },
+    {
+      "recordId": "TXT-028",
+      "candidateLeaves": ["GWP-PIP-1060"],
+      "expectedKinds": ["FINISH"],
+      "reviewNote": "All 180 spools and visual check",
+      "missingDate": false
+    },
+    {
+      "recordId": "TXT-029",
+      "candidateLeaves": ["GWP-CIV-1080"],
+      "expectedKinds": ["FINISH"],
+      "reviewNote": "PCC and footing both complete",
+      "missingDate": false
+    },
+    {
+      "recordId": "TXT-030",
+      "candidateLeaves": [
+        "GWP-CIV-1090",
+        "GWP-CIV-1250",
+        "GWP-CIV-1440",
+        "GWP-CIV-1690",
+        "GWP-CIV-1810"
+      ],
+      "expectedKinds": ["START", "START", "START", "START", "START"],
+      "reviewNote": "Five independent starts",
+      "missingDate": false
+    },
+    {
+      "recordId": "TXT-031",
+      "candidateLeaves": ["GWP-CIV-1310"],
+      "expectedKinds": ["START", "BLOCKED"],
+      "reviewNote": "Shoring pit, seepage and dewatering distinct facts",
+      "missingDate": false
+    },
+    {
+      "recordId": "TXT-032",
+      "candidateLeaves": ["GWP-CIV-1610", "GWP-CIV-1920", "GWP-CIV-1140"],
+      "expectedKinds": ["START", "START", "START", "ITEM_PROGRESS"],
+      "reviewNote": "Substation excavation is partial civil package; drain 80 m",
+      "missingDate": false
+    },
+    {
+      "recordId": "TXT-033",
+      "candidateLeaves": ["GWP-CIV-1810", "GWP-CIV-1750", "GWP-CIV-1190"],
+      "expectedKinds": ["FINISH", "START", "START"],
+      "reviewNote": "Three separate locations",
+      "missingDate": false
+    },
+    {
+      "recordId": "TXT-034",
+      "candidateLeaves": ["GWP-CIV-1690", "GWP-CIV-1930"],
+      "expectedKinds": ["FINISH", "START"],
+      "reviewNote": "14 footings support finish; fire tank excavation partial package",
+      "missingDate": false
+    },
+    {
+      "recordId": "TXT-035",
+      "candidateLeaves": ["GWP-CIV-1250|CIV-1440"],
+      "expectedKinds": ["PERCENT_PROGRESS"],
+      "reviewNote": "Hall ambiguous; ask which hall, do not force either",
+      "missingDate": false
+    },
+    {
+      "recordId": "TXT-036",
+      "candidateLeaves": ["GWP-CIV-1610", "GWP-CIV-1940"],
+      "expectedKinds": ["FINISH", "START"],
+      "reviewNote": "Two scopes, 6000 sqm normalized",
+      "missingDate": false
+    },
+    {
+      "recordId": "TXT-037",
+      "candidateLeaves": ["GWP-CIV-1250", "GWP-CIV-1700", "GWP-CIV-1750"],
+      "expectedKinds": ["FINISH", "START", "FINISH"],
+      "reviewNote": "12 footings support volume-plan finish; RDF PCC only starts compound scope",
+      "missingDate": false
+    },
+    {
+      "recordId": "TXT-038",
+      "candidateLeaves": ["GWP-CIV-1260", "GWP-CIV-1190"],
+      "expectedKinds": ["START", "FINISH"],
+      "reviewNote": "Tipping equals receiving hall B",
+      "missingDate": false
+    },
+    {
+      "recordId": "TXT-039",
+      "candidateLeaves": ["GWP-ELE-1060"],
+      "expectedKinds": ["START", "ITEM_PROGRESS", "UNKNOWN"],
+      "reviewNote": "Six earth pits partial LS; temporary lighting is not permanent lighting",
+      "missingDate": false
+    },
+    {
+      "recordId": "TXT-040",
+      "candidateLeaves": ["GWP-CIV-1440"],
+      "expectedKinds": ["FINISH"],
+      "reviewNote": "3100 cum equivalent m3",
+      "missingDate": false
+    },
+    {
+      "recordId": "TXT-041",
+      "candidateLeaves": ["GWP-CIV-1260", "GWP-CIV-1450"],
+      "expectedKinds": ["ITEM_PROGRESS", "START"],
+      "reviewNote": "110 m3 does not itself imply finish",
+      "missingDate": false
+    },
+    {
+      "recordId": "TXT-042",
+      "candidateLeaves": ["GWP-CIV-1310", "GWP-CIV-1450"],
+      "expectedKinds": ["FINISH", "FINISH"],
+      "reviewNote": "Dewatering separate from completed pit excavation",
+      "missingDate": false
+    },
+    {
+      "recordId": "TXT-043",
+      "candidateLeaves": ["GWP-CIV-1090", "GWP-CIV-1460"],
+      "expectedKinds": ["ITEM_PROGRESS", "START"],
+      "reviewNote": "Masonry 250 m basis not explicit; reinforcement starts compound work",
+      "missingDate": false
+    },
+    {
+      "recordId": "TXT-044",
+      "candidateLeaves": ["GWP-CIV-1320"],
+      "expectedKinds": ["START", "ITEM_PROGRESS", "UNKNOWN"],
+      "reviewNote": "12 MT rebar; separate 45 cum concrete location unclear, no truck-volume conversion",
+      "missingDate": false
+    },
+    {
+      "recordId": "TXT-045",
+      "candidateLeaves": ["GWP-CIV-1090"],
+      "expectedKinds": ["ITEM_PROGRESS", "START"],
+      "reviewNote": "East-side component finish and south-side start; both dateless",
+      "missingDate": true
+    },
+    {
+      "recordId": "TXT-046",
+      "candidateLeaves": ["GWP-CIV-1140"],
+      "expectedKinds": ["FINISH"],
+      "reviewNote": "Missing event date, keep unresolved",
+      "missingDate": true
+    },
+    {
+      "recordId": "CIV-001",
+      "candidateLeaves": ["GWP-CIV-1250"],
+      "expectedKinds": ["ITEM_PROGRESS"],
+      "reviewNote": "Keep daily and cumulative readings together; do not sum both. No inferred start. Component remarks and inspections retain scope.",
+      "missingDate": false
+    },
+    {
+      "recordId": "CIV-002",
+      "candidateLeaves": ["GWP-CIV-1250"],
+      "expectedKinds": ["ITEM_PROGRESS"],
+      "reviewNote": "Keep daily and cumulative readings together; do not sum both. No inferred start. Component remarks and inspections retain scope.",
+      "missingDate": false
+    },
+    {
+      "recordId": "CIV-003",
+      "candidateLeaves": ["GWP-CIV-1250"],
+      "expectedKinds": ["ITEM_PROGRESS"],
+      "reviewNote": "Keep daily and cumulative readings together; do not sum both. No inferred start. Component remarks and inspections retain scope.",
+      "missingDate": false
+    },
+    {
+      "recordId": "CIV-004",
+      "candidateLeaves": ["GWP-CIV-1250"],
+      "expectedKinds": ["ITEM_PROGRESS"],
+      "reviewNote": "Keep daily and cumulative readings together; do not sum both. No inferred start. Completed remark may add a separate full-scope finish.",
+      "missingDate": false
+    },
+    {
+      "recordId": "CIV-005",
+      "candidateLeaves": ["GWP-CIV-1440"],
+      "expectedKinds": ["ITEM_PROGRESS"],
+      "reviewNote": "Keep daily and cumulative readings together; do not sum both. No inferred start. Component remarks and inspections retain scope.",
+      "missingDate": false
+    },
+    {
+      "recordId": "CIV-006",
+      "candidateLeaves": ["GWP-CIV-1440"],
+      "expectedKinds": ["ITEM_PROGRESS"],
+      "reviewNote": "Keep daily and cumulative readings together; do not sum both. No inferred start. Component remarks and inspections retain scope.",
+      "missingDate": false
+    },
+    {
+      "recordId": "CIV-007",
+      "candidateLeaves": ["GWP-CIV-1440"],
+      "expectedKinds": ["ITEM_PROGRESS"],
+      "reviewNote": "Keep daily and cumulative readings together; do not sum both. No inferred start. Component remarks and inspections retain scope.",
+      "missingDate": false
+    },
+    {
+      "recordId": "CIV-008",
+      "candidateLeaves": ["GWP-CIV-1440"],
+      "expectedKinds": ["ITEM_PROGRESS"],
+      "reviewNote": "Keep daily and cumulative readings together; do not sum both. No inferred start. Component remarks and inspections retain scope.",
+      "missingDate": false
+    },
+    {
+      "recordId": "CIV-009",
+      "candidateLeaves": ["GWP-CIV-1440"],
+      "expectedKinds": ["ITEM_PROGRESS"],
+      "reviewNote": "Keep daily and cumulative readings together; do not sum both. No inferred start. Component remarks and inspections retain scope.",
+      "missingDate": false
+    },
+    {
+      "recordId": "CIV-010",
+      "candidateLeaves": ["GWP-CIV-1310"],
+      "expectedKinds": ["ITEM_PROGRESS"],
+      "reviewNote": "Keep daily and cumulative readings together; do not sum both. No inferred start. Component remarks and inspections retain scope.",
+      "missingDate": false
+    },
+    {
+      "recordId": "CIV-011",
+      "candidateLeaves": ["GWP-CIV-1310"],
+      "expectedKinds": ["ITEM_PROGRESS"],
+      "reviewNote": "Keep daily and cumulative readings together; do not sum both. No inferred start. Component remarks and inspections retain scope.",
+      "missingDate": false
+    },
+    {
+      "recordId": "CIV-012",
+      "candidateLeaves": ["GWP-CIV-1310"],
+      "expectedKinds": ["ITEM_PROGRESS"],
+      "reviewNote": "Keep daily and cumulative readings together; do not sum both. No inferred start. Component remarks and inspections retain scope.",
+      "missingDate": false
+    },
+    {
+      "recordId": "CIV-013",
+      "candidateLeaves": ["GWP-CIV-1310"],
+      "expectedKinds": ["ITEM_PROGRESS"],
+      "reviewNote": "Keep daily and cumulative readings together; do not sum both. No inferred start. Component remarks and inspections retain scope.",
+      "missingDate": false
+    },
+    {
+      "recordId": "CIV-014",
+      "candidateLeaves": ["GWP-CIV-1310"],
+      "expectedKinds": ["ITEM_PROGRESS"],
+      "reviewNote": "Keep daily and cumulative readings together; do not sum both. No inferred start. Component remarks and inspections retain scope.",
+      "missingDate": false
+    },
+    {
+      "recordId": "CIV-015",
+      "candidateLeaves": ["GWP-CIV-1690"],
+      "expectedKinds": ["ITEM_PROGRESS"],
+      "reviewNote": "Keep daily and cumulative readings together; do not sum both. No inferred start. Component remarks and inspections retain scope.",
+      "missingDate": false
+    },
+    {
+      "recordId": "CIV-016",
+      "candidateLeaves": ["GWP-CIV-1690"],
+      "expectedKinds": ["ITEM_PROGRESS"],
+      "reviewNote": "Keep daily and cumulative readings together; do not sum both. No inferred start. Completed remark may add a separate full-scope finish.",
+      "missingDate": false
+    },
+    {
+      "recordId": "CIV-017",
+      "candidateLeaves": ["GWP-CIV-1810"],
+      "expectedKinds": ["ITEM_PROGRESS"],
+      "reviewNote": "Keep daily and cumulative readings together; do not sum both. No inferred start. Component remarks and inspections retain scope.",
+      "missingDate": false
+    },
+    {
+      "recordId": "CIV-018",
+      "candidateLeaves": ["GWP-CIV-1810"],
+      "expectedKinds": ["ITEM_PROGRESS"],
+      "reviewNote": "Keep daily and cumulative readings together; do not sum both. No inferred start. Completed remark may add a separate full-scope finish.",
+      "missingDate": false
+    },
+    {
+      "recordId": "CIV-019",
+      "candidateLeaves": ["GWP-CIV-1090"],
+      "expectedKinds": ["ITEM_PROGRESS"],
+      "reviewNote": "Keep daily and cumulative readings together; do not sum both. No inferred start. Component remarks and inspections retain scope.",
+      "missingDate": false
+    },
+    {
+      "recordId": "CIV-020",
+      "candidateLeaves": ["GWP-CIV-1090"],
+      "expectedKinds": ["ITEM_PROGRESS"],
+      "reviewNote": "Keep daily and cumulative readings together; do not sum both. No inferred start. Component remarks and inspections retain scope.",
+      "missingDate": false
+    },
+    {
+      "recordId": "CIV-021",
+      "candidateLeaves": ["GWP-CIV-1090"],
+      "expectedKinds": ["ITEM_PROGRESS"],
+      "reviewNote": "Keep daily and cumulative readings together; do not sum both. No inferred start. Component remarks and inspections retain scope.",
+      "missingDate": false
+    },
+    {
+      "recordId": "CIV-022",
+      "candidateLeaves": ["GWP-CIV-1140"],
+      "expectedKinds": ["ITEM_PROGRESS"],
+      "reviewNote": "Keep daily and cumulative readings together; do not sum both. No inferred start. Component remarks and inspections retain scope.",
+      "missingDate": false
+    },
+    {
+      "recordId": "CIV-023",
+      "candidateLeaves": ["GWP-CIV-1140"],
+      "expectedKinds": ["ITEM_PROGRESS"],
+      "reviewNote": "Keep daily and cumulative readings together; do not sum both. No inferred start. Component remarks and inspections retain scope.",
+      "missingDate": false
+    },
+    {
+      "recordId": "CIV-024",
+      "candidateLeaves": ["GWP-CIV-1140"],
+      "expectedKinds": ["ITEM_PROGRESS"],
+      "reviewNote": "Keep daily and cumulative readings together; do not sum both. No inferred start. Component remarks and inspections retain scope.",
+      "missingDate": false
+    },
+    {
+      "recordId": "CIV-025",
+      "candidateLeaves": ["GWP-CIV-1700"],
+      "expectedKinds": ["ITEM_PROGRESS"],
+      "reviewNote": "Keep daily and cumulative readings together; do not sum both. No inferred start. Component remarks and inspections retain scope.",
+      "missingDate": false
+    },
+    {
+      "recordId": "FAB-001",
+      "candidateLeaves": [],
+      "expectedKinds": ["ITEM_PROGRESS"],
+      "reviewNote": "Receipt is not fabrication. Spool range coverage overlaps earlier rows; no additive total across repeated ranges. Steel lots are distinct components.",
+      "missingDate": false
+    },
+    {
+      "recordId": "FAB-002",
+      "candidateLeaves": ["GWP-PIP-1060"],
+      "expectedKinds": ["START", "ITEM_PROGRESS"],
+      "reviewNote": "Receipt is not fabrication. Spool range coverage overlaps earlier rows; no additive total across repeated ranges. Steel lots are distinct components.",
+      "missingDate": false
+    },
+    {
+      "recordId": "FAB-003",
+      "candidateLeaves": ["GWP-PIP-1060"],
+      "expectedKinds": ["ITEM_PROGRESS"],
+      "reviewNote": "Receipt is not fabrication. Spool range coverage overlaps earlier rows; no additive total across repeated ranges. Steel lots are distinct components.",
+      "missingDate": false
+    },
+    {
+      "recordId": "FAB-004",
+      "candidateLeaves": ["GWP-STR-1030"],
+      "expectedKinds": ["ITEM_PROGRESS"],
+      "reviewNote": "Receipt is not fabrication. Spool range coverage overlaps earlier rows; no additive total across repeated ranges. Steel lots are distinct components.",
+      "missingDate": false
+    },
+    {
+      "recordId": "FAB-005",
+      "candidateLeaves": ["GWP-PIP-1060"],
+      "expectedKinds": ["ITEM_PROGRESS"],
+      "reviewNote": "Receipt is not fabrication. Spool range coverage overlaps earlier rows; no additive total across repeated ranges. Steel lots are distinct components.",
+      "missingDate": false
+    },
+    {
+      "recordId": "FAB-006",
+      "candidateLeaves": ["GWP-STR-1030"],
+      "expectedKinds": ["ITEM_PROGRESS"],
+      "reviewNote": "Receipt is not fabrication. Spool range coverage overlaps earlier rows; no additive total across repeated ranges. Steel lots are distinct components.",
+      "missingDate": false
+    },
+    {
+      "recordId": "FAB-007",
+      "candidateLeaves": ["GWP-PIP-1060"],
+      "expectedKinds": ["FINISH", "ITEM_PROGRESS"],
+      "reviewNote": "Receipt is not fabrication. Spool range coverage overlaps earlier rows; no additive total across repeated ranges. Steel lots are distinct components.",
+      "missingDate": false
+    },
+    {
+      "recordId": "ELE-001",
+      "candidateLeaves": ["GWP-ELE-1060"],
+      "expectedKinds": ["ITEM_PROGRESS"],
+      "reviewNote": "Temporary lighting unmatched. Earth pits/strip are components of LS installation, not complete activity or directly convertible quantity.",
+      "missingDate": false
+    },
+    {
+      "recordId": "ELE-002",
+      "candidateLeaves": [],
+      "expectedKinds": ["UNKNOWN"],
+      "reviewNote": "Temporary lighting unmatched. Earth pits/strip are components of LS installation, not complete activity or directly convertible quantity.",
+      "missingDate": false
+    },
+    {
+      "recordId": "ELE-003",
+      "candidateLeaves": ["GWP-ELE-1060"],
+      "expectedKinds": ["ITEM_PROGRESS"],
+      "reviewNote": "Temporary lighting unmatched. Earth pits/strip are components of LS installation, not complete activity or directly convertible quantity.",
+      "missingDate": false
+    },
+    {
+      "recordId": "ELE-004",
+      "candidateLeaves": ["GWP-ELE-1060"],
+      "expectedKinds": ["ITEM_PROGRESS"],
+      "reviewNote": "Temporary lighting unmatched. Earth pits/strip are components of LS installation, not complete activity or directly convertible quantity.",
+      "missingDate": false
+    }
+  ]
+}

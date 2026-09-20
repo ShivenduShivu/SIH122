@@ -1,0 +1,21 @@
+{
+  "status": "passed",
+  "checks": [
+    "field source search",
+    "search restored after report return",
+    "empty result and status filter",
+    "390px and 320px",
+    "reporter answer form and routing",
+    "TXT-045 two dateless claims and partial finish guard",
+    "schedule return link and browser Back",
+    "reload preserves schedule view",
+    "date, discipline, scale, baseline, expansion and horizontal scroll",
+    "selected activity and Evidence/Audit trail tabs",
+    "table mode restored",
+    "page and drawer scroll restored",
+    "project view isolation",
+    "invalid saved view falls back safely",
+    "accepted schedule unchanged"
+  ],
+  "scheduleVersion": 5
+}

@@ -9,6 +9,24 @@ export async function apiSession(request?: Request) {
   return { db, user: data.user } as const;
 }
 const messages: Record<string, string> = {
+  CHANGE_PREVIEW_REQUIRED: 'Preview the proposed change before accepting it.',
+  STALE_CHANGE_PREVIEW: 'The proposed change is no longer current. Preview it again.',
+  SOURCE_CONTRACTOR_MISMATCH:
+    'This activity belongs to a different contractor. Check the source workbook allocation.',
+  INVALID_PROGRESS_PERCENT:
+    'Confirm that this is activity progress, not a test result, and give its basis.',
+  PROGRESS_BASIS_CONFLICT:
+    'This percentage uses a different basis from the accepted reading. Ask the reporter to clarify.',
+  SAME_DAY_PROGRESS_CONFLICT:
+    'Different readings already exist for this date. Correct the earlier reading or record this as an observation.',
+  OVERLAPPING_ITEMS: 'Some of these items were already counted. Confirm which items are new.',
+  ITEM_COVERAGE_CONFLICT:
+    'These quantities name different items. Check the covered items before treating the reports as equivalent.',
+  DAILY_ALREADY_COVERED:
+    'An accepted cumulative total already covers this day. Record it as supporting evidence or review a correction.',
+  COVERAGE_REQUIRED: 'Confirm which day this additional quantity covers.',
+  NO_EQUIVALENT_READING:
+    'No equivalent accepted reading was found. Check the date, quantity and basis.',
   INITIAL_IMPORT_ONLY:
     'This project already has a schedule. Replacing a used revision is not enabled; use a new project for an initial import.',
   STALE_IMPORT_PREVIEW:
@@ -61,6 +79,10 @@ const messages: Record<string, string> = {
     'A finish is already recorded. Check the existing record before changing it.',
   MISSING_ACTUAL_START: 'Approve the actual start before approving the finish.',
   FINISH_BEFORE_START: 'The finish cannot be earlier than the recorded start.',
+  FINISH_BEFORE_PROGRESS:
+    'Work was recorded after this proposed finish. Check the finish date or correct the later reading.',
+  COMPOUND_SCOPE_INCOMPLETE:
+    'This planned activity includes several stages. Confirm all of them before marking it complete.',
   INCOMPLETE_QUANTITY: 'The quantity or unit does not support completion of the whole activity.',
   QUANTITY_SCOPE_REQUIRES_REVIEW:
     'Confirm the quantity, unit and whether it is a total or an addition.',

@@ -1,5 +1,6 @@
 import { apiJson, apiSession } from '../../../../../lib/api';
 import { Id } from '@intelligrid/contracts';
+import { readRows } from '../../../../../lib/read-rows';
 export async function GET(
   _request: Request,
   { params }: { params: Promise<{ importId: string }> },
@@ -17,5 +18,20 @@ export async function GET(
     .maybeSingle();
   if (r.error) return apiJson({ error: 'Import unavailable' }, { status: 503 });
   if (!r.data) return apiJson({ error: 'Import not found' }, { status: 404 });
+  if (r.data.files[0]?.profile === 'field_corpus') {
+    try {
+      const manifest = await readRows((from, to) =>
+        s.db
+          .from('field_import_rows')
+          .select('row_key,outcome,reason,report_id', { count: 'exact' })
+          .eq('import_id', id.data)
+          .order('row_key')
+          .range(from, to),
+      );
+      return apiJson({ ...r.data, manifest });
+    } catch {
+      return apiJson({ error: 'Source outcomes unavailable' }, { status: 503 });
+    }
+  }
   return apiJson(r.data);
 }

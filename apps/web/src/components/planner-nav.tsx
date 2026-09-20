@@ -20,7 +20,10 @@ export function PlannerNav({ pendingCount = 0 }: { pendingCount?: number }) {
       >
         <Icon name="calendar" /> Schedule
       </Link>
-      <Link href="/planner/reports" aria-current={path === '/planner/reports' ? 'page' : undefined}>
+      <Link
+        href="/planner/reports"
+        aria-current={path.startsWith('/planner/reports') ? 'page' : undefined}
+      >
         <Icon name="reports" /> Field reports
       </Link>
       <Link href="/planner/review" aria-current={path === '/planner/review' ? 'page' : undefined}>

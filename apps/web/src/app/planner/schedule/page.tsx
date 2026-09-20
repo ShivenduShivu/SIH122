@@ -2,7 +2,7 @@ import { plannerContext, siteToday } from '../../../lib/project';
 import { ProjectTimeline } from '../../../components/project-timeline';
 import { RefreshPage } from '../../../components/refresh-page';
 export default async function SchedulePage() {
-  const { db, project } = await plannerContext();
+  const { db, project, user } = await plannerContext();
   const { data, error, count } = await db
     .from('accepted_events')
     .select('*', { count: 'exact' })
@@ -13,7 +13,7 @@ export default async function SchedulePage() {
   return (
     <>
       <RefreshPage />
-      <ProjectTimeline today={siteToday()} events={data ?? []} />
+      <ProjectTimeline today={siteToday()} events={data ?? []} userId={user.id} />
     </>
   );
 }

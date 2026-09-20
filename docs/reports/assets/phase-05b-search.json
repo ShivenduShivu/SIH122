@@ -1,0 +1,18 @@
+{
+  "status": "passed",
+  "checks": [
+    "source ID and case/space normalization",
+    "visible provenance",
+    "preview only",
+    "selection preserved while searching",
+    "preview cleared on selection",
+    "empty and clear",
+    "candidate activity ID",
+    "multi-claim report",
+    "direct source link",
+    "combined filter",
+    "390px and 320px",
+    "accepted schedule unchanged"
+  ],
+  "scheduleVersion": 4
+}

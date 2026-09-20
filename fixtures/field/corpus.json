@@ -1,0 +1,1161 @@
+[
+  {
+    "id": "TXT-001",
+    "sheet": "Text_Reports",
+    "row": 2,
+    "cells": {
+      "Msg ID": "TXT-001",
+      "Date": "2027-10-04 00:00:00",
+      "Time": "12:30",
+      "Channel": "WhatsApp",
+      "From (role)": "Site Engineer (Contractor)",
+      "Message": "PMC team reached site 10 am. Handover started, joint survey of boundary going on."
+    }
+  },
+  {
+    "id": "TXT-002",
+    "sheet": "Text_Reports",
+    "row": 3,
+    "cells": {
+      "Msg ID": "TXT-002",
+      "Date": "2027-10-05 00:00:00",
+      "Time": "17:45",
+      "Channel": "WhatsApp",
+      "From (role)": "Site Engineer (Contractor)",
+      "Message": "Joint survey finished. Site handover minutes signed by both sides."
+    }
+  },
+  {
+    "id": "TXT-003",
+    "sheet": "Text_Reports",
+    "row": 4,
+    "cells": {
+      "Msg ID": "TXT-003",
+      "Date": "2027-10-06 00:00:00",
+      "Time": "18:00",
+      "Channel": "Daily report (typed)",
+      "From (role)": "Site Engineer (Contractor)",
+      "Message": "Started marking for site office and store shed. Temporary fencing gang started from gate side. Survey team started fixing benchmark pillars."
+    }
+  },
+  {
+    "id": "TXT-004",
+    "sheet": "Text_Reports",
+    "row": 5,
+    "cells": {
+      "Msg ID": "TXT-004",
+      "Date": "2027-10-08 00:00:00",
+      "Time": "17:30",
+      "Channel": "WhatsApp",
+      "From (role)": "Site Engineer (Contractor)",
+      "Message": "DG set 125 kVA reached site and unloaded. Labour camp shed erection started. QAP and ITP submitted to PMC today."
+    }
+  },
+  {
+    "id": "TXT-005",
+    "sheet": "Text_Reports",
+    "row": 6,
+    "cells": {
+      "Msg ID": "TXT-005",
+      "Date": "2027-10-09 00:00:00",
+      "Time": "18:10",
+      "Channel": "WhatsApp",
+      "From (role)": "Civil Supervisor",
+      "Message": "Fencing 300 m complete, signage boards fixed, gate hung."
+    }
+  },
+  {
+    "id": "TXT-006",
+    "sheet": "Text_Reports",
+    "row": 7,
+    "cells": {
+      "Msg ID": "TXT-006",
+      "Date": "2027-10-11 00:00:00",
+      "Time": "17:50",
+      "Channel": "WhatsApp",
+      "From (role)": "Survey Engineer",
+      "Message": "12 nos BM pillars fixed, levels checked, PMC signed level book."
+    }
+  },
+  {
+    "id": "TXT-007",
+    "sheet": "Text_Reports",
+    "row": 8,
+    "cells": {
+      "Msg ID": "TXT-007",
+      "Date": "2027-10-13 00:00:00",
+      "Time": "18:20",
+      "Channel": "Daily report (typed)",
+      "From (role)": "Site Engineer (Contractor)",
+      "Message": "Site office and stores completed today. Furniture placed."
+    }
+  },
+  {
+    "id": "TXT-008",
+    "sheet": "Text_Reports",
+    "row": 9,
+    "cells": {
+      "Msg ID": "TXT-008",
+      "Date": "2027-10-15 00:00:00",
+      "Time": "16:40",
+      "Channel": "WhatsApp",
+      "From (role)": "Site Engineer (Contractor)",
+      "Message": "Excavator 2 nos and JCB arrived. 20T crane will reach on 19th."
+    }
+  },
+  {
+    "id": "TXT-009",
+    "sheet": "Text_Reports",
+    "row": 10,
+    "cells": {
+      "Msg ID": "TXT-009",
+      "Date": "2027-10-15 00:00:00",
+      "Time": "18:00",
+      "Channel": "WhatsApp",
+      "From (role)": "HSE Officer",
+      "Message": "Safety plan approved by PMC today. Induction starts tomorrow."
+    }
+  },
+  {
+    "id": "TXT-010",
+    "sheet": "Text_Reports",
+    "row": 11,
+    "cells": {
+      "Msg ID": "TXT-010",
+      "Date": "2027-10-16 00:00:00",
+      "Time": "17:30",
+      "Channel": "Daily report (typed)",
+      "From (role)": "Site Engineer (Contractor)",
+      "Message": "Labour camp ready for 120 workers, canteen shed also ready. Temporary power through DG done, water tanker arranged."
+    }
+  },
+  {
+    "id": "TXT-011",
+    "sheet": "Text_Reports",
+    "row": 12,
+    "cells": {
+      "Msg ID": "TXT-011",
+      "Date": "2027-10-18 00:00:00",
+      "Time": "17:00",
+      "Channel": "WhatsApp",
+      "From (role)": "HSE Officer",
+      "Message": "Safety induction for 85 workers done."
+    }
+  },
+  {
+    "id": "TXT-012",
+    "sheet": "Text_Reports",
+    "row": 13,
+    "cells": {
+      "Msg ID": "TXT-012",
+      "Date": "2027-10-18 00:00:00",
+      "Time": "17:40",
+      "Channel": "WhatsApp",
+      "From (role)": "QC Engineer",
+      "Message": "Lab set up complete. Cube moulds, sieve set, slump cone, balance installed."
+    }
+  },
+  {
+    "id": "TXT-013",
+    "sheet": "Text_Reports",
+    "row": 14,
+    "cells": {
+      "Msg ID": "TXT-013",
+      "Date": "2027-10-19 00:00:00",
+      "Time": "16:50",
+      "Channel": "WhatsApp",
+      "From (role)": "Site Engineer (Contractor)",
+      "Message": "20T crane reached site and unloaded. All equipment available now."
+    }
+  },
+  {
+    "id": "TXT-014",
+    "sheet": "Text_Reports",
+    "row": 15,
+    "cells": {
+      "Msg ID": "TXT-014",
+      "Date": "2027-10-20 00:00:00",
+      "Time": "18:00",
+      "Channel": "Daily report (typed)",
+      "From (role)": "Site Engineer (Contractor)",
+      "Message": "Site clearing started with 2 JCB and 6 tippers. Also started making temporary haul road with murrum for tippers."
+    }
+  },
+  {
+    "id": "TXT-015",
+    "sheet": "Text_Reports",
+    "row": 16,
+    "cells": {
+      "Msg ID": "TXT-015",
+      "Date": "2027-10-22 00:00:00",
+      "Time": "17:30",
+      "Channel": "WhatsApp",
+      "From (role)": "QC Engineer",
+      "Message": "QAP and ITP approved by PMC (comments incorporated)."
+    }
+  },
+  {
+    "id": "TXT-016",
+    "sheet": "Text_Reports",
+    "row": 17,
+    "cells": {
+      "Msg ID": "TXT-016",
+      "Date": "2027-10-27 00:00:00",
+      "Time": "18:00",
+      "Channel": "WhatsApp",
+      "From (role)": "Civil Supervisor",
+      "Message": "Site clearing finished. Debris shifting to dump yard also done."
+    }
+  },
+  {
+    "id": "TXT-017",
+    "sheet": "Text_Reports",
+    "row": 18,
+    "cells": {
+      "Msg ID": "TXT-017",
+      "Date": "2027-10-28 00:00:00",
+      "Time": "18:30",
+      "Channel": "Daily report (typed)",
+      "From (role)": "Site Engineer (Contractor)",
+      "Message": "Started cut and fill from north side. Boundary wall trench marking done, excavation started on east side. Structural steel PO placed with mill, dispatch in 3 weeks."
+    }
+  },
+  {
+    "id": "TXT-018",
+    "sheet": "Text_Reports",
+    "row": 19,
+    "cells": {
+      "Msg ID": "TXT-018",
+      "Date": "2027-10-30 00:00:00",
+      "Time": "18:00",
+      "Channel": "Daily report (typed)",
+      "From (role)": "Site Engineer (Contractor)",
+      "Message": "Cut and fill 3500 m3 done till date. Boundary trench east and north side done, about 700 m of 1200 m."
+    }
+  },
+  {
+    "id": "TXT-019",
+    "sheet": "Text_Reports",
+    "row": 20,
+    "cells": {
+      "Msg ID": "TXT-019",
+      "Date": "2027-11-02 00:00:00",
+      "Time": "17:30",
+      "Channel": "WhatsApp",
+      "From (role)": "Piping Supervisor",
+      "Message": "Pipes for spools not received from vendor yet. Prefab yard and welding machines ready."
+    }
+  },
+  {
+    "id": "TXT-020",
+    "sheet": "Text_Reports",
+    "row": 21,
+    "cells": {
+      "Msg ID": "TXT-020",
+      "Date": "2027-11-04 00:00:00",
+      "Time": "16:30",
+      "Channel": "WhatsApp",
+      "From (role)": "Piping Supervisor",
+      "Message": "First lot of pipes came today. Spool fabrication will start tomorrow."
+    }
+  },
+  {
+    "id": "TXT-021",
+    "sheet": "Text_Reports",
+    "row": 22,
+    "cells": {
+      "Msg ID": "TXT-021",
+      "Date": "2027-11-06 00:00:00",
+      "Time": "18:15",
+      "Channel": "Daily report (typed)",
+      "From (role)": "Site Engineer (Contractor)",
+      "Message": "Boundary wall trench excavation completed all sides, 1200 m. Rain in the evening."
+    }
+  },
+  {
+    "id": "TXT-022",
+    "sheet": "Text_Reports",
+    "row": 23,
+    "cells": {
+      "Msg ID": "TXT-022",
+      "Date": "2027-11-08 00:00:00",
+      "Time": "17:45",
+      "Channel": "WhatsApp",
+      "From (role)": "Civil Supervisor",
+      "Message": "PCC in boundary wall trench started, 60 m done."
+    }
+  },
+  {
+    "id": "TXT-023",
+    "sheet": "Text_Reports",
+    "row": 24,
+    "cells": {
+      "Msg ID": "TXT-023",
+      "Date": "2027-11-12 00:00:00",
+      "Time": "16:00",
+      "Channel": "WhatsApp",
+      "From (role)": "Site Engineer (Contractor)",
+      "Message": "Heavy rain from 2 pm, all earthwork stopped. Tippers stuck at fill area."
+    }
+  },
+  {
+    "id": "TXT-024",
+    "sheet": "Text_Reports",
+    "row": 25,
+    "cells": {
+      "Msg ID": "TXT-024",
+      "Date": "2027-11-12 00:00:00",
+      "Time": "17:30",
+      "Channel": "WhatsApp",
+      "From (role)": "Store Keeper",
+      "Message": "Structural steel lot 1 received, 90 MT (angles, channels). Balance 150 MT later."
+    }
+  },
+  {
+    "id": "TXT-025",
+    "sheet": "Text_Reports",
+    "row": 26,
+    "cells": {
+      "Msg ID": "TXT-025",
+      "Date": "2027-11-15 00:00:00",
+      "Time": "18:00",
+      "Channel": "Daily report (typed)",
+      "From (role)": "Site Engineer (Contractor)",
+      "Message": "Cut and fill finished, FGL achieved as per drawing. Compaction to start tomorrow."
+    }
+  },
+  {
+    "id": "TXT-026",
+    "sheet": "Text_Reports",
+    "row": 27,
+    "cells": {
+      "Msg ID": "TXT-026",
+      "Date": "2027-11-16 00:00:00",
+      "Time": "17:30",
+      "Channel": "WhatsApp",
+      "From (role)": "QC Engineer",
+      "Message": "Compaction started with 2 rollers. FDD samples taken."
+    }
+  },
+  {
+    "id": "TXT-027",
+    "sheet": "Text_Reports",
+    "row": 28,
+    "cells": {
+      "Msg ID": "TXT-027",
+      "Date": "2027-11-19 00:00:00",
+      "Time": "18:20",
+      "Channel": "Daily report (typed)",
+      "From (role)": "Site Engineer (Contractor)",
+      "Message": "Compaction complete, density test 98% passed. Balance steel 150 MT received, all steel lots now at site."
+    }
+  },
+  {
+    "id": "TXT-028",
+    "sheet": "Text_Reports",
+    "row": 29,
+    "cells": {
+      "Msg ID": "TXT-028",
+      "Date": "2027-11-20 00:00:00",
+      "Time": "18:00",
+      "Channel": "WhatsApp",
+      "From (role)": "Piping Supervisor",
+      "Message": "All spools 180 nos fabricated and visually checked by QC."
+    }
+  },
+  {
+    "id": "TXT-029",
+    "sheet": "Text_Reports",
+    "row": 30,
+    "cells": {
+      "Msg ID": "TXT-029",
+      "Date": "2027-11-20 00:00:00",
+      "Time": "18:10",
+      "Channel": "WhatsApp",
+      "From (role)": "Civil Supervisor",
+      "Message": "Boundary wall PCC and footing done for full length."
+    }
+  },
+  {
+    "id": "TXT-030",
+    "sheet": "Text_Reports",
+    "row": 31,
+    "cells": {
+      "Msg ID": "TXT-030",
+      "Date": "2027-11-22 00:00:00",
+      "Time": "18:30",
+      "Channel": "Daily report (typed)",
+      "From (role)": "Site Engineer (Contractor)",
+      "Message": "Brick masonry of boundary wall started east side. Excavation started for receiving hall footings, processing building footings, RDF shed footings and admin block foundation."
+    }
+  },
+  {
+    "id": "TXT-031",
+    "sheet": "Text_Reports",
+    "row": 32,
+    "cells": {
+      "Msg ID": "TXT-031",
+      "Date": "2027-11-23 00:00:00",
+      "Time": "18:00",
+      "Channel": "WhatsApp",
+      "From (role)": "Civil Supervisor",
+      "Message": "Pit excavation started with sheet piling. Water seepage seen at 2 m depth, 2 dewatering pumps placed."
+    }
+  },
+  {
+    "id": "TXT-032",
+    "sheet": "Text_Reports",
+    "row": 33,
+    "cells": {
+      "Msg ID": "TXT-032",
+      "Date": "2027-11-24 00:00:00",
+      "Time": "18:10",
+      "Channel": "Daily report (typed)",
+      "From (role)": "Site Engineer (Contractor)",
+      "Message": "Compost yard levelling started. Substation room excavation begun. Drain trench excavation started, 80 m done."
+    }
+  },
+  {
+    "id": "TXT-033",
+    "sheet": "Text_Reports",
+    "row": 34,
+    "cells": {
+      "Msg ID": "TXT-033",
+      "Date": "2027-11-25 00:00:00",
+      "Time": "18:00",
+      "Channel": "WhatsApp",
+      "From (role)": "Civil Supervisor",
+      "Message": "Admin block foundation excavation done. Sump excavation started. Road subgrade preparation started near gate."
+    }
+  },
+  {
+    "id": "TXT-034",
+    "sheet": "Text_Reports",
+    "row": 35,
+    "cells": {
+      "Msg ID": "TXT-034",
+      "Date": "2027-11-26 00:00:00",
+      "Time": "17:50",
+      "Channel": "WhatsApp",
+      "From (role)": "Civil Supervisor",
+      "Message": "RDF shed footing pits F1 to F14 all excavated. Fire water tank excavation started."
+    }
+  },
+  {
+    "id": "TXT-035",
+    "sheet": "Text_Reports",
+    "row": 36,
+    "cells": {
+      "Msg ID": "TXT-035",
+      "Date": "2027-11-27 00:00:00",
+      "Time": "17:40",
+      "Channel": "WhatsApp",
+      "From (role)": "Civil Supervisor",
+      "Message": "Hall footing excavation 60% done."
+    }
+  },
+  {
+    "id": "TXT-036",
+    "sheet": "Text_Reports",
+    "row": 37,
+    "cells": {
+      "Msg ID": "TXT-036",
+      "Date": "2027-11-29 00:00:00",
+      "Time": "18:00",
+      "Channel": "Daily report (typed)",
+      "From (role)": "Site Engineer (Contractor)",
+      "Message": "Compost yard levelling completed, 6000 sqm. Weighbridge foundation work started."
+    }
+  },
+  {
+    "id": "TXT-037",
+    "sheet": "Text_Reports",
+    "row": 38,
+    "cells": {
+      "Msg ID": "TXT-037",
+      "Date": "2027-11-30 00:00:00",
+      "Time": "18:20",
+      "Channel": "Daily report (typed)",
+      "From (role)": "Site Engineer (Contractor)",
+      "Message": "Receiving hall footing excavation completed, 12 footings. PCC started in RDF shed footings. Sump excavation completed."
+    }
+  },
+  {
+    "id": "TXT-038",
+    "sheet": "Text_Reports",
+    "row": 39,
+    "cells": {
+      "Msg ID": "TXT-038",
+      "Date": "2027-12-01 00:00:00",
+      "Time": "17:30",
+      "Channel": "WhatsApp",
+      "From (role)": "Civil Supervisor",
+      "Message": "Tipping hall PCC started. Road subgrade prep complete, 6000 sqm."
+    }
+  },
+  {
+    "id": "TXT-039",
+    "sheet": "Text_Reports",
+    "row": 40,
+    "cells": {
+      "Msg ID": "TXT-039",
+      "Date": "2027-12-02 00:00:00",
+      "Time": "17:45",
+      "Channel": "WhatsApp",
+      "From (role)": "Electrical Supervisor",
+      "Message": "Earthing pits started, 6 nos ready. Temporary lighting installed near pit and yard, 12 poles."
+    }
+  },
+  {
+    "id": "TXT-040",
+    "sheet": "Text_Reports",
+    "row": 41,
+    "cells": {
+      "Msg ID": "TXT-040",
+      "Date": "2027-12-02 00:00:00",
+      "Time": "18:00",
+      "Channel": "WhatsApp",
+      "From (role)": "Civil Supervisor",
+      "Message": "Processing bldg excavation complete, 3100 cum."
+    }
+  },
+  {
+    "id": "TXT-041",
+    "sheet": "Text_Reports",
+    "row": 42,
+    "cells": {
+      "Msg ID": "TXT-041",
+      "Date": "2027-12-03 00:00:00",
+      "Time": "18:00",
+      "Channel": "Daily report (typed)",
+      "From (role)": "Site Engineer (Contractor)",
+      "Message": "PCC laid for tipping hall footings, 110 cum done. PCC started in processing building from grid A."
+    }
+  },
+  {
+    "id": "TXT-042",
+    "sheet": "Text_Reports",
+    "row": 43,
+    "cells": {
+      "Msg ID": "TXT-042",
+      "Date": "2027-12-04 00:00:00",
+      "Time": "18:10",
+      "Channel": "WhatsApp",
+      "From (role)": "Civil Supervisor",
+      "Message": "Pit excavation completed to final level. Dewatering still on. PCC done in processing building footings."
+    }
+  },
+  {
+    "id": "TXT-043",
+    "sheet": "Text_Reports",
+    "row": 44,
+    "cells": {
+      "Msg ID": "TXT-043",
+      "Date": "2027-12-06 00:00:00",
+      "Time": "18:00",
+      "Channel": "Daily report (typed)",
+      "From (role)": "Site Engineer (Contractor)",
+      "Message": "Boundary wall masonry 250 m done, half day lost in rain. Rebar tying started in processing building footings."
+    }
+  },
+  {
+    "id": "TXT-044",
+    "sheet": "Text_Reports",
+    "row": 45,
+    "cells": {
+      "Msg ID": "TXT-044",
+      "Date": "2027-12-07 00:00:00",
+      "Time": "17:40",
+      "Channel": "WhatsApp",
+      "From (role)": "Civil Supervisor",
+      "Message": "Pit raft rebar work started, 12 MT tied. Today concrete 45 cum, RMC 8 trucks."
+    }
+  },
+  {
+    "id": "TXT-045",
+    "sheet": "Text_Reports",
+    "row": 46,
+    "cells": {
+      "Msg ID": "TXT-045",
+      "Date": null,
+      "Time": null,
+      "Channel": "WhatsApp (export, timestamp missing)",
+      "From (role)": "Civil Supervisor",
+      "Message": "Brick masonry east side finished, starting south side."
+    }
+  },
+  {
+    "id": "TXT-046",
+    "sheet": "Text_Reports",
+    "row": 47,
+    "cells": {
+      "Msg ID": "TXT-046",
+      "Date": null,
+      "Time": null,
+      "Channel": "Site diary (transcribed from scan)",
+      "From (role)": "Civil Supervisor",
+      "Message": "Drain trench excavation completed, 900 RM total."
+    }
+  },
+  {
+    "id": "CIV-001",
+    "sheet": "Civil_DPR",
+    "row": 2,
+    "cells": {
+      "Rec ID": "CIV-001",
+      "Date": "2027-11-22 00:00:00",
+      "Area / Location": "Rcvg Hall",
+      "Work description": "Footing excavation F1-F3",
+      "Qty today": 350,
+      "Unit": "cum",
+      "Cumulative qty": 350,
+      "Manpower / equipment": "Helper 14, JCB 2, Tipper 4",
+      "Remarks": null
+    }
+  },
+  {
+    "id": "CIV-002",
+    "sheet": "Civil_DPR",
+    "row": 3,
+    "cells": {
+      "Rec ID": "CIV-002",
+      "Date": "2027-11-23 00:00:00",
+      "Area / Location": "Rcvg Hall",
+      "Work description": "Footing excavation F4-F6",
+      "Qty today": 400,
+      "Unit": "cum",
+      "Cumulative qty": 750,
+      "Manpower / equipment": "Helper 14, JCB 2, Tipper 4",
+      "Remarks": null
+    }
+  },
+  {
+    "id": "CIV-003",
+    "sheet": "Civil_DPR",
+    "row": 4,
+    "cells": {
+      "Rec ID": "CIV-003",
+      "Date": "2027-11-26 00:00:00",
+      "Area / Location": "Rcvg Hall",
+      "Work description": "Footing excavation F9-F10",
+      "Qty today": 350,
+      "Unit": "cum",
+      "Cumulative qty": 1800,
+      "Manpower / equipment": "Helper 12, JCB 2, Tipper 4",
+      "Remarks": null
+    }
+  },
+  {
+    "id": "CIV-004",
+    "sheet": "Civil_DPR",
+    "row": 5,
+    "cells": {
+      "Rec ID": "CIV-004",
+      "Date": "2027-11-30 00:00:00",
+      "Area / Location": "Rcvg Hall",
+      "Work description": "Footing excavation F12, trimming",
+      "Qty today": 200,
+      "Unit": "cum",
+      "Cumulative qty": 2200,
+      "Manpower / equipment": "Helper 10, JCB 1",
+      "Remarks": "Completed"
+    }
+  },
+  {
+    "id": "CIV-005",
+    "sheet": "Civil_DPR",
+    "row": 6,
+    "cells": {
+      "Rec ID": "CIV-005",
+      "Date": "2027-11-22 00:00:00",
+      "Area / Location": "Proc. bldg",
+      "Work description": "Excavation grid A-C",
+      "Qty today": 250,
+      "Unit": "cum",
+      "Cumulative qty": 250,
+      "Manpower / equipment": "Helper 16, JCB 2, Tipper 5",
+      "Remarks": null
+    }
+  },
+  {
+    "id": "CIV-006",
+    "sheet": "Civil_DPR",
+    "row": 7,
+    "cells": {
+      "Rec ID": "CIV-006",
+      "Date": "2027-11-25 00:00:00",
+      "Area / Location": "Proc. bldg",
+      "Work description": "Excavation grid D-F",
+      "Qty today": 320,
+      "Unit": "cum",
+      "Cumulative qty": 1200,
+      "Manpower / equipment": "Helper 16, JCB 2, Tipper 5",
+      "Remarks": null
+    }
+  },
+  {
+    "id": "CIV-007",
+    "sheet": "Civil_DPR",
+    "row": 8,
+    "cells": {
+      "Rec ID": "CIV-007",
+      "Date": "2027-11-27 00:00:00",
+      "Area / Location": "Proc. bldg",
+      "Work description": "Excavation grid G-H",
+      "Qty today": 330,
+      "Unit": "cum",
+      "Cumulative qty": 1860,
+      "Manpower / equipment": "Helper 16, JCB 2, Tipper 5",
+      "Remarks": "60% of total"
+    }
+  },
+  {
+    "id": "CIV-008",
+    "sheet": "Civil_DPR",
+    "row": 9,
+    "cells": {
+      "Rec ID": "CIV-008",
+      "Date": "2027-11-30 00:00:00",
+      "Area / Location": "Proc. bldg",
+      "Work description": "Excavation trimming",
+      "Qty today": 330,
+      "Unit": "cum",
+      "Cumulative qty": 2540,
+      "Manpower / equipment": "Helper 14, JCB 2, Tipper 4",
+      "Remarks": null
+    }
+  },
+  {
+    "id": "CIV-009",
+    "sheet": "Civil_DPR",
+    "row": 10,
+    "cells": {
+      "Rec ID": "CIV-009",
+      "Date": "2027-12-02 00:00:00",
+      "Area / Location": "Proc. bldg",
+      "Work description": "Excavation, final level",
+      "Qty today": 260,
+      "Unit": "cum",
+      "Cumulative qty": 3100,
+      "Manpower / equipment": "Helper 12, JCB 2, Tipper 4",
+      "Remarks": "Ready for PCC"
+    }
+  },
+  {
+    "id": "CIV-010",
+    "sheet": "Civil_DPR",
+    "row": 11,
+    "cells": {
+      "Rec ID": "CIV-010",
+      "Date": "2027-11-23 00:00:00",
+      "Area / Location": "Pit (hopper)",
+      "Work description": "Excavation with sheet piling",
+      "Qty today": 150,
+      "Unit": "cum",
+      "Cumulative qty": 150,
+      "Manpower / equipment": "Helper 10, Excavator 1",
+      "Remarks": "Seepage, 2 pumps running"
+    }
+  },
+  {
+    "id": "CIV-011",
+    "sheet": "Civil_DPR",
+    "row": 12,
+    "cells": {
+      "Rec ID": "CIV-011",
+      "Date": "2027-11-26 00:00:00",
+      "Area / Location": "Pit (hopper)",
+      "Work description": "Excavation",
+      "Qty today": 150,
+      "Unit": "cum",
+      "Cumulative qty": 650,
+      "Manpower / equipment": "Helper 10, Excavator 1",
+      "Remarks": null
+    }
+  },
+  {
+    "id": "CIV-012",
+    "sheet": "Civil_DPR",
+    "row": 13,
+    "cells": {
+      "Rec ID": "CIV-012",
+      "Date": "2027-11-30 00:00:00",
+      "Area / Location": "Pit (hopper)",
+      "Work description": "Excavation",
+      "Qty today": 100,
+      "Unit": "cum",
+      "Cumulative qty": 1010,
+      "Manpower / equipment": "Helper 10, Excavator 1",
+      "Remarks": null
+    }
+  },
+  {
+    "id": "CIV-013",
+    "sheet": "Civil_DPR",
+    "row": 14,
+    "cells": {
+      "Rec ID": "CIV-013",
+      "Date": "2027-12-03 00:00:00",
+      "Area / Location": "Pit (hopper)",
+      "Work description": "Excavation",
+      "Qty today": 150,
+      "Unit": "cum",
+      "Cumulative qty": 1380,
+      "Manpower / equipment": "Helper 10, Excavator 1",
+      "Remarks": null
+    }
+  },
+  {
+    "id": "CIV-014",
+    "sheet": "Civil_DPR",
+    "row": 15,
+    "cells": {
+      "Rec ID": "CIV-014",
+      "Date": "2027-12-04 00:00:00",
+      "Area / Location": "Pit (hopper)",
+      "Work description": "Excavation, final level",
+      "Qty today": 120,
+      "Unit": "cum",
+      "Cumulative qty": 1500,
+      "Manpower / equipment": "Helper 10, Excavator 1",
+      "Remarks": "Final level reached"
+    }
+  },
+  {
+    "id": "CIV-015",
+    "sheet": "Civil_DPR",
+    "row": 16,
+    "cells": {
+      "Rec ID": "CIV-015",
+      "Date": "2027-11-22 00:00:00",
+      "Area / Location": "RDF shed",
+      "Work description": "Footing pit excavation",
+      "Qty today": 120,
+      "Unit": "cum",
+      "Cumulative qty": 120,
+      "Manpower / equipment": "Helper 8, JCB 1",
+      "Remarks": null
+    }
+  },
+  {
+    "id": "CIV-016",
+    "sheet": "Civil_DPR",
+    "row": 17,
+    "cells": {
+      "Rec ID": "CIV-016",
+      "Date": "2027-11-26 00:00:00",
+      "Area / Location": "RDF shed",
+      "Work description": "Footing pit excavation F11-F14",
+      "Qty today": 120,
+      "Unit": "cum",
+      "Cumulative qty": 600,
+      "Manpower / equipment": "Helper 8, JCB 1",
+      "Remarks": "Completed"
+    }
+  },
+  {
+    "id": "CIV-017",
+    "sheet": "Civil_DPR",
+    "row": 18,
+    "cells": {
+      "Rec ID": "CIV-017",
+      "Date": "2027-11-22 00:00:00",
+      "Area / Location": "Admin block",
+      "Work description": "Foundation excavation",
+      "Qty today": 70,
+      "Unit": "cum",
+      "Cumulative qty": 70,
+      "Manpower / equipment": "Helper 6, JCB 1",
+      "Remarks": null
+    }
+  },
+  {
+    "id": "CIV-018",
+    "sheet": "Civil_DPR",
+    "row": 19,
+    "cells": {
+      "Rec ID": "CIV-018",
+      "Date": "2027-11-25 00:00:00",
+      "Area / Location": "Admin block",
+      "Work description": "Foundation excavation",
+      "Qty today": 70,
+      "Unit": "cum",
+      "Cumulative qty": 300,
+      "Manpower / equipment": "Helper 6, JCB 1",
+      "Remarks": "Completed"
+    }
+  },
+  {
+    "id": "CIV-019",
+    "sheet": "Civil_DPR",
+    "row": 20,
+    "cells": {
+      "Rec ID": "CIV-019",
+      "Date": "2027-11-22 00:00:00",
+      "Area / Location": "B/wall east",
+      "Work description": "Brick masonry",
+      "Qty today": 30,
+      "Unit": "RM",
+      "Cumulative qty": 30,
+      "Manpower / equipment": "Mason 6, Helper 8",
+      "Remarks": null
+    }
+  },
+  {
+    "id": "CIV-020",
+    "sheet": "Civil_DPR",
+    "row": 21,
+    "cells": {
+      "Rec ID": "CIV-020",
+      "Date": "2027-11-30 00:00:00",
+      "Area / Location": "B/wall east",
+      "Work description": "Brick masonry",
+      "Qty today": 40,
+      "Unit": "RM",
+      "Cumulative qty": 130,
+      "Manpower / equipment": "Mason 8, Helper 10",
+      "Remarks": null
+    }
+  },
+  {
+    "id": "CIV-021",
+    "sheet": "Civil_DPR",
+    "row": 22,
+    "cells": {
+      "Rec ID": "CIV-021",
+      "Date": "2027-12-06 00:00:00",
+      "Area / Location": "B/wall",
+      "Work description": "Brick masonry",
+      "Qty today": 45,
+      "Unit": "RM",
+      "Cumulative qty": 250,
+      "Manpower / equipment": "Mason 8, Helper 10",
+      "Remarks": "Rain half day"
+    }
+  },
+  {
+    "id": "CIV-022",
+    "sheet": "Civil_DPR",
+    "row": 23,
+    "cells": {
+      "Rec ID": "CIV-022",
+      "Date": "2027-11-24 00:00:00",
+      "Area / Location": "Storm drain",
+      "Work description": "Trench excavation",
+      "Qty today": 80,
+      "Unit": "RM",
+      "Cumulative qty": 80,
+      "Manpower / equipment": "Helper 12, JCB 1",
+      "Remarks": null
+    }
+  },
+  {
+    "id": "CIV-023",
+    "sheet": "Civil_DPR",
+    "row": 24,
+    "cells": {
+      "Rec ID": "CIV-023",
+      "Date": "2027-12-01 00:00:00",
+      "Area / Location": "Storm drain",
+      "Work description": "Trench excavation",
+      "Qty today": 110,
+      "Unit": "RM",
+      "Cumulative qty": 560,
+      "Manpower / equipment": "Helper 12, JCB 1",
+      "Remarks": null
+    }
+  },
+  {
+    "id": "CIV-024",
+    "sheet": "Civil_DPR",
+    "row": 25,
+    "cells": {
+      "Rec ID": "CIV-024",
+      "Date": "2027-12-06 00:00:00",
+      "Area / Location": "Storm drain",
+      "Work description": "Trench excavation",
+      "Qty today": 100,
+      "Unit": "RM",
+      "Cumulative qty": 760,
+      "Manpower / equipment": "Helper 12, JCB 1",
+      "Remarks": null
+    }
+  },
+  {
+    "id": "CIV-025",
+    "sheet": "Civil_DPR",
+    "row": 26,
+    "cells": {
+      "Rec ID": "CIV-025",
+      "Date": "2027-12-07 00:00:00",
+      "Area / Location": "RDF shed",
+      "Work description": "RMC pour footings F1-F6",
+      "Qty today": 45,
+      "Unit": "cum",
+      "Cumulative qty": 45,
+      "Manpower / equipment": "Mason 4, Helper 12, Pump 1",
+      "Remarks": "8 trucks RMC"
+    }
+  },
+  {
+    "id": "FAB-001",
+    "sheet": "Fabrication_Log",
+    "row": 2,
+    "cells": {
+      "Rec ID": "FAB-001",
+      "Date": "2027-11-04 00:00:00",
+      "Item / Mark no.": "PIPE-LOT1",
+      "Description": "CS pipes 6\", 8\", 10\" lot 1 received",
+      "Qty": 60,
+      "Unit": "spool eq.",
+      "Status": "Received",
+      "Remarks": "Store yard"
+    }
+  },
+  {
+    "id": "FAB-002",
+    "sheet": "Fabrication_Log",
+    "row": 3,
+    "cells": {
+      "Rec ID": "FAB-002",
+      "Date": "2027-11-05 00:00:00",
+      "Item / Mark no.": "S-001 to S-012",
+      "Description": "Cut and fit-up",
+      "Qty": 12,
+      "Unit": "spools",
+      "Status": "In progress",
+      "Remarks": "Fabrication started"
+    }
+  },
+  {
+    "id": "FAB-003",
+    "sheet": "Fabrication_Log",
+    "row": 4,
+    "cells": {
+      "Rec ID": "FAB-003",
+      "Date": "2027-11-09 00:00:00",
+      "Item / Mark no.": "S-001 to S-040",
+      "Description": "Welded, visual OK",
+      "Qty": 40,
+      "Unit": "spools",
+      "Status": "In progress",
+      "Remarks": null
+    }
+  },
+  {
+    "id": "FAB-004",
+    "sheet": "Fabrication_Log",
+    "row": 5,
+    "cells": {
+      "Rec ID": "FAB-004",
+      "Date": "2027-11-12 00:00:00",
+      "Item / Mark no.": "STL-LOT1",
+      "Description": "Angles, channels, plates received",
+      "Qty": 90,
+      "Unit": "MT",
+      "Status": "Received",
+      "Remarks": "Balance 150 MT expected 19-Nov"
+    }
+  },
+  {
+    "id": "FAB-005",
+    "sheet": "Fabrication_Log",
+    "row": 6,
+    "cells": {
+      "Rec ID": "FAB-005",
+      "Date": "2027-11-16 00:00:00",
+      "Item / Mark no.": "S-001 to S-110",
+      "Description": "Welded, visual OK",
+      "Qty": 110,
+      "Unit": "spools",
+      "Status": "In progress",
+      "Remarks": null
+    }
+  },
+  {
+    "id": "FAB-006",
+    "sheet": "Fabrication_Log",
+    "row": 7,
+    "cells": {
+      "Rec ID": "FAB-006",
+      "Date": "2027-11-19 00:00:00",
+      "Item / Mark no.": "STL-LOT2",
+      "Description": "Balance structural steel received",
+      "Qty": 150,
+      "Unit": "MT",
+      "Status": "Received",
+      "Remarks": "All steel received"
+    }
+  },
+  {
+    "id": "FAB-007",
+    "sheet": "Fabrication_Log",
+    "row": 8,
+    "cells": {
+      "Rec ID": "FAB-007",
+      "Date": "2027-11-20 00:00:00",
+      "Item / Mark no.": "S-001 to S-180",
+      "Description": "All welded, QC visual done",
+      "Qty": 180,
+      "Unit": "spools",
+      "Status": "Completed",
+      "Remarks": null
+    }
+  },
+  {
+    "id": "ELE-001",
+    "sheet": "Electrical_Log",
+    "row": 2,
+    "cells": {
+      "Rec ID": "ELE-001",
+      "Date": "2027-12-02 00:00:00",
+      "Location": "Near substation",
+      "Work description": "Earth pit E1-E6 (GI pipe electrode) complete",
+      "Qty": 6,
+      "Unit": "Nos",
+      "Remarks": null
+    }
+  },
+  {
+    "id": "ELE-002",
+    "sheet": "Electrical_Log",
+    "row": 3,
+    "cells": {
+      "Rec ID": "ELE-002",
+      "Date": "2027-12-02 00:00:00",
+      "Location": "Pit and yard area",
+      "Work description": "Temporary lighting poles with LED flood lights",
+      "Qty": 12,
+      "Unit": "Nos",
+      "Remarks": "Temporary works"
+    }
+  },
+  {
+    "id": "ELE-003",
+    "sheet": "Electrical_Log",
+    "row": 4,
+    "cells": {
+      "Rec ID": "ELE-003",
+      "Date": "2027-12-04 00:00:00",
+      "Location": "Process bldg periphery",
+      "Work description": "Earth pit E7-E12 complete",
+      "Qty": 6,
+      "Unit": "Nos",
+      "Remarks": "Cumulative 12"
+    }
+  },
+  {
+    "id": "ELE-004",
+    "sheet": "Electrical_Log",
+    "row": 5,
+    "cells": {
+      "Rec ID": "ELE-004",
+      "Date": "2027-12-07 00:00:00",
+      "Location": "Boundary side",
+      "Work description": "GI strip 50x6 laid and welded",
+      "Qty": 120,
+      "Unit": "RM",
+      "Remarks": null
+    }
+  }
+]

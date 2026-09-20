@@ -41,6 +41,7 @@ export async function processOne(db: SupabaseClient, extractor: Extractor): Prom
       const result = await extractor.extract({
         sourceText: version.source_text,
         workDate: version.work_date,
+        sourceEnvelope: version.context?.sourceEnvelope,
       });
       if (lost) throw new Error('LEASE_LOST');
       runId = must(
@@ -53,6 +54,7 @@ export async function processOne(db: SupabaseClient, extractor: Extractor): Prom
     }
     const run = must(await db.from('processing_runs').select('output').eq('id', runId).single());
     const extraction = Extraction.parse(run.output);
+    if (extraction.overflow) throw new ProviderError('manual_review_event_overflow', false);
     const project = must(
       await db.from('projects').select('*').eq('id', report.project_id).single(),
     );
@@ -85,7 +87,13 @@ export async function processOne(db: SupabaseClient, extractor: Extractor): Prom
         .range(from, to),
     );
     const catalog = plans
-      .filter((p) => activityRows.some((a) => a.id === p.activity_id))
+      .filter((p) =>
+        activityRows.some(
+          (a) =>
+            a.id === p.activity_id &&
+            (!version.context?.contractorId || a.contractor_id === version.context.contractorId),
+        ),
+      )
       .map((p) =>
         PlannedActivity.parse({
           id: p.activity_id,

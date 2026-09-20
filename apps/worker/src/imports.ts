@@ -1,5 +1,6 @@
 import type { SupabaseClient } from '@supabase/supabase-js';
 import { parseSchedules } from '@intelligrid/adapters/schedule-import';
+import { parseFieldWorkbook } from '@intelligrid/adapters/field-import';
 import { ImportFile } from '@intelligrid/contracts/imports';
 export async function processImport(db: SupabaseClient) {
   const leased = await db.rpc('lease_schedule_import');
@@ -16,7 +17,10 @@ export async function processImport(db: SupabaseClient) {
         throw new Error('Source upload could not be read; reserve and upload a new import.');
       files.push({ file, buffer: Buffer.from(await download.data.arrayBuffer()) });
     }
-    const preview = await parseSchedules(files);
+    const preview =
+      files[0]?.file.profile === 'field_corpus'
+        ? await parseFieldWorkbook(files[0].buffer, files[0].file.sha256)
+        : await parseSchedules(files);
     const r = await db.rpc('complete_schedule_import', {
       p_id: job.id,
       p_token: job.lease_token,

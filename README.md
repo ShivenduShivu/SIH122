@@ -4,7 +4,7 @@ BITS Pilani / SIH 26122. Synthetic oil/gas and supplied waste-plant project data
 
 ## Current scope
 
-Phase 5A adds protected schedule import, original-row preview, initial baseline activation and a nested Gantt for the supplied waste-plant schedules. Existing text reporting, simple clarification, supervisor verification and planner-only acceptance remain in place. See the [Phase 5A report](docs/reports/phase-05a.md) and [technical notes](docs/phase-05a-technical-notes.md). Phase 5A is awaiting review; the richer field-input/progress workflow is Phase 5B, external exchange is 6A, and voice/photo is 6B.
+Phase 5B adds the supplied field workbook, typed source evidence, quantity/percentage reconciliation, milestone occurrence, before/after approval preview and per-claim receipts. Earlier text reporting, clarification and supervisor verification remain in place. See the [Phase 5B report](docs/reports/phase-05b.md) and [technical notes](docs/phase-05b-technical-notes.md). Phase 5B and its review fixes are approved. External exchange is Phase 6A; voice/photo is Phase 6B.
 
 ## Run locally
 
@@ -51,4 +51,4 @@ Browser checks use Playwright and Chromium. Install it once with `npx playwright
 - `docs/implementation-phases.md`: detailed phase instructions, gates and commit messages.
 - `docs/reports`: phase completion evidence and review status.
 
-Only approved phases are staged and committed. Do not commit `.env`, provider keys, `node_modules`, raw browser output or scratch files. Selected reviewed screenshots belong in phase reports. Package patches are pinned by `package-lock.json`. `.github/workflows/checks.yml` repeats foundation checks on GitHub. Latest approved/pushed commit: `7d07770` (Phase 4A). Phase 5A remains uncommitted pending review.
+Only approved phases are staged and committed. Do not commit `.env`, provider keys, `node_modules`, raw browser output or scratch files. Selected reviewed screenshots belong in phase reports. Package patches are pinned by `package-lock.json`. `.github/workflows/checks.yml` repeats foundation checks on GitHub. Latest approved/pushed commit: `522af77` (Phase 5A). Phase 5B is approved for commit and push before Phase 6A.

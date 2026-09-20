@@ -1,0 +1,5 @@
+{
+  "passed": true,
+  "checks": 48,
+  "fixtureProvider": "clarification-contract-fixture; not a live model evaluation"
+}

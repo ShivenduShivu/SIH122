@@ -149,7 +149,7 @@ try {
       p_expected_version: 0,
       p_reporter: account(6).id,
       p_supervisor: account(7).id,
-      p_from: '2026-09-20',
+      p_from: '2026-09-18',
       p_to: '2026-09-25',
       p_reason: 'Synthetic integration test assignment',
     }),

@@ -4,15 +4,18 @@ import { reportWorkbench } from '../../../lib/reports';
 import { ReviewPanel } from '../../../components/review-panel';
 import { followupWorkbench } from '../../../lib/followups';
 import { RefreshPage } from '../../../components/refresh-page';
+import Link from 'next/link';
 export default async function ReviewPage({
   searchParams,
 }: {
-  searchParams: Promise<{ claim?: string }>;
+  searchParams: Promise<{ claim?: string; source?: string; from?: string }>;
 }) {
   await plannerContext();
   const w = await reportWorkbench();
   const followups = await followupWorkbench();
-  const { claim } = await searchParams;
+  const params = await searchParams;
+  const claim = typeof params.claim === 'string' ? params.claim : undefined;
+  const source = typeof params.source === 'string' ? params.source.trim().slice(0, 160) : '';
   const [members, decisions] = await Promise.all([
     w.db.from('project_members').select('user_id,display_name').eq('project_id', w.project.id),
     w.db.from('review_decisions').select('*').eq('project_id', w.project.id),
@@ -21,6 +24,11 @@ export default async function ReviewPage({
   return (
     <>
       <RefreshPage />
+      {params.from === 'schedule' && (
+        <Link className="back-link" href="/planner/schedule">
+          ← Return to schedule
+        </Link>
+      )}
       <div className="breadcrumb">{w.project.name} › Review queue</div>
       <div className="page-heading">
         <div>
@@ -29,7 +37,9 @@ export default async function ReviewPage({
         </div>
       </div>
       <ReviewPanel
+        key={`${claim ?? ''}:${source}`}
         initialClaim={claim}
+        initialSearch={source}
         entries={w.claims
           .filter((c) => c.state !== 'superseded' && c.state !== 'withdrawn')
           .sort((a, b) => Number(b.state === 'pending') - Number(a.state === 'pending'))
@@ -72,6 +82,8 @@ export default async function ReviewPage({
               reporter:
                 members.data.find((m) => m.user_id === r.author_id)?.display_name ??
                 'Project member',
+              provenance: w.versions.find((v) => v.report_id === c.report_id && v.version === 1)
+                ?.context?.sourceEnvelope,
               received: new Date(r.received_at).toLocaleString('en-IN', {
                 timeZone: 'Asia/Kolkata',
               }),

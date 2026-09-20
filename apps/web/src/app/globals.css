@@ -1790,6 +1790,9 @@ textarea {
 .review-inbox {
   border: 1px solid var(--line);
   background: white;
+  max-height: 72vh;
+  overflow-y: auto;
+  overscroll-behavior: contain;
 }
 .review-inbox button {
   width: 100%;
@@ -1892,6 +1895,9 @@ textarea {
   font-size: 10px;
   color: var(--muted);
   margin-top: 5px;
+}
+.candidate small {
+  display: block;
 }
 .candidate > span > small {
   display: block;
@@ -2398,4 +2404,111 @@ textarea:focus-visible {
 }
 .legend-instrumentation {
   background: #d5dcec;
+}
+
+/* Source provenance and before/after review use the same formal register language. */
+.review-filters {
+  display: flex;
+  gap: 16px;
+  align-items: center;
+  flex-wrap: wrap;
+  margin-bottom: 16px;
+}
+.review-filters select,
+.review-filters input,
+.rematch-action input,
+.rematch-action select {
+  border: 1px solid var(--line);
+  padding: 8px;
+  background: white;
+  max-width: 100%;
+}
+.review-filters span {
+  color: var(--muted);
+  font-size: 12px;
+}
+.review-search {
+  display: grid;
+  gap: 6px;
+  flex: 1 1 320px;
+  min-width: 0;
+}
+.field-report-filters {
+  display: grid;
+  gap: 12px;
+  margin-bottom: 20px;
+}
+.schedule-controls {
+  border: 0;
+  padding: 0;
+  margin: 0;
+  min-width: 0;
+}
+.field-report-filters label {
+  display: grid;
+  gap: 6px;
+  min-width: 0;
+}
+.field-report-filters input,
+.field-report-filters select {
+  width: 100%;
+  min-width: 0;
+  padding: 12px;
+  border: 1px solid var(--line);
+  background: white;
+  font: inherit;
+}
+.field-report-filters [role='status'],
+.followup-routing {
+  color: var(--muted);
+  font-size: 12px;
+}
+.followup-routing {
+  line-height: 1.7;
+  margin-bottom: 14px;
+}
+.review-search input {
+  width: 100%;
+  min-width: 0;
+}
+.review-filters #review-search-help {
+  flex-basis: 100%;
+}
+.review-inbox .source-record-id {
+  color: var(--accent);
+  letter-spacing: 0.04em;
+}
+.source-provenance,
+.change-preview {
+  padding: 14px;
+  margin: 15px 0;
+  border: 1px solid var(--line);
+  background: #f5f8f9;
+  overflow-wrap: anywhere;
+}
+.change-preview {
+  overflow-x: auto;
+}
+.rematch-action {
+  margin-top: 20px;
+  border-top: 1px solid var(--line);
+  padding-top: 16px;
+}
+.rematch-action summary {
+  cursor: pointer;
+  color: var(--accent);
+}
+.rematch-action label {
+  display: grid;
+  gap: 6px;
+  margin: 12px 0;
+}
+.actual-milestone-marker {
+  position: absolute;
+  top: 29px;
+  width: 7px;
+  height: 7px;
+  background: #426e60;
+  transform: translateX(-50%) rotate(45deg);
+  z-index: 3;
 }

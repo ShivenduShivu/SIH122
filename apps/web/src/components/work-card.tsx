@@ -6,7 +6,18 @@ export function WorkCard({
   assignment: x,
 }: {
   activity: PlannedActivity &
-    Partial<Pick<ScheduleActivity, 'actualStart' | 'actualFinish' | 'acceptedQuantity'>>;
+    Partial<
+      Pick<
+        ScheduleActivity,
+        | 'actualStart'
+        | 'actualFinish'
+        | 'acceptedQuantity'
+        | 'acceptedPercent'
+        | 'percentBasis'
+        | 'reportedProgress'
+        | 'milestoneDate'
+      >
+    >;
   assignment: { effective_from: string; effective_to: string; version: number };
 }) {
   return (
@@ -16,7 +27,13 @@ export function WorkCard({
           {a.externalId} · {a.discipline}
         </span>
         <span className="tag">
-          {a.actualFinish ? 'Complete' : a.actualStart ? 'In progress' : 'Assigned'}
+          {a.actualFinish
+            ? 'Complete'
+            : a.actualStart
+              ? 'In progress'
+              : a.reportedProgress
+                ? 'Progress reported · start unresolved'
+                : 'Assigned'}
         </span>
       </div>
       <h2>{a.name}</h2>
@@ -41,6 +58,12 @@ export function WorkCard({
             : `${a.acceptedQuantity} / ${a.targetQuantity} ${a.unit} accepted`}{' '}
         · Assignment v{x.version}
       </div>
+      {a.acceptedPercent != null && (
+        <p>
+          Accepted progress: {a.acceptedPercent}% · {a.percentBasis}
+        </p>
+      )}
+      {a.milestoneDate && <p>Milestone recorded: {formatDateOnly(a.milestoneDate)}</p>}
     </article>
   );
 }

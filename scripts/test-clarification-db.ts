@@ -96,7 +96,7 @@ async function assign(activity: string, who: string) {
       p_reporter: who,
       p_supervisor: accounts.supervisor.id,
       p_from: '2026-09-20',
-      p_to: '2026-09-21',
+      p_to: '2026-09-25',
       p_reason: 'Synthetic scoped test allocation',
     }),
   );

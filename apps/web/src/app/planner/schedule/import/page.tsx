@@ -11,7 +11,7 @@ export default async function ImportPage() {
       .not('contractor_id', 'is', null),
     db
       .from('schedule_imports')
-      .select('id,status,created_at')
+      .select('id,status,created_at,files')
       .eq('project_id', project.id)
       .order('created_at', { ascending: false })
       .limit(20),
@@ -31,7 +31,7 @@ export default async function ImportPage() {
       projectName={project.name}
       activeRevision={project.active_revision_id}
       contractors={contractors}
-      history={imports.data ?? []}
+      history={(imports.data ?? []).filter((i) => i.files[0]?.profile !== 'field_corpus')}
     />
   );
 }

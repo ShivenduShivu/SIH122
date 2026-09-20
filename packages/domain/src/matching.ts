@@ -1,5 +1,6 @@
 import type { PlannedActivity } from '@intelligrid/contracts';
 import type { ExtractedClaim } from '@intelligrid/contracts/reports';
+import { vocabulary, inferredStages } from './vocabulary';
 const normalize = (s: string) =>
   s
     .toLowerCase()
@@ -27,19 +28,36 @@ export function rankClaim(
           ` ${normalize(claim.assetTag)} `,
         );
       const tag = explicit || assetMatches;
-      const location =
+      let location =
         !!claim.location && ` ${normalize(a.location)} `.includes(` ${normalize(claim.location)} `);
       const aliases: Record<string, string> = {
         'concrete pour': 'concrete',
         'cable tray': 'tray installation',
-        inspection: 'ndt',
       };
       const reportedStage = claim.stage ? normalize(claim.stage) : '';
-      const stage =
-        !!claim.stage && normalize(a.stage) === (aliases[reportedStage] ?? reportedStage);
-      const words = tokens(`${claim.evidenceQuote} ${claim.activityHint ?? ''}`),
+      let stage = !!claim.stage && normalize(a.stage) === (aliases[reportedStage] ?? reportedStage);
+      const words = tokens(`${claim.evidenceQuote} ${claim.activityHint ?? ''}`);
+      let description =
+        [...tokens(a.name)].filter((w) => words.has(w)).length / Math.max(1, tokens(a.name).size);
+      if (a.sourceLevel) {
+        const path = vocabulary(`${a.location} ${a.hierarchyPath.map((p) => p.name).join(' ')}`);
+        const loc = vocabulary(claim.location ?? '');
+        const locationWords = loc
+          .split(' ')
+          .filter((w) => w.length > 2 && !['area', 'near', 'side', 'the'].includes(w));
+        location = !!loc && locationWords.every((w) => path.includes(w));
+        const stages = inferredStages(
+          `${claim.stage ?? ''} ${claim.activityHint ?? ''} ${claim.evidenceQuote}`,
+        );
+        stage = stages.some((s) => inferredStages(a.name).includes(s));
+        const sourceWords = tokens(
+          vocabulary(`${claim.evidenceQuote} ${claim.activityHint ?? ''}`),
+        );
+        const plannedWords = tokens(vocabulary(a.name));
         description =
-          [...tokens(a.name)].filter((w) => words.has(w)).length / Math.max(1, tokens(a.name).size);
+          [...plannedWords].filter((w) => sourceWords.has(w)).length /
+          Math.max(1, plannedWords.size);
+      }
       const features = {
         tag: Number(tag),
         location: Number(location),
@@ -48,17 +66,36 @@ export function rankClaim(
         discipline: Number(claim.discipline === a.discipline),
         assignment: Number(a.assignedReporterId === context.authorId),
       };
-      const score =
-        0.45 * features.tag +
-        0.2 * features.location +
-        0.15 * features.stage +
-        0.1 * features.description +
-        0.05 * features.discipline +
-        0.05 * features.assignment;
+      const score = a.sourceLevel
+        ? Math.min(
+            1,
+            0.35 * Number(explicit) +
+              0.25 * features.location +
+              0.2 * features.stage +
+              0.15 * features.description +
+              0.05 * features.discipline,
+          )
+        : 0.45 * features.tag +
+          0.2 * features.location +
+          0.15 * features.stage +
+          0.1 * features.description +
+          0.05 * features.discipline +
+          0.05 * features.assignment;
       const flags: string[] = [];
       if (claim.assetTag && !assetMatches) flags.push('Different asset tag');
       if (claim.location && !location) flags.push('Different location');
-      if (claim.stage && !stage) flags.push('Different activity stage');
+      if (claim.stage && !stage && (!a.sourceLevel || inferredStages(claim.stage).length))
+        flags.push('Different activity stage');
+      if (a.sourceLevel && claim.kind === 'FINISH') {
+        const plannedStages = inferredStages(a.name),
+          reportedStages = inferredStages(claim.evidenceQuote);
+        if (
+          plannedStages.length > 1 &&
+          plannedStages.some((s) => !reportedStages.includes(s)) &&
+          !/whole|entire|all.*(?:scope|work)/i.test(claim.evidenceQuote)
+        )
+          flags.push('Compound planned scope is not fully confirmed');
+      }
       if (claim.discipline && claim.discipline !== a.discipline) flags.push('Different discipline');
       return {
         activityId: a.id,
@@ -86,6 +123,12 @@ export function rankClaim(
     .slice(0, 8)
     .map((c, i) => ({ ...c, rank: i + 1 }));
   const flags: string[] = [];
+  if (
+    activities.some((a) => a.sourceLevel) &&
+    /^(the )?(hall|building|shed|pit|site|area)$/i.test((claim.location ?? '').trim()) &&
+    !candidates.some((c) => c.explicit)
+  )
+    flags.push('Work location missing');
   if (!claim.eventDate) flags.push('Work date missing');
   if (
     !claim.location &&
@@ -96,12 +139,32 @@ export function rankClaim(
   if (claim.scope === 'unknown') flags.push('Activity or item scope unclear');
   if (claim.kind === 'FINISH' && (!claim.fullScope || claim.scope !== 'activity'))
     flags.push('Partial scope cannot finish an activity');
-  if (!['START', 'FINISH', 'ITEM_PROGRESS'].includes(claim.kind))
+  if (!['START', 'FINISH', 'ITEM_PROGRESS', 'PERCENT_PROGRESS', 'MILESTONE'].includes(claim.kind))
     flags.push('Not an executable actual-progress event');
-  if (claim.qualifiers.length && claim.kind === 'FINISH')
+  if (
+    claim.qualifiers.length &&
+    claim.kind === 'FINISH' &&
+    claim.observation?.inspectionRelation !== 'separate'
+  )
     flags.push('Finish has unresolved qualifications');
   if (claim.kind === 'ITEM_PROGRESS' && (!claim.quantity || claim.quantity.mode === 'item'))
     flags.push('Quantity or individual item needs clarification');
   if (!candidates.length) flags.push('No matching activity');
-  return { facts: claim, flags, candidates };
+  if (
+    claim.kind === 'PERCENT_PROGRESS' &&
+    (!claim.observation?.percent || claim.observation.percent.basis === 'test_result')
+  )
+    flags.push('Percentage is not confirmed activity progress');
+  if (claim.observation?.quantityCoverage === 'component' && claim.kind === 'ITEM_PROGRESS')
+    flags.push('Component progress needs reconciliation');
+  if (
+    claim.location &&
+    candidates.length > 1 &&
+    candidates[0]!.features.location &&
+    candidates[1]!.features.location &&
+    Math.abs(candidates[0]!.score - candidates[1]!.score) < 0.03 &&
+    !candidates[0]!.explicit
+  )
+    flags.push('Work location missing');
+  return { facts: claim, flags: [...new Set(flags)], candidates };
 }

@@ -38,6 +38,8 @@ export const AmendmentCommand = z
     claimId: Id,
     expectedClaimVersion: z.number().int().positive(),
     eventDate: WorkDate,
+    quantityValue: z.number().nonnegative().optional(),
+    percentValue: z.number().min(0).max(100).optional(),
     reason,
   })
   .strict();

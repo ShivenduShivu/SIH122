@@ -1,0 +1,14 @@
+{
+  "unitTests": 71,
+  "observationDatabaseChecks": 43,
+  "reconciliationDatabaseChecks": 36,
+  "clarificationDatabaseChecks": 48,
+  "importDatabaseChecks": 39,
+  "typecheck": "passed",
+  "fixtureValidation": "passed",
+  "workerConfiguration": "passed",
+  "productionBuild": "passed",
+  "productionBrowserErrors": [],
+  "normalBrowserSmoke": "passed",
+  "phaseCommit": "not created; awaiting review"
+}

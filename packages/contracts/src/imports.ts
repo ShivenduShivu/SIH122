@@ -11,7 +11,7 @@ export const ImportFile = z
       .min(1)
       .max(160)
       .refine((s) => !/[\\/\x00-\x1f]/.test(s)),
-    profile: z.enum(['gwp_construction', 'gwp_l3', 'canonical_csv']),
+    profile: z.enum(['gwp_construction', 'gwp_l3', 'canonical_csv', 'field_corpus']),
     bytes: z.number().int().min(1).max(MAX_FILE_BYTES),
     sha256: z.string().regex(/^[a-f0-9]{64}$/),
   })
@@ -23,7 +23,10 @@ export const ReserveImport = z
     (x) =>
       new Set(x.files.map((f) => f.id)).size === x.files.length &&
       new Set(x.files.map((f) => f.profile)).size === x.files.length &&
-      !(x.files.length > 1 && x.files.some((f) => f.profile === 'canonical_csv')),
+      !(
+        x.files.length > 1 &&
+        x.files.some((f) => ['canonical_csv', 'field_corpus'].includes(f.profile))
+      ),
     'Use one file per profile; canonical CSV is imported alone.',
   );
 export const SourceRef = z.object({

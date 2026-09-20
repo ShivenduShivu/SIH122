@@ -4,6 +4,7 @@ import { reportWorkbench } from '../../../lib/reports';
 import { reportStatus } from '../../../lib/report-status';
 import { RefreshPage } from '../../../components/refresh-page';
 import { Icon } from '../../../components/icon';
+import { ReprocessReport } from '../../../components/followup-actions';
 export default async function ReportsPage() {
   await plannerContext();
   const w = await reportWorkbench();
@@ -21,6 +22,9 @@ export default async function ReportsPage() {
           <h1>Field reports</h1>
           <p>Original evidence, extraction outcomes and review status.</p>
         </div>
+        <Link className="button primary" href="/planner/reports/import">
+          <Icon name="reports" /> Import field reports
+        </Link>
       </div>
       <section className="panel">
         <div className="section-heading">
@@ -49,11 +53,11 @@ export default async function ReportsPage() {
                     ['pending', 'clarification', 'verification', 'disputed'].includes(c.state),
                   ) ?? reportClaims[0];
                 return (
-                  <tr key={r.id}>
+                  <tr key={r.id} id={r.id}>
                     <td>
                       <strong>FR-{r.id.slice(0, 8).toUpperCase()}</strong>
                       <small>
-                        Text report ·{' '}
+                        {r.source_kind === 'spreadsheet' ? 'Spreadsheet row' : 'Text report'} ·{' '}
                         {new Date(r.received_at).toLocaleTimeString('en-IN', {
                           timeZone: 'Asia/Kolkata',
                           hour: '2-digit',
@@ -65,7 +69,13 @@ export default async function ReportsPage() {
                     <td>
                       {w.versions.find((v) => v.report_id === r.id)?.work_date ?? 'Not supplied'}
                     </td>
-                    <td>{members?.find((m) => m.user_id === r.author_id)?.display_name}</td>
+                    <td>
+                      {w.versions.find((v) => v.report_id === r.id)?.context?.sourceEnvelope
+                        ?.reportedByLabel ?? 'Source person not supplied'}
+                      <small>
+                        Uploaded by {members?.find((m) => m.user_id === r.author_id)?.display_name}
+                      </small>
+                    </td>
                     <td>
                       <span className="attention-tag">{reportStatus(r.id, w.claims, w.jobs)}</span>
                     </td>
@@ -81,6 +91,21 @@ export default async function ReportsPage() {
                             : 'Extracting…'}
                         </span>
                       )}
+                      {r.lifecycle === 'submitted' &&
+                        !reportClaims.some((c) => c.state === 'accepted') &&
+                        !w.jobs.some(
+                          (j) =>
+                            j.report_id === r.id &&
+                            ['queued', 'running', 'retry_wait'].includes(j.status),
+                        ) &&
+                        w.versions.some(
+                          (v) =>
+                            v.report_id === r.id &&
+                            v.version === r.current_version &&
+                            v.context?.submissionMode !== 'structured_reply' &&
+                            (!v.context?.sourceEnvelope ||
+                              v.context.sourceEnvelope.sheet === 'Text_Reports'),
+                        ) && <ReprocessReport reportId={r.id} version={r.current_version} />}
                     </td>
                   </tr>
                 );

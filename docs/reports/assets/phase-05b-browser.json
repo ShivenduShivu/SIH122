@@ -1,0 +1,34 @@
+{
+  "checks": [
+    "TXT-030: preview, accepted START, second planner refreshed without reload",
+    "CIV-002: preview, accepted ITEM_PROGRESS, second planner refreshed without reload",
+    "Reporter confirms missing finish date through the field question; source context retained",
+    "TXT-037: preview, accepted FINISH, second planner refreshed without reload",
+    "Ambiguous Hall asks a simple location question; mobile receipt fits 390px and 320px"
+  ],
+  "errors": [],
+  "before": {
+    "project_id": "10000000-0000-4000-8000-000000000005",
+    "activity_id": "afafc839-86de-4203-89af-b2a325503920",
+    "actual_start": null,
+    "actual_finish": null,
+    "version": 0,
+    "accepted_quantity": 0,
+    "accepted_percent": null,
+    "percent_basis": null,
+    "progress_as_of": null,
+    "milestone_date": null
+  },
+  "after": {
+    "project_id": "10000000-0000-4000-8000-000000000005",
+    "activity_id": "afafc839-86de-4203-89af-b2a325503920",
+    "actual_start": "2027-11-22",
+    "actual_finish": "2027-11-30",
+    "version": 3,
+    "accepted_quantity": 750,
+    "accepted_percent": null,
+    "percent_basis": null,
+    "progress_as_of": "2027-11-23",
+    "milestone_date": null
+  }
+}
