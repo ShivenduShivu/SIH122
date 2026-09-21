@@ -3,7 +3,7 @@ export function GET() {
     {
       service: 'intelligrid-web',
       status: 'ok',
-      phase: 4,
+      pipelineVersion: 'observations-v2',
       mode: 'authenticated-synthetic-project',
       check: 'web-process-liveness',
     },

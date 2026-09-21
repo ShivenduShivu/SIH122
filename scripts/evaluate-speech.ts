@@ -21,7 +21,7 @@ const cases = z
       reference: z.string().min(1),
       critical: z.array(
         z.object({
-          field: z.enum(['asset', 'location', 'date', 'quantity', 'negation']),
+          field: z.enum(['asset', 'location', 'date', 'quantity', 'unit', 'negation']),
           acceptedPhrases: z.array(z.string().min(1)).min(1),
         }),
       ),

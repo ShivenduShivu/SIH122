@@ -1,0 +1,30 @@
+{
+  "createdAt": "2026-09-21T05:47:42.880Z",
+  "backupDirectory": ".cache/backups/1789969586313_04f293",
+  "targetDatabase": "intelligrid_restore_1789969586313_04f293",
+  "storageVolume": "intelligrid_restore_1789969586313_04f293",
+  "migrationDatabase": "intelligrid_restore_1789969586313_04f293_migrations",
+  "databaseSha256": "e85a4605ceef4f550cd1bd15adb6b327f826597bb231dc8f6ff6c554e7ddaf80",
+  "storageSha256": "7692c89ec8908ec51f1121345e2e479aa3ce8e3218f945fb9a5d61545fc79dc4",
+  "tablesCompared": 37,
+  "storageObjects": 112,
+  "filesCompared": 112,
+  "migrationsApplied": [
+    "202609200001_project_foundation.sql",
+    "202609200002_provisioning.sql",
+    "202609200003_reports.sql",
+    "202609200004_acceptance.sql",
+    "202609210005_clarification.sql",
+    "202609210006_followup_acceptance.sql",
+    "202609210007_schedule_imports.sql",
+    "202609210008_field_observations.sql",
+    "202609210009_planner_exchange.sql",
+    "202609210010_exchange_csv_encoding.sql",
+    "202609210011_field_media.sql",
+    "202609210012_media_evidence.sql"
+  ],
+  "restoreMs": 47733,
+  "totalMs": 76598,
+  "activeDatabaseUnchanged": true,
+  "limitation": "Same PostgreSQL server/global roles and local platform schemas. Database/files restore, not a live restored Auth/Storage service or disaster recovery on a new host. Backup contains private data; restrict access and encrypt before off-device storage."
+}

@@ -1,0 +1,47 @@
+{
+  "results": [
+    {
+      "file": "test-database.mjs",
+      "exitCode": 0,
+      "durationMs": 1800,
+      "passLines": 39
+    },
+    {
+      "file": "test-reconciliation-db.ts",
+      "exitCode": 0,
+      "durationMs": 4263,
+      "passLines": 37
+    },
+    {
+      "file": "test-clarification-db.ts",
+      "exitCode": 0,
+      "durationMs": 8899,
+      "passLines": 50
+    },
+    {
+      "file": "test-schedule-import-db.ts",
+      "exitCode": 0,
+      "durationMs": 5495,
+      "passLines": 39
+    },
+    {
+      "file": "test-observations-db.ts",
+      "exitCode": 0,
+      "durationMs": 13023,
+      "passLines": 43
+    },
+    {
+      "file": "test-exchange-db.ts",
+      "exitCode": 0,
+      "durationMs": 7960,
+      "passLines": 49
+    },
+    {
+      "file": "test-media-db.ts",
+      "exitCode": 0,
+      "durationMs": 3815,
+      "passLines": 41
+    }
+  ],
+  "gwpAcceptedScheduleUnchanged": true
+}

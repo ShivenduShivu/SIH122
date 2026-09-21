@@ -4,7 +4,7 @@ BITS Pilani / SIH 26122. Synthetic oil/gas and supplied waste-plant project data
 
 ## Current scope
 
-Phase 6B adds bounded voice capture, editable OpenAI transcripts, private photo/audio evidence and recoverable field text drafts. Submission still requires reporter confirmation; accepted schedule changes still require planner review. The supplied workbook, progress reconciliation, clarification, supervisor verification, history and planner exchange remain in place. See the [Phase 6B report](docs/reports/phase-06b.md) and [technical notes](docs/phase-06b-technical-notes.md). The implementation and review fixes are approved; human speech and physical Android/iPhone checks carry into Phase 7 as pending. This is not a fully offline PWA or verified native Primavera integration.
+Phase 7 adds frozen synthetic evaluation, security checks, separate web/worker container builds and an isolated database/evidence recovery rehearsal. The user authorized review and commit on 21 September 2026; hosting, human speech and physical Android/iPhone checks remain pending. See the [Phase 7 report](docs/reports/phase-07.md), [operations guide](docs/phase-07-operations.md) and [evaluation definitions](docs/phase-07-evaluation.md). Voice, private evidence, clarification, progress reconciliation and planner exchange remain review-led. This is not a fully offline PWA or verified native Primavera integration.
 
 ## Run locally
 
@@ -50,10 +50,10 @@ Browser checks use Playwright and Chromium. Install it once with `npx playwright
 - `packages/adapters`: strict OpenAI extraction provider boundary.
 - `packages/contracts`: runtime-validated data structures; no provider credentials or UI.
 - `packages/domain`: pure domain rules; no React, database or external model calls.
-- `fixtures`: explicitly synthetic development fixtures, not the frozen evaluation set.
+- `fixtures`: synthetic development fixtures, source-format expectations and the separately hashed `evaluation` experiment.
 - `tests`: contracts/domain/browser checks.
 - `planning/07-technical-architecture.md`: architecture version 1.1.
 - `docs/implementation-phases.md`: detailed phase instructions, gates and commit messages.
 - `docs/reports`: phase completion evidence and review status.
 
-Only approved phases are staged and committed. Do not commit `.env`, provider keys, `node_modules`, raw browser output or scratch files. Selected reviewed screenshots belong in phase reports. Package patches are pinned by `package-lock.json`. `.github/workflows/checks.yml` repeats foundation checks on GitHub. Latest approved/pushed commit: `051247f` (Phase 6A). Phase 6B is approved for commit/push and Phase 7 may then begin, carrying outstanding device/speech verification.
+Only approved phases are staged and committed. Do not commit `.env`, provider keys, backups, `node_modules`, raw browser output or scratch files. Selected reviewed evidence belongs in phase reports. Package patches are pinned by `package-lock.json`. `.github/workflows/checks.yml` repeats foundation checks on GitHub. Latest pushed phase: `57270e6` (Phase 6B). Phase 7 is authorized for a local commit after verification; a push is outside this request. Phase 8 has not begun.

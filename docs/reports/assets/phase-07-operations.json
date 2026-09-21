@@ -1,0 +1,42 @@
+{
+  "measuredAt": "2026-09-21T05:58:44.242Z",
+  "project": "10000000-0000-4000-8000-000000000005",
+  "scheduleVersion": 5,
+  "reports": 83,
+  "reportLifecycle": {
+    "submitted": 83
+  },
+  "claimsByState": {
+    "superseded": 106,
+    "clarification": 115,
+    "pending": 29,
+    "rejected": 1,
+    "accepted": 4
+  },
+  "reportJobs": {
+    "succeeded": 137
+  },
+  "mediaJobs": {
+    "ready": 1
+  },
+  "expiredReportLeases": 0,
+  "sourceRows": 82,
+  "uniqueSourceIds": 82,
+  "sourceSheets": {
+    "Text_Reports": 46,
+    "Civil_DPR": 25,
+    "Electrical_Log": 4,
+    "Fabrication_Log": 7
+  },
+  "missingDateSources": [
+    {
+      "sourceId": "TXT-045",
+      "originalWorkDate": null
+    },
+    {
+      "sourceId": "TXT-046",
+      "originalWorkDate": null
+    }
+  ],
+  "note": "Read-only current state. Historical claims and intentional test failures must not be interpreted as fresh production incidents. No report text, account details or signed URLs included."
+}

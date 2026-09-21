@@ -1,4 +1,4 @@
-import { existsSync } from 'node:fs';
+import { existsSync, writeFileSync } from 'node:fs';
 import { resolve } from 'node:path';
 import { OpenAIExtractor } from '@intelligrid/adapters';
 import { processOne, workerDatabase } from './processor';
@@ -40,6 +40,12 @@ if (process.argv.includes('--check')) {
       const imported = await processImport(db);
       const media = await processMedia(db, transcriber);
       const worked = (await processOne(db, extractor)) || imported || media;
+      // A successful database loop; not proof that every provider job succeeded.
+      if (process.env.WORKER_HEARTBEAT_PATH)
+        writeFileSync(
+          process.env.WORKER_HEARTBEAT_PATH,
+          JSON.stringify({ completedAt: new Date().toISOString() }),
+        );
       if (process.argv.includes('--once')) break;
       if (!worked) await new Promise((r) => setTimeout(r, 2000));
     } catch {

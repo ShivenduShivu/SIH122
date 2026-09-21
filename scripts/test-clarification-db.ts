@@ -671,8 +671,18 @@ try {
     'manager can renew a stale scoped verification with an audit reason',
   );
   const objectPath = `${lab.project}/${accounts.reporter.id}/${randomUUID()}.txt`;
+  check(
+    !!(
+      await reporter.storage
+        .from('evidence')
+        .upload(objectPath, Buffer.from('Unreserved note'), { contentType: 'text/plain' })
+    ).error,
+    'legacy unreserved evidence uploads remain denied',
+  );
+  // This existing submitted report is a database scope fixture, not a new capture.
+  // Seed its evidence with operator authority; real capture reservation/upload is tested in test-media-db.
   must(
-    await reporter.storage
+    await admin.storage
       .from('evidence')
       .upload(objectPath, Buffer.from('Synthetic report evidence for scope checks'), {
         contentType: 'text/plain',

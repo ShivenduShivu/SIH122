@@ -1,0 +1,15 @@
+{
+  "checks": [
+    "Security headers preserve same-origin microphone/camera and disable framing/cache",
+    "25 mutation routes reject foreign origins; 12 protected reads reject anonymous users",
+    "Standalone app supports authenticated planner navigation with the approved tab icons",
+    "Mobile 320px: voice text separated, report list bounded, CIV-003 search and return scroll preserved",
+    "Mobile 390px: voice text separated, report list bounded, CIV-003 search and return scroll preserved",
+    "Authenticated planner cannot read another project or request an absent evidence URL",
+    "Sign-out clears access; no browser runtime errors"
+  ],
+  "mutationRoutes": 25,
+  "readRoutes": 12,
+  "browserErrors": [],
+  "passed": true
+}

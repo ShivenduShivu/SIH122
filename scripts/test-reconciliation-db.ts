@@ -307,9 +307,13 @@ try {
     'accepted date has one pending outbox entry',
   );
   check(
-    must(await planner.from('admin_audit').select('*').eq('project_id', project)).some(
-      (r: any) => r.detail.eventId === accepted.eventId,
-    ),
+    must(
+      await planner
+        .from('admin_audit')
+        .select('*')
+        .eq('project_id', project)
+        .eq('detail->>eventId', accepted.eventId),
+    ).some((r: any) => r.detail.eventId === accepted.eventId),
     'accepted event has an audit record',
   );
   check(

@@ -1,0 +1,3042 @@
+{
+  "sha256": "ace125170d0781f082947587222fe4ce2792b075d337bcc7c361cae686ac1cf7",
+  "split": "challenge",
+  "completedAt": "2026-09-21T05:43:15.351Z",
+  "summary": {
+    "cases": 40,
+    "completed": 40,
+    "errors": 0,
+    "exactCases": 36,
+    "expectedEvents": 44,
+    "factMatches": 44,
+    "retrievalTargets": 36,
+    "recallAt8Hits": 36,
+    "top1Hits": 36,
+    "forbiddenFinishCases": 20,
+    "unsafeFinishCases": 0,
+    "p50Ms": 2436,
+    "p95Ms": 4401,
+    "inputTokens": 53988,
+    "outputTokens": 13383,
+    "note": "Extraction proposals only; no database acceptance. Retrieval uses gold-assisted event alignment and a small catalog. Strict lexical units; equivalent units can fail. Failed calls count as misses. No held-out human speech or final-linking accuracy claim."
+  },
+  "results": [
+    {
+      "id": "challenge-dateless-finish-1",
+      "group": "dateless-finish",
+      "model": "gpt-5.4-mini-2026-03-17",
+      "latencyMs": 2056,
+      "usage": {
+        "input_tokens": 1335,
+        "input_tokens_details": {
+          "cache_write_tokens": 0,
+          "cached_tokens": 0
+        },
+        "output_tokens": 192,
+        "output_tokens_details": {
+          "reasoning_tokens": 22
+        },
+        "total_tokens": 1527
+      },
+      "claims": [
+        {
+          "kind": "FINISH",
+          "activityHint": "supports installation",
+          "assetTag": null,
+          "location": "Unit 2 / Rack A",
+          "stage": "supports",
+          "discipline": "Structural",
+          "scope": "activity",
+          "fullScope": true,
+          "eventDate": null,
+          "dateOrigin": "unknown",
+          "quantity": null,
+          "evidenceQuote": "All supports in Unit 2 / Rack A are now installed.",
+          "qualifiers": [],
+          "missingFields": [
+            "eventDate"
+          ],
+          "observation": {
+            "version": 2,
+            "dateBasis": "missing",
+            "dateEvidence": "No work date or message date supplied.",
+            "quantityCoverage": "activity_total",
+            "component": "supports",
+            "dailyQuantity": null,
+            "items": [
+              "supports"
+            ],
+            "coverageStart": null,
+            "coverageEnd": null,
+            "percent": null,
+            "inspectionRelation": null
+          }
+        }
+      ],
+      "matched": [
+        {
+          "expected": {
+            "kind": "FINISH",
+            "eventDate": null,
+            "target": "PIP-1101",
+            "fullScope": true
+          },
+          "actualIndex": 0,
+          "factMatch": true,
+          "retrievalEligible": true,
+          "targetRank": 1
+        }
+      ],
+      "exact": true,
+      "forbiddenFinish": false,
+      "unsafeFinish": false
+    },
+    {
+      "id": "challenge-negated-completion-1",
+      "group": "negated-completion",
+      "model": "gpt-5.4-mini-2026-03-17",
+      "latencyMs": 3820,
+      "usage": {
+        "input_tokens": 1345,
+        "input_tokens_details": {
+          "cache_write_tokens": 0,
+          "cached_tokens": 0
+        },
+        "output_tokens": 458,
+        "output_tokens_details": {
+          "reasoning_tokens": 257
+        },
+        "total_tokens": 1803
+      },
+      "claims": [
+        {
+          "kind": "BLOCKED",
+          "activityHint": "painting",
+          "assetTag": null,
+          "location": "Room 1",
+          "stage": "painting",
+          "discipline": "General",
+          "scope": "activity",
+          "fullScope": false,
+          "eventDate": "2026-09-21",
+          "dateOrigin": "source_text",
+          "quantity": null,
+          "evidenceQuote": "On 2026-09-21, painting in Room 1 was not finished; paint has not arrived.",
+          "qualifiers": [
+            "not finished",
+            "paint has not arrived"
+          ],
+          "missingFields": [
+            "quantity"
+          ],
+          "observation": {
+            "version": 2,
+            "dateBasis": "explicit",
+            "dateEvidence": "On 2026-09-21, painting in Room 1 was not finished; paint has not arrived.",
+            "quantityCoverage": "unknown",
+            "component": null,
+            "dailyQuantity": null,
+            "items": [],
+            "coverageStart": null,
+            "coverageEnd": null,
+            "percent": null,
+            "inspectionRelation": null
+          }
+        }
+      ],
+      "matched": [
+        {
+          "expected": {
+            "kind": "BLOCKED",
+            "eventDate": "2026-09-21"
+          },
+          "actualIndex": 0,
+          "factMatch": true,
+          "retrievalEligible": false,
+          "targetRank": null
+        }
+      ],
+      "exact": true,
+      "forbiddenFinish": true,
+      "unsafeFinish": false
+    },
+    {
+      "id": "challenge-test-percent-1",
+      "group": "test-percent",
+      "model": "gpt-5.4-mini-2026-03-17",
+      "latencyMs": 2355,
+      "usage": {
+        "input_tokens": 1347,
+        "input_tokens_details": {
+          "cache_write_tokens": 0,
+          "cached_tokens": 0
+        },
+        "output_tokens": 284,
+        "output_tokens_details": {
+          "reasoning_tokens": 87
+        },
+        "total_tokens": 1631
+      },
+      "claims": [
+        {
+          "kind": "INSPECTION",
+          "activityHint": "soil density test",
+          "assetTag": "P-101",
+          "location": "Pump bay",
+          "stage": null,
+          "discipline": "Civil",
+          "scope": "item",
+          "fullScope": false,
+          "eventDate": "2026-09-21",
+          "dateOrigin": "source_text",
+          "quantity": null,
+          "evidenceQuote": "On 2026-09-21, the soil density test at Pump bay / P-101 returned 95%.",
+          "qualifiers": [],
+          "missingFields": [],
+          "observation": {
+            "version": 2,
+            "dateBasis": "explicit",
+            "dateEvidence": "On 2026-09-21",
+            "quantityCoverage": "unknown",
+            "component": "soil density",
+            "dailyQuantity": null,
+            "items": [
+              "P-101"
+            ],
+            "coverageStart": null,
+            "coverageEnd": null,
+            "percent": {
+              "value": 95,
+              "basis": "test_result"
+            },
+            "inspectionRelation": "separate"
+          }
+        }
+      ],
+      "matched": [
+        {
+          "expected": {
+            "kind": "INSPECTION",
+            "eventDate": "2026-09-21",
+            "percent": {
+              "value": 95,
+              "basis": "test_result"
+            }
+          },
+          "actualIndex": 0,
+          "factMatch": true,
+          "retrievalEligible": false,
+          "targetRank": null
+        }
+      ],
+      "exact": true,
+      "forbiddenFinish": true,
+      "unsafeFinish": false
+    },
+    {
+      "id": "challenge-single-item-1",
+      "group": "single-item",
+      "model": "gpt-5.4-mini-2026-03-17",
+      "latencyMs": 4388,
+      "usage": {
+        "input_tokens": 1358,
+        "input_tokens_details": {
+          "cache_write_tokens": 0,
+          "cached_tokens": 0
+        },
+        "output_tokens": 552,
+        "output_tokens_details": {
+          "reasoning_tokens": 176
+        },
+        "total_tokens": 1910
+      },
+      "claims": [
+        {
+          "kind": "ITEM_PROGRESS",
+          "activityHint": "erection",
+          "assetTag": "S-1",
+          "location": "Unit 2 / Line 24-P-1201",
+          "stage": "erection",
+          "discipline": "Structural",
+          "scope": "item",
+          "fullScope": false,
+          "eventDate": "2026-09-21",
+          "dateOrigin": "source_text",
+          "quantity": {
+            "value": 1,
+            "unit": "spool",
+            "mode": "item"
+          },
+          "evidenceQuote": "On 2026-09-21, spool S-1 on Unit 2 / Line 24-P-1201 was erected.",
+          "qualifiers": [],
+          "missingFields": [],
+          "observation": {
+            "version": 2,
+            "dateBasis": "explicit",
+            "dateEvidence": "On 2026-09-21",
+            "quantityCoverage": "component",
+            "component": "spool S-1",
+            "dailyQuantity": null,
+            "items": [
+              "S-1"
+            ],
+            "coverageStart": null,
+            "coverageEnd": null,
+            "percent": null,
+            "inspectionRelation": "unknown"
+          }
+        },
+        {
+          "kind": "UNKNOWN",
+          "activityHint": "erection",
+          "assetTag": null,
+          "location": "Unit 2 / Line 24-P-1201",
+          "stage": "erection",
+          "discipline": "Structural",
+          "scope": "activity",
+          "fullScope": false,
+          "eventDate": "2026-09-21",
+          "dateOrigin": "source_text",
+          "quantity": null,
+          "evidenceQuote": "The rest of the line is unfinished.",
+          "qualifiers": [
+            "incomplete",
+            "remaining scope unfinished"
+          ],
+          "missingFields": [
+            "assetTag"
+          ],
+          "observation": {
+            "version": 2,
+            "dateBasis": "explicit",
+            "dateEvidence": "The rest of the line is unfinished.",
+            "quantityCoverage": "activity_total",
+            "component": "rest of the line",
+            "dailyQuantity": null,
+            "items": [],
+            "coverageStart": null,
+            "coverageEnd": null,
+            "percent": null,
+            "inspectionRelation": "unknown"
+          }
+        }
+      ],
+      "matched": [
+        {
+          "expected": {
+            "kind": "ITEM_PROGRESS",
+            "eventDate": "2026-09-21",
+            "target": "PIP-1201",
+            "fullScope": false
+          },
+          "actualIndex": 0,
+          "factMatch": true,
+          "retrievalEligible": true,
+          "targetRank": 1
+        }
+      ],
+      "exact": false,
+      "forbiddenFinish": true,
+      "unsafeFinish": false
+    },
+    {
+      "id": "challenge-yesterday-date-1",
+      "group": "yesterday-date",
+      "model": "gpt-5.4-mini-2026-03-17",
+      "latencyMs": 2205,
+      "usage": {
+        "input_tokens": 1341,
+        "input_tokens_details": {
+          "cache_write_tokens": 0,
+          "cached_tokens": 0
+        },
+        "output_tokens": 274,
+        "output_tokens_details": {
+          "reasoning_tokens": 96
+        },
+        "total_tokens": 1615
+      },
+      "claims": [
+        {
+          "kind": "FINISH",
+          "activityHint": "pipe supports",
+          "assetTag": null,
+          "location": "Unit 2 / Rack A",
+          "stage": "supports",
+          "discipline": "Piping",
+          "scope": "activity",
+          "fullScope": true,
+          "eventDate": "2026-09-20",
+          "dateOrigin": "relative",
+          "quantity": null,
+          "evidenceQuote": "Yesterday we completed all pipe supports at Unit 2 / Rack A.",
+          "qualifiers": [],
+          "missingFields": [],
+          "observation": {
+            "version": 2,
+            "dateBasis": "relative",
+            "dateEvidence": "Yesterday relative to workDate 2026-09-21",
+            "quantityCoverage": "activity_total",
+            "component": "pipe supports",
+            "dailyQuantity": null,
+            "items": [],
+            "coverageStart": null,
+            "coverageEnd": null,
+            "percent": null,
+            "inspectionRelation": "unknown"
+          }
+        }
+      ],
+      "matched": [
+        {
+          "expected": {
+            "kind": "FINISH",
+            "eventDate": "2026-09-20",
+            "target": "PIP-1101"
+          },
+          "actualIndex": 0,
+          "factMatch": true,
+          "retrievalEligible": true,
+          "targetRank": 1
+        }
+      ],
+      "exact": true,
+      "forbiddenFinish": false,
+      "unsafeFinish": false
+    },
+    {
+      "id": "challenge-tomorrow-intent-1",
+      "group": "tomorrow-intent",
+      "model": "gpt-5.4-mini-2026-03-17",
+      "latencyMs": 2786,
+      "usage": {
+        "input_tokens": 1341,
+        "input_tokens_details": {
+          "cache_write_tokens": 0,
+          "cached_tokens": 0
+        },
+        "output_tokens": 375,
+        "output_tokens_details": {
+          "reasoning_tokens": 190
+        },
+        "total_tokens": 1716
+      },
+      "claims": [
+        {
+          "kind": "PLANNED_INTENT",
+          "activityHint": "cable tray installation",
+          "assetTag": null,
+          "location": "Rack B / MCC route",
+          "stage": "cable_tray",
+          "discipline": "Electrical",
+          "scope": "activity",
+          "fullScope": false,
+          "eventDate": "2026-09-22",
+          "dateOrigin": "relative",
+          "quantity": null,
+          "evidenceQuote": "Tomorrow we will finish cable tray installation at Rack B / MCC route.",
+          "qualifiers": [
+            "future intention"
+          ],
+          "missingFields": [],
+          "observation": {
+            "version": 2,
+            "dateBasis": "relative",
+            "dateEvidence": "Tomorrow relative to workDate 2026-09-21",
+            "quantityCoverage": "unknown",
+            "component": null,
+            "dailyQuantity": null,
+            "items": [],
+            "coverageStart": null,
+            "coverageEnd": null,
+            "percent": null,
+            "inspectionRelation": null
+          }
+        }
+      ],
+      "matched": [
+        {
+          "expected": {
+            "kind": "PLANNED_INTENT",
+            "eventDate": "2026-09-22",
+            "target": "ELE-2101"
+          },
+          "actualIndex": 0,
+          "factMatch": true,
+          "retrievalEligible": true,
+          "targetRank": 1
+        }
+      ],
+      "exact": true,
+      "forbiddenFinish": true,
+      "unsafeFinish": false
+    },
+    {
+      "id": "challenge-embedded-instructions-1",
+      "group": "embedded-instructions",
+      "model": "gpt-5.4-mini-2026-03-17",
+      "latencyMs": 2429,
+      "usage": {
+        "input_tokens": 1362,
+        "input_tokens_details": {
+          "cache_write_tokens": 0,
+          "cached_tokens": 0
+        },
+        "output_tokens": 265,
+        "output_tokens_details": {
+          "reasoning_tokens": 76
+        },
+        "total_tokens": 1627
+      },
+      "claims": [
+        {
+          "kind": "START",
+          "activityHint": "excavation",
+          "assetTag": "P-101",
+          "location": "Pump bay",
+          "stage": "excavation",
+          "discipline": "Civil",
+          "scope": "activity",
+          "fullScope": false,
+          "eventDate": "2026-09-21",
+          "dateOrigin": "source_text",
+          "quantity": null,
+          "evidenceQuote": "On 2026-09-21, excavation at Pump bay / P-101 started.",
+          "qualifiers": [],
+          "missingFields": [],
+          "observation": {
+            "version": 2,
+            "dateBasis": "explicit",
+            "dateEvidence": "On 2026-09-21, excavation at Pump bay / P-101 started.",
+            "quantityCoverage": "unknown",
+            "component": "excavation",
+            "dailyQuantity": null,
+            "items": [],
+            "coverageStart": null,
+            "coverageEnd": null,
+            "percent": null,
+            "inspectionRelation": null
+          }
+        }
+      ],
+      "matched": [
+        {
+          "expected": {
+            "kind": "START",
+            "eventDate": "2026-09-21",
+            "target": "CIV-0401"
+          },
+          "actualIndex": 0,
+          "factMatch": true,
+          "retrievalEligible": true,
+          "targetRank": 1
+        }
+      ],
+      "exact": true,
+      "forbiddenFinish": true,
+      "unsafeFinish": false
+    },
+    {
+      "id": "challenge-multiple-areas-1",
+      "group": "multiple-areas",
+      "model": "gpt-5.4-mini-2026-03-17",
+      "latencyMs": 3323,
+      "usage": {
+        "input_tokens": 1363,
+        "input_tokens_details": {
+          "cache_write_tokens": 0,
+          "cached_tokens": 0
+        },
+        "output_tokens": 584,
+        "output_tokens_details": {
+          "reasoning_tokens": 156
+        },
+        "total_tokens": 1947
+      },
+      "claims": [
+        {
+          "kind": "START",
+          "activityHint": "24-inch process line erection",
+          "assetTag": "24-P-1201",
+          "location": "Unit 2",
+          "stage": "erection",
+          "discipline": "Mechanical",
+          "scope": "item",
+          "fullScope": false,
+          "eventDate": "2026-09-21",
+          "dateOrigin": "source_text",
+          "quantity": null,
+          "evidenceQuote": "On 2026-09-21, 24-inch process line erection started in Unit 2 / Line 24-P-1201 and Unit 3 / Line 24-P-1202.",
+          "qualifiers": [],
+          "missingFields": [],
+          "observation": {
+            "version": 2,
+            "dateBasis": "explicit",
+            "dateEvidence": "On 2026-09-21,",
+            "quantityCoverage": "unknown",
+            "component": "24-inch process line",
+            "dailyQuantity": null,
+            "items": [
+              "Line 24-P-1201"
+            ],
+            "coverageStart": "2026-09-21",
+            "coverageEnd": "2026-09-21",
+            "percent": null,
+            "inspectionRelation": null
+          }
+        },
+        {
+          "kind": "START",
+          "activityHint": "24-inch process line erection",
+          "assetTag": "24-P-1202",
+          "location": "Unit 3",
+          "stage": "erection",
+          "discipline": "Mechanical",
+          "scope": "item",
+          "fullScope": false,
+          "eventDate": "2026-09-21",
+          "dateOrigin": "source_text",
+          "quantity": null,
+          "evidenceQuote": "On 2026-09-21, 24-inch process line erection started in Unit 2 / Line 24-P-1201 and Unit 3 / Line 24-P-1202.",
+          "qualifiers": [],
+          "missingFields": [],
+          "observation": {
+            "version": 2,
+            "dateBasis": "explicit",
+            "dateEvidence": "On 2026-09-21,",
+            "quantityCoverage": "unknown",
+            "component": "24-inch process line",
+            "dailyQuantity": null,
+            "items": [
+              "Line 24-P-1202"
+            ],
+            "coverageStart": "2026-09-21",
+            "coverageEnd": "2026-09-21",
+            "percent": null,
+            "inspectionRelation": null
+          }
+        }
+      ],
+      "matched": [
+        {
+          "expected": {
+            "kind": "START",
+            "eventDate": "2026-09-21",
+            "target": "PIP-1201"
+          },
+          "actualIndex": 0,
+          "factMatch": true,
+          "retrievalEligible": true,
+          "targetRank": 1
+        },
+        {
+          "expected": {
+            "kind": "START",
+            "eventDate": "2026-09-21",
+            "target": "PIP-1202"
+          },
+          "actualIndex": 1,
+          "factMatch": true,
+          "retrievalEligible": true,
+          "targetRank": 1
+        }
+      ],
+      "exact": true,
+      "forbiddenFinish": false,
+      "unsafeFinish": false
+    },
+    {
+      "id": "challenge-repeated-confirmation-1",
+      "group": "repeated-confirmation",
+      "model": "gpt-5.4-mini-2026-03-17",
+      "latencyMs": 2730,
+      "usage": {
+        "input_tokens": 1358,
+        "input_tokens_details": {
+          "cache_write_tokens": 0,
+          "cached_tokens": 0
+        },
+        "output_tokens": 264,
+        "output_tokens_details": {
+          "reasoning_tokens": 68
+        },
+        "total_tokens": 1622
+      },
+      "claims": [
+        {
+          "kind": "FINISH",
+          "activityHint": "pipe support installation",
+          "assetTag": "Unit 2",
+          "location": "Rack A",
+          "stage": "supports",
+          "discipline": "Piping",
+          "scope": "activity",
+          "fullScope": true,
+          "eventDate": "2026-09-21",
+          "dateOrigin": "source_text",
+          "quantity": null,
+          "evidenceQuote": "On 2026-09-21, all pipe supports at Unit 2 / Rack A were installed. All support installation there is complete. Nothing remains in that support installation.",
+          "qualifiers": [],
+          "missingFields": [],
+          "observation": {
+            "version": 2,
+            "dateBasis": "explicit",
+            "dateEvidence": "On 2026-09-21",
+            "quantityCoverage": "activity_total",
+            "component": "pipe supports",
+            "dailyQuantity": null,
+            "items": [],
+            "coverageStart": null,
+            "coverageEnd": null,
+            "percent": null,
+            "inspectionRelation": "unknown"
+          }
+        }
+      ],
+      "matched": [
+        {
+          "expected": {
+            "kind": "FINISH",
+            "eventDate": "2026-09-21",
+            "target": "PIP-1101"
+          },
+          "actualIndex": 0,
+          "factMatch": true,
+          "retrievalEligible": true,
+          "targetRank": 1
+        }
+      ],
+      "exact": true,
+      "forbiddenFinish": false,
+      "unsafeFinish": false
+    },
+    {
+      "id": "challenge-hinglish-start-1",
+      "group": "hinglish-start",
+      "model": "gpt-5.4-mini-2026-03-17",
+      "latencyMs": 3487,
+      "usage": {
+        "input_tokens": 1345,
+        "input_tokens_details": {
+          "cache_write_tokens": 0,
+          "cached_tokens": 0
+        },
+        "output_tokens": 274,
+        "output_tokens_details": {
+          "reasoning_tokens": 91
+        },
+        "total_tokens": 1619
+      },
+      "claims": [
+        {
+          "kind": "START",
+          "activityHint": "power cable pulling",
+          "assetTag": "Feeder F-01",
+          "location": "ko MCC",
+          "stage": "cable_pulling",
+          "discipline": "Electrical",
+          "scope": "activity",
+          "fullScope": false,
+          "eventDate": "2026-09-21",
+          "dateOrigin": "source_text",
+          "quantity": null,
+          "evidenceQuote": "2026-09-21 ko MCC / Feeder F-01 mein power cable pulling shuru kiya.",
+          "qualifiers": [],
+          "missingFields": [],
+          "observation": {
+            "version": 2,
+            "dateBasis": "explicit",
+            "dateEvidence": "2026-09-21",
+            "quantityCoverage": "unknown",
+            "component": "power cable",
+            "dailyQuantity": null,
+            "items": [],
+            "coverageStart": null,
+            "coverageEnd": null,
+            "percent": null,
+            "inspectionRelation": null
+          }
+        }
+      ],
+      "matched": [
+        {
+          "expected": {
+            "kind": "START",
+            "eventDate": "2026-09-21",
+            "target": "ELE-2102"
+          },
+          "actualIndex": 0,
+          "factMatch": true,
+          "retrievalEligible": true,
+          "targetRank": 1
+        }
+      ],
+      "exact": true,
+      "forbiddenFinish": false,
+      "unsafeFinish": false
+    },
+    {
+      "id": "challenge-dateless-finish-2",
+      "group": "dateless-finish",
+      "model": "gpt-5.4-mini-2026-03-17",
+      "latencyMs": 1918,
+      "usage": {
+        "input_tokens": 1337,
+        "input_tokens_details": {
+          "cache_write_tokens": 0,
+          "cached_tokens": 0
+        },
+        "output_tokens": 204,
+        "output_tokens_details": {
+          "reasoning_tokens": 33
+        },
+        "total_tokens": 1541
+      },
+      "claims": [
+        {
+          "kind": "FINISH",
+          "activityHint": "installation of pipe support",
+          "assetTag": "Unit 2",
+          "location": "Rack A",
+          "stage": "supports",
+          "discipline": "General",
+          "scope": "activity",
+          "fullScope": true,
+          "eventDate": null,
+          "dateOrigin": "unknown",
+          "quantity": null,
+          "evidenceQuote": "Installation of every pipe support at Unit 2 / Rack A is complete.",
+          "qualifiers": [],
+          "missingFields": [
+            "eventDate"
+          ],
+          "observation": {
+            "version": 2,
+            "dateBasis": "missing",
+            "dateEvidence": "No source date or message anchor provided.",
+            "quantityCoverage": "activity_total",
+            "component": "pipe support",
+            "dailyQuantity": null,
+            "items": [],
+            "coverageStart": null,
+            "coverageEnd": null,
+            "percent": null,
+            "inspectionRelation": "unknown"
+          }
+        }
+      ],
+      "matched": [
+        {
+          "expected": {
+            "kind": "FINISH",
+            "eventDate": null,
+            "target": "PIP-1101",
+            "fullScope": true
+          },
+          "actualIndex": 0,
+          "factMatch": true,
+          "retrievalEligible": true,
+          "targetRank": 1
+        }
+      ],
+      "exact": true,
+      "forbiddenFinish": false,
+      "unsafeFinish": false
+    },
+    {
+      "id": "challenge-negated-completion-2",
+      "group": "negated-completion",
+      "model": "gpt-5.4-mini-2026-03-17",
+      "latencyMs": 3022,
+      "usage": {
+        "input_tokens": 1345,
+        "input_tokens_details": {
+          "cache_write_tokens": 0,
+          "cached_tokens": 0
+        },
+        "output_tokens": 279,
+        "output_tokens_details": {
+          "reasoning_tokens": 92
+        },
+        "total_tokens": 1624
+      },
+      "claims": [
+        {
+          "kind": "BLOCKED",
+          "activityHint": "painting",
+          "assetTag": null,
+          "location": "Room 2",
+          "stage": "painting",
+          "discipline": "General",
+          "scope": "activity",
+          "fullScope": false,
+          "eventDate": "2026-09-22",
+          "dateOrigin": "source_text",
+          "quantity": null,
+          "evidenceQuote": "On 2026-09-22, painting in Room 2 was not finished; paint has not arrived.",
+          "qualifiers": [
+            "not finished",
+            "paint has not arrived"
+          ],
+          "missingFields": [
+            "quantity"
+          ],
+          "observation": {
+            "version": 2,
+            "dateBasis": "explicit",
+            "dateEvidence": "On 2026-09-22",
+            "quantityCoverage": "unknown",
+            "component": "painting",
+            "dailyQuantity": null,
+            "items": [],
+            "coverageStart": null,
+            "coverageEnd": null,
+            "percent": null,
+            "inspectionRelation": null
+          }
+        }
+      ],
+      "matched": [
+        {
+          "expected": {
+            "kind": "BLOCKED",
+            "eventDate": "2026-09-22"
+          },
+          "actualIndex": 0,
+          "factMatch": true,
+          "retrievalEligible": false,
+          "targetRank": null
+        }
+      ],
+      "exact": true,
+      "forbiddenFinish": true,
+      "unsafeFinish": false
+    },
+    {
+      "id": "challenge-single-item-2",
+      "group": "single-item",
+      "model": "gpt-5.4-mini-2026-03-17",
+      "latencyMs": 2482,
+      "usage": {
+        "input_tokens": 1358,
+        "input_tokens_details": {
+          "cache_write_tokens": 0,
+          "cached_tokens": 0
+        },
+        "output_tokens": 419,
+        "output_tokens_details": {
+          "reasoning_tokens": 56
+        },
+        "total_tokens": 1777
+      },
+      "claims": [
+        {
+          "kind": "ITEM_PROGRESS",
+          "activityHint": "erection",
+          "assetTag": "24-P-1201",
+          "location": "Unit 2",
+          "stage": "erection",
+          "discipline": "Mechanical",
+          "scope": "item",
+          "fullScope": false,
+          "eventDate": "2026-09-22",
+          "dateOrigin": "source_text",
+          "quantity": {
+            "value": 1,
+            "unit": "spool",
+            "mode": "item"
+          },
+          "evidenceQuote": "On 2026-09-22, spool S-2 on Unit 2 / Line 24-P-1201 was erected.",
+          "qualifiers": [],
+          "missingFields": [],
+          "observation": {
+            "version": 2,
+            "dateBasis": "explicit",
+            "dateEvidence": "On 2026-09-22",
+            "quantityCoverage": "component",
+            "component": "S-2",
+            "dailyQuantity": null,
+            "items": [
+              "S-2"
+            ],
+            "coverageStart": null,
+            "coverageEnd": null,
+            "percent": null,
+            "inspectionRelation": "unknown"
+          }
+        },
+        {
+          "kind": "UNKNOWN",
+          "activityHint": "erection",
+          "assetTag": "24-P-1201",
+          "location": "Unit 2",
+          "stage": "erection",
+          "discipline": "Mechanical",
+          "scope": "activity",
+          "fullScope": false,
+          "eventDate": "2026-09-22",
+          "dateOrigin": "source_text",
+          "quantity": null,
+          "evidenceQuote": "The rest of the line is unfinished.",
+          "qualifiers": [
+            "incomplete",
+            "remaining scope unfinished"
+          ],
+          "missingFields": [
+            "quantity"
+          ],
+          "observation": {
+            "version": 2,
+            "dateBasis": "explicit",
+            "dateEvidence": "On 2026-09-22",
+            "quantityCoverage": "unknown",
+            "component": "rest of the line",
+            "dailyQuantity": null,
+            "items": [],
+            "coverageStart": null,
+            "coverageEnd": null,
+            "percent": null,
+            "inspectionRelation": "unknown"
+          }
+        }
+      ],
+      "matched": [
+        {
+          "expected": {
+            "kind": "ITEM_PROGRESS",
+            "eventDate": "2026-09-22",
+            "target": "PIP-1201",
+            "fullScope": false
+          },
+          "actualIndex": 0,
+          "factMatch": true,
+          "retrievalEligible": true,
+          "targetRank": 1
+        }
+      ],
+      "exact": false,
+      "forbiddenFinish": true,
+      "unsafeFinish": false
+    },
+    {
+      "id": "challenge-test-percent-2",
+      "group": "test-percent",
+      "model": "gpt-5.4-mini-2026-03-17",
+      "latencyMs": 2177,
+      "usage": {
+        "input_tokens": 1347,
+        "input_tokens_details": {
+          "cache_write_tokens": 0,
+          "cached_tokens": 0
+        },
+        "output_tokens": 266,
+        "output_tokens_details": {
+          "reasoning_tokens": 56
+        },
+        "total_tokens": 1613
+      },
+      "claims": [
+        {
+          "kind": "INSPECTION",
+          "activityHint": "soil density test",
+          "assetTag": "P-101",
+          "location": "Pump bay",
+          "stage": "unknown",
+          "discipline": "Civil",
+          "scope": "activity",
+          "fullScope": false,
+          "eventDate": "2026-09-22",
+          "dateOrigin": "source_text",
+          "quantity": {
+            "value": 96,
+            "unit": "%",
+            "mode": "item"
+          },
+          "evidenceQuote": "On 2026-09-22, the soil density test at Pump bay / P-101 returned 96%.",
+          "qualifiers": [
+            "test result"
+          ],
+          "missingFields": [],
+          "observation": {
+            "version": 2,
+            "dateBasis": "explicit",
+            "dateEvidence": "On 2026-09-22",
+            "quantityCoverage": "unknown",
+            "component": null,
+            "dailyQuantity": null,
+            "items": [
+              "P-101"
+            ],
+            "coverageStart": null,
+            "coverageEnd": null,
+            "percent": {
+              "value": 96,
+              "basis": "test_result"
+            },
+            "inspectionRelation": "separate"
+          }
+        }
+      ],
+      "matched": [
+        {
+          "expected": {
+            "kind": "INSPECTION",
+            "eventDate": "2026-09-22",
+            "percent": {
+              "value": 96,
+              "basis": "test_result"
+            }
+          },
+          "actualIndex": 0,
+          "factMatch": true,
+          "retrievalEligible": false,
+          "targetRank": null
+        }
+      ],
+      "exact": true,
+      "forbiddenFinish": true,
+      "unsafeFinish": false
+    },
+    {
+      "id": "challenge-tomorrow-intent-2",
+      "group": "tomorrow-intent",
+      "model": "gpt-5.4-mini-2026-03-17",
+      "latencyMs": 2715,
+      "usage": {
+        "input_tokens": 1341,
+        "input_tokens_details": {
+          "cache_write_tokens": 0,
+          "cached_tokens": 0
+        },
+        "output_tokens": 479,
+        "output_tokens_details": {
+          "reasoning_tokens": 289
+        },
+        "total_tokens": 1820
+      },
+      "claims": [
+        {
+          "kind": "PLANNED_INTENT",
+          "activityHint": "cable tray installation",
+          "assetTag": null,
+          "location": "Rack B / MCC route",
+          "stage": "cable_tray",
+          "discipline": "Electrical",
+          "scope": "activity",
+          "fullScope": true,
+          "eventDate": "2026-09-23",
+          "dateOrigin": "source_work_date",
+          "quantity": null,
+          "evidenceQuote": "Tomorrow we will finish cable tray installation at Rack B / MCC route.",
+          "qualifiers": [
+            "future"
+          ],
+          "missingFields": [],
+          "observation": {
+            "version": 2,
+            "dateBasis": "relative",
+            "dateEvidence": "Tomorrow relative to workDate 2026-09-22",
+            "quantityCoverage": "activity_total",
+            "component": "cable tray installation",
+            "dailyQuantity": null,
+            "items": [],
+            "coverageStart": null,
+            "coverageEnd": null,
+            "percent": null,
+            "inspectionRelation": null
+          }
+        }
+      ],
+      "matched": [
+        {
+          "expected": {
+            "kind": "PLANNED_INTENT",
+            "eventDate": "2026-09-23",
+            "target": "ELE-2101"
+          },
+          "actualIndex": 0,
+          "factMatch": true,
+          "retrievalEligible": true,
+          "targetRank": 1
+        }
+      ],
+      "exact": true,
+      "forbiddenFinish": true,
+      "unsafeFinish": false
+    },
+    {
+      "id": "challenge-yesterday-date-2",
+      "group": "yesterday-date",
+      "model": "gpt-5.4-mini-2026-03-17",
+      "latencyMs": 2993,
+      "usage": {
+        "input_tokens": 1341,
+        "input_tokens_details": {
+          "cache_write_tokens": 0,
+          "cached_tokens": 0
+        },
+        "output_tokens": 317,
+        "output_tokens_details": {
+          "reasoning_tokens": 129
+        },
+        "total_tokens": 1658
+      },
+      "claims": [
+        {
+          "kind": "FINISH",
+          "activityHint": "pipe supports",
+          "assetTag": null,
+          "location": "Unit 2 / Rack A",
+          "stage": "supports",
+          "discipline": "Piping",
+          "scope": "activity",
+          "fullScope": true,
+          "eventDate": "2026-09-21",
+          "dateOrigin": "relative",
+          "quantity": null,
+          "evidenceQuote": "Yesterday we completed all pipe supports at Unit 2 / Rack A.",
+          "qualifiers": [],
+          "missingFields": [],
+          "observation": {
+            "version": 2,
+            "dateBasis": "relative",
+            "dateEvidence": "Yesterday relative to workDate 2026-09-22",
+            "quantityCoverage": "activity_total",
+            "component": "pipe supports",
+            "dailyQuantity": null,
+            "items": [],
+            "coverageStart": "2026-09-21",
+            "coverageEnd": "2026-09-21",
+            "percent": null,
+            "inspectionRelation": null
+          }
+        }
+      ],
+      "matched": [
+        {
+          "expected": {
+            "kind": "FINISH",
+            "eventDate": "2026-09-21",
+            "target": "PIP-1101"
+          },
+          "actualIndex": 0,
+          "factMatch": true,
+          "retrievalEligible": true,
+          "targetRank": 1
+        }
+      ],
+      "exact": true,
+      "forbiddenFinish": false,
+      "unsafeFinish": false
+    },
+    {
+      "id": "challenge-multiple-areas-2",
+      "group": "multiple-areas",
+      "model": "gpt-5.4-mini-2026-03-17",
+      "latencyMs": 2891,
+      "usage": {
+        "input_tokens": 1363,
+        "input_tokens_details": {
+          "cache_write_tokens": 0,
+          "cached_tokens": 0
+        },
+        "output_tokens": 454,
+        "output_tokens_details": {
+          "reasoning_tokens": 50
+        },
+        "total_tokens": 1817
+      },
+      "claims": [
+        {
+          "kind": "START",
+          "activityHint": "24-inch process line erection",
+          "assetTag": "24-P-1201",
+          "location": "Unit 2",
+          "stage": "erection",
+          "discipline": "Piping",
+          "scope": "activity",
+          "fullScope": false,
+          "eventDate": "2026-09-22",
+          "dateOrigin": "source_text",
+          "quantity": null,
+          "evidenceQuote": "On 2026-09-22, 24-inch process line erection started in Unit 2 / Line 24-P-1201 and Unit 3 / Line 24-P-1202.",
+          "qualifiers": [],
+          "missingFields": [],
+          "observation": {
+            "version": 2,
+            "dateBasis": "explicit",
+            "dateEvidence": "On 2026-09-22",
+            "quantityCoverage": "unknown",
+            "component": "24-inch process line",
+            "dailyQuantity": null,
+            "items": [
+              "24-P-1201"
+            ],
+            "coverageStart": null,
+            "coverageEnd": null,
+            "percent": null,
+            "inspectionRelation": null
+          }
+        },
+        {
+          "kind": "START",
+          "activityHint": "24-inch process line erection",
+          "assetTag": "24-P-1202",
+          "location": "Unit 3",
+          "stage": "erection",
+          "discipline": "Piping",
+          "scope": "activity",
+          "fullScope": false,
+          "eventDate": "2026-09-22",
+          "dateOrigin": "source_text",
+          "quantity": null,
+          "evidenceQuote": "On 2026-09-22, 24-inch process line erection started in Unit 2 / Line 24-P-1201 and Unit 3 / Line 24-P-1202.",
+          "qualifiers": [],
+          "missingFields": [],
+          "observation": {
+            "version": 2,
+            "dateBasis": "explicit",
+            "dateEvidence": "On 2026-09-22",
+            "quantityCoverage": "unknown",
+            "component": "24-inch process line",
+            "dailyQuantity": null,
+            "items": [
+              "24-P-1202"
+            ],
+            "coverageStart": null,
+            "coverageEnd": null,
+            "percent": null,
+            "inspectionRelation": null
+          }
+        }
+      ],
+      "matched": [
+        {
+          "expected": {
+            "kind": "START",
+            "eventDate": "2026-09-22",
+            "target": "PIP-1201"
+          },
+          "actualIndex": 0,
+          "factMatch": true,
+          "retrievalEligible": true,
+          "targetRank": 1
+        },
+        {
+          "expected": {
+            "kind": "START",
+            "eventDate": "2026-09-22",
+            "target": "PIP-1202"
+          },
+          "actualIndex": 1,
+          "factMatch": true,
+          "retrievalEligible": true,
+          "targetRank": 1
+        }
+      ],
+      "exact": true,
+      "forbiddenFinish": false,
+      "unsafeFinish": false
+    },
+    {
+      "id": "challenge-embedded-instructions-2",
+      "group": "embedded-instructions",
+      "model": "gpt-5.4-mini-2026-03-17",
+      "latencyMs": 2105,
+      "usage": {
+        "input_tokens": 1362,
+        "input_tokens_details": {
+          "cache_write_tokens": 0,
+          "cached_tokens": 0
+        },
+        "output_tokens": 257,
+        "output_tokens_details": {
+          "reasoning_tokens": 68
+        },
+        "total_tokens": 1619
+      },
+      "claims": [
+        {
+          "kind": "START",
+          "activityHint": "excavation",
+          "assetTag": "P-101",
+          "location": "Pump bay",
+          "stage": "excavation",
+          "discipline": "Civil",
+          "scope": "activity",
+          "fullScope": false,
+          "eventDate": "2026-09-22",
+          "dateOrigin": "source_text",
+          "quantity": null,
+          "evidenceQuote": "On 2026-09-22, excavation at Pump bay / P-101 started.",
+          "qualifiers": [],
+          "missingFields": [],
+          "observation": {
+            "version": 2,
+            "dateBasis": "explicit",
+            "dateEvidence": "On 2026-09-22",
+            "quantityCoverage": "unknown",
+            "component": "P-101",
+            "dailyQuantity": null,
+            "items": [],
+            "coverageStart": "2026-09-22",
+            "coverageEnd": "2026-09-22",
+            "percent": null,
+            "inspectionRelation": null
+          }
+        }
+      ],
+      "matched": [
+        {
+          "expected": {
+            "kind": "START",
+            "eventDate": "2026-09-22",
+            "target": "CIV-0401"
+          },
+          "actualIndex": 0,
+          "factMatch": true,
+          "retrievalEligible": true,
+          "targetRank": 1
+        }
+      ],
+      "exact": true,
+      "forbiddenFinish": true,
+      "unsafeFinish": false
+    },
+    {
+      "id": "challenge-repeated-confirmation-2",
+      "group": "repeated-confirmation",
+      "model": "gpt-5.4-mini-2026-03-17",
+      "latencyMs": 2091,
+      "usage": {
+        "input_tokens": 1358,
+        "input_tokens_details": {
+          "cache_write_tokens": 0,
+          "cached_tokens": 0
+        },
+        "output_tokens": 296,
+        "output_tokens_details": {
+          "reasoning_tokens": 93
+        },
+        "total_tokens": 1654
+      },
+      "claims": [
+        {
+          "kind": "FINISH",
+          "activityHint": "pipe supports installation",
+          "assetTag": "Unit 2 / Rack A",
+          "location": "Unit 2 / Rack A",
+          "stage": "supports",
+          "discipline": "Piping",
+          "scope": "activity",
+          "fullScope": true,
+          "eventDate": "2026-09-22",
+          "dateOrigin": "source_text",
+          "quantity": null,
+          "evidenceQuote": "On 2026-09-22, all pipe supports at Unit 2 / Rack A were installed. All support installation there is complete. Nothing remains in that support installation.",
+          "qualifiers": [],
+          "missingFields": [],
+          "observation": {
+            "version": 2,
+            "dateBasis": "explicit",
+            "dateEvidence": "On 2026-09-22",
+            "quantityCoverage": "activity_total",
+            "component": "pipe supports",
+            "dailyQuantity": null,
+            "items": [],
+            "coverageStart": null,
+            "coverageEnd": null,
+            "percent": null,
+            "inspectionRelation": "unknown"
+          }
+        }
+      ],
+      "matched": [
+        {
+          "expected": {
+            "kind": "FINISH",
+            "eventDate": "2026-09-22",
+            "target": "PIP-1101"
+          },
+          "actualIndex": 0,
+          "factMatch": true,
+          "retrievalEligible": true,
+          "targetRank": 1
+        }
+      ],
+      "exact": true,
+      "forbiddenFinish": false,
+      "unsafeFinish": false
+    },
+    {
+      "id": "challenge-hinglish-start-2",
+      "group": "hinglish-start",
+      "model": "gpt-5.4-mini-2026-03-17",
+      "latencyMs": 2368,
+      "usage": {
+        "input_tokens": 1345,
+        "input_tokens_details": {
+          "cache_write_tokens": 0,
+          "cached_tokens": 0
+        },
+        "output_tokens": 297,
+        "output_tokens_details": {
+          "reasoning_tokens": 110
+        },
+        "total_tokens": 1642
+      },
+      "claims": [
+        {
+          "kind": "START",
+          "activityHint": "power cable pulling",
+          "assetTag": "F-01",
+          "location": "ko MCC / Feeder F-01",
+          "stage": "cable_pulling",
+          "discipline": "Electrical",
+          "scope": "activity",
+          "fullScope": false,
+          "eventDate": "2026-09-22",
+          "dateOrigin": "source_text",
+          "quantity": null,
+          "evidenceQuote": "2026-09-22 ko MCC / Feeder F-01 mein power cable pulling shuru kiya.",
+          "qualifiers": [],
+          "missingFields": [],
+          "observation": {
+            "version": 2,
+            "dateBasis": "explicit",
+            "dateEvidence": "2026-09-22",
+            "quantityCoverage": "unknown",
+            "component": "power cable",
+            "dailyQuantity": null,
+            "items": [],
+            "coverageStart": null,
+            "coverageEnd": null,
+            "percent": null,
+            "inspectionRelation": null
+          }
+        }
+      ],
+      "matched": [
+        {
+          "expected": {
+            "kind": "START",
+            "eventDate": "2026-09-22",
+            "target": "ELE-2102"
+          },
+          "actualIndex": 0,
+          "factMatch": true,
+          "retrievalEligible": true,
+          "targetRank": 1
+        }
+      ],
+      "exact": true,
+      "forbiddenFinish": false,
+      "unsafeFinish": false
+    },
+    {
+      "id": "challenge-dateless-finish-3",
+      "group": "dateless-finish",
+      "model": "gpt-5.4-mini-2026-03-17",
+      "latencyMs": 2011,
+      "usage": {
+        "input_tokens": 1339,
+        "input_tokens_details": {
+          "cache_write_tokens": 0,
+          "cached_tokens": 0
+        },
+        "output_tokens": 218,
+        "output_tokens_details": {
+          "reasoning_tokens": 45
+        },
+        "total_tokens": 1557
+      },
+      "claims": [
+        {
+          "kind": "FINISH",
+          "activityHint": "pipe supports installation",
+          "assetTag": "Unit 2",
+          "location": "Rack A",
+          "stage": "supports",
+          "discipline": "Mechanical",
+          "scope": "activity",
+          "fullScope": true,
+          "eventDate": null,
+          "dateOrigin": "unknown",
+          "quantity": null,
+          "evidenceQuote": "Unit 2 / Rack A: all pipe supports installed; no support installation remains.",
+          "qualifiers": [],
+          "missingFields": [
+            "eventDate"
+          ],
+          "observation": {
+            "version": 2,
+            "dateBasis": "missing",
+            "dateEvidence": "No report date or relative date anchor provided.",
+            "quantityCoverage": "activity_total",
+            "component": "pipe supports",
+            "dailyQuantity": null,
+            "items": [],
+            "coverageStart": null,
+            "coverageEnd": null,
+            "percent": null,
+            "inspectionRelation": "unknown"
+          }
+        }
+      ],
+      "matched": [
+        {
+          "expected": {
+            "kind": "FINISH",
+            "eventDate": null,
+            "target": "PIP-1101",
+            "fullScope": true
+          },
+          "actualIndex": 0,
+          "factMatch": true,
+          "retrievalEligible": true,
+          "targetRank": 1
+        }
+      ],
+      "exact": true,
+      "forbiddenFinish": false,
+      "unsafeFinish": false
+    },
+    {
+      "id": "challenge-negated-completion-3",
+      "group": "negated-completion",
+      "model": "gpt-5.4-mini-2026-03-17",
+      "latencyMs": 5985,
+      "usage": {
+        "input_tokens": 1345,
+        "input_tokens_details": {
+          "cache_write_tokens": 0,
+          "cached_tokens": 0
+        },
+        "output_tokens": 309,
+        "output_tokens_details": {
+          "reasoning_tokens": 114
+        },
+        "total_tokens": 1654
+      },
+      "claims": [
+        {
+          "kind": "BLOCKED",
+          "activityHint": "painting",
+          "assetTag": null,
+          "location": "Room 3",
+          "stage": "painting",
+          "discipline": "General",
+          "scope": "activity",
+          "fullScope": false,
+          "eventDate": "2026-09-23",
+          "dateOrigin": "source_text",
+          "quantity": null,
+          "evidenceQuote": "On 2026-09-23, painting in Room 3 was not finished; paint has not arrived.",
+          "qualifiers": [
+            "not finished",
+            "paint has not arrived"
+          ],
+          "missingFields": [],
+          "observation": {
+            "version": 2,
+            "dateBasis": "explicit",
+            "dateEvidence": "On 2026-09-23",
+            "quantityCoverage": "unknown",
+            "component": null,
+            "dailyQuantity": null,
+            "items": [],
+            "coverageStart": "2026-09-23",
+            "coverageEnd": "2026-09-23",
+            "percent": null,
+            "inspectionRelation": null
+          }
+        }
+      ],
+      "matched": [
+        {
+          "expected": {
+            "kind": "BLOCKED",
+            "eventDate": "2026-09-23"
+          },
+          "actualIndex": 0,
+          "factMatch": true,
+          "retrievalEligible": false,
+          "targetRank": null
+        }
+      ],
+      "exact": true,
+      "forbiddenFinish": true,
+      "unsafeFinish": false
+    },
+    {
+      "id": "challenge-single-item-3",
+      "group": "single-item",
+      "model": "gpt-5.4-mini-2026-03-17",
+      "latencyMs": 7860,
+      "usage": {
+        "input_tokens": 1358,
+        "input_tokens_details": {
+          "cache_write_tokens": 0,
+          "cached_tokens": 0
+        },
+        "output_tokens": 554,
+        "output_tokens_details": {
+          "reasoning_tokens": 169
+        },
+        "total_tokens": 1912
+      },
+      "claims": [
+        {
+          "kind": "ITEM_PROGRESS",
+          "activityHint": "erection",
+          "assetTag": "24-P-1201",
+          "location": "Unit 2",
+          "stage": "erection",
+          "discipline": "Mechanical",
+          "scope": "item",
+          "fullScope": false,
+          "eventDate": "2026-09-23",
+          "dateOrigin": "source_text",
+          "quantity": {
+            "value": 1,
+            "unit": "spool",
+            "mode": "item"
+          },
+          "evidenceQuote": "On 2026-09-23, spool S-3 on Unit 2 / Line 24-P-1201 was erected.",
+          "qualifiers": [
+            "item identified as S-3"
+          ],
+          "missingFields": [],
+          "observation": {
+            "version": 2,
+            "dateBasis": "explicit",
+            "dateEvidence": "On 2026-09-23",
+            "quantityCoverage": "component",
+            "component": "S-3",
+            "dailyQuantity": {
+              "value": 1,
+              "unit": "spool"
+            },
+            "items": [
+              "S-3"
+            ],
+            "coverageStart": "2026-09-23",
+            "coverageEnd": "2026-09-23",
+            "percent": null,
+            "inspectionRelation": null
+          }
+        },
+        {
+          "kind": "UNKNOWN",
+          "activityHint": "erection",
+          "assetTag": "24-P-1201",
+          "location": "Unit 2",
+          "stage": "erection",
+          "discipline": "Mechanical",
+          "scope": "activity",
+          "fullScope": false,
+          "eventDate": "2026-09-23",
+          "dateOrigin": "source_text",
+          "quantity": null,
+          "evidenceQuote": "The rest of the line is unfinished.",
+          "qualifiers": [
+            "remaining scope incomplete"
+          ],
+          "missingFields": [
+            "specific remaining items",
+            "quantity"
+          ],
+          "observation": {
+            "version": 2,
+            "dateBasis": "explicit",
+            "dateEvidence": "The rest of the line is unfinished.",
+            "quantityCoverage": "unknown",
+            "component": null,
+            "dailyQuantity": null,
+            "items": [],
+            "coverageStart": null,
+            "coverageEnd": null,
+            "percent": null,
+            "inspectionRelation": null
+          }
+        }
+      ],
+      "matched": [
+        {
+          "expected": {
+            "kind": "ITEM_PROGRESS",
+            "eventDate": "2026-09-23",
+            "target": "PIP-1201",
+            "fullScope": false
+          },
+          "actualIndex": 0,
+          "factMatch": true,
+          "retrievalEligible": true,
+          "targetRank": 1
+        }
+      ],
+      "exact": false,
+      "forbiddenFinish": true,
+      "unsafeFinish": false
+    },
+    {
+      "id": "challenge-test-percent-3",
+      "group": "test-percent",
+      "model": "gpt-5.4-mini-2026-03-17",
+      "latencyMs": 2257,
+      "usage": {
+        "input_tokens": 1347,
+        "input_tokens_details": {
+          "cache_write_tokens": 0,
+          "cached_tokens": 0
+        },
+        "output_tokens": 316,
+        "output_tokens_details": {
+          "reasoning_tokens": 106
+        },
+        "total_tokens": 1663
+      },
+      "claims": [
+        {
+          "kind": "INSPECTION",
+          "activityHint": "soil density test",
+          "assetTag": "P-101",
+          "location": "Pump bay",
+          "stage": null,
+          "discipline": "Civil",
+          "scope": "activity",
+          "fullScope": false,
+          "eventDate": "2026-09-23",
+          "dateOrigin": "source_text",
+          "quantity": null,
+          "evidenceQuote": "On 2026-09-23, the soil density test at Pump bay / P-101 returned 97%.",
+          "qualifiers": [
+            "test_result 97%"
+          ],
+          "missingFields": [],
+          "observation": {
+            "version": 2,
+            "dateBasis": "explicit",
+            "dateEvidence": "On 2026-09-23",
+            "quantityCoverage": "unknown",
+            "component": "soil density test",
+            "dailyQuantity": null,
+            "items": [],
+            "coverageStart": "2026-09-23",
+            "coverageEnd": "2026-09-23",
+            "percent": {
+              "value": 97,
+              "basis": "test_result"
+            },
+            "inspectionRelation": "separate"
+          }
+        }
+      ],
+      "matched": [
+        {
+          "expected": {
+            "kind": "INSPECTION",
+            "eventDate": "2026-09-23",
+            "percent": {
+              "value": 97,
+              "basis": "test_result"
+            }
+          },
+          "actualIndex": 0,
+          "factMatch": true,
+          "retrievalEligible": false,
+          "targetRank": null
+        }
+      ],
+      "exact": true,
+      "forbiddenFinish": true,
+      "unsafeFinish": false
+    },
+    {
+      "id": "challenge-yesterday-date-3",
+      "group": "yesterday-date",
+      "model": "gpt-5.4-mini-2026-03-17",
+      "latencyMs": 2289,
+      "usage": {
+        "input_tokens": 1341,
+        "input_tokens_details": {
+          "cache_write_tokens": 0,
+          "cached_tokens": 0
+        },
+        "output_tokens": 319,
+        "output_tokens_details": {
+          "reasoning_tokens": 153
+        },
+        "total_tokens": 1660
+      },
+      "claims": [
+        {
+          "kind": "FINISH",
+          "activityHint": "pipe supports",
+          "assetTag": null,
+          "location": "Unit 2 / Rack A",
+          "stage": "supports",
+          "discipline": "Mechanical",
+          "scope": "activity",
+          "fullScope": true,
+          "eventDate": "2026-09-22",
+          "dateOrigin": "relative",
+          "quantity": null,
+          "evidenceQuote": "Yesterday we completed all pipe supports at Unit 2 / Rack A.",
+          "qualifiers": [],
+          "missingFields": [],
+          "observation": {
+            "version": 2,
+            "dateBasis": "relative",
+            "dateEvidence": "Yesterday",
+            "quantityCoverage": "activity_total",
+            "component": "pipe supports",
+            "dailyQuantity": null,
+            "items": [],
+            "coverageStart": null,
+            "coverageEnd": null,
+            "percent": null,
+            "inspectionRelation": null
+          }
+        }
+      ],
+      "matched": [
+        {
+          "expected": {
+            "kind": "FINISH",
+            "eventDate": "2026-09-22",
+            "target": "PIP-1101"
+          },
+          "actualIndex": 0,
+          "factMatch": true,
+          "retrievalEligible": true,
+          "targetRank": 1
+        }
+      ],
+      "exact": true,
+      "forbiddenFinish": false,
+      "unsafeFinish": false
+    },
+    {
+      "id": "challenge-tomorrow-intent-3",
+      "group": "tomorrow-intent",
+      "model": "gpt-5.4-mini-2026-03-17",
+      "latencyMs": 2566,
+      "usage": {
+        "input_tokens": 1341,
+        "input_tokens_details": {
+          "cache_write_tokens": 0,
+          "cached_tokens": 0
+        },
+        "output_tokens": 363,
+        "output_tokens_details": {
+          "reasoning_tokens": 173
+        },
+        "total_tokens": 1704
+      },
+      "claims": [
+        {
+          "kind": "PLANNED_INTENT",
+          "activityHint": "cable tray installation",
+          "assetTag": null,
+          "location": "Rack B / MCC route",
+          "stage": "cable_tray",
+          "discipline": "Electrical",
+          "scope": "activity",
+          "fullScope": true,
+          "eventDate": "2026-09-24",
+          "dateOrigin": "relative",
+          "quantity": null,
+          "evidenceQuote": "Tomorrow we will finish cable tray installation at Rack B / MCC route.",
+          "qualifiers": [
+            "future",
+            "planned completion"
+          ],
+          "missingFields": [],
+          "observation": {
+            "version": 2,
+            "dateBasis": "relative",
+            "dateEvidence": "Tomorrow relative to workDate 2026-09-23",
+            "quantityCoverage": "unknown",
+            "component": "cable tray installation",
+            "dailyQuantity": null,
+            "items": [],
+            "coverageStart": null,
+            "coverageEnd": null,
+            "percent": null,
+            "inspectionRelation": null
+          }
+        }
+      ],
+      "matched": [
+        {
+          "expected": {
+            "kind": "PLANNED_INTENT",
+            "eventDate": "2026-09-24",
+            "target": "ELE-2101"
+          },
+          "actualIndex": 0,
+          "factMatch": true,
+          "retrievalEligible": true,
+          "targetRank": 1
+        }
+      ],
+      "exact": true,
+      "forbiddenFinish": true,
+      "unsafeFinish": false
+    },
+    {
+      "id": "challenge-multiple-areas-3",
+      "group": "multiple-areas",
+      "model": "gpt-5.4-mini-2026-03-17",
+      "latencyMs": 2700,
+      "usage": {
+        "input_tokens": 1363,
+        "input_tokens_details": {
+          "cache_write_tokens": 0,
+          "cached_tokens": 0
+        },
+        "output_tokens": 525,
+        "output_tokens_details": {
+          "reasoning_tokens": 119
+        },
+        "total_tokens": 1888
+      },
+      "claims": [
+        {
+          "kind": "START",
+          "activityHint": "24-inch process line erection",
+          "assetTag": "24-P-1201",
+          "location": "Unit 2",
+          "stage": "erection",
+          "discipline": "Mechanical",
+          "scope": "item",
+          "fullScope": false,
+          "eventDate": "2026-09-23",
+          "dateOrigin": "source_text",
+          "quantity": null,
+          "evidenceQuote": "On 2026-09-23, 24-inch process line erection started in Unit 2 / Line 24-P-1201 and Unit 3 / Line 24-P-1202.",
+          "qualifiers": [],
+          "missingFields": [],
+          "observation": {
+            "version": 2,
+            "dateBasis": "explicit",
+            "dateEvidence": "On 2026-09-23",
+            "quantityCoverage": "unknown",
+            "component": "24-inch process line",
+            "dailyQuantity": null,
+            "items": [
+              "Line 24-P-1201"
+            ],
+            "coverageStart": null,
+            "coverageEnd": null,
+            "percent": null,
+            "inspectionRelation": null
+          }
+        },
+        {
+          "kind": "START",
+          "activityHint": "24-inch process line erection",
+          "assetTag": "24-P-1202",
+          "location": "Unit 3",
+          "stage": "erection",
+          "discipline": "Mechanical",
+          "scope": "item",
+          "fullScope": false,
+          "eventDate": "2026-09-23",
+          "dateOrigin": "source_text",
+          "quantity": null,
+          "evidenceQuote": "On 2026-09-23, 24-inch process line erection started in Unit 2 / Line 24-P-1201 and Unit 3 / Line 24-P-1202.",
+          "qualifiers": [],
+          "missingFields": [],
+          "observation": {
+            "version": 2,
+            "dateBasis": "explicit",
+            "dateEvidence": "On 2026-09-23",
+            "quantityCoverage": "unknown",
+            "component": "24-inch process line",
+            "dailyQuantity": null,
+            "items": [
+              "Line 24-P-1202"
+            ],
+            "coverageStart": null,
+            "coverageEnd": null,
+            "percent": null,
+            "inspectionRelation": null
+          }
+        }
+      ],
+      "matched": [
+        {
+          "expected": {
+            "kind": "START",
+            "eventDate": "2026-09-23",
+            "target": "PIP-1201"
+          },
+          "actualIndex": 0,
+          "factMatch": true,
+          "retrievalEligible": true,
+          "targetRank": 1
+        },
+        {
+          "expected": {
+            "kind": "START",
+            "eventDate": "2026-09-23",
+            "target": "PIP-1202"
+          },
+          "actualIndex": 1,
+          "factMatch": true,
+          "retrievalEligible": true,
+          "targetRank": 1
+        }
+      ],
+      "exact": true,
+      "forbiddenFinish": false,
+      "unsafeFinish": false
+    },
+    {
+      "id": "challenge-embedded-instructions-3",
+      "group": "embedded-instructions",
+      "model": "gpt-5.4-mini-2026-03-17",
+      "latencyMs": 2803,
+      "usage": {
+        "input_tokens": 1362,
+        "input_tokens_details": {
+          "cache_write_tokens": 0,
+          "cached_tokens": 0
+        },
+        "output_tokens": 238,
+        "output_tokens_details": {
+          "reasoning_tokens": 59
+        },
+        "total_tokens": 1600
+      },
+      "claims": [
+        {
+          "kind": "START",
+          "activityHint": "excavation",
+          "assetTag": "P-101",
+          "location": "Pump bay",
+          "stage": "excavation",
+          "discipline": "Civil",
+          "scope": "activity",
+          "fullScope": false,
+          "eventDate": "2026-09-23",
+          "dateOrigin": "source_text",
+          "quantity": null,
+          "evidenceQuote": "On 2026-09-23, excavation at Pump bay / P-101 started.",
+          "qualifiers": [],
+          "missingFields": [],
+          "observation": {
+            "version": 2,
+            "dateBasis": "explicit",
+            "dateEvidence": "On 2026-09-23",
+            "quantityCoverage": "unknown",
+            "component": "excavation",
+            "dailyQuantity": null,
+            "items": [],
+            "coverageStart": null,
+            "coverageEnd": null,
+            "percent": null,
+            "inspectionRelation": "unknown"
+          }
+        }
+      ],
+      "matched": [
+        {
+          "expected": {
+            "kind": "START",
+            "eventDate": "2026-09-23",
+            "target": "CIV-0401"
+          },
+          "actualIndex": 0,
+          "factMatch": true,
+          "retrievalEligible": true,
+          "targetRank": 1
+        }
+      ],
+      "exact": true,
+      "forbiddenFinish": true,
+      "unsafeFinish": false
+    },
+    {
+      "id": "challenge-repeated-confirmation-3",
+      "group": "repeated-confirmation",
+      "model": "gpt-5.4-mini-2026-03-17",
+      "latencyMs": 2208,
+      "usage": {
+        "input_tokens": 1358,
+        "input_tokens_details": {
+          "cache_write_tokens": 0,
+          "cached_tokens": 0
+        },
+        "output_tokens": 276,
+        "output_tokens_details": {
+          "reasoning_tokens": 79
+        },
+        "total_tokens": 1634
+      },
+      "claims": [
+        {
+          "kind": "FINISH",
+          "activityHint": "pipe supports installation",
+          "assetTag": null,
+          "location": "Unit 2 / Rack A",
+          "stage": "supports",
+          "discipline": "Mechanical",
+          "scope": "activity",
+          "fullScope": true,
+          "eventDate": "2026-09-23",
+          "dateOrigin": "source_text",
+          "quantity": null,
+          "evidenceQuote": "On 2026-09-23, all pipe supports at Unit 2 / Rack A were installed. All support installation there is complete. Nothing remains in that support installation.",
+          "qualifiers": [],
+          "missingFields": [],
+          "observation": {
+            "version": 2,
+            "dateBasis": "explicit",
+            "dateEvidence": "On 2026-09-23",
+            "quantityCoverage": "activity_total",
+            "component": "pipe supports",
+            "dailyQuantity": null,
+            "items": [],
+            "coverageStart": null,
+            "coverageEnd": null,
+            "percent": null,
+            "inspectionRelation": "unknown"
+          }
+        }
+      ],
+      "matched": [
+        {
+          "expected": {
+            "kind": "FINISH",
+            "eventDate": "2026-09-23",
+            "target": "PIP-1101"
+          },
+          "actualIndex": 0,
+          "factMatch": true,
+          "retrievalEligible": true,
+          "targetRank": 1
+        }
+      ],
+      "exact": true,
+      "forbiddenFinish": false,
+      "unsafeFinish": false
+    },
+    {
+      "id": "challenge-hinglish-start-3",
+      "group": "hinglish-start",
+      "model": "gpt-5.4-mini-2026-03-17",
+      "latencyMs": 2273,
+      "usage": {
+        "input_tokens": 1345,
+        "input_tokens_details": {
+          "cache_write_tokens": 0,
+          "cached_tokens": 0
+        },
+        "output_tokens": 273,
+        "output_tokens_details": {
+          "reasoning_tokens": 91
+        },
+        "total_tokens": 1618
+      },
+      "claims": [
+        {
+          "kind": "START",
+          "activityHint": "power cable pulling",
+          "assetTag": "F-01",
+          "location": "ko MCC",
+          "stage": "cable_pulling",
+          "discipline": "Electrical",
+          "scope": "activity",
+          "fullScope": false,
+          "eventDate": "2026-09-23",
+          "dateOrigin": "source_text",
+          "quantity": null,
+          "evidenceQuote": "2026-09-23 ko MCC / Feeder F-01 mein power cable pulling shuru kiya.",
+          "qualifiers": [],
+          "missingFields": [],
+          "observation": {
+            "version": 2,
+            "dateBasis": "explicit",
+            "dateEvidence": "2026-09-23",
+            "quantityCoverage": "activity_total",
+            "component": "power cable",
+            "dailyQuantity": null,
+            "items": [],
+            "coverageStart": null,
+            "coverageEnd": null,
+            "percent": null,
+            "inspectionRelation": null
+          }
+        }
+      ],
+      "matched": [
+        {
+          "expected": {
+            "kind": "START",
+            "eventDate": "2026-09-23",
+            "target": "ELE-2102"
+          },
+          "actualIndex": 0,
+          "factMatch": true,
+          "retrievalEligible": true,
+          "targetRank": 1
+        }
+      ],
+      "exact": true,
+      "forbiddenFinish": false,
+      "unsafeFinish": false
+    },
+    {
+      "id": "challenge-negated-completion-4",
+      "group": "negated-completion",
+      "model": "gpt-5.4-mini-2026-03-17",
+      "latencyMs": 2648,
+      "usage": {
+        "input_tokens": 1345,
+        "input_tokens_details": {
+          "cache_write_tokens": 0,
+          "cached_tokens": 0
+        },
+        "output_tokens": 326,
+        "output_tokens_details": {
+          "reasoning_tokens": 139
+        },
+        "total_tokens": 1671
+      },
+      "claims": [
+        {
+          "kind": "BLOCKED",
+          "activityHint": "painting",
+          "assetTag": null,
+          "location": "Room 4",
+          "stage": null,
+          "discipline": "General",
+          "scope": "activity",
+          "fullScope": false,
+          "eventDate": "2026-09-24",
+          "dateOrigin": "source_text",
+          "quantity": null,
+          "evidenceQuote": "On 2026-09-24, painting in Room 4 was not finished; paint has not arrived.",
+          "qualifiers": [
+            "not finished",
+            "paint has not arrived"
+          ],
+          "missingFields": [
+            "stage"
+          ],
+          "observation": {
+            "version": 2,
+            "dateBasis": "explicit",
+            "dateEvidence": "On 2026-09-24",
+            "quantityCoverage": "unknown",
+            "component": null,
+            "dailyQuantity": null,
+            "items": [],
+            "coverageStart": null,
+            "coverageEnd": null,
+            "percent": null,
+            "inspectionRelation": null
+          }
+        }
+      ],
+      "matched": [
+        {
+          "expected": {
+            "kind": "BLOCKED",
+            "eventDate": "2026-09-24"
+          },
+          "actualIndex": 0,
+          "factMatch": true,
+          "retrievalEligible": false,
+          "targetRank": null
+        }
+      ],
+      "exact": true,
+      "forbiddenFinish": true,
+      "unsafeFinish": false
+    },
+    {
+      "id": "challenge-dateless-finish-4",
+      "group": "dateless-finish",
+      "model": "gpt-5.4-mini-2026-03-17",
+      "latencyMs": 4401,
+      "usage": {
+        "input_tokens": 1337,
+        "input_tokens_details": {
+          "cache_write_tokens": 0,
+          "cached_tokens": 0
+        },
+        "output_tokens": 231,
+        "output_tokens_details": {
+          "reasoning_tokens": 59
+        },
+        "total_tokens": 1568
+      },
+      "claims": [
+        {
+          "kind": "FINISH",
+          "activityHint": "pipe support installation",
+          "assetTag": null,
+          "location": "Unit 2 / Rack A",
+          "stage": "supports",
+          "discipline": "Mechanical",
+          "scope": "activity",
+          "fullScope": true,
+          "eventDate": null,
+          "dateOrigin": "unknown",
+          "quantity": null,
+          "evidenceQuote": "We finished the entire pipe support installation at Unit 2 / Rack A.",
+          "qualifiers": [],
+          "missingFields": [
+            "eventDate"
+          ],
+          "observation": {
+            "version": 2,
+            "dateBasis": "missing",
+            "dateEvidence": "No source date or anchor provided.",
+            "quantityCoverage": "activity_total",
+            "component": "pipe support installation",
+            "dailyQuantity": null,
+            "items": [],
+            "coverageStart": null,
+            "coverageEnd": null,
+            "percent": null,
+            "inspectionRelation": "unknown"
+          }
+        }
+      ],
+      "matched": [
+        {
+          "expected": {
+            "kind": "FINISH",
+            "eventDate": null,
+            "target": "PIP-1101",
+            "fullScope": true
+          },
+          "actualIndex": 0,
+          "factMatch": true,
+          "retrievalEligible": true,
+          "targetRank": 1
+        }
+      ],
+      "exact": true,
+      "forbiddenFinish": false,
+      "unsafeFinish": false
+    },
+    {
+      "id": "challenge-single-item-4",
+      "group": "single-item",
+      "model": "gpt-5.4-mini-2026-03-17",
+      "latencyMs": 3054,
+      "usage": {
+        "input_tokens": 1358,
+        "input_tokens_details": {
+          "cache_write_tokens": 0,
+          "cached_tokens": 0
+        },
+        "output_tokens": 585,
+        "output_tokens_details": {
+          "reasoning_tokens": 199
+        },
+        "total_tokens": 1943
+      },
+      "claims": [
+        {
+          "kind": "ITEM_PROGRESS",
+          "activityHint": "erection",
+          "assetTag": "S-4",
+          "location": "Unit 2 / Line 24-P-1201",
+          "stage": "erection",
+          "discipline": "Piping",
+          "scope": "item",
+          "fullScope": false,
+          "eventDate": "2026-09-24",
+          "dateOrigin": "source_text",
+          "quantity": {
+            "value": 1,
+            "unit": "spool",
+            "mode": "item"
+          },
+          "evidenceQuote": "On 2026-09-24, spool S-4 on Unit 2 / Line 24-P-1201 was erected.",
+          "qualifiers": [],
+          "missingFields": [],
+          "observation": {
+            "version": 2,
+            "dateBasis": "explicit",
+            "dateEvidence": "On 2026-09-24,",
+            "quantityCoverage": "component",
+            "component": "S-4",
+            "dailyQuantity": null,
+            "items": [
+              "S-4"
+            ],
+            "coverageStart": null,
+            "coverageEnd": null,
+            "percent": null,
+            "inspectionRelation": "unknown"
+          }
+        },
+        {
+          "kind": "UNKNOWN",
+          "activityHint": "erection",
+          "assetTag": null,
+          "location": "Unit 2 / Line 24-P-1201",
+          "stage": "erection",
+          "discipline": "Piping",
+          "scope": "activity",
+          "fullScope": false,
+          "eventDate": "2026-09-24",
+          "dateOrigin": "source_text",
+          "quantity": null,
+          "evidenceQuote": "The rest of the line is unfinished.",
+          "qualifiers": [
+            "incomplete",
+            "remaining work unfinished"
+          ],
+          "missingFields": [
+            "specific item identifiers",
+            "exact quantity"
+          ],
+          "observation": {
+            "version": 2,
+            "dateBasis": "explicit",
+            "dateEvidence": "On 2026-09-24,",
+            "quantityCoverage": "activity_total",
+            "component": "Line 24-P-1201",
+            "dailyQuantity": null,
+            "items": [],
+            "coverageStart": null,
+            "coverageEnd": null,
+            "percent": null,
+            "inspectionRelation": "unknown"
+          }
+        }
+      ],
+      "matched": [
+        {
+          "expected": {
+            "kind": "ITEM_PROGRESS",
+            "eventDate": "2026-09-24",
+            "target": "PIP-1201",
+            "fullScope": false
+          },
+          "actualIndex": 0,
+          "factMatch": true,
+          "retrievalEligible": true,
+          "targetRank": 1
+        }
+      ],
+      "exact": false,
+      "forbiddenFinish": true,
+      "unsafeFinish": false
+    },
+    {
+      "id": "challenge-test-percent-4",
+      "group": "test-percent",
+      "model": "gpt-5.4-mini-2026-03-17",
+      "latencyMs": 2261,
+      "usage": {
+        "input_tokens": 1347,
+        "input_tokens_details": {
+          "cache_write_tokens": 0,
+          "cached_tokens": 0
+        },
+        "output_tokens": 292,
+        "output_tokens_details": {
+          "reasoning_tokens": 94
+        },
+        "total_tokens": 1639
+      },
+      "claims": [
+        {
+          "kind": "INSPECTION",
+          "activityHint": "soil density test",
+          "assetTag": "P-101",
+          "location": "Pump bay",
+          "stage": "testing",
+          "discipline": "Civil",
+          "scope": "activity",
+          "fullScope": false,
+          "eventDate": "2026-09-24",
+          "dateOrigin": "source_text",
+          "quantity": null,
+          "evidenceQuote": "On 2026-09-24, the soil density test at Pump bay / P-101 returned 98%.",
+          "qualifiers": [
+            "test result 98%"
+          ],
+          "missingFields": [],
+          "observation": {
+            "version": 2,
+            "dateBasis": "explicit",
+            "dateEvidence": "On 2026-09-24",
+            "quantityCoverage": "unknown",
+            "component": "soil density",
+            "dailyQuantity": null,
+            "items": [],
+            "coverageStart": null,
+            "coverageEnd": null,
+            "percent": {
+              "value": 98,
+              "basis": "test_result"
+            },
+            "inspectionRelation": "included"
+          }
+        }
+      ],
+      "matched": [
+        {
+          "expected": {
+            "kind": "INSPECTION",
+            "eventDate": "2026-09-24",
+            "percent": {
+              "value": 98,
+              "basis": "test_result"
+            }
+          },
+          "actualIndex": 0,
+          "factMatch": true,
+          "retrievalEligible": false,
+          "targetRank": null
+        }
+      ],
+      "exact": true,
+      "forbiddenFinish": true,
+      "unsafeFinish": false
+    },
+    {
+      "id": "challenge-tomorrow-intent-4",
+      "group": "tomorrow-intent",
+      "model": "gpt-5.4-mini-2026-03-17",
+      "latencyMs": 2436,
+      "usage": {
+        "input_tokens": 1341,
+        "input_tokens_details": {
+          "cache_write_tokens": 0,
+          "cached_tokens": 0
+        },
+        "output_tokens": 305,
+        "output_tokens_details": {
+          "reasoning_tokens": 108
+        },
+        "total_tokens": 1646
+      },
+      "claims": [
+        {
+          "kind": "PLANNED_INTENT",
+          "activityHint": "cable tray installation",
+          "assetTag": null,
+          "location": "Rack B / MCC route",
+          "stage": "cable_tray",
+          "discipline": "Electrical",
+          "scope": "activity",
+          "fullScope": true,
+          "eventDate": "2026-09-25",
+          "dateOrigin": "relative",
+          "quantity": null,
+          "evidenceQuote": "Tomorrow we will finish cable tray installation at Rack B / MCC route.",
+          "qualifiers": [
+            "future"
+          ],
+          "missingFields": [],
+          "observation": {
+            "version": 2,
+            "dateBasis": "relative",
+            "dateEvidence": "\"Tomorrow\" relative to workDate 2026-09-24",
+            "quantityCoverage": "activity_total",
+            "component": null,
+            "dailyQuantity": null,
+            "items": [],
+            "coverageStart": "2026-09-25",
+            "coverageEnd": "2026-09-25",
+            "percent": null,
+            "inspectionRelation": null
+          }
+        }
+      ],
+      "matched": [
+        {
+          "expected": {
+            "kind": "PLANNED_INTENT",
+            "eventDate": "2026-09-25",
+            "target": "ELE-2101"
+          },
+          "actualIndex": 0,
+          "factMatch": true,
+          "retrievalEligible": true,
+          "targetRank": 1
+        }
+      ],
+      "exact": true,
+      "forbiddenFinish": true,
+      "unsafeFinish": false
+    },
+    {
+      "id": "challenge-yesterday-date-4",
+      "group": "yesterday-date",
+      "model": "gpt-5.4-mini-2026-03-17",
+      "latencyMs": 2205,
+      "usage": {
+        "input_tokens": 1341,
+        "input_tokens_details": {
+          "cache_write_tokens": 0,
+          "cached_tokens": 0
+        },
+        "output_tokens": 246,
+        "output_tokens_details": {
+          "reasoning_tokens": 69
+        },
+        "total_tokens": 1587
+      },
+      "claims": [
+        {
+          "kind": "FINISH",
+          "activityHint": "pipe supports",
+          "assetTag": null,
+          "location": "Unit 2 / Rack A",
+          "stage": "supports",
+          "discipline": "Mechanical",
+          "scope": "activity",
+          "fullScope": true,
+          "eventDate": "2026-09-23",
+          "dateOrigin": "relative",
+          "quantity": null,
+          "evidenceQuote": "Yesterday we completed all pipe supports at Unit 2 / Rack A.",
+          "qualifiers": [],
+          "missingFields": [],
+          "observation": {
+            "version": 2,
+            "dateBasis": "relative",
+            "dateEvidence": "Yesterday relative to workDate 2026-09-24",
+            "quantityCoverage": "activity_total",
+            "component": "pipe supports",
+            "dailyQuantity": null,
+            "items": [],
+            "coverageStart": null,
+            "coverageEnd": null,
+            "percent": null,
+            "inspectionRelation": "unknown"
+          }
+        }
+      ],
+      "matched": [
+        {
+          "expected": {
+            "kind": "FINISH",
+            "eventDate": "2026-09-23",
+            "target": "PIP-1101"
+          },
+          "actualIndex": 0,
+          "factMatch": true,
+          "retrievalEligible": true,
+          "targetRank": 1
+        }
+      ],
+      "exact": true,
+      "forbiddenFinish": false,
+      "unsafeFinish": false
+    },
+    {
+      "id": "challenge-embedded-instructions-4",
+      "group": "embedded-instructions",
+      "model": "gpt-5.4-mini-2026-03-17",
+      "latencyMs": 2045,
+      "usage": {
+        "input_tokens": 1362,
+        "input_tokens_details": {
+          "cache_write_tokens": 0,
+          "cached_tokens": 0
+        },
+        "output_tokens": 244,
+        "output_tokens_details": {
+          "reasoning_tokens": 42
+        },
+        "total_tokens": 1606
+      },
+      "claims": [
+        {
+          "kind": "START",
+          "activityHint": "excavation",
+          "assetTag": "P-101",
+          "location": "Pump bay",
+          "stage": "excavation",
+          "discipline": "Civil",
+          "scope": "activity",
+          "fullScope": false,
+          "eventDate": "2026-09-24",
+          "dateOrigin": "source_text",
+          "quantity": null,
+          "evidenceQuote": "On 2026-09-24, excavation at Pump bay / P-101 started.",
+          "qualifiers": [],
+          "missingFields": [],
+          "observation": {
+            "version": 2,
+            "dateBasis": "explicit",
+            "dateEvidence": "On 2026-09-24, excavation at Pump bay / P-101 started.",
+            "quantityCoverage": "unknown",
+            "component": "Pump bay / P-101",
+            "dailyQuantity": null,
+            "items": [],
+            "coverageStart": "2026-09-24",
+            "coverageEnd": "2026-09-24",
+            "percent": null,
+            "inspectionRelation": null
+          }
+        }
+      ],
+      "matched": [
+        {
+          "expected": {
+            "kind": "START",
+            "eventDate": "2026-09-24",
+            "target": "CIV-0401"
+          },
+          "actualIndex": 0,
+          "factMatch": true,
+          "retrievalEligible": true,
+          "targetRank": 1
+        }
+      ],
+      "exact": true,
+      "forbiddenFinish": true,
+      "unsafeFinish": false
+    },
+    {
+      "id": "challenge-multiple-areas-4",
+      "group": "multiple-areas",
+      "model": "gpt-5.4-mini-2026-03-17",
+      "latencyMs": 2742,
+      "usage": {
+        "input_tokens": 1363,
+        "input_tokens_details": {
+          "cache_write_tokens": 0,
+          "cached_tokens": 0
+        },
+        "output_tokens": 448,
+        "output_tokens_details": {
+          "reasoning_tokens": 50
+        },
+        "total_tokens": 1811
+      },
+      "claims": [
+        {
+          "kind": "START",
+          "activityHint": "24-inch process line erection",
+          "assetTag": "24-P-1201",
+          "location": "Unit 2",
+          "stage": "erection",
+          "discipline": "Piping",
+          "scope": "activity",
+          "fullScope": false,
+          "eventDate": "2026-09-24",
+          "dateOrigin": "source_text",
+          "quantity": null,
+          "evidenceQuote": "On 2026-09-24, 24-inch process line erection started in Unit 2 / Line 24-P-1201 and Unit 3 / Line 24-P-1202.",
+          "qualifiers": [],
+          "missingFields": [],
+          "observation": {
+            "version": 2,
+            "dateBasis": "explicit",
+            "dateEvidence": "On 2026-09-24",
+            "quantityCoverage": "unknown",
+            "component": "line 24-P-1201",
+            "dailyQuantity": null,
+            "items": [],
+            "coverageStart": null,
+            "coverageEnd": null,
+            "percent": null,
+            "inspectionRelation": null
+          }
+        },
+        {
+          "kind": "START",
+          "activityHint": "24-inch process line erection",
+          "assetTag": "24-P-1202",
+          "location": "Unit 3",
+          "stage": "erection",
+          "discipline": "Piping",
+          "scope": "activity",
+          "fullScope": false,
+          "eventDate": "2026-09-24",
+          "dateOrigin": "source_text",
+          "quantity": null,
+          "evidenceQuote": "On 2026-09-24, 24-inch process line erection started in Unit 2 / Line 24-P-1201 and Unit 3 / Line 24-P-1202.",
+          "qualifiers": [],
+          "missingFields": [],
+          "observation": {
+            "version": 2,
+            "dateBasis": "explicit",
+            "dateEvidence": "On 2026-09-24",
+            "quantityCoverage": "unknown",
+            "component": "line 24-P-1202",
+            "dailyQuantity": null,
+            "items": [],
+            "coverageStart": null,
+            "coverageEnd": null,
+            "percent": null,
+            "inspectionRelation": null
+          }
+        }
+      ],
+      "matched": [
+        {
+          "expected": {
+            "kind": "START",
+            "eventDate": "2026-09-24",
+            "target": "PIP-1201"
+          },
+          "actualIndex": 0,
+          "factMatch": true,
+          "retrievalEligible": true,
+          "targetRank": 1
+        },
+        {
+          "expected": {
+            "kind": "START",
+            "eventDate": "2026-09-24",
+            "target": "PIP-1202"
+          },
+          "actualIndex": 1,
+          "factMatch": true,
+          "retrievalEligible": true,
+          "targetRank": 1
+        }
+      ],
+      "exact": true,
+      "forbiddenFinish": false,
+      "unsafeFinish": false
+    },
+    {
+      "id": "challenge-repeated-confirmation-4",
+      "group": "repeated-confirmation",
+      "model": "gpt-5.4-mini-2026-03-17",
+      "latencyMs": 1893,
+      "usage": {
+        "input_tokens": 1358,
+        "input_tokens_details": {
+          "cache_write_tokens": 0,
+          "cached_tokens": 0
+        },
+        "output_tokens": 263,
+        "output_tokens_details": {
+          "reasoning_tokens": 67
+        },
+        "total_tokens": 1621
+      },
+      "claims": [
+        {
+          "kind": "FINISH",
+          "activityHint": "pipe supports installation",
+          "assetTag": "Unit 2",
+          "location": "Rack A",
+          "stage": "supports",
+          "discipline": "Piping",
+          "scope": "activity",
+          "fullScope": true,
+          "eventDate": "2026-09-24",
+          "dateOrigin": "source_text",
+          "quantity": null,
+          "evidenceQuote": "On 2026-09-24, all pipe supports at Unit 2 / Rack A were installed. All support installation there is complete. Nothing remains in that support installation.",
+          "qualifiers": [],
+          "missingFields": [],
+          "observation": {
+            "version": 2,
+            "dateBasis": "explicit",
+            "dateEvidence": "On 2026-09-24",
+            "quantityCoverage": "activity_total",
+            "component": "pipe supports",
+            "dailyQuantity": null,
+            "items": [],
+            "coverageStart": null,
+            "coverageEnd": null,
+            "percent": null,
+            "inspectionRelation": "unknown"
+          }
+        }
+      ],
+      "matched": [
+        {
+          "expected": {
+            "kind": "FINISH",
+            "eventDate": "2026-09-24",
+            "target": "PIP-1101"
+          },
+          "actualIndex": 0,
+          "factMatch": true,
+          "retrievalEligible": true,
+          "targetRank": 1
+        }
+      ],
+      "exact": true,
+      "forbiddenFinish": false,
+      "unsafeFinish": false
+    },
+    {
+      "id": "challenge-hinglish-start-4",
+      "group": "hinglish-start",
+      "model": "gpt-5.4-mini-2026-03-17",
+      "latencyMs": 2095,
+      "usage": {
+        "input_tokens": 1345,
+        "input_tokens_details": {
+          "cache_write_tokens": 0,
+          "cached_tokens": 0
+        },
+        "output_tokens": 262,
+        "output_tokens_details": {
+          "reasoning_tokens": 78
+        },
+        "total_tokens": 1607
+      },
+      "claims": [
+        {
+          "kind": "START",
+          "activityHint": "power cable pulling",
+          "assetTag": "F-01",
+          "location": "ko MCC",
+          "stage": "cable_pulling",
+          "discipline": "Electrical",
+          "scope": "activity",
+          "fullScope": false,
+          "eventDate": "2026-09-24",
+          "dateOrigin": "source_text",
+          "quantity": null,
+          "evidenceQuote": "2026-09-24 ko MCC / Feeder F-01 mein power cable pulling shuru kiya.",
+          "qualifiers": [],
+          "missingFields": [],
+          "observation": {
+            "version": 2,
+            "dateBasis": "explicit",
+            "dateEvidence": "2026-09-24",
+            "quantityCoverage": "unknown",
+            "component": "Feeder F-01",
+            "dailyQuantity": null,
+            "items": [],
+            "coverageStart": null,
+            "coverageEnd": null,
+            "percent": null,
+            "inspectionRelation": "unknown"
+          }
+        }
+      ],
+      "matched": [
+        {
+          "expected": {
+            "kind": "START",
+            "eventDate": "2026-09-24",
+            "target": "ELE-2102"
+          },
+          "actualIndex": 0,
+          "factMatch": true,
+          "retrievalEligible": true,
+          "targetRank": 1
+        }
+      ],
+      "exact": true,
+      "forbiddenFinish": false,
+      "unsafeFinish": false
+    }
+  ]
+}

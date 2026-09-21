@@ -1,0 +1,2984 @@
+{
+  "sha256": "ace125170d0781f082947587222fe4ce2792b075d337bcc7c361cae686ac1cf7",
+  "split": "development",
+  "completedAt": "2026-09-21T05:41:08.056Z",
+  "summary": {
+    "cases": 40,
+    "completed": 40,
+    "errors": 0,
+    "exactCases": 40,
+    "expectedEvents": 44,
+    "factMatches": 44,
+    "retrievalTargets": 40,
+    "recallAt8Hits": 40,
+    "top1Hits": 40,
+    "forbiddenFinishCases": 8,
+    "unsafeFinishCases": 0,
+    "p50Ms": 2683,
+    "p95Ms": 3241,
+    "inputTokens": 53856,
+    "outputTokens": 11167,
+    "note": "Extraction proposals only; no database acceptance. Retrieval uses gold-assisted event alignment and a small catalog. Strict lexical units; equivalent units can fail. Failed calls count as misses. No held-out human speech or final-linking accuracy claim."
+  },
+  "results": [
+    {
+      "id": "development-explicit-start-1",
+      "group": "explicit-start",
+      "model": "gpt-5.4-mini-2026-03-17",
+      "latencyMs": 2554,
+      "usage": {
+        "input_tokens": 1346,
+        "input_tokens_details": {
+          "cache_write_tokens": 0,
+          "cached_tokens": 0
+        },
+        "output_tokens": 242,
+        "output_tokens_details": {
+          "reasoning_tokens": 52
+        },
+        "total_tokens": 1588
+      },
+      "claims": [
+        {
+          "kind": "START",
+          "activityHint": "excavating the pump foundations",
+          "assetTag": "P-101",
+          "location": "Pump bay",
+          "stage": "excavation",
+          "discipline": "Civil",
+          "scope": "activity",
+          "fullScope": false,
+          "eventDate": "2026-09-21",
+          "dateOrigin": "source_text",
+          "quantity": null,
+          "evidenceQuote": "On 2026-09-21, we started excavating the pump foundations at Pump bay / P-101.",
+          "qualifiers": [],
+          "missingFields": [],
+          "observation": {
+            "version": 2,
+            "dateBasis": "explicit",
+            "dateEvidence": "On 2026-09-21",
+            "quantityCoverage": "unknown",
+            "component": "pump foundations",
+            "dailyQuantity": null,
+            "items": [
+              "P-101"
+            ],
+            "coverageStart": null,
+            "coverageEnd": null,
+            "percent": null,
+            "inspectionRelation": null
+          }
+        }
+      ],
+      "matched": [
+        {
+          "expected": {
+            "kind": "START",
+            "eventDate": "2026-09-21",
+            "target": "CIV-0401"
+          },
+          "actualIndex": 0,
+          "factMatch": true,
+          "retrievalEligible": true,
+          "targetRank": 1
+        }
+      ],
+      "exact": true,
+      "forbiddenFinish": false,
+      "unsafeFinish": false
+    },
+    {
+      "id": "development-explicit-finish-1",
+      "group": "explicit-finish",
+      "model": "gpt-5.4-mini-2026-03-17",
+      "latencyMs": 3206,
+      "usage": {
+        "input_tokens": 1349,
+        "input_tokens_details": {
+          "cache_write_tokens": 0,
+          "cached_tokens": 0
+        },
+        "output_tokens": 310,
+        "output_tokens_details": {
+          "reasoning_tokens": 109
+        },
+        "total_tokens": 1659
+      },
+      "claims": [
+        {
+          "kind": "FINISH",
+          "activityHint": "installation of pipe supports",
+          "assetTag": null,
+          "location": "Unit 2 / Rack A",
+          "stage": "supports",
+          "discipline": "Mechanical",
+          "scope": "activity",
+          "fullScope": true,
+          "eventDate": "2026-09-21",
+          "dateOrigin": "source_text",
+          "quantity": {
+            "value": 12,
+            "unit": "pipe supports",
+            "mode": "item"
+          },
+          "evidenceQuote": "On 2026-09-21, installation of all 12 pipe supports in Unit 2 / Rack A was fully completed.",
+          "qualifiers": [],
+          "missingFields": [],
+          "observation": {
+            "version": 2,
+            "dateBasis": "explicit",
+            "dateEvidence": "On 2026-09-21",
+            "quantityCoverage": "activity_total",
+            "component": "pipe supports",
+            "dailyQuantity": null,
+            "items": [],
+            "coverageStart": null,
+            "coverageEnd": null,
+            "percent": null,
+            "inspectionRelation": null
+          }
+        }
+      ],
+      "matched": [
+        {
+          "expected": {
+            "kind": "FINISH",
+            "eventDate": "2026-09-21",
+            "target": "PIP-1101",
+            "fullScope": true
+          },
+          "actualIndex": 0,
+          "factMatch": true,
+          "retrievalEligible": true,
+          "targetRank": 1
+        }
+      ],
+      "exact": true,
+      "forbiddenFinish": false,
+      "unsafeFinish": false
+    },
+    {
+      "id": "development-cumulative-quantity-1",
+      "group": "cumulative-quantity",
+      "model": "gpt-5.4-mini-2026-03-17",
+      "latencyMs": 3241,
+      "usage": {
+        "input_tokens": 1349,
+        "input_tokens_details": {
+          "cache_write_tokens": 0,
+          "cached_tokens": 0
+        },
+        "output_tokens": 340,
+        "output_tokens_details": {
+          "reasoning_tokens": 130
+        },
+        "total_tokens": 1689
+      },
+      "claims": [
+        {
+          "kind": "ITEM_PROGRESS",
+          "activityHint": "power cable pulled",
+          "assetTag": "F-01",
+          "location": "MCC / Feeder F-01",
+          "stage": "cable_pulling",
+          "discipline": "Electrical",
+          "scope": "activity",
+          "fullScope": false,
+          "eventDate": "2026-09-21",
+          "dateOrigin": "source_text",
+          "quantity": {
+            "value": 10,
+            "unit": "m",
+            "mode": "cumulative"
+          },
+          "evidenceQuote": "As of 2026-09-21, cumulative power cable pulled at MCC / Feeder F-01 is 10 m.",
+          "qualifiers": [
+            "cumulative"
+          ],
+          "missingFields": [],
+          "observation": {
+            "version": 2,
+            "dateBasis": "explicit",
+            "dateEvidence": "As of 2026-09-21",
+            "quantityCoverage": "component",
+            "component": "power cable",
+            "dailyQuantity": null,
+            "items": [],
+            "coverageStart": null,
+            "coverageEnd": null,
+            "percent": null,
+            "inspectionRelation": null
+          }
+        }
+      ],
+      "matched": [
+        {
+          "expected": {
+            "kind": "ITEM_PROGRESS",
+            "eventDate": "2026-09-21",
+            "target": "ELE-2102",
+            "quantity": {
+              "value": 10,
+              "unit": "m",
+              "mode": "cumulative"
+            }
+          },
+          "actualIndex": 0,
+          "factMatch": true,
+          "retrievalEligible": true,
+          "targetRank": 1
+        }
+      ],
+      "exact": true,
+      "forbiddenFinish": false,
+      "unsafeFinish": false
+    },
+    {
+      "id": "development-daily-quantity-1",
+      "group": "daily-quantity",
+      "model": "gpt-5.4-mini-2026-03-17",
+      "latencyMs": 3350,
+      "usage": {
+        "input_tokens": 1351,
+        "input_tokens_details": {
+          "cache_write_tokens": 0,
+          "cached_tokens": 0
+        },
+        "output_tokens": 297,
+        "output_tokens_details": {
+          "reasoning_tokens": 66
+        },
+        "total_tokens": 1648
+      },
+      "claims": [
+        {
+          "kind": "ITEM_PROGRESS",
+          "activityHint": "power cable pulling",
+          "assetTag": "Feeder F-01",
+          "location": "MCC / Feeder F-01",
+          "stage": "cable_pulling",
+          "discipline": "Electrical",
+          "scope": "activity",
+          "fullScope": false,
+          "eventDate": "2026-09-21",
+          "dateOrigin": "source_text",
+          "quantity": {
+            "value": 10,
+            "unit": "m",
+            "mode": "delta"
+          },
+          "evidenceQuote": "On 2026-09-21, we pulled 10 m of power cable at MCC / Feeder F-01 during this shift.",
+          "qualifiers": [
+            "during this shift"
+          ],
+          "missingFields": [],
+          "observation": {
+            "version": 2,
+            "dateBasis": "explicit",
+            "dateEvidence": "On 2026-09-21",
+            "quantityCoverage": "activity_total",
+            "component": "power cable",
+            "dailyQuantity": {
+              "value": 10,
+              "unit": "m"
+            },
+            "items": [],
+            "coverageStart": "2026-09-21",
+            "coverageEnd": "2026-09-21",
+            "percent": null,
+            "inspectionRelation": null
+          }
+        }
+      ],
+      "matched": [
+        {
+          "expected": {
+            "kind": "ITEM_PROGRESS",
+            "eventDate": "2026-09-21",
+            "target": "ELE-2102",
+            "quantity": {
+              "value": 10,
+              "unit": "m",
+              "mode": "delta"
+            }
+          },
+          "actualIndex": 0,
+          "factMatch": true,
+          "retrievalEligible": true,
+          "targetRank": 1
+        }
+      ],
+      "exact": true,
+      "forbiddenFinish": false,
+      "unsafeFinish": false
+    },
+    {
+      "id": "development-physical-percent-1",
+      "group": "physical-percent",
+      "model": "gpt-5.4-mini-2026-03-17",
+      "latencyMs": 3676,
+      "usage": {
+        "input_tokens": 1347,
+        "input_tokens_details": {
+          "cache_write_tokens": 0,
+          "cached_tokens": 0
+        },
+        "output_tokens": 267,
+        "output_tokens_details": {
+          "reasoning_tokens": 58
+        },
+        "total_tokens": 1614
+      },
+      "claims": [
+        {
+          "kind": "PERCENT_PROGRESS",
+          "activityHint": "cable tray installation",
+          "assetTag": null,
+          "location": "Rack B / MCC route",
+          "stage": "cable_tray",
+          "discipline": "Electrical",
+          "scope": "activity",
+          "fullScope": false,
+          "eventDate": "2026-09-21",
+          "dateOrigin": "source_text",
+          "quantity": null,
+          "evidenceQuote": "On 2026-09-21, cable tray installation at Rack B / MCC route is 10% physically complete.",
+          "qualifiers": [
+            "physical progress"
+          ],
+          "missingFields": [],
+          "observation": {
+            "version": 2,
+            "dateBasis": "explicit",
+            "dateEvidence": "On 2026-09-21",
+            "quantityCoverage": "activity_total",
+            "component": null,
+            "dailyQuantity": null,
+            "items": [],
+            "coverageStart": "2026-09-21",
+            "coverageEnd": "2026-09-21",
+            "percent": {
+              "value": 10,
+              "basis": "physical"
+            },
+            "inspectionRelation": "unknown"
+          }
+        }
+      ],
+      "matched": [
+        {
+          "expected": {
+            "kind": "PERCENT_PROGRESS",
+            "eventDate": "2026-09-21",
+            "target": "ELE-2101",
+            "percent": {
+              "value": 10,
+              "basis": "physical"
+            }
+          },
+          "actualIndex": 0,
+          "factMatch": true,
+          "retrievalEligible": true,
+          "targetRank": 1
+        }
+      ],
+      "exact": true,
+      "forbiddenFinish": false,
+      "unsafeFinish": false
+    },
+    {
+      "id": "development-missing-location-1",
+      "group": "missing-location",
+      "model": "gpt-5.4-mini-2026-03-17",
+      "latencyMs": 3100,
+      "usage": {
+        "input_tokens": 1336,
+        "input_tokens_details": {
+          "cache_write_tokens": 0,
+          "cached_tokens": 0
+        },
+        "output_tokens": 223,
+        "output_tokens_details": {
+          "reasoning_tokens": 46
+        },
+        "total_tokens": 1559
+      },
+      "claims": [
+        {
+          "kind": "FINISH",
+          "activityHint": "painting",
+          "assetTag": null,
+          "location": null,
+          "stage": "painting",
+          "discipline": "General",
+          "scope": "activity",
+          "fullScope": true,
+          "eventDate": "2026-09-21",
+          "dateOrigin": "source_text",
+          "quantity": null,
+          "evidenceQuote": "On 2026-09-21, all painting was finished.",
+          "qualifiers": [],
+          "missingFields": [],
+          "observation": {
+            "version": 2,
+            "dateBasis": "explicit",
+            "dateEvidence": "On 2026-09-21",
+            "quantityCoverage": "activity_total",
+            "component": null,
+            "dailyQuantity": null,
+            "items": [],
+            "coverageStart": "2026-09-21",
+            "coverageEnd": "2026-09-21",
+            "percent": null,
+            "inspectionRelation": null
+          }
+        }
+      ],
+      "matched": [
+        {
+          "expected": {
+            "kind": "FINISH",
+            "eventDate": "2026-09-21",
+            "location": null
+          },
+          "actualIndex": 0,
+          "factMatch": true,
+          "retrievalEligible": false,
+          "targetRank": null
+        }
+      ],
+      "exact": true,
+      "forbiddenFinish": false,
+      "unsafeFinish": false
+    },
+    {
+      "id": "development-blocked-1",
+      "group": "blocked",
+      "model": "gpt-5.4-mini-2026-03-17",
+      "latencyMs": 2687,
+      "usage": {
+        "input_tokens": 1345,
+        "input_tokens_details": {
+          "cache_write_tokens": 0,
+          "cached_tokens": 0
+        },
+        "output_tokens": 284,
+        "output_tokens_details": {
+          "reasoning_tokens": 97
+        },
+        "total_tokens": 1629
+      },
+      "claims": [
+        {
+          "kind": "BLOCKED",
+          "activityHint": "excavation",
+          "assetTag": "P-101",
+          "location": "Pump bay",
+          "stage": "excavation",
+          "discipline": "Civil",
+          "scope": "activity",
+          "fullScope": false,
+          "eventDate": "2026-09-21",
+          "dateOrigin": "source_text",
+          "quantity": null,
+          "evidenceQuote": "On 2026-09-21, excavation at Pump bay / P-101 was blocked by standing water.",
+          "qualifiers": [
+            "blocked by standing water"
+          ],
+          "missingFields": [],
+          "observation": {
+            "version": 2,
+            "dateBasis": "explicit",
+            "dateEvidence": "On 2026-09-21",
+            "quantityCoverage": "unknown",
+            "component": null,
+            "dailyQuantity": null,
+            "items": [],
+            "coverageStart": null,
+            "coverageEnd": null,
+            "percent": null,
+            "inspectionRelation": null
+          }
+        }
+      ],
+      "matched": [
+        {
+          "expected": {
+            "kind": "BLOCKED",
+            "eventDate": "2026-09-21",
+            "target": "CIV-0401"
+          },
+          "actualIndex": 0,
+          "factMatch": true,
+          "retrievalEligible": true,
+          "targetRank": 1
+        }
+      ],
+      "exact": true,
+      "forbiddenFinish": true,
+      "unsafeFinish": false
+    },
+    {
+      "id": "development-resumed-1",
+      "group": "resumed",
+      "model": "gpt-5.4-mini-2026-03-17",
+      "latencyMs": 2630,
+      "usage": {
+        "input_tokens": 1347,
+        "input_tokens_details": {
+          "cache_write_tokens": 0,
+          "cached_tokens": 0
+        },
+        "output_tokens": 318,
+        "output_tokens_details": {
+          "reasoning_tokens": 119
+        },
+        "total_tokens": 1665
+      },
+      "claims": [
+        {
+          "kind": "RESUMED",
+          "activityHint": "excavation work",
+          "assetTag": "P-101",
+          "location": "Pump bay / P-101",
+          "stage": "excavation",
+          "discipline": "Civil",
+          "scope": "activity",
+          "fullScope": false,
+          "eventDate": "2026-09-21",
+          "dateOrigin": "source_text",
+          "quantity": null,
+          "evidenceQuote": "On 2026-09-21, excavation work at Pump bay / P-101 resumed after the water was removed.",
+          "qualifiers": [
+            "after the water was removed"
+          ],
+          "missingFields": [],
+          "observation": {
+            "version": 2,
+            "dateBasis": "explicit",
+            "dateEvidence": "On 2026-09-21",
+            "quantityCoverage": "unknown",
+            "component": "excavation work",
+            "dailyQuantity": null,
+            "items": [],
+            "coverageStart": null,
+            "coverageEnd": null,
+            "percent": null,
+            "inspectionRelation": null
+          }
+        }
+      ],
+      "matched": [
+        {
+          "expected": {
+            "kind": "RESUMED",
+            "eventDate": "2026-09-21",
+            "target": "CIV-0401"
+          },
+          "actualIndex": 0,
+          "factMatch": true,
+          "retrievalEligible": true,
+          "targetRank": 1
+        }
+      ],
+      "exact": true,
+      "forbiddenFinish": false,
+      "unsafeFinish": false
+    },
+    {
+      "id": "development-future-date-1",
+      "group": "future-date",
+      "model": "gpt-5.4-mini-2026-03-17",
+      "latencyMs": 2502,
+      "usage": {
+        "input_tokens": 1346,
+        "input_tokens_details": {
+          "cache_write_tokens": 0,
+          "cached_tokens": 0
+        },
+        "output_tokens": 267,
+        "output_tokens_details": {
+          "reasoning_tokens": 74
+        },
+        "total_tokens": 1613
+      },
+      "claims": [
+        {
+          "kind": "PLANNED_INTENT",
+          "activityHint": "pulling power cables",
+          "assetTag": "Feeder F-01",
+          "location": "MCC",
+          "stage": "cable_pulling",
+          "discipline": "Electrical",
+          "scope": "activity",
+          "fullScope": false,
+          "eventDate": "2026-09-21",
+          "dateOrigin": "source_text",
+          "quantity": null,
+          "evidenceQuote": "We plan to start pulling power cables at MCC / Feeder F-01 on 2026-09-21.",
+          "qualifiers": [
+            "planned",
+            "future"
+          ],
+          "missingFields": [],
+          "observation": {
+            "version": 2,
+            "dateBasis": "explicit",
+            "dateEvidence": "2026-09-21",
+            "quantityCoverage": "unknown",
+            "component": "power cables",
+            "dailyQuantity": null,
+            "items": [],
+            "coverageStart": null,
+            "coverageEnd": null,
+            "percent": null,
+            "inspectionRelation": null
+          }
+        }
+      ],
+      "matched": [
+        {
+          "expected": {
+            "kind": "PLANNED_INTENT",
+            "eventDate": "2026-09-21",
+            "target": "ELE-2102"
+          },
+          "actualIndex": 0,
+          "factMatch": true,
+          "retrievalEligible": true,
+          "targetRank": 1
+        }
+      ],
+      "exact": true,
+      "forbiddenFinish": true,
+      "unsafeFinish": false
+    },
+    {
+      "id": "development-multi-stage-1",
+      "group": "multi-stage",
+      "model": "gpt-5.4-mini-2026-03-17",
+      "latencyMs": 2996,
+      "usage": {
+        "input_tokens": 1348,
+        "input_tokens_details": {
+          "cache_write_tokens": 0,
+          "cached_tokens": 0
+        },
+        "output_tokens": 411,
+        "output_tokens_details": {
+          "reasoning_tokens": 49
+        },
+        "total_tokens": 1759
+      },
+      "claims": [
+        {
+          "kind": "FINISH",
+          "activityHint": "excavation",
+          "assetTag": "P-101",
+          "location": "Pump bay",
+          "stage": "excavation",
+          "discipline": "Civil",
+          "scope": "activity",
+          "fullScope": true,
+          "eventDate": "2026-09-21",
+          "dateOrigin": "source_text",
+          "quantity": null,
+          "evidenceQuote": "On 2026-09-21, all excavation at Pump bay / P-101 finished and reinforcement cage fixing started there.",
+          "qualifiers": [],
+          "missingFields": [],
+          "observation": {
+            "version": 2,
+            "dateBasis": "explicit",
+            "dateEvidence": "On 2026-09-21",
+            "quantityCoverage": "unknown",
+            "component": "excavation",
+            "dailyQuantity": null,
+            "items": [],
+            "coverageStart": null,
+            "coverageEnd": "2026-09-21",
+            "percent": null,
+            "inspectionRelation": null
+          }
+        },
+        {
+          "kind": "START",
+          "activityHint": "reinforcement cage fixing",
+          "assetTag": "P-101",
+          "location": "Pump bay",
+          "stage": "reinforcement",
+          "discipline": "Civil",
+          "scope": "activity",
+          "fullScope": false,
+          "eventDate": "2026-09-21",
+          "dateOrigin": "source_text",
+          "quantity": null,
+          "evidenceQuote": "On 2026-09-21, all excavation at Pump bay / P-101 finished and reinforcement cage fixing started there.",
+          "qualifiers": [],
+          "missingFields": [],
+          "observation": {
+            "version": 2,
+            "dateBasis": "explicit",
+            "dateEvidence": "On 2026-09-21",
+            "quantityCoverage": "unknown",
+            "component": "reinforcement cage fixing",
+            "dailyQuantity": null,
+            "items": [],
+            "coverageStart": "2026-09-21",
+            "coverageEnd": null,
+            "percent": null,
+            "inspectionRelation": null
+          }
+        }
+      ],
+      "matched": [
+        {
+          "expected": {
+            "kind": "FINISH",
+            "eventDate": "2026-09-21",
+            "target": "CIV-0401"
+          },
+          "actualIndex": 0,
+          "factMatch": true,
+          "retrievalEligible": true,
+          "targetRank": 1
+        },
+        {
+          "expected": {
+            "kind": "START",
+            "eventDate": "2026-09-21",
+            "target": "CIV-0402"
+          },
+          "actualIndex": 1,
+          "factMatch": true,
+          "retrievalEligible": true,
+          "targetRank": 1
+        }
+      ],
+      "exact": true,
+      "forbiddenFinish": false,
+      "unsafeFinish": false
+    },
+    {
+      "id": "development-explicit-start-2",
+      "group": "explicit-start",
+      "model": "gpt-5.4-mini-2026-03-17",
+      "latencyMs": 2545,
+      "usage": {
+        "input_tokens": 1346,
+        "input_tokens_details": {
+          "cache_write_tokens": 0,
+          "cached_tokens": 0
+        },
+        "output_tokens": 254,
+        "output_tokens_details": {
+          "reasoning_tokens": 58
+        },
+        "total_tokens": 1600
+      },
+      "claims": [
+        {
+          "kind": "START",
+          "activityHint": "excavating the pump foundations",
+          "assetTag": "P-101",
+          "location": "Pump bay",
+          "stage": "excavation",
+          "discipline": "Civil",
+          "scope": "activity",
+          "fullScope": false,
+          "eventDate": "2026-09-22",
+          "dateOrigin": "source_text",
+          "quantity": null,
+          "evidenceQuote": "On 2026-09-22, we started excavating the pump foundations at Pump bay / P-101.",
+          "qualifiers": [],
+          "missingFields": [],
+          "observation": {
+            "version": 2,
+            "dateBasis": "explicit",
+            "dateEvidence": "On 2026-09-22",
+            "quantityCoverage": "unknown",
+            "component": "pump foundations",
+            "dailyQuantity": null,
+            "items": [],
+            "coverageStart": "2026-09-22",
+            "coverageEnd": "2026-09-22",
+            "percent": null,
+            "inspectionRelation": null
+          }
+        }
+      ],
+      "matched": [
+        {
+          "expected": {
+            "kind": "START",
+            "eventDate": "2026-09-22",
+            "target": "CIV-0401"
+          },
+          "actualIndex": 0,
+          "factMatch": true,
+          "retrievalEligible": true,
+          "targetRank": 1
+        }
+      ],
+      "exact": true,
+      "forbiddenFinish": false,
+      "unsafeFinish": false
+    },
+    {
+      "id": "development-explicit-finish-2",
+      "group": "explicit-finish",
+      "model": "gpt-5.4-mini-2026-03-17",
+      "latencyMs": 2627,
+      "usage": {
+        "input_tokens": 1349,
+        "input_tokens_details": {
+          "cache_write_tokens": 0,
+          "cached_tokens": 0
+        },
+        "output_tokens": 269,
+        "output_tokens_details": {
+          "reasoning_tokens": 68
+        },
+        "total_tokens": 1618
+      },
+      "claims": [
+        {
+          "kind": "FINISH",
+          "activityHint": "installation of pipe supports",
+          "assetTag": null,
+          "location": "Unit 2 / Rack A",
+          "stage": "supports",
+          "discipline": "Mechanical",
+          "scope": "activity",
+          "fullScope": true,
+          "eventDate": "2026-09-22",
+          "dateOrigin": "source_text",
+          "quantity": {
+            "value": 12,
+            "unit": "pipe supports",
+            "mode": "item"
+          },
+          "evidenceQuote": "On 2026-09-22, installation of all 12 pipe supports in Unit 2 / Rack A was fully completed.",
+          "qualifiers": [],
+          "missingFields": [],
+          "observation": {
+            "version": 2,
+            "dateBasis": "explicit",
+            "dateEvidence": "On 2026-09-22",
+            "quantityCoverage": "activity_total",
+            "component": "pipe supports",
+            "dailyQuantity": null,
+            "items": [],
+            "coverageStart": null,
+            "coverageEnd": null,
+            "percent": null,
+            "inspectionRelation": null
+          }
+        }
+      ],
+      "matched": [
+        {
+          "expected": {
+            "kind": "FINISH",
+            "eventDate": "2026-09-22",
+            "target": "PIP-1101",
+            "fullScope": true
+          },
+          "actualIndex": 0,
+          "factMatch": true,
+          "retrievalEligible": true,
+          "targetRank": 1
+        }
+      ],
+      "exact": true,
+      "forbiddenFinish": false,
+      "unsafeFinish": false
+    },
+    {
+      "id": "development-cumulative-quantity-2",
+      "group": "cumulative-quantity",
+      "model": "gpt-5.4-mini-2026-03-17",
+      "latencyMs": 2715,
+      "usage": {
+        "input_tokens": 1349,
+        "input_tokens_details": {
+          "cache_write_tokens": 0,
+          "cached_tokens": 0
+        },
+        "output_tokens": 318,
+        "output_tokens_details": {
+          "reasoning_tokens": 109
+        },
+        "total_tokens": 1667
+      },
+      "claims": [
+        {
+          "kind": "ITEM_PROGRESS",
+          "activityHint": "power cable pulled",
+          "assetTag": "Feeder F-01",
+          "location": "MCC",
+          "stage": "cable_pulling",
+          "discipline": "Electrical",
+          "scope": "item",
+          "fullScope": false,
+          "eventDate": "2026-09-22",
+          "dateOrigin": "source_text",
+          "quantity": {
+            "value": 20,
+            "unit": "m",
+            "mode": "cumulative"
+          },
+          "evidenceQuote": "As of 2026-09-22, cumulative power cable pulled at MCC / Feeder F-01 is 20 m.",
+          "qualifiers": [],
+          "missingFields": [],
+          "observation": {
+            "version": 2,
+            "dateBasis": "explicit",
+            "dateEvidence": "As of 2026-09-22",
+            "quantityCoverage": "unknown",
+            "component": "power cable",
+            "dailyQuantity": null,
+            "items": [
+              "Feeder F-01"
+            ],
+            "coverageStart": null,
+            "coverageEnd": null,
+            "percent": null,
+            "inspectionRelation": null
+          }
+        }
+      ],
+      "matched": [
+        {
+          "expected": {
+            "kind": "ITEM_PROGRESS",
+            "eventDate": "2026-09-22",
+            "target": "ELE-2102",
+            "quantity": {
+              "value": 20,
+              "unit": "m",
+              "mode": "cumulative"
+            }
+          },
+          "actualIndex": 0,
+          "factMatch": true,
+          "retrievalEligible": true,
+          "targetRank": 1
+        }
+      ],
+      "exact": true,
+      "forbiddenFinish": false,
+      "unsafeFinish": false
+    },
+    {
+      "id": "development-daily-quantity-2",
+      "group": "daily-quantity",
+      "model": "gpt-5.4-mini-2026-03-17",
+      "latencyMs": 2521,
+      "usage": {
+        "input_tokens": 1351,
+        "input_tokens_details": {
+          "cache_write_tokens": 0,
+          "cached_tokens": 0
+        },
+        "output_tokens": 285,
+        "output_tokens_details": {
+          "reasoning_tokens": 69
+        },
+        "total_tokens": 1636
+      },
+      "claims": [
+        {
+          "kind": "ITEM_PROGRESS",
+          "activityHint": "pulled power cable",
+          "assetTag": "Feeder F-01",
+          "location": "MCC",
+          "stage": "cable_pulling",
+          "discipline": "Electrical",
+          "scope": "activity",
+          "fullScope": false,
+          "eventDate": "2026-09-22",
+          "dateOrigin": "source_text",
+          "quantity": {
+            "value": 20,
+            "unit": "m",
+            "mode": "delta"
+          },
+          "evidenceQuote": "On 2026-09-22, we pulled 20 m of power cable at MCC / Feeder F-01 during this shift.",
+          "qualifiers": [
+            "during this shift"
+          ],
+          "missingFields": [],
+          "observation": {
+            "version": 2,
+            "dateBasis": "explicit",
+            "dateEvidence": "On 2026-09-22",
+            "quantityCoverage": "activity_total",
+            "component": "power cable",
+            "dailyQuantity": {
+              "value": 20,
+              "unit": "m"
+            },
+            "items": [],
+            "coverageStart": null,
+            "coverageEnd": null,
+            "percent": null,
+            "inspectionRelation": "unknown"
+          }
+        }
+      ],
+      "matched": [
+        {
+          "expected": {
+            "kind": "ITEM_PROGRESS",
+            "eventDate": "2026-09-22",
+            "target": "ELE-2102",
+            "quantity": {
+              "value": 20,
+              "unit": "m",
+              "mode": "delta"
+            }
+          },
+          "actualIndex": 0,
+          "factMatch": true,
+          "retrievalEligible": true,
+          "targetRank": 1
+        }
+      ],
+      "exact": true,
+      "forbiddenFinish": false,
+      "unsafeFinish": false
+    },
+    {
+      "id": "development-missing-location-2",
+      "group": "missing-location",
+      "model": "gpt-5.4-mini-2026-03-17",
+      "latencyMs": 2104,
+      "usage": {
+        "input_tokens": 1336,
+        "input_tokens_details": {
+          "cache_write_tokens": 0,
+          "cached_tokens": 0
+        },
+        "output_tokens": 196,
+        "output_tokens_details": {
+          "reasoning_tokens": 29
+        },
+        "total_tokens": 1532
+      },
+      "claims": [
+        {
+          "kind": "FINISH",
+          "activityHint": "painting",
+          "assetTag": null,
+          "location": null,
+          "stage": null,
+          "discipline": "General",
+          "scope": "activity",
+          "fullScope": true,
+          "eventDate": "2026-09-22",
+          "dateOrigin": "source_text",
+          "quantity": null,
+          "evidenceQuote": "On 2026-09-22, all painting was finished.",
+          "qualifiers": [],
+          "missingFields": [],
+          "observation": {
+            "version": 2,
+            "dateBasis": "explicit",
+            "dateEvidence": "On 2026-09-22",
+            "quantityCoverage": "activity_total",
+            "component": null,
+            "dailyQuantity": null,
+            "items": [],
+            "coverageStart": null,
+            "coverageEnd": null,
+            "percent": null,
+            "inspectionRelation": null
+          }
+        }
+      ],
+      "matched": [
+        {
+          "expected": {
+            "kind": "FINISH",
+            "eventDate": "2026-09-22",
+            "location": null
+          },
+          "actualIndex": 0,
+          "factMatch": true,
+          "retrievalEligible": false,
+          "targetRank": null
+        }
+      ],
+      "exact": true,
+      "forbiddenFinish": false,
+      "unsafeFinish": false
+    },
+    {
+      "id": "development-physical-percent-2",
+      "group": "physical-percent",
+      "model": "gpt-5.4-mini-2026-03-17",
+      "latencyMs": 2638,
+      "usage": {
+        "input_tokens": 1347,
+        "input_tokens_details": {
+          "cache_write_tokens": 0,
+          "cached_tokens": 0
+        },
+        "output_tokens": 258,
+        "output_tokens_details": {
+          "reasoning_tokens": 47
+        },
+        "total_tokens": 1605
+      },
+      "claims": [
+        {
+          "kind": "PERCENT_PROGRESS",
+          "activityHint": "cable tray installation",
+          "assetTag": null,
+          "location": "Rack B / MCC route",
+          "stage": "cable_tray",
+          "discipline": "Electrical",
+          "scope": "activity",
+          "fullScope": false,
+          "eventDate": "2026-09-22",
+          "dateOrigin": "source_text",
+          "quantity": {
+            "value": 20,
+            "unit": "%",
+            "mode": "cumulative"
+          },
+          "evidenceQuote": "On 2026-09-22, cable tray installation at Rack B / MCC route is 20% physically complete.",
+          "qualifiers": [
+            "physical progress"
+          ],
+          "missingFields": [],
+          "observation": {
+            "version": 2,
+            "dateBasis": "explicit",
+            "dateEvidence": "On 2026-09-22",
+            "quantityCoverage": "activity_total",
+            "component": null,
+            "dailyQuantity": null,
+            "items": [],
+            "coverageStart": null,
+            "coverageEnd": null,
+            "percent": {
+              "value": 20,
+              "basis": "physical"
+            },
+            "inspectionRelation": "unknown"
+          }
+        }
+      ],
+      "matched": [
+        {
+          "expected": {
+            "kind": "PERCENT_PROGRESS",
+            "eventDate": "2026-09-22",
+            "target": "ELE-2101",
+            "percent": {
+              "value": 20,
+              "basis": "physical"
+            }
+          },
+          "actualIndex": 0,
+          "factMatch": true,
+          "retrievalEligible": true,
+          "targetRank": 1
+        }
+      ],
+      "exact": true,
+      "forbiddenFinish": false,
+      "unsafeFinish": false
+    },
+    {
+      "id": "development-resumed-2",
+      "group": "resumed",
+      "model": "gpt-5.4-mini-2026-03-17",
+      "latencyMs": 2332,
+      "usage": {
+        "input_tokens": 1347,
+        "input_tokens_details": {
+          "cache_write_tokens": 0,
+          "cached_tokens": 0
+        },
+        "output_tokens": 234,
+        "output_tokens_details": {
+          "reasoning_tokens": 39
+        },
+        "total_tokens": 1581
+      },
+      "claims": [
+        {
+          "kind": "RESUMED",
+          "activityHint": "excavation work",
+          "assetTag": "P-101",
+          "location": "Pump bay",
+          "stage": "excavation",
+          "discipline": "Civil",
+          "scope": "activity",
+          "fullScope": false,
+          "eventDate": "2026-09-22",
+          "dateOrigin": "source_text",
+          "quantity": null,
+          "evidenceQuote": "On 2026-09-22, excavation work at Pump bay / P-101 resumed after the water was removed.",
+          "qualifiers": [
+            "after the water was removed"
+          ],
+          "missingFields": [],
+          "observation": {
+            "version": 2,
+            "dateBasis": "explicit",
+            "dateEvidence": "On 2026-09-22",
+            "quantityCoverage": "unknown",
+            "component": "excavation work",
+            "dailyQuantity": null,
+            "items": [],
+            "coverageStart": null,
+            "coverageEnd": null,
+            "percent": null,
+            "inspectionRelation": null
+          }
+        }
+      ],
+      "matched": [
+        {
+          "expected": {
+            "kind": "RESUMED",
+            "eventDate": "2026-09-22",
+            "target": "CIV-0401"
+          },
+          "actualIndex": 0,
+          "factMatch": true,
+          "retrievalEligible": true,
+          "targetRank": 1
+        }
+      ],
+      "exact": true,
+      "forbiddenFinish": false,
+      "unsafeFinish": false
+    },
+    {
+      "id": "development-blocked-2",
+      "group": "blocked",
+      "model": "gpt-5.4-mini-2026-03-17",
+      "latencyMs": 2641,
+      "usage": {
+        "input_tokens": 1345,
+        "input_tokens_details": {
+          "cache_write_tokens": 0,
+          "cached_tokens": 0
+        },
+        "output_tokens": 243,
+        "output_tokens_details": {
+          "reasoning_tokens": 44
+        },
+        "total_tokens": 1588
+      },
+      "claims": [
+        {
+          "kind": "BLOCKED",
+          "activityHint": "excavation",
+          "assetTag": "P-101",
+          "location": "Pump bay",
+          "stage": "excavation",
+          "discipline": "Civil",
+          "scope": "activity",
+          "fullScope": false,
+          "eventDate": "2026-09-22",
+          "dateOrigin": "source_text",
+          "quantity": null,
+          "evidenceQuote": "On 2026-09-22, excavation at Pump bay / P-101 was blocked by standing water.",
+          "qualifiers": [
+            "blocked by standing water"
+          ],
+          "missingFields": [],
+          "observation": {
+            "version": 2,
+            "dateBasis": "explicit",
+            "dateEvidence": "On 2026-09-22",
+            "quantityCoverage": "unknown",
+            "component": "P-101",
+            "dailyQuantity": null,
+            "items": [],
+            "coverageStart": "2026-09-22",
+            "coverageEnd": "2026-09-22",
+            "percent": null,
+            "inspectionRelation": null
+          }
+        }
+      ],
+      "matched": [
+        {
+          "expected": {
+            "kind": "BLOCKED",
+            "eventDate": "2026-09-22",
+            "target": "CIV-0401"
+          },
+          "actualIndex": 0,
+          "factMatch": true,
+          "retrievalEligible": true,
+          "targetRank": 1
+        }
+      ],
+      "exact": true,
+      "forbiddenFinish": true,
+      "unsafeFinish": false
+    },
+    {
+      "id": "development-future-date-2",
+      "group": "future-date",
+      "model": "gpt-5.4-mini-2026-03-17",
+      "latencyMs": 2412,
+      "usage": {
+        "input_tokens": 1346,
+        "input_tokens_details": {
+          "cache_write_tokens": 0,
+          "cached_tokens": 0
+        },
+        "output_tokens": 278,
+        "output_tokens_details": {
+          "reasoning_tokens": 70
+        },
+        "total_tokens": 1624
+      },
+      "claims": [
+        {
+          "kind": "PLANNED_INTENT",
+          "activityHint": "pulling power cables",
+          "assetTag": "F-01",
+          "location": "MCC",
+          "stage": "cable_pulling",
+          "discipline": "Electrical",
+          "scope": "activity",
+          "fullScope": false,
+          "eventDate": "2026-09-22",
+          "dateOrigin": "source_text",
+          "quantity": null,
+          "evidenceQuote": "We plan to start pulling power cables at MCC / Feeder F-01 on 2026-09-22.",
+          "qualifiers": [
+            "future intention"
+          ],
+          "missingFields": [
+            "component",
+            "percent",
+            "inspectionRelation"
+          ],
+          "observation": {
+            "version": 2,
+            "dateBasis": "explicit",
+            "dateEvidence": "on 2026-09-22",
+            "quantityCoverage": "unknown",
+            "component": null,
+            "dailyQuantity": null,
+            "items": [],
+            "coverageStart": "2026-09-22",
+            "coverageEnd": "2026-09-22",
+            "percent": null,
+            "inspectionRelation": "unknown"
+          }
+        }
+      ],
+      "matched": [
+        {
+          "expected": {
+            "kind": "PLANNED_INTENT",
+            "eventDate": "2026-09-22",
+            "target": "ELE-2102"
+          },
+          "actualIndex": 0,
+          "factMatch": true,
+          "retrievalEligible": true,
+          "targetRank": 1
+        }
+      ],
+      "exact": true,
+      "forbiddenFinish": true,
+      "unsafeFinish": false
+    },
+    {
+      "id": "development-multi-stage-2",
+      "group": "multi-stage",
+      "model": "gpt-5.4-mini-2026-03-17",
+      "latencyMs": 2818,
+      "usage": {
+        "input_tokens": 1348,
+        "input_tokens_details": {
+          "cache_write_tokens": 0,
+          "cached_tokens": 0
+        },
+        "output_tokens": 372,
+        "output_tokens_details": {
+          "reasoning_tokens": 46
+        },
+        "total_tokens": 1720
+      },
+      "claims": [
+        {
+          "kind": "FINISH",
+          "activityHint": "excavation",
+          "assetTag": "P-101",
+          "location": "Pump bay",
+          "stage": "excavation",
+          "discipline": "Civil",
+          "scope": "activity",
+          "fullScope": true,
+          "eventDate": "2026-09-22",
+          "dateOrigin": "source_text",
+          "quantity": null,
+          "evidenceQuote": "On 2026-09-22, all excavation at Pump bay / P-101 finished",
+          "qualifiers": [],
+          "missingFields": [],
+          "observation": {
+            "version": 2,
+            "dateBasis": "explicit",
+            "dateEvidence": "On 2026-09-22",
+            "quantityCoverage": "activity_total",
+            "component": null,
+            "dailyQuantity": null,
+            "items": [],
+            "coverageStart": null,
+            "coverageEnd": null,
+            "percent": null,
+            "inspectionRelation": "unknown"
+          }
+        },
+        {
+          "kind": "START",
+          "activityHint": "reinforcement cage fixing",
+          "assetTag": "P-101",
+          "location": "Pump bay",
+          "stage": "reinforcement",
+          "discipline": "Civil",
+          "scope": "activity",
+          "fullScope": false,
+          "eventDate": "2026-09-22",
+          "dateOrigin": "source_text",
+          "quantity": null,
+          "evidenceQuote": "reinforcement cage fixing started there.",
+          "qualifiers": [],
+          "missingFields": [],
+          "observation": {
+            "version": 2,
+            "dateBasis": "explicit",
+            "dateEvidence": "On 2026-09-22",
+            "quantityCoverage": "activity_total",
+            "component": "reinforcement cage",
+            "dailyQuantity": null,
+            "items": [],
+            "coverageStart": null,
+            "coverageEnd": null,
+            "percent": null,
+            "inspectionRelation": "unknown"
+          }
+        }
+      ],
+      "matched": [
+        {
+          "expected": {
+            "kind": "FINISH",
+            "eventDate": "2026-09-22",
+            "target": "CIV-0401"
+          },
+          "actualIndex": 0,
+          "factMatch": true,
+          "retrievalEligible": true,
+          "targetRank": 1
+        },
+        {
+          "expected": {
+            "kind": "START",
+            "eventDate": "2026-09-22",
+            "target": "CIV-0402"
+          },
+          "actualIndex": 1,
+          "factMatch": true,
+          "retrievalEligible": true,
+          "targetRank": 1
+        }
+      ],
+      "exact": true,
+      "forbiddenFinish": false,
+      "unsafeFinish": false
+    },
+    {
+      "id": "development-explicit-start-3",
+      "group": "explicit-start",
+      "model": "gpt-5.4-mini-2026-03-17",
+      "latencyMs": 2303,
+      "usage": {
+        "input_tokens": 1346,
+        "input_tokens_details": {
+          "cache_write_tokens": 0,
+          "cached_tokens": 0
+        },
+        "output_tokens": 262,
+        "output_tokens_details": {
+          "reasoning_tokens": 67
+        },
+        "total_tokens": 1608
+      },
+      "claims": [
+        {
+          "kind": "START",
+          "activityHint": "excavating pump foundations",
+          "assetTag": "P-101",
+          "location": "Pump bay",
+          "stage": "excavation",
+          "discipline": "Civil",
+          "scope": "activity",
+          "fullScope": false,
+          "eventDate": "2026-09-23",
+          "dateOrigin": "source_text",
+          "quantity": null,
+          "evidenceQuote": "On 2026-09-23, we started excavating the pump foundations at Pump bay / P-101.",
+          "qualifiers": [],
+          "missingFields": [],
+          "observation": {
+            "version": 2,
+            "dateBasis": "explicit",
+            "dateEvidence": "On 2026-09-23",
+            "quantityCoverage": "unknown",
+            "component": "pump foundations",
+            "dailyQuantity": null,
+            "items": [],
+            "coverageStart": "2026-09-23",
+            "coverageEnd": "2026-09-23",
+            "percent": null,
+            "inspectionRelation": null
+          }
+        }
+      ],
+      "matched": [
+        {
+          "expected": {
+            "kind": "START",
+            "eventDate": "2026-09-23",
+            "target": "CIV-0401"
+          },
+          "actualIndex": 0,
+          "factMatch": true,
+          "retrievalEligible": true,
+          "targetRank": 1
+        }
+      ],
+      "exact": true,
+      "forbiddenFinish": false,
+      "unsafeFinish": false
+    },
+    {
+      "id": "development-explicit-finish-3",
+      "group": "explicit-finish",
+      "model": "gpt-5.4-mini-2026-03-17",
+      "latencyMs": 3008,
+      "usage": {
+        "input_tokens": 1349,
+        "input_tokens_details": {
+          "cache_write_tokens": 0,
+          "cached_tokens": 0
+        },
+        "output_tokens": 299,
+        "output_tokens_details": {
+          "reasoning_tokens": 98
+        },
+        "total_tokens": 1648
+      },
+      "claims": [
+        {
+          "kind": "FINISH",
+          "activityHint": "installation of pipe supports",
+          "assetTag": null,
+          "location": "Unit 2 / Rack A",
+          "stage": "supports",
+          "discipline": "Mechanical",
+          "scope": "activity",
+          "fullScope": true,
+          "eventDate": "2026-09-23",
+          "dateOrigin": "source_text",
+          "quantity": {
+            "value": 12,
+            "unit": "pipe supports",
+            "mode": "item"
+          },
+          "evidenceQuote": "On 2026-09-23, installation of all 12 pipe supports in Unit 2 / Rack A was fully completed.",
+          "qualifiers": [],
+          "missingFields": [],
+          "observation": {
+            "version": 2,
+            "dateBasis": "explicit",
+            "dateEvidence": "On 2026-09-23",
+            "quantityCoverage": "activity_total",
+            "component": "pipe supports",
+            "dailyQuantity": null,
+            "items": [],
+            "coverageStart": null,
+            "coverageEnd": null,
+            "percent": null,
+            "inspectionRelation": null
+          }
+        }
+      ],
+      "matched": [
+        {
+          "expected": {
+            "kind": "FINISH",
+            "eventDate": "2026-09-23",
+            "target": "PIP-1101",
+            "fullScope": true
+          },
+          "actualIndex": 0,
+          "factMatch": true,
+          "retrievalEligible": true,
+          "targetRank": 1
+        }
+      ],
+      "exact": true,
+      "forbiddenFinish": false,
+      "unsafeFinish": false
+    },
+    {
+      "id": "development-cumulative-quantity-3",
+      "group": "cumulative-quantity",
+      "model": "gpt-5.4-mini-2026-03-17",
+      "latencyMs": 2690,
+      "usage": {
+        "input_tokens": 1349,
+        "input_tokens_details": {
+          "cache_write_tokens": 0,
+          "cached_tokens": 0
+        },
+        "output_tokens": 325,
+        "output_tokens_details": {
+          "reasoning_tokens": 110
+        },
+        "total_tokens": 1674
+      },
+      "claims": [
+        {
+          "kind": "ITEM_PROGRESS",
+          "activityHint": "power cable pulled",
+          "assetTag": "F-01",
+          "location": "MCC",
+          "stage": "cable_pulling",
+          "discipline": "Electrical",
+          "scope": "item",
+          "fullScope": false,
+          "eventDate": "2026-09-23",
+          "dateOrigin": "source_text",
+          "quantity": {
+            "value": 30,
+            "unit": "m",
+            "mode": "cumulative"
+          },
+          "evidenceQuote": "As of 2026-09-23, cumulative power cable pulled at MCC / Feeder F-01 is 30 m.",
+          "qualifiers": [
+            "cumulative"
+          ],
+          "missingFields": [],
+          "observation": {
+            "version": 2,
+            "dateBasis": "explicit",
+            "dateEvidence": "As of 2026-09-23",
+            "quantityCoverage": "unknown",
+            "component": "power cable",
+            "dailyQuantity": null,
+            "items": [
+              "Feeder F-01"
+            ],
+            "coverageStart": null,
+            "coverageEnd": "2026-09-23",
+            "percent": null,
+            "inspectionRelation": null
+          }
+        }
+      ],
+      "matched": [
+        {
+          "expected": {
+            "kind": "ITEM_PROGRESS",
+            "eventDate": "2026-09-23",
+            "target": "ELE-2102",
+            "quantity": {
+              "value": 30,
+              "unit": "m",
+              "mode": "cumulative"
+            }
+          },
+          "actualIndex": 0,
+          "factMatch": true,
+          "retrievalEligible": true,
+          "targetRank": 1
+        }
+      ],
+      "exact": true,
+      "forbiddenFinish": false,
+      "unsafeFinish": false
+    },
+    {
+      "id": "development-daily-quantity-3",
+      "group": "daily-quantity",
+      "model": "gpt-5.4-mini-2026-03-17",
+      "latencyMs": 2901,
+      "usage": {
+        "input_tokens": 1351,
+        "input_tokens_details": {
+          "cache_write_tokens": 0,
+          "cached_tokens": 0
+        },
+        "output_tokens": 358,
+        "output_tokens_details": {
+          "reasoning_tokens": 134
+        },
+        "total_tokens": 1709
+      },
+      "claims": [
+        {
+          "kind": "ITEM_PROGRESS",
+          "activityHint": "pulled power cable",
+          "assetTag": "F-01",
+          "location": "MCC",
+          "stage": "cable_pulling",
+          "discipline": "Electrical",
+          "scope": "activity",
+          "fullScope": false,
+          "eventDate": "2026-09-23",
+          "dateOrigin": "source_text",
+          "quantity": {
+            "value": 30,
+            "unit": "m",
+            "mode": "delta"
+          },
+          "evidenceQuote": "On 2026-09-23, we pulled 30 m of power cable at MCC / Feeder F-01 during this shift.",
+          "qualifiers": [
+            "during this shift"
+          ],
+          "missingFields": [],
+          "observation": {
+            "version": 2,
+            "dateBasis": "explicit",
+            "dateEvidence": "On 2026-09-23",
+            "quantityCoverage": "activity_total",
+            "component": "power cable",
+            "dailyQuantity": {
+              "value": 30,
+              "unit": "m"
+            },
+            "items": [],
+            "coverageStart": "2026-09-23",
+            "coverageEnd": "2026-09-23",
+            "percent": null,
+            "inspectionRelation": null
+          }
+        }
+      ],
+      "matched": [
+        {
+          "expected": {
+            "kind": "ITEM_PROGRESS",
+            "eventDate": "2026-09-23",
+            "target": "ELE-2102",
+            "quantity": {
+              "value": 30,
+              "unit": "m",
+              "mode": "delta"
+            }
+          },
+          "actualIndex": 0,
+          "factMatch": true,
+          "retrievalEligible": true,
+          "targetRank": 1
+        }
+      ],
+      "exact": true,
+      "forbiddenFinish": false,
+      "unsafeFinish": false
+    },
+    {
+      "id": "development-physical-percent-3",
+      "group": "physical-percent",
+      "model": "gpt-5.4-mini-2026-03-17",
+      "latencyMs": 2683,
+      "usage": {
+        "input_tokens": 1347,
+        "input_tokens_details": {
+          "cache_write_tokens": 0,
+          "cached_tokens": 0
+        },
+        "output_tokens": 281,
+        "output_tokens_details": {
+          "reasoning_tokens": 85
+        },
+        "total_tokens": 1628
+      },
+      "claims": [
+        {
+          "kind": "PERCENT_PROGRESS",
+          "activityHint": "cable tray installation",
+          "assetTag": null,
+          "location": "Rack B / MCC route",
+          "stage": "cable_tray",
+          "discipline": "Electrical",
+          "scope": "activity",
+          "fullScope": false,
+          "eventDate": "2026-09-23",
+          "dateOrigin": "source_text",
+          "quantity": null,
+          "evidenceQuote": "On 2026-09-23, cable tray installation at Rack B / MCC route is 30% physically complete.",
+          "qualifiers": [],
+          "missingFields": [],
+          "observation": {
+            "version": 2,
+            "dateBasis": "explicit",
+            "dateEvidence": "On 2026-09-23",
+            "quantityCoverage": "activity_total",
+            "component": null,
+            "dailyQuantity": null,
+            "items": [],
+            "coverageStart": null,
+            "coverageEnd": null,
+            "percent": {
+              "value": 30,
+              "basis": "physical"
+            },
+            "inspectionRelation": null
+          }
+        }
+      ],
+      "matched": [
+        {
+          "expected": {
+            "kind": "PERCENT_PROGRESS",
+            "eventDate": "2026-09-23",
+            "target": "ELE-2101",
+            "percent": {
+              "value": 30,
+              "basis": "physical"
+            }
+          },
+          "actualIndex": 0,
+          "factMatch": true,
+          "retrievalEligible": true,
+          "targetRank": 1
+        }
+      ],
+      "exact": true,
+      "forbiddenFinish": false,
+      "unsafeFinish": false
+    },
+    {
+      "id": "development-missing-location-3",
+      "group": "missing-location",
+      "model": "gpt-5.4-mini-2026-03-17",
+      "latencyMs": 2085,
+      "usage": {
+        "input_tokens": 1336,
+        "input_tokens_details": {
+          "cache_write_tokens": 0,
+          "cached_tokens": 0
+        },
+        "output_tokens": 213,
+        "output_tokens_details": {
+          "reasoning_tokens": 36
+        },
+        "total_tokens": 1549
+      },
+      "claims": [
+        {
+          "kind": "FINISH",
+          "activityHint": "painting",
+          "assetTag": null,
+          "location": null,
+          "stage": null,
+          "discipline": "General",
+          "scope": "activity",
+          "fullScope": true,
+          "eventDate": "2026-09-23",
+          "dateOrigin": "source_text",
+          "quantity": null,
+          "evidenceQuote": "On 2026-09-23, all painting was finished.",
+          "qualifiers": [],
+          "missingFields": [],
+          "observation": {
+            "version": 2,
+            "dateBasis": "explicit",
+            "dateEvidence": "On 2026-09-23",
+            "quantityCoverage": "activity_total",
+            "component": null,
+            "dailyQuantity": null,
+            "items": [],
+            "coverageStart": "2026-09-23",
+            "coverageEnd": "2026-09-23",
+            "percent": null,
+            "inspectionRelation": null
+          }
+        }
+      ],
+      "matched": [
+        {
+          "expected": {
+            "kind": "FINISH",
+            "eventDate": "2026-09-23",
+            "location": null
+          },
+          "actualIndex": 0,
+          "factMatch": true,
+          "retrievalEligible": false,
+          "targetRank": null
+        }
+      ],
+      "exact": true,
+      "forbiddenFinish": false,
+      "unsafeFinish": false
+    },
+    {
+      "id": "development-blocked-3",
+      "group": "blocked",
+      "model": "gpt-5.4-mini-2026-03-17",
+      "latencyMs": 2074,
+      "usage": {
+        "input_tokens": 1345,
+        "input_tokens_details": {
+          "cache_write_tokens": 0,
+          "cached_tokens": 0
+        },
+        "output_tokens": 223,
+        "output_tokens_details": {
+          "reasoning_tokens": 36
+        },
+        "total_tokens": 1568
+      },
+      "claims": [
+        {
+          "kind": "BLOCKED",
+          "activityHint": "excavation",
+          "assetTag": "P-101",
+          "location": "Pump bay",
+          "stage": "excavation",
+          "discipline": "Civil",
+          "scope": "activity",
+          "fullScope": false,
+          "eventDate": "2026-09-23",
+          "dateOrigin": "source_text",
+          "quantity": null,
+          "evidenceQuote": "On 2026-09-23, excavation at Pump bay / P-101 was blocked by standing water.",
+          "qualifiers": [
+            "standing water"
+          ],
+          "missingFields": [],
+          "observation": {
+            "version": 2,
+            "dateBasis": "explicit",
+            "dateEvidence": "On 2026-09-23",
+            "quantityCoverage": "unknown",
+            "component": "excavation",
+            "dailyQuantity": null,
+            "items": [],
+            "coverageStart": null,
+            "coverageEnd": null,
+            "percent": null,
+            "inspectionRelation": null
+          }
+        }
+      ],
+      "matched": [
+        {
+          "expected": {
+            "kind": "BLOCKED",
+            "eventDate": "2026-09-23",
+            "target": "CIV-0401"
+          },
+          "actualIndex": 0,
+          "factMatch": true,
+          "retrievalEligible": true,
+          "targetRank": 1
+        }
+      ],
+      "exact": true,
+      "forbiddenFinish": true,
+      "unsafeFinish": false
+    },
+    {
+      "id": "development-resumed-3",
+      "group": "resumed",
+      "model": "gpt-5.4-mini-2026-03-17",
+      "latencyMs": 2991,
+      "usage": {
+        "input_tokens": 1347,
+        "input_tokens_details": {
+          "cache_write_tokens": 0,
+          "cached_tokens": 0
+        },
+        "output_tokens": 242,
+        "output_tokens_details": {
+          "reasoning_tokens": 47
+        },
+        "total_tokens": 1589
+      },
+      "claims": [
+        {
+          "kind": "RESUMED",
+          "activityHint": "excavation work",
+          "assetTag": "P-101",
+          "location": "Pump bay",
+          "stage": "excavation",
+          "discipline": "Civil",
+          "scope": "activity",
+          "fullScope": false,
+          "eventDate": "2026-09-23",
+          "dateOrigin": "source_text",
+          "quantity": null,
+          "evidenceQuote": "On 2026-09-23, excavation work at Pump bay / P-101 resumed after the water was removed.",
+          "qualifiers": [
+            "after the water was removed"
+          ],
+          "missingFields": [],
+          "observation": {
+            "version": 2,
+            "dateBasis": "explicit",
+            "dateEvidence": "On 2026-09-23",
+            "quantityCoverage": "unknown",
+            "component": "excavation work",
+            "dailyQuantity": null,
+            "items": [],
+            "coverageStart": null,
+            "coverageEnd": null,
+            "percent": null,
+            "inspectionRelation": null
+          }
+        }
+      ],
+      "matched": [
+        {
+          "expected": {
+            "kind": "RESUMED",
+            "eventDate": "2026-09-23",
+            "target": "CIV-0401"
+          },
+          "actualIndex": 0,
+          "factMatch": true,
+          "retrievalEligible": true,
+          "targetRank": 1
+        }
+      ],
+      "exact": true,
+      "forbiddenFinish": false,
+      "unsafeFinish": false
+    },
+    {
+      "id": "development-future-date-3",
+      "group": "future-date",
+      "model": "gpt-5.4-mini-2026-03-17",
+      "latencyMs": 2021,
+      "usage": {
+        "input_tokens": 1346,
+        "input_tokens_details": {
+          "cache_write_tokens": 0,
+          "cached_tokens": 0
+        },
+        "output_tokens": 215,
+        "output_tokens_details": {
+          "reasoning_tokens": 12
+        },
+        "total_tokens": 1561
+      },
+      "claims": [
+        {
+          "kind": "PLANNED_INTENT",
+          "activityHint": "pulling power cables",
+          "assetTag": "MCC / Feeder F-01",
+          "location": "MCC / Feeder F-01",
+          "stage": "cable_pulling",
+          "discipline": "Electrical",
+          "scope": "activity",
+          "fullScope": false,
+          "eventDate": "2026-09-23",
+          "dateOrigin": "source_text",
+          "quantity": null,
+          "evidenceQuote": "We plan to start pulling power cables at MCC / Feeder F-01 on 2026-09-23.",
+          "qualifiers": [
+            "future intention"
+          ],
+          "missingFields": [],
+          "observation": {
+            "version": 2,
+            "dateBasis": "explicit",
+            "dateEvidence": "on 2026-09-23",
+            "quantityCoverage": "unknown",
+            "component": "power cables",
+            "dailyQuantity": null,
+            "items": [],
+            "coverageStart": null,
+            "coverageEnd": null,
+            "percent": null,
+            "inspectionRelation": null
+          }
+        }
+      ],
+      "matched": [
+        {
+          "expected": {
+            "kind": "PLANNED_INTENT",
+            "eventDate": "2026-09-23",
+            "target": "ELE-2102"
+          },
+          "actualIndex": 0,
+          "factMatch": true,
+          "retrievalEligible": true,
+          "targetRank": 1
+        }
+      ],
+      "exact": true,
+      "forbiddenFinish": true,
+      "unsafeFinish": false
+    },
+    {
+      "id": "development-multi-stage-3",
+      "group": "multi-stage",
+      "model": "gpt-5.4-mini-2026-03-17",
+      "latencyMs": 3023,
+      "usage": {
+        "input_tokens": 1348,
+        "input_tokens_details": {
+          "cache_write_tokens": 0,
+          "cached_tokens": 0
+        },
+        "output_tokens": 372,
+        "output_tokens_details": {
+          "reasoning_tokens": 27
+        },
+        "total_tokens": 1720
+      },
+      "claims": [
+        {
+          "kind": "FINISH",
+          "activityHint": "excavation",
+          "assetTag": "P-101",
+          "location": "Pump bay",
+          "stage": "excavation",
+          "discipline": "Civil",
+          "scope": "activity",
+          "fullScope": true,
+          "eventDate": "2026-09-23",
+          "dateOrigin": "source_text",
+          "quantity": null,
+          "evidenceQuote": "On 2026-09-23, all excavation at Pump bay / P-101 finished",
+          "qualifiers": [],
+          "missingFields": [],
+          "observation": {
+            "version": 2,
+            "dateBasis": "explicit",
+            "dateEvidence": "On 2026-09-23",
+            "quantityCoverage": "activity_total",
+            "component": null,
+            "dailyQuantity": null,
+            "items": [],
+            "coverageStart": "2026-09-23",
+            "coverageEnd": "2026-09-23",
+            "percent": null,
+            "inspectionRelation": "unknown"
+          }
+        },
+        {
+          "kind": "START",
+          "activityHint": "reinforcement cage fixing",
+          "assetTag": "P-101",
+          "location": "Pump bay",
+          "stage": "reinforcement",
+          "discipline": "Civil",
+          "scope": "activity",
+          "fullScope": false,
+          "eventDate": "2026-09-23",
+          "dateOrigin": "source_text",
+          "quantity": null,
+          "evidenceQuote": "and reinforcement cage fixing started there.",
+          "qualifiers": [],
+          "missingFields": [],
+          "observation": {
+            "version": 2,
+            "dateBasis": "explicit",
+            "dateEvidence": "On 2026-09-23",
+            "quantityCoverage": "unknown",
+            "component": "reinforcement cage",
+            "dailyQuantity": null,
+            "items": [],
+            "coverageStart": "2026-09-23",
+            "coverageEnd": "2026-09-23",
+            "percent": null,
+            "inspectionRelation": "unknown"
+          }
+        }
+      ],
+      "matched": [
+        {
+          "expected": {
+            "kind": "FINISH",
+            "eventDate": "2026-09-23",
+            "target": "CIV-0401"
+          },
+          "actualIndex": 0,
+          "factMatch": true,
+          "retrievalEligible": true,
+          "targetRank": 1
+        },
+        {
+          "expected": {
+            "kind": "START",
+            "eventDate": "2026-09-23",
+            "target": "CIV-0402"
+          },
+          "actualIndex": 1,
+          "factMatch": true,
+          "retrievalEligible": true,
+          "targetRank": 1
+        }
+      ],
+      "exact": true,
+      "forbiddenFinish": false,
+      "unsafeFinish": false
+    },
+    {
+      "id": "development-explicit-start-4",
+      "group": "explicit-start",
+      "model": "gpt-5.4-mini-2026-03-17",
+      "latencyMs": 2953,
+      "usage": {
+        "input_tokens": 1346,
+        "input_tokens_details": {
+          "cache_write_tokens": 0,
+          "cached_tokens": 0
+        },
+        "output_tokens": 245,
+        "output_tokens_details": {
+          "reasoning_tokens": 53
+        },
+        "total_tokens": 1591
+      },
+      "claims": [
+        {
+          "kind": "START",
+          "activityHint": "excavating the pump foundations",
+          "assetTag": "P-101",
+          "location": "Pump bay",
+          "stage": "excavation",
+          "discipline": "Civil",
+          "scope": "activity",
+          "fullScope": false,
+          "eventDate": "2026-09-24",
+          "dateOrigin": "source_text",
+          "quantity": null,
+          "evidenceQuote": "On 2026-09-24, we started excavating the pump foundations at Pump bay / P-101.",
+          "qualifiers": [],
+          "missingFields": [],
+          "observation": {
+            "version": 2,
+            "dateBasis": "explicit",
+            "dateEvidence": "On 2026-09-24",
+            "quantityCoverage": "activity_total",
+            "component": "pump foundations",
+            "dailyQuantity": null,
+            "items": [],
+            "coverageStart": "2026-09-24",
+            "coverageEnd": null,
+            "percent": null,
+            "inspectionRelation": "unknown"
+          }
+        }
+      ],
+      "matched": [
+        {
+          "expected": {
+            "kind": "START",
+            "eventDate": "2026-09-24",
+            "target": "CIV-0401"
+          },
+          "actualIndex": 0,
+          "factMatch": true,
+          "retrievalEligible": true,
+          "targetRank": 1
+        }
+      ],
+      "exact": true,
+      "forbiddenFinish": false,
+      "unsafeFinish": false
+    },
+    {
+      "id": "development-explicit-finish-4",
+      "group": "explicit-finish",
+      "model": "gpt-5.4-mini-2026-03-17",
+      "latencyMs": 2744,
+      "usage": {
+        "input_tokens": 1349,
+        "input_tokens_details": {
+          "cache_write_tokens": 0,
+          "cached_tokens": 0
+        },
+        "output_tokens": 263,
+        "output_tokens_details": {
+          "reasoning_tokens": 56
+        },
+        "total_tokens": 1612
+      },
+      "claims": [
+        {
+          "kind": "FINISH",
+          "activityHint": "installation of pipe supports",
+          "assetTag": null,
+          "location": "Unit 2 / Rack A",
+          "stage": "supports",
+          "discipline": "Mechanical",
+          "scope": "activity",
+          "fullScope": true,
+          "eventDate": "2026-09-24",
+          "dateOrigin": "source_text",
+          "quantity": {
+            "value": 12,
+            "unit": "pipe supports",
+            "mode": "item"
+          },
+          "evidenceQuote": "On 2026-09-24, installation of all 12 pipe supports in Unit 2 / Rack A was fully completed.",
+          "qualifiers": [],
+          "missingFields": [],
+          "observation": {
+            "version": 2,
+            "dateBasis": "explicit",
+            "dateEvidence": "On 2026-09-24",
+            "quantityCoverage": "activity_total",
+            "component": "pipe supports",
+            "dailyQuantity": null,
+            "items": [
+              "all 12 pipe supports"
+            ],
+            "coverageStart": null,
+            "coverageEnd": null,
+            "percent": null,
+            "inspectionRelation": "unknown"
+          }
+        }
+      ],
+      "matched": [
+        {
+          "expected": {
+            "kind": "FINISH",
+            "eventDate": "2026-09-24",
+            "target": "PIP-1101",
+            "fullScope": true
+          },
+          "actualIndex": 0,
+          "factMatch": true,
+          "retrievalEligible": true,
+          "targetRank": 1
+        }
+      ],
+      "exact": true,
+      "forbiddenFinish": false,
+      "unsafeFinish": false
+    },
+    {
+      "id": "development-cumulative-quantity-4",
+      "group": "cumulative-quantity",
+      "model": "gpt-5.4-mini-2026-03-17",
+      "latencyMs": 2805,
+      "usage": {
+        "input_tokens": 1349,
+        "input_tokens_details": {
+          "cache_write_tokens": 0,
+          "cached_tokens": 0
+        },
+        "output_tokens": 318,
+        "output_tokens_details": {
+          "reasoning_tokens": 103
+        },
+        "total_tokens": 1667
+      },
+      "claims": [
+        {
+          "kind": "ITEM_PROGRESS",
+          "activityHint": "power cable pulled",
+          "assetTag": "Feeder F-01",
+          "location": "MCC",
+          "stage": "cable_pulling",
+          "discipline": "Electrical",
+          "scope": "item",
+          "fullScope": false,
+          "eventDate": "2026-09-24",
+          "dateOrigin": "source_text",
+          "quantity": {
+            "value": 40,
+            "unit": "m",
+            "mode": "cumulative"
+          },
+          "evidenceQuote": "As of 2026-09-24, cumulative power cable pulled at MCC / Feeder F-01 is 40 m.",
+          "qualifiers": [],
+          "missingFields": [],
+          "observation": {
+            "version": 2,
+            "dateBasis": "explicit",
+            "dateEvidence": "As of 2026-09-24",
+            "quantityCoverage": "activity_total",
+            "component": "power cable",
+            "dailyQuantity": null,
+            "items": [
+              "Feeder F-01"
+            ],
+            "coverageStart": null,
+            "coverageEnd": "2026-09-24",
+            "percent": null,
+            "inspectionRelation": "unknown"
+          }
+        }
+      ],
+      "matched": [
+        {
+          "expected": {
+            "kind": "ITEM_PROGRESS",
+            "eventDate": "2026-09-24",
+            "target": "ELE-2102",
+            "quantity": {
+              "value": 40,
+              "unit": "m",
+              "mode": "cumulative"
+            }
+          },
+          "actualIndex": 0,
+          "factMatch": true,
+          "retrievalEligible": true,
+          "targetRank": 1
+        }
+      ],
+      "exact": true,
+      "forbiddenFinish": false,
+      "unsafeFinish": false
+    },
+    {
+      "id": "development-physical-percent-4",
+      "group": "physical-percent",
+      "model": "gpt-5.4-mini-2026-03-17",
+      "latencyMs": 2116,
+      "usage": {
+        "input_tokens": 1347,
+        "input_tokens_details": {
+          "cache_write_tokens": 0,
+          "cached_tokens": 0
+        },
+        "output_tokens": 245,
+        "output_tokens_details": {
+          "reasoning_tokens": 31
+        },
+        "total_tokens": 1592
+      },
+      "claims": [
+        {
+          "kind": "PERCENT_PROGRESS",
+          "activityHint": "cable tray installation",
+          "assetTag": null,
+          "location": "Rack B / MCC route",
+          "stage": "cable_tray",
+          "discipline": "Electrical",
+          "scope": "activity",
+          "fullScope": false,
+          "eventDate": "2026-09-24",
+          "dateOrigin": "source_text",
+          "quantity": {
+            "value": 40,
+            "unit": "%",
+            "mode": "cumulative"
+          },
+          "evidenceQuote": "On 2026-09-24, cable tray installation at Rack B / MCC route is 40% physically complete.",
+          "qualifiers": [
+            "physical progress"
+          ],
+          "missingFields": [],
+          "observation": {
+            "version": 2,
+            "dateBasis": "explicit",
+            "dateEvidence": "On 2026-09-24",
+            "quantityCoverage": "activity_total",
+            "component": "cable tray installation",
+            "dailyQuantity": null,
+            "items": [],
+            "coverageStart": null,
+            "coverageEnd": null,
+            "percent": {
+              "value": 40,
+              "basis": "physical"
+            },
+            "inspectionRelation": "unknown"
+          }
+        }
+      ],
+      "matched": [
+        {
+          "expected": {
+            "kind": "PERCENT_PROGRESS",
+            "eventDate": "2026-09-24",
+            "target": "ELE-2101",
+            "percent": {
+              "value": 40,
+              "basis": "physical"
+            }
+          },
+          "actualIndex": 0,
+          "factMatch": true,
+          "retrievalEligible": true,
+          "targetRank": 1
+        }
+      ],
+      "exact": true,
+      "forbiddenFinish": false,
+      "unsafeFinish": false
+    },
+    {
+      "id": "development-daily-quantity-4",
+      "group": "daily-quantity",
+      "model": "gpt-5.4-mini-2026-03-17",
+      "latencyMs": 3054,
+      "usage": {
+        "input_tokens": 1351,
+        "input_tokens_details": {
+          "cache_write_tokens": 0,
+          "cached_tokens": 0
+        },
+        "output_tokens": 297,
+        "output_tokens_details": {
+          "reasoning_tokens": 70
+        },
+        "total_tokens": 1648
+      },
+      "claims": [
+        {
+          "kind": "ITEM_PROGRESS",
+          "activityHint": "power cable pulling",
+          "assetTag": "Feeder F-01",
+          "location": "MCC / Feeder F-01",
+          "stage": "cable_pulling",
+          "discipline": "Electrical",
+          "scope": "activity",
+          "fullScope": false,
+          "eventDate": "2026-09-24",
+          "dateOrigin": "source_text",
+          "quantity": {
+            "value": 40,
+            "unit": "m",
+            "mode": "delta"
+          },
+          "evidenceQuote": "On 2026-09-24, we pulled 40 m of power cable at MCC / Feeder F-01 during this shift.",
+          "qualifiers": [
+            "during this shift"
+          ],
+          "missingFields": [],
+          "observation": {
+            "version": 2,
+            "dateBasis": "explicit",
+            "dateEvidence": "On 2026-09-24",
+            "quantityCoverage": "activity_total",
+            "component": "power cable",
+            "dailyQuantity": {
+              "value": 40,
+              "unit": "m"
+            },
+            "items": [
+              "Feeder F-01"
+            ],
+            "coverageStart": null,
+            "coverageEnd": null,
+            "percent": null,
+            "inspectionRelation": "unknown"
+          }
+        }
+      ],
+      "matched": [
+        {
+          "expected": {
+            "kind": "ITEM_PROGRESS",
+            "eventDate": "2026-09-24",
+            "target": "ELE-2102",
+            "quantity": {
+              "value": 40,
+              "unit": "m",
+              "mode": "delta"
+            }
+          },
+          "actualIndex": 0,
+          "factMatch": true,
+          "retrievalEligible": true,
+          "targetRank": 1
+        }
+      ],
+      "exact": true,
+      "forbiddenFinish": false,
+      "unsafeFinish": false
+    },
+    {
+      "id": "development-missing-location-4",
+      "group": "missing-location",
+      "model": "gpt-5.4-mini-2026-03-17",
+      "latencyMs": 2201,
+      "usage": {
+        "input_tokens": 1336,
+        "input_tokens_details": {
+          "cache_write_tokens": 0,
+          "cached_tokens": 0
+        },
+        "output_tokens": 214,
+        "output_tokens_details": {
+          "reasoning_tokens": 42
+        },
+        "total_tokens": 1550
+      },
+      "claims": [
+        {
+          "kind": "FINISH",
+          "activityHint": "painting",
+          "assetTag": null,
+          "location": null,
+          "stage": null,
+          "discipline": "General",
+          "scope": "activity",
+          "fullScope": true,
+          "eventDate": "2026-09-24",
+          "dateOrigin": "source_text",
+          "quantity": null,
+          "evidenceQuote": "On 2026-09-24, all painting was finished.",
+          "qualifiers": [],
+          "missingFields": [],
+          "observation": {
+            "version": 2,
+            "dateBasis": "explicit",
+            "dateEvidence": "On 2026-09-24",
+            "quantityCoverage": "activity_total",
+            "component": null,
+            "dailyQuantity": null,
+            "items": [],
+            "coverageStart": null,
+            "coverageEnd": "2026-09-24",
+            "percent": null,
+            "inspectionRelation": null
+          }
+        }
+      ],
+      "matched": [
+        {
+          "expected": {
+            "kind": "FINISH",
+            "eventDate": "2026-09-24",
+            "location": null
+          },
+          "actualIndex": 0,
+          "factMatch": true,
+          "retrievalEligible": false,
+          "targetRank": null
+        }
+      ],
+      "exact": true,
+      "forbiddenFinish": false,
+      "unsafeFinish": false
+    },
+    {
+      "id": "development-blocked-4",
+      "group": "blocked",
+      "model": "gpt-5.4-mini-2026-03-17",
+      "latencyMs": 2322,
+      "usage": {
+        "input_tokens": 1345,
+        "input_tokens_details": {
+          "cache_write_tokens": 0,
+          "cached_tokens": 0
+        },
+        "output_tokens": 229,
+        "output_tokens_details": {
+          "reasoning_tokens": 42
+        },
+        "total_tokens": 1574
+      },
+      "claims": [
+        {
+          "kind": "BLOCKED",
+          "activityHint": "excavation",
+          "assetTag": "P-101",
+          "location": "Pump bay",
+          "stage": "excavation",
+          "discipline": "Civil",
+          "scope": "activity",
+          "fullScope": false,
+          "eventDate": "2026-09-24",
+          "dateOrigin": "source_text",
+          "quantity": null,
+          "evidenceQuote": "On 2026-09-24, excavation at Pump bay / P-101 was blocked by standing water.",
+          "qualifiers": [
+            "standing water"
+          ],
+          "missingFields": [],
+          "observation": {
+            "version": 2,
+            "dateBasis": "explicit",
+            "dateEvidence": "On 2026-09-24",
+            "quantityCoverage": "unknown",
+            "component": "P-101",
+            "dailyQuantity": null,
+            "items": [],
+            "coverageStart": null,
+            "coverageEnd": null,
+            "percent": null,
+            "inspectionRelation": "unknown"
+          }
+        }
+      ],
+      "matched": [
+        {
+          "expected": {
+            "kind": "BLOCKED",
+            "eventDate": "2026-09-24",
+            "target": "CIV-0401"
+          },
+          "actualIndex": 0,
+          "factMatch": true,
+          "retrievalEligible": true,
+          "targetRank": 1
+        }
+      ],
+      "exact": true,
+      "forbiddenFinish": true,
+      "unsafeFinish": false
+    },
+    {
+      "id": "development-resumed-4",
+      "group": "resumed",
+      "model": "gpt-5.4-mini-2026-03-17",
+      "latencyMs": 2696,
+      "usage": {
+        "input_tokens": 1347,
+        "input_tokens_details": {
+          "cache_write_tokens": 0,
+          "cached_tokens": 0
+        },
+        "output_tokens": 239,
+        "output_tokens_details": {
+          "reasoning_tokens": 45
+        },
+        "total_tokens": 1586
+      },
+      "claims": [
+        {
+          "kind": "RESUMED",
+          "activityHint": "excavation",
+          "assetTag": "P-101",
+          "location": "Pump bay",
+          "stage": "excavation",
+          "discipline": "Civil",
+          "scope": "activity",
+          "fullScope": false,
+          "eventDate": "2026-09-24",
+          "dateOrigin": "source_text",
+          "quantity": null,
+          "evidenceQuote": "On 2026-09-24, excavation work at Pump bay / P-101 resumed after the water was removed.",
+          "qualifiers": [
+            "after the water was removed"
+          ],
+          "missingFields": [],
+          "observation": {
+            "version": 2,
+            "dateBasis": "explicit",
+            "dateEvidence": "On 2026-09-24",
+            "quantityCoverage": "unknown",
+            "component": "excavation work",
+            "dailyQuantity": null,
+            "items": [],
+            "coverageStart": null,
+            "coverageEnd": null,
+            "percent": null,
+            "inspectionRelation": null
+          }
+        }
+      ],
+      "matched": [
+        {
+          "expected": {
+            "kind": "RESUMED",
+            "eventDate": "2026-09-24",
+            "target": "CIV-0401"
+          },
+          "actualIndex": 0,
+          "factMatch": true,
+          "retrievalEligible": true,
+          "targetRank": 1
+        }
+      ],
+      "exact": true,
+      "forbiddenFinish": false,
+      "unsafeFinish": false
+    },
+    {
+      "id": "development-future-date-4",
+      "group": "future-date",
+      "model": "gpt-5.4-mini-2026-03-17",
+      "latencyMs": 2636,
+      "usage": {
+        "input_tokens": 1346,
+        "input_tokens_details": {
+          "cache_write_tokens": 0,
+          "cached_tokens": 0
+        },
+        "output_tokens": 276,
+        "output_tokens_details": {
+          "reasoning_tokens": 78
+        },
+        "total_tokens": 1622
+      },
+      "claims": [
+        {
+          "kind": "PLANNED_INTENT",
+          "activityHint": "pulling power cables",
+          "assetTag": "F-01",
+          "location": "MCC / Feeder F-01",
+          "stage": "cable_pulling",
+          "discipline": "Electrical",
+          "scope": "activity",
+          "fullScope": false,
+          "eventDate": "2026-09-24",
+          "dateOrigin": "source_text",
+          "quantity": null,
+          "evidenceQuote": "We plan to start pulling power cables at MCC / Feeder F-01 on 2026-09-24.",
+          "qualifiers": [
+            "future intent"
+          ],
+          "missingFields": [],
+          "observation": {
+            "version": 2,
+            "dateBasis": "explicit",
+            "dateEvidence": "on 2026-09-24",
+            "quantityCoverage": "unknown",
+            "component": "power cables",
+            "dailyQuantity": null,
+            "items": [],
+            "coverageStart": null,
+            "coverageEnd": null,
+            "percent": null,
+            "inspectionRelation": null
+          }
+        }
+      ],
+      "matched": [
+        {
+          "expected": {
+            "kind": "PLANNED_INTENT",
+            "eventDate": "2026-09-24",
+            "target": "ELE-2102"
+          },
+          "actualIndex": 0,
+          "factMatch": true,
+          "retrievalEligible": true,
+          "targetRank": 1
+        }
+      ],
+      "exact": true,
+      "forbiddenFinish": true,
+      "unsafeFinish": false
+    },
+    {
+      "id": "development-multi-stage-4",
+      "group": "multi-stage",
+      "model": "gpt-5.4-mini-2026-03-17",
+      "latencyMs": 2984,
+      "usage": {
+        "input_tokens": 1348,
+        "input_tokens_details": {
+          "cache_write_tokens": 0,
+          "cached_tokens": 0
+        },
+        "output_tokens": 385,
+        "output_tokens_details": {
+          "reasoning_tokens": 45
+        },
+        "total_tokens": 1733
+      },
+      "claims": [
+        {
+          "kind": "FINISH",
+          "activityHint": "excavation",
+          "assetTag": "P-101",
+          "location": "Pump bay",
+          "stage": "excavation",
+          "discipline": "Civil",
+          "scope": "activity",
+          "fullScope": true,
+          "eventDate": "2026-09-24",
+          "dateOrigin": "source_text",
+          "quantity": null,
+          "evidenceQuote": "On 2026-09-24, all excavation at Pump bay / P-101 finished",
+          "qualifiers": [],
+          "missingFields": [],
+          "observation": {
+            "version": 2,
+            "dateBasis": "explicit",
+            "dateEvidence": "On 2026-09-24",
+            "quantityCoverage": "activity_total",
+            "component": null,
+            "dailyQuantity": null,
+            "items": [],
+            "coverageStart": "2026-09-24",
+            "coverageEnd": "2026-09-24",
+            "percent": null,
+            "inspectionRelation": "unknown"
+          }
+        },
+        {
+          "kind": "START",
+          "activityHint": "reinforcement cage fixing",
+          "assetTag": "P-101",
+          "location": "Pump bay",
+          "stage": "reinforcement",
+          "discipline": "Civil",
+          "scope": "activity",
+          "fullScope": false,
+          "eventDate": "2026-09-24",
+          "dateOrigin": "source_text",
+          "quantity": null,
+          "evidenceQuote": "and reinforcement cage fixing started there.",
+          "qualifiers": [],
+          "missingFields": [],
+          "observation": {
+            "version": 2,
+            "dateBasis": "explicit",
+            "dateEvidence": "On 2026-09-24",
+            "quantityCoverage": "unknown",
+            "component": "reinforcement cage",
+            "dailyQuantity": null,
+            "items": [],
+            "coverageStart": "2026-09-24",
+            "coverageEnd": null,
+            "percent": null,
+            "inspectionRelation": "unknown"
+          }
+        }
+      ],
+      "matched": [
+        {
+          "expected": {
+            "kind": "FINISH",
+            "eventDate": "2026-09-24",
+            "target": "CIV-0401"
+          },
+          "actualIndex": 0,
+          "factMatch": true,
+          "retrievalEligible": true,
+          "targetRank": 1
+        },
+        {
+          "expected": {
+            "kind": "START",
+            "eventDate": "2026-09-24",
+            "target": "CIV-0402"
+          },
+          "actualIndex": 1,
+          "factMatch": true,
+          "retrievalEligible": true,
+          "targetRank": 1
+        }
+      ],
+      "exact": true,
+      "forbiddenFinish": false,
+      "unsafeFinish": false
+    }
+  ]
+}
