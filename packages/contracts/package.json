@@ -8,7 +8,8 @@
     "./reports": "./src/reports.ts",
     "./followups": "./src/followups.ts",
     "./imports": "./src/imports.ts",
-    "./observations": "./src/observations.ts"
+    "./observations": "./src/observations.ts",
+    "./media": "./src/media.ts"
   },
   "dependencies": {
     "zod": "4.6.5"

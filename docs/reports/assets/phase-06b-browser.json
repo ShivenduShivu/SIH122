@@ -1,0 +1,19 @@
+{
+  "complete": true,
+  "checks": [
+    "Chrome AudioWorklet records a playable WAV from synthetic microphone input",
+    "Real OpenAI transcription preserves negation; checked audio/photo remain unsubmitted with no extraction job",
+    "Saved uploads can be reopened after local storage is cleared, with original transcript recovered",
+    "Reload restores corrected words, date and uploaded evidence without a duplicate upload",
+    "Capture form fits 390px and 320px without page overflow",
+    "Lost submission response recovers the same receipt and one extraction job; original and corrected words are separate",
+    "Receipt shows transcript provenance and authorized private photo access works",
+    "Offline text persists and Send remains disabled until connection returns",
+    "Simulated expired session retains draft text for signing back in",
+    "Simulated storage quota failure is visible instead of falsely claiming a saved draft",
+    "Simulated microphone denial preserves typed reporting",
+    "Sign out clears this user’s local drafts"
+  ],
+  "errors": [],
+  "kind": "Desktop Chrome with fake microphone and synthetic English speech; not real-device testing"
+}

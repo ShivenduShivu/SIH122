@@ -4,6 +4,7 @@ import { useRouter } from 'next/navigation';
 import type { ExtractedClaim } from '@intelligrid/contracts/reports';
 import { useSchedule } from './schedule-context';
 import { RematchAction } from './rematch-action';
+import { TranscriptEvidence } from './transcript-evidence';
 import { PlannerFollowup, EvidenceLink } from './followup-actions';
 import type { Question, Verification } from '@intelligrid/contracts/followups';
 type Candidate = {
@@ -31,6 +32,7 @@ export type ReviewEntry = {
   claim: ReviewClaim;
   candidates: Candidate[];
   questions: Array<Question & { replyText?: string }>;
+  media?: Parameters<typeof TranscriptEvidence>[0]['media'];
   attachments: Array<{ id: string; file_name: string }>;
   verification?: Verification;
   source: string;
@@ -331,6 +333,7 @@ export function ReviewPanel({
               </div>
             )}
             <blockquote className="source-quote">{entry.source}</blockquote>
+            <TranscriptEvidence media={entry.media} />
             {entry.attachments.map((a) => (
               <EvidenceLink key={a.id} id={a.id} name={a.file_name} />
             ))}

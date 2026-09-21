@@ -1,0 +1,48 @@
+{
+  "passed": true,
+  "results": [
+    {
+      "width": 390,
+      "height": 844,
+      "listHeight": 273,
+      "contentHeight": 14715,
+      "pageHeight": 844,
+      "viewport": 844,
+      "navBottom": 844,
+      "overflow": false
+    },
+    {
+      "width": 320,
+      "height": 568,
+      "listHeight": 111,
+      "contentHeight": 15656,
+      "pageHeight": 700,
+      "viewport": 568,
+      "navBottom": 700,
+      "overflow": false
+    },
+    {
+      "width": 480,
+      "height": 900,
+      "listHeight": 329,
+      "contentHeight": 14088,
+      "pageHeight": 900,
+      "viewport": 900,
+      "navBottom": 900,
+      "overflow": false
+    },
+    {
+      "width": 1440,
+      "height": 950,
+      "listHeight": 315,
+      "contentHeight": 14369,
+      "pageHeight": 950,
+      "viewport": 950,
+      "navBottom": 921,
+      "overflow": false
+    }
+  ],
+  "keyboardScroll": true,
+  "returnPositionRestored": true,
+  "searchAndEmptyState": true
+}

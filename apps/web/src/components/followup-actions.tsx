@@ -608,17 +608,28 @@ export function ReportLifecycleActions({
 
 export function EvidenceLink({ id, name }: { id: string; name: string }) {
   const [message, setMessage] = useState('');
+  const [fallback, setFallback] = useState<string | null>(null);
   async function open() {
     setMessage('');
+    setFallback(null);
+    // Open within the user gesture; Safari may block a new tab after an awaited fetch.
+    const tab = window.open('about:blank', '_blank');
+    if (tab) tab.opener = null;
     try {
       const response = await fetch(`/api/v1/attachments/${id}/access`, { cache: 'no-store' });
       const data = await response.json();
       if (!response.ok) {
+        tab?.close();
         setMessage(data.error);
         return;
       }
-      window.open(data.url, '_blank', 'noopener,noreferrer');
+      if (tab) tab.location.replace(data.url);
+      else {
+        setFallback(data.url);
+        setMessage('The browser blocked a new tab. Use the file link below within one minute.');
+      }
     } catch {
+      tab?.close();
       setMessage('Could not open the evidence. Please retry.');
     }
   }
@@ -628,6 +639,11 @@ export function EvidenceLink({ id, name }: { id: string; name: string }) {
         Open evidence: {name}
       </button>
       {message && <p role="alert">{message}</p>}
+      {fallback && (
+        <a href={fallback} target="_blank" rel="noopener noreferrer">
+          View {name}
+        </a>
+      )}
     </div>
   );
 }

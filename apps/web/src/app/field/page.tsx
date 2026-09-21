@@ -75,22 +75,22 @@ export default async function FieldPage() {
           <h2 id="report-heading">Report from the site</h2>
         </div>
         <div className="capture-options">
-          <button disabled className="voice-primary">
+          <Link href="/field/report?mode=voice" className="voice-primary">
             <Icon name="microphone" size={20} />
             <strong>Speak a progress report</strong>
             <small>Hindi, English, or a mix of both</small>
-          </button>
+          </Link>
           <Link href="/field/report" className="capture-link">
             <Icon name="pen" />
             <strong>Type instead</strong>
           </Link>
-          <button disabled>
+          <Link href="/field/report?mode=photo" className="capture-link">
             <Icon name="camera" />
             <strong>Add a photo</strong>
-          </button>
+          </Link>
         </div>
         <p className="field-explanation">
-          Text reporting is available. Voice and photo capture arrive in a later phase.
+          Check your words and evidence before sending. Submission and acceptance are separate steps.
         </p>
       </section>
       <div className="field-callout">

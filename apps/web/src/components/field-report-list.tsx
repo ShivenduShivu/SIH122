@@ -1,5 +1,6 @@
 'use client';
 import Link from 'next/link';
+import { useLayoutEffect, useRef } from 'react';
 import { z } from 'zod';
 import { useSessionView } from './use-session-view';
 const filtersSchema = z.object({ search: z.string().max(160), status: z.string().max(60) });
@@ -20,6 +21,24 @@ export function FieldReportList({
   storageKey: string;
 }) {
   const { view, setView, ready } = useSessionView(storageKey, filtersSchema, defaults);
+  const listRef = useRef<HTMLDivElement>(null);
+  const scrollKey = `${storageKey}:scroll`;
+  useLayoutEffect(() => {
+    if (!ready || !listRef.current) return;
+    let top = 0;
+    try {
+      const saved = JSON.parse(sessionStorage.getItem(scrollKey) ?? 'null');
+      if (
+        saved?.search === view.search &&
+        saved?.status === view.status &&
+        Number.isFinite(saved?.top)
+      )
+        top = Math.max(0, saved.top);
+    } catch {
+      /* Scrolling also works without browser storage. */
+    }
+    listRef.current.scrollTop = top;
+  }, [ready, scrollKey, view.search, view.status]);
   const query = view.search.trim().toLowerCase();
   const visible = records.filter(
     (r) =>
@@ -75,7 +94,28 @@ export function FieldReportList({
           )}
         </div>
       </div>
-      <div className="field-tasks report-list">
+      <div
+        ref={listRef}
+        className="field-tasks report-list"
+        role="region"
+        aria-label="Your reports"
+        tabIndex={0}
+        onScroll={(event) => {
+          if (!ready) return;
+          try {
+            sessionStorage.setItem(
+              scrollKey,
+              JSON.stringify({
+                search: view.search,
+                status: view.status,
+                top: event.currentTarget.scrollTop,
+              }),
+            );
+          } catch {
+            /* View position is optional; reporting does not depend on storage. */
+          }
+        }}
+      >
         {visible.map((r) => (
           <Link className="field-task" key={r.id} href={`/field/reports/${r.id}`}>
             <div>

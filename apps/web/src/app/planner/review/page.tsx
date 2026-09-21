@@ -56,6 +56,7 @@ export default async function ReviewPage({
             );
             return {
               claim: c,
+              media: w.versions.find(v=>v.report_id===r.id&&v.version===1)?.context?.media,
               attachments: followups.attachments.filter(
                 (a) => a.report_id === c.report_id && a.state === 'received',
               ),

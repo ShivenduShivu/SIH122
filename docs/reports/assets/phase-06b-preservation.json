@@ -1,0 +1,55 @@
+{
+  "scheduleVersion": 5,
+  "reportingLeaves": 149,
+  "activity": {
+    "id": "afafc839-86de-4203-89af-b2a325503920",
+    "name": "Excavate for footings",
+    "unit": "m3",
+    "stage": "unclassified",
+    "calendar": "Mon–Sat; Sunday off; no holidays",
+    "duration": 6,
+    "location": "Waste Receiving & Tipping Hall (Bldg B)",
+    "nodeKind": "task",
+    "projectId": "10000000-0000-4000-8000-000000000005",
+    "sourceWbs": "GWP.C03.01.01.01",
+    "discipline": "Civil",
+    "externalId": "GWP-CIV-1250",
+    "revisionId": "bb1f537e-0345-41f5-a55d-094758696e37",
+    "actualStart": "2027-11-22",
+    "sourceLevel": "L6",
+    "actualFinish": "2027-11-30",
+    "percentBasis": null,
+    "plannedStart": "2027-11-18",
+    "predecessors": "GWP-CIV-1050 FS",
+    "progressAsOf": "2027-11-26",
+    "baselineStart": "2027-11-18",
+    "hierarchyPath": [
+      {
+        "id": "GWP-PH-7",
+        "name": "Construction (Contractor Package)"
+      },
+      {
+        "id": "GWP-L3-030",
+        "name": "Civil Works - Process Buildings"
+      },
+      {
+        "id": "GWP-CIV-1230",
+        "name": "Waste Receiving & Tipping Hall (Bldg B)"
+      },
+      {
+        "id": "GWP-CIV-1240",
+        "name": "Foundations"
+      }
+    ],
+    "milestoneDate": null,
+    "plannedFinish": "2027-11-24",
+    "actualsVersion": 4,
+    "baselineFinish": "2027-11-24",
+    "targetQuantity": 2200,
+    "acceptedPercent": null,
+    "acceptedQuantity": 1800,
+    "reportedProgress": true,
+    "sourceDiscipline": "CIV",
+    "assignedReporterId": null
+  }
+}

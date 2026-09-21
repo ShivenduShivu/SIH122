@@ -1,0 +1,47 @@
+{
+  "kind": "Synthetic smoke probes only; not human/device accuracy",
+  "humanRecordingsEvaluated": 0,
+  "cases": [
+    {
+      "source": "synthetic",
+      "language": "en",
+      "duration": 8.018,
+      "reference": "Painting in room one is not finished. Room two is complete. We installed twelve metres of cable today.",
+      "text": "Painting in room one is not finished. Room two is complete. We installed twelve meters of cable today.",
+      "provider": "openai",
+      "model": "gpt-4o-mini-transcribe-2025-12-15",
+      "latencyMs": 2178,
+      "usage": {
+        "type": "tokens",
+        "total_tokens": 103,
+        "input_tokens": 80,
+        "input_token_details": {
+          "text_tokens": 0,
+          "audio_tokens": 80
+        },
+        "output_tokens": 23
+      }
+    },
+    {
+      "source": "synthetic",
+      "reference": "कमरा एक में पेंटिंग अभी पूरी नहीं हुई है। कमरा दो में पेंटिंग पूरी हो गई है। आज बारह मीटर केबल लगाया है।",
+      "duration": 9.35,
+      "sampleRate": 24000,
+      "text": "कमरा एक में पेंटिंग अभी पूरी नहीं हुई है। कमरा दो में पेंटिंग पूरी हो गई है। आज बारह मीटर केबल लगाया है।",
+      "provider": "openai",
+      "model": "gpt-4o-mini-transcribe-2025-12-15",
+      "latencyMs": 1110,
+      "usage": {
+        "type": "tokens",
+        "total_tokens": 130,
+        "input_tokens": 93,
+        "input_token_details": {
+          "text_tokens": 0,
+          "audio_tokens": 93
+        },
+        "output_tokens": 37
+      },
+      "notice": "Synthetic Hindi connectivity check, not team-recorded speech accuracy"
+    }
+  ]
+}

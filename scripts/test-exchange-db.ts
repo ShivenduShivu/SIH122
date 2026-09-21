@@ -12,6 +12,7 @@ import { Discipline } from '@intelligrid/contracts';
 import { processImport } from '../apps/worker/src/imports';
 import { processOne } from '../apps/worker/src/processor';
 import type { ExtractedClaim } from '@intelligrid/contracts/reports';
+import { processMedia } from '../apps/worker/src/media';
 const accounts = JSON.parse(readFileSync('.cache/demo-accounts.json', 'utf8'));
 const planner = await signIn(accounts[ids.planner]),
   supervisor = await signIn(accounts[ids.supervisor]),
@@ -130,16 +131,77 @@ function facts(kind: string, date: string | null, value?: number, mode = 'cumula
     },
   };
 }
+let voiceFixtureUsed = false;
 async function claim(f: any, client = supervisor, flags: string[] = []) {
-  const report = must(
-    await client.rpc('capture_text_report', {
-      p_project: project,
-      p_capture: randomUUID(),
-      p_text: f.evidenceQuote,
-      p_work_date: f.eventDate,
-      p_activity: null,
-    }),
-  );
+  let report: string;
+  if (!voiceFixtureUsed) {
+    voiceFixtureUsed = true;
+    // Fixture transcriber verifies provenance plumbing only; this is not an ASR-quality test.
+    const bytes = Buffer.alloc(44 + 32000);
+    bytes.write('RIFF');
+    bytes.writeUInt32LE(bytes.length - 8, 4);
+    bytes.write('WAVEfmt ', 8);
+    bytes.writeUInt32LE(16, 16);
+    bytes.writeUInt16LE(1, 20);
+    bytes.writeUInt16LE(1, 22);
+    bytes.writeUInt32LE(16000, 24);
+    bytes.writeUInt32LE(32000, 28);
+    bytes.writeUInt16LE(2, 32);
+    bytes.writeUInt16LE(16, 34);
+    bytes.write('data', 36);
+    bytes.writeUInt32LE(32000, 40);
+    for (let i = 0; i < 16000; i++)
+      bytes.writeInt16LE(Math.round(Math.sin(i / 8) * 4000), 44 + i * 2);
+    const file = {
+      id: randomUUID(),
+      name: 'fixture-tone.wav',
+      kind: 'audio',
+      mime: 'audio/wav',
+      bytes: bytes.length,
+      sha256: createHash('sha256').update(bytes).digest('hex'),
+      caption: '',
+    };
+    report = must(
+      await client.rpc('reserve_field_capture', {
+        p_project: project,
+        p_capture: randomUUID(),
+        p_files: [file],
+        p_language: 'en',
+      }),
+    );
+    must(
+      await client.storage
+        .from('evidence')
+        .upload(`${project}/${report}/${file.id}`, bytes, { contentType: file.mime }),
+    );
+    must(await client.rpc('finalize_field_media', { p_report: report }));
+    await processMedia(admin, {
+      transcribe: async () => ({
+        text: f.evidenceQuote,
+        provider: 'test-fixture',
+        model: 'media-exchange-contract',
+        latencyMs: 0,
+        usage: null,
+      }),
+    });
+    must(
+      await client.rpc('submit_field_capture', {
+        p_report: report,
+        p_text: f.evidenceQuote,
+        p_work_date: f.eventDate,
+        p_activity: null,
+      }),
+    );
+  } else
+    report = must(
+      await client.rpc('capture_text_report', {
+        p_project: project,
+        p_capture: randomUUID(),
+        p_text: f.evidenceQuote,
+        p_work_date: f.eventDate,
+        p_activity: null,
+      }),
+    );
   const job = must(await admin.rpc('lease_report_job'));
   assert.equal(job.report_id, report);
   must(
@@ -346,6 +408,22 @@ try {
   const firstId = must(await exportNow()),
     first = await loadExport(firstId);
   const firstRows = fileRows(first, 'activities.csv');
+  check(
+    JSON.parse(first.files['snapshot.json'].content).acceptedEvents.some((e: any) =>
+      e.media?.some(
+        (m: any) => m.model === 'media-exchange-contract' && m.originalTranscript === e.quote,
+      ),
+    ),
+    'accepted voice event retains original transcript, checksum and attachment in exported snapshot',
+  );
+  check(
+    fileRows(first, 'evidence.csv').some(
+      (r: any) =>
+        r.media &&
+        JSON.parse(r.media)?.some((m: any) => m.kind === 'audio' && m.sha256 && m.attachmentId),
+    ),
+    'evidence CSV carries authorized voice provenance',
+  );
   check(
     ['activities.csv', 'evidence.csv', 'exceptions.csv'].every((name) =>
       Buffer.from(first.files[name].content, 'utf8')

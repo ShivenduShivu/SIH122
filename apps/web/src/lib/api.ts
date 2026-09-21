@@ -9,6 +9,12 @@ export async function apiSession(request?: Request) {
   return { db, user: data.user } as const;
 }
 const messages: Record<string, string> = {
+  MEDIA_NOT_READY:
+    'Wait for every file to finish checking before submitting. Retry a failed upload if needed.',
+  CAPTURE_NOT_DRAFT: 'This report has already been sent or discarded. Open My reports to check it.',
+  CAPTURE_DISCARDED: 'This draft was discarded. Start a new report.',
+  TOO_MANY_DRAFTS:
+    'There are too many saved upload drafts. Discard unused drafts before starting another.',
   STALE_EXPORT: 'Accepted progress changed. Refresh the schedule before creating an export.',
   STALE_REVISION_DIFF:
     'The schedule, accepted progress or access policy changed. Preview the revision again.',

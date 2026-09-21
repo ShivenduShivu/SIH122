@@ -5,7 +5,7 @@ import { RefreshPage } from '../../../components/refresh-page';
 export default async function ReportsPage() {
   const w = await reportWorkbench();
   return (
-    <>
+    <div className="field-reports-screen">
       <RefreshPage />
       <div className="field-greeting">
         <p className="eyebrow">YOUR FIELD RECORDS</p>
@@ -27,6 +27,6 @@ export default async function ReportsPage() {
           };
         })}
       />
-    </>
+    </div>
   );
 }

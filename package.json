@@ -44,7 +44,10 @@
     "evaluate:field": "tsx scripts/evaluate-field-corpus.ts",
     "test:browser:observations": "tsx tests/browser/observations.ts",
     "test:exchange-db": "tsx scripts/test-exchange-db.ts",
-    "test:browser:exchange": "tsx tests/browser/exchange.ts"
+    "test:browser:exchange": "tsx tests/browser/exchange.ts",
+    "test:media-db": "tsx scripts/test-media-db.ts",
+    "test:browser:media": "tsx tests/browser/media.ts",
+    "evaluate:speech": "tsx scripts/evaluate-speech.ts"
   },
   "devDependencies": {
     "@playwright/test": "1.63.0",

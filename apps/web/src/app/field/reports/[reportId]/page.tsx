@@ -1,3 +1,4 @@
+import { TranscriptEvidence } from '../../../../components/transcript-evidence';
 import Link from 'next/link';
 import { notFound } from 'next/navigation';
 import { reportWorkbench } from '../../../../lib/reports';
@@ -41,6 +42,7 @@ export default async function ReportDetail({ params }: { params: Promise<{ repor
           IST
         </p>
       </section>
+      <TranscriptEvidence media={version?.context?.media} />
       {followups.questions
         .filter((q) => q.report_id === reportId)
         .map((q) => (

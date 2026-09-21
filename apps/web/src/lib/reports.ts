@@ -16,6 +16,7 @@ export const reportWorkbench = cache(async () => {
       .from('reports')
       .select('*', { count: 'exact' })
       .eq('project_id', c.project.id)
+      .gte('current_version', 1)
       .order('id')
       .range(from, to),
   );

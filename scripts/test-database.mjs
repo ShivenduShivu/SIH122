@@ -1,6 +1,6 @@
 import assert from 'node:assert/strict';
 import { readFileSync } from 'node:fs';
-import { randomUUID } from 'node:crypto';
+import { randomUUID, createHash } from 'node:crypto';
 import { createClient } from '@supabase/supabase-js';
 import { admin, local, must, signIn } from './local-env.mjs';
 const accounts = JSON.parse(readFileSync('.cache/demo-accounts.json', 'utf8'));
@@ -160,15 +160,51 @@ check(
   ).error?.code === '23503',
   'same-project foreign key rejects mixed project references',
 );
-const path = `${p}/${accounts[id(1)].id}/integration-${randomUUID()}.txt`;
+const bytes = Buffer.from(
+  'iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAQAAAC1HAwCAAAAC0lEQVR42mP8/x8AAwMCAO+jK1sAAAAASUVORK5CYII=',
+  'base64',
+);
+const attachment = randomUUID(),
+  hash = createHash('sha256').update(bytes).digest('hex');
+const report = must(
+  await civil.rpc('reserve_field_capture', {
+    p_project: p,
+    p_capture: randomUUID(),
+    p_language: 'auto',
+    p_files: [
+      {
+        id: attachment,
+        name: 'policy-test.png',
+        kind: 'photo',
+        mime: 'image/png',
+        bytes: bytes.length,
+        sha256: hash,
+        caption: 'Storage policy fixture',
+      },
+    ],
+  }),
+);
+const path = `${p}/${report}/${attachment}`;
 try {
-  must(
-    await civil.storage
-      .from('evidence')
-      .upload(path, 'synthetic evidence', { contentType: 'text/plain' }),
-  );
+  must(await civil.storage.from('evidence').upload(path, bytes, { contentType: 'image/png' }));
   checks++;
-  console.log('PASS reporter uploads to own project namespace');
+  console.log('PASS reporter uploads to reserved report attachment');
+  check(
+    !!(await civil.storage.from('evidence').createSignedUrl(path, 30)).error,
+    'unverified upload cannot be read',
+  );
+  // This suite checks RLS, not decoder quality (covered by test:media-db).
+  must(await civil.rpc('finalize_field_media', { p_report: report }));
+  const lease = must(await admin.rpc('lease_field_media'));
+  assert.equal(lease.id, attachment);
+  must(
+    await admin.rpc('complete_field_media', {
+      p_attachment: attachment,
+      p_token: lease.leaseToken,
+      p_result: { sha256: hash, width: 1, height: 1, format: 'png' },
+      p_error: null,
+    }),
+  );
   check(
     !!(await piping.storage.from('evidence').createSignedUrl(path, 30)).error,
     'other reporter cannot retrieve evidence',
@@ -232,6 +268,7 @@ try {
     await mutate(row, latest);
   }
 } finally {
+  must(await civil.rpc('discard_field_capture', { p_report: report }));
   must(await admin.storage.from('evidence').remove([path]));
 }
 const audit = must(await planner.from('admin_audit').select('action').eq('project_id', p));

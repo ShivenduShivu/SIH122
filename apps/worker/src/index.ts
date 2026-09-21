@@ -3,6 +3,8 @@ import { resolve } from 'node:path';
 import { OpenAIExtractor } from '@intelligrid/adapters';
 import { processOne, workerDatabase } from './processor';
 import { processImport } from './imports';
+import { processMedia } from './media';
+import { OpenAITranscriber } from '@intelligrid/adapters/transcription';
 if (process.argv.includes('--check')) {
   console.log(
     JSON.stringify({
@@ -24,7 +26,8 @@ if (process.argv.includes('--check')) {
       'Configure SUPABASE_URL, SUPABASE_SERVICE_ROLE_KEY and OPENAI_API_KEY for the worker.',
     );
   const db = workerDatabase(url, key),
-    extractor = new OpenAIExtractor(apiKey);
+    extractor = new OpenAIExtractor(apiKey),
+    transcriber = new OpenAITranscriber(apiKey);
   let stopping = false;
   process.on('SIGINT', () => {
     stopping = true;
@@ -35,7 +38,8 @@ if (process.argv.includes('--check')) {
   do {
     try {
       const imported = await processImport(db);
-      const worked = (await processOne(db, extractor)) || imported;
+      const media = await processMedia(db, transcriber);
+      const worked = (await processOne(db, extractor)) || imported || media;
       if (process.argv.includes('--once')) break;
       if (!worked) await new Promise((r) => setTimeout(r, 2000));
     } catch {

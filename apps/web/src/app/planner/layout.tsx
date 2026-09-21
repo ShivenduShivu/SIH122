@@ -1,3 +1,4 @@
+import { SignOut } from '../../components/sign-out';
 import { readRows } from '../../lib/read-rows';
 import { PlannerNav } from '../../components/planner-nav';
 import { brand } from '../../lib/brand';
@@ -55,9 +56,7 @@ export default async function PlannerLayout({ children }: { children: React.Reac
           <div>
             <strong>{member.display_name}</strong>
             <small>{member.role}</small>
-            <form method="post" action="/api/auth/logout">
-              <button className="text-button">Sign out</button>
-            </form>
+            <SignOut userId={member.user_id} />
           </div>
         </div>
       </header>

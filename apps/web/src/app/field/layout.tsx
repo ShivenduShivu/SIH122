@@ -1,3 +1,4 @@
+import { SignOut } from '../../components/sign-out';
 import { FieldNav } from '../../components/field-nav';
 import { brand } from '../../lib/brand';
 import { projectContext } from '../../lib/project';
@@ -29,9 +30,7 @@ export default async function FieldLayout({ children }: { children: React.ReactN
         </header>
         <div className="field-session">
           <span>{member.role} · Project access verified</span>
-          <form action="/api/auth/logout" method="post">
-            <button className="text-button">Sign out</button>
-          </form>
+          <SignOut userId={member.user_id} />
         </div>
         <main id="field-main" className="field-main">
           {children}

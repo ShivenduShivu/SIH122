@@ -57,7 +57,12 @@ export default async function ReportsPage() {
                     <td>
                       <strong>FR-{r.id.slice(0, 8).toUpperCase()}</strong>
                       <small>
-                        {r.source_kind === 'spreadsheet' ? 'Spreadsheet row' : 'Text report'} ·{' '}
+                        {r.source_kind === 'spreadsheet'
+                          ? 'Spreadsheet row'
+                          : r.source_kind === 'voice'
+                            ? 'Voice report'
+                            : 'Text report'}{' '}
+                        ·{' '}
                         {new Date(r.received_at).toLocaleTimeString('en-IN', {
                           timeZone: 'Asia/Kolkata',
                           hour: '2-digit',

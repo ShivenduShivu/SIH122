@@ -4,7 +4,7 @@ BITS Pilani / SIH 26122. Synthetic oil/gas and supplied waste-plant project data
 
 ## Current scope
 
-Phase 6A adds immutable planner exchange ZIPs, controlled replacement schedule revisions and searchable accepted execution history. The supplied field workbook, progress reconciliation, approval preview, clarification and supervisor verification remain in place. See the [Phase 6A report](docs/reports/phase-06a.md) and [technical notes](docs/phase-06a-technical-notes.md). Phase 6A and its review fixes are approved. Native Primavera import is not verified; voice/photo remains Phase 6B.
+Phase 6B adds bounded voice capture, editable OpenAI transcripts, private photo/audio evidence and recoverable field text drafts. Submission still requires reporter confirmation; accepted schedule changes still require planner review. The supplied workbook, progress reconciliation, clarification, supervisor verification, history and planner exchange remain in place. See the [Phase 6B report](docs/reports/phase-06b.md) and [technical notes](docs/phase-06b-technical-notes.md). The implementation and review fixes are approved; human speech and physical Android/iPhone checks carry into Phase 7 as pending. This is not a fully offline PWA or verified native Primavera integration.
 
 ## Run locally
 
@@ -33,6 +33,9 @@ npm run test:import-paging # 260 leaves and 241 assignment-history records
 npm run test:browser:import # running app; uploads only if plant is still empty
 npm run test:exchange-db # immutable export and revision checks; stop worker first
 npm run test:browser:exchange # GWP demo; creates ZIP and unactivated revision preview
+npm run test:media-db # isolated media/reservation/retry checks; stop worker first
+npm run test:browser:media # running app, synthetic mic + real OpenAI; consumes API tokens
+npm run evaluate:speech -- fixtures/speech/synthetic.json # synthetic smoke metrics only
 npm run test:seed     # verify repeated seed has no database changes
 npm run build        # production Next.js build
 npm run test:browser # running app on :3000; see browser prerequisites below
@@ -53,4 +56,4 @@ Browser checks use Playwright and Chromium. Install it once with `npx playwright
 - `docs/implementation-phases.md`: detailed phase instructions, gates and commit messages.
 - `docs/reports`: phase completion evidence and review status.
 
-Only approved phases are staged and committed. Do not commit `.env`, provider keys, `node_modules`, raw browser output or scratch files. Selected reviewed screenshots belong in phase reports. Package patches are pinned by `package-lock.json`. `.github/workflows/checks.yml` repeats foundation checks on GitHub. Latest approved/pushed commit: `1f77af4` (Phase 5B). Phase 6A is approved for commit/push before Phase 6B.
+Only approved phases are staged and committed. Do not commit `.env`, provider keys, `node_modules`, raw browser output or scratch files. Selected reviewed screenshots belong in phase reports. Package patches are pinned by `package-lock.json`. `.github/workflows/checks.yml` repeats foundation checks on GitHub. Latest approved/pushed commit: `051247f` (Phase 6A). Phase 6B is approved for commit/push and Phase 7 may then begin, carrying outstanding device/speech verification.

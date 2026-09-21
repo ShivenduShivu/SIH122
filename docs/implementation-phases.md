@@ -159,4 +159,4 @@ Each phase or lettered subphase is a separate review boundary. The original seve
 
 ## Current gate
 
-Phases 1–4 are approved and pushed as `0c9b3df`, `23d13e1`, `d2feff5` and `d9fb8ea`. Phase 4A is `7d07770`; Phase 5A is `522af77`. Phase 5B, including its review fixes, is approved and pushed as `1f77af4`. Phase 6A and its review fixes are approved at `docs/reports/phase-06a.md`. Commit/push the reviewed changes, then begin Phase 6B. Every later lettered subphase retains its own report and review boundary.
+Phases 1–4 are approved and pushed as `0c9b3df`, `23d13e1`, `d2feff5` and `d9fb8ea`. Phase 4A is `7d07770`; Phase 5A is `522af77`; Phase 5B is `1f77af4`. Phase 6A and its review fixes are approved and pushed as `051247f`. Phase 6B and its layout/scrolling fixes are approved by the user on 21 September 2026. Commit and push this phase before Phase 7 implementation. Physical Android Chrome/iPhone Safari and team-recorded speech checks carry into Phase 7 as pending, not passed. Every later lettered subphase retains its own report and review boundary.

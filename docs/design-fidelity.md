@@ -59,3 +59,7 @@ Compared approved PDF pages 5 and 8 and the retained schedule reference with the
 ## Phase 6A review evidence
 
 Compared the approved page-7 execution-history design against rendered desktop and narrow screens. Completed dates use a table; accepted wording is linked to source decisions and audit references below it. Those examples are evidence, not automatically verified vocabulary. The top navigation now enables Execution history with its outline icon. Exchange uses formal registers, explicit status and checksum details; revision review uses a readable before/after list and a separate confirmation. Original masthead, navigation order, schedule controls and field reporting hierarchy remain. Desktop, 390px and 320px checks and selected screenshots are in `reports/phase-06a.md`. Voice/photo stays at Phase 6B.
+
+## Phase 6B review evidence
+
+Compared pages 8–11 with the rendered capture, confirmation and receipt screens. Navy voice action, outlined text/photo controls, serif headings, step indicator and four bottom navigation icons remain. Actual file-check and receipt states replace illustrative sync claims. Original and corrected transcripts are separate; photos carry captions. At 320px/390px there is no document overflow. Physical phone verification and Hindi interface translation remain explicitly unverified/unimplemented; Hindi speech input is a separate capability. See `reports/phase-06b.md` for evidence and device checklist.

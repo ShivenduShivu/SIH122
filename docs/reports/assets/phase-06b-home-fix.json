@@ -1,0 +1,290 @@
+{
+  "passed": true,
+  "results": [
+    {
+      "width": 320,
+      "passed": true,
+      "measurements": {
+        "greeting": {
+          "x": 20,
+          "y": 171,
+          "right": 300,
+          "bottom": 272.796875,
+          "width": 280,
+          "height": 101.796875
+        },
+        "alert": {
+          "x": 20,
+          "y": 290.796875,
+          "right": 300,
+          "bottom": 382.796875,
+          "width": 280,
+          "height": 92
+        },
+        "alertTitle": {
+          "x": 36,
+          "y": 306.796875,
+          "right": 284,
+          "bottom": 324.796875,
+          "width": 248,
+          "height": 18
+        },
+        "alertCopy": {
+          "x": 36,
+          "y": 330.796875,
+          "right": 284,
+          "bottom": 366.796875,
+          "width": 248,
+          "height": 36
+        },
+        "voice": {
+          "x": 20,
+          "y": 574.25,
+          "right": 300,
+          "bottom": 645.25,
+          "width": 280,
+          "height": 71
+        },
+        "icon": {
+          "x": 37,
+          "y": 599.75,
+          "right": 57,
+          "bottom": 619.75,
+          "width": 20,
+          "height": 20
+        },
+        "title": {
+          "x": 71,
+          "y": 591.25,
+          "right": 283,
+          "bottom": 609.25,
+          "width": 212,
+          "height": 18
+        },
+        "subtitle": {
+          "x": 71,
+          "y": 613.25,
+          "right": 283,
+          "bottom": 628.25,
+          "width": 212,
+          "height": 15
+        },
+        "overflow": false
+      }
+    },
+    {
+      "width": 390,
+      "passed": true,
+      "measurements": {
+        "greeting": {
+          "x": 20,
+          "y": 171,
+          "right": 370,
+          "bottom": 254.796875,
+          "width": 350,
+          "height": 83.796875
+        },
+        "alert": {
+          "x": 20,
+          "y": 272.796875,
+          "right": 370,
+          "bottom": 346.796875,
+          "width": 350,
+          "height": 74
+        },
+        "alertTitle": {
+          "x": 36,
+          "y": 288.796875,
+          "right": 354,
+          "bottom": 306.796875,
+          "width": 318,
+          "height": 18
+        },
+        "alertCopy": {
+          "x": 36,
+          "y": 312.796875,
+          "right": 354,
+          "bottom": 330.796875,
+          "width": 318,
+          "height": 18
+        },
+        "voice": {
+          "x": 20,
+          "y": 519.0625,
+          "right": 370,
+          "bottom": 590.0625,
+          "width": 350,
+          "height": 71
+        },
+        "icon": {
+          "x": 37,
+          "y": 544.5625,
+          "right": 57,
+          "bottom": 564.5625,
+          "width": 20,
+          "height": 20
+        },
+        "title": {
+          "x": 71,
+          "y": 536.0625,
+          "right": 353,
+          "bottom": 554.0625,
+          "width": 282,
+          "height": 18
+        },
+        "subtitle": {
+          "x": 71,
+          "y": 558.0625,
+          "right": 353,
+          "bottom": 573.0625,
+          "width": 282,
+          "height": 15
+        },
+        "overflow": false
+      }
+    },
+    {
+      "width": 480,
+      "passed": true,
+      "measurements": {
+        "greeting": {
+          "x": 20,
+          "y": 171,
+          "right": 460,
+          "bottom": 254.796875,
+          "width": 440,
+          "height": 83.796875
+        },
+        "alert": {
+          "x": 20,
+          "y": 272.796875,
+          "right": 460,
+          "bottom": 346.796875,
+          "width": 440,
+          "height": 74
+        },
+        "alertTitle": {
+          "x": 36,
+          "y": 288.796875,
+          "right": 444,
+          "bottom": 306.796875,
+          "width": 408,
+          "height": 18
+        },
+        "alertCopy": {
+          "x": 36,
+          "y": 312.796875,
+          "right": 444,
+          "bottom": 330.796875,
+          "width": 408,
+          "height": 18
+        },
+        "voice": {
+          "x": 20,
+          "y": 519.0625,
+          "right": 460,
+          "bottom": 590.0625,
+          "width": 440,
+          "height": 71
+        },
+        "icon": {
+          "x": 37,
+          "y": 544.5625,
+          "right": 57,
+          "bottom": 564.5625,
+          "width": 20,
+          "height": 20
+        },
+        "title": {
+          "x": 71,
+          "y": 536.0625,
+          "right": 443,
+          "bottom": 554.0625,
+          "width": 372,
+          "height": 18
+        },
+        "subtitle": {
+          "x": 71,
+          "y": 558.0625,
+          "right": 443,
+          "bottom": 573.0625,
+          "width": 372,
+          "height": 15
+        },
+        "overflow": false
+      }
+    },
+    {
+      "width": 1440,
+      "passed": true,
+      "measurements": {
+        "greeting": {
+          "x": 521,
+          "y": 205,
+          "right": 919,
+          "bottom": 288.796875,
+          "width": 398,
+          "height": 83.796875
+        },
+        "alert": {
+          "x": 521,
+          "y": 306.796875,
+          "right": 919,
+          "bottom": 380.796875,
+          "width": 398,
+          "height": 74
+        },
+        "alertTitle": {
+          "x": 537,
+          "y": 322.796875,
+          "right": 903,
+          "bottom": 340.796875,
+          "width": 366,
+          "height": 18
+        },
+        "alertCopy": {
+          "x": 537,
+          "y": 346.796875,
+          "right": 903,
+          "bottom": 364.796875,
+          "width": 366,
+          "height": 18
+        },
+        "voice": {
+          "x": 521,
+          "y": 553.0625,
+          "right": 919,
+          "bottom": 624.0625,
+          "width": 398,
+          "height": 71
+        },
+        "icon": {
+          "x": 538,
+          "y": 578.5625,
+          "right": 558,
+          "bottom": 598.5625,
+          "width": 20,
+          "height": 20
+        },
+        "title": {
+          "x": 572,
+          "y": 570.0625,
+          "right": 902,
+          "bottom": 588.0625,
+          "width": 330,
+          "height": 18
+        },
+        "subtitle": {
+          "x": 572,
+          "y": 592.0625,
+          "right": 902,
+          "bottom": 607.0625,
+          "width": 330,
+          "height": 15
+        },
+        "overflow": false
+      }
+    }
+  ],
+  "keyboardFocus": true
+}

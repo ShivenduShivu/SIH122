@@ -1,0 +1,187 @@
+{
+  "notice": "WER does not measure meaning. Critical phrase presence does not prove factual correctness. Human review required.",
+  "groups": [
+    {
+      "source": "human",
+      "attempted": 0,
+      "successful": 0,
+      "failed": 0,
+      "referenceWords": 0,
+      "wordErrors": 0,
+      "wer": null,
+      "criticalPhraseChecks": 0,
+      "criticalPhrasesPresent": 0,
+      "manualMeaningReview": "pending"
+    },
+    {
+      "source": "synthetic",
+      "attempted": 2,
+      "successful": 2,
+      "failed": 0,
+      "referenceWords": 41,
+      "wordErrors": 3,
+      "wer": 0.07317073170731707,
+      "criticalPhraseChecks": 6,
+      "criticalPhrasesPresent": 6,
+      "manualMeaningReview": "pending"
+    }
+  ],
+  "results": [
+    {
+      "id": "synthetic-en-01",
+      "file": "synthetic-en.wav",
+      "speaker": "Windows System.Speech generated voice",
+      "device": "Generated PCM WAV, not a phone",
+      "source": "synthetic",
+      "language": "en",
+      "reference": "Painting in room one is not finished. Room two is complete. We installed twelve metres of cable today.",
+      "critical": [
+        {
+          "field": "location",
+          "acceptedPhrases": [
+            "room one",
+            "room 1"
+          ]
+        },
+        {
+          "field": "negation",
+          "acceptedPhrases": [
+            "not finished"
+          ]
+        },
+        {
+          "field": "quantity",
+          "acceptedPhrases": [
+            "twelve meters",
+            "twelve metres",
+            "12 meters",
+            "12 metres"
+          ]
+        }
+      ],
+      "duration": 8.018412698412698,
+      "sampleRate": 22050,
+      "text": "Painting in room 1 is not finished. Room 2 is complete. We installed twelve meters of cable today.",
+      "provider": "openai",
+      "model": "gpt-4o-mini-transcribe-2025-12-15",
+      "latencyMs": 952,
+      "usage": {
+        "type": "tokens",
+        "total_tokens": 105,
+        "input_tokens": 80,
+        "input_token_details": {
+          "text_tokens": 0,
+          "audio_tokens": 80
+        },
+        "output_tokens": 25
+      },
+      "errors": 3,
+      "referenceWords": 18,
+      "wer": 0.16666666666666666,
+      "criticalChecks": [
+        {
+          "field": "location",
+          "acceptedPhrases": [
+            "room one",
+            "room 1"
+          ],
+          "phrasePresent": true
+        },
+        {
+          "field": "negation",
+          "acceptedPhrases": [
+            "not finished"
+          ],
+          "phrasePresent": true
+        },
+        {
+          "field": "quantity",
+          "acceptedPhrases": [
+            "twelve meters",
+            "twelve metres",
+            "12 meters",
+            "12 metres"
+          ],
+          "phrasePresent": true
+        }
+      ],
+      "manualMeaningReview": "pending"
+    },
+    {
+      "id": "synthetic-hi-01",
+      "file": "synthetic-hi.wav",
+      "speaker": "OpenAI gpt-4o-mini-tts coral generated voice",
+      "device": "Generated PCM WAV, not a phone",
+      "source": "synthetic",
+      "language": "hi",
+      "reference": "कमरा एक में पेंटिंग अभी पूरी नहीं हुई है। कमरा दो में पेंटिंग पूरी हो गई है। आज बारह मीटर केबल लगाया है।",
+      "critical": [
+        {
+          "field": "location",
+          "acceptedPhrases": [
+            "कमरा एक",
+            "कमरा 1"
+          ]
+        },
+        {
+          "field": "negation",
+          "acceptedPhrases": [
+            "पूरी नहीं हुई"
+          ]
+        },
+        {
+          "field": "quantity",
+          "acceptedPhrases": [
+            "बारह मीटर",
+            "12 मीटर"
+          ]
+        }
+      ],
+      "duration": 9.35,
+      "sampleRate": 24000,
+      "text": "कमरा एक में पेंटिंग अभी पूरी नहीं हुई है, कमरा दो में पेंटिंग पूरी हो गई है, आज बारह मीटर केबल लगाया है।",
+      "provider": "openai",
+      "model": "gpt-4o-mini-transcribe-2025-12-15",
+      "latencyMs": 937,
+      "usage": {
+        "type": "tokens",
+        "total_tokens": 130,
+        "input_tokens": 93,
+        "input_token_details": {
+          "text_tokens": 0,
+          "audio_tokens": 93
+        },
+        "output_tokens": 37
+      },
+      "errors": 0,
+      "referenceWords": 23,
+      "wer": 0,
+      "criticalChecks": [
+        {
+          "field": "location",
+          "acceptedPhrases": [
+            "कमरा एक",
+            "कमरा 1"
+          ],
+          "phrasePresent": true
+        },
+        {
+          "field": "negation",
+          "acceptedPhrases": [
+            "पूरी नहीं हुई"
+          ],
+          "phrasePresent": true
+        },
+        {
+          "field": "quantity",
+          "acceptedPhrases": [
+            "बारह मीटर",
+            "12 मीटर"
+          ],
+          "phrasePresent": true
+        }
+      ],
+      "manualMeaningReview": "pending"
+    }
+  ]
+}
