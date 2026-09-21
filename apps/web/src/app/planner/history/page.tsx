@@ -1,0 +1,18 @@
+import { plannerContext } from '../../../lib/project';
+import { AcceptedHistory } from '../../../components/accepted-history';
+import { RefreshPage } from '../../../components/refresh-page';
+export default async function HistoryPage() {
+  const { db, project, user } = await plannerContext();
+  const result = await db.rpc('execution_history', { p_project: project.id });
+  if (result.error) throw new Error('Could not load complete accepted execution history.');
+  return (
+    <>
+      <RefreshPage />
+      <AcceptedHistory
+        key={`${user.id}:${project.id}`}
+        entries={result.data}
+        storageKey={`intelligrid:history:v1:${user.id}:${project.id}`}
+      />
+    </>
+  );
+}

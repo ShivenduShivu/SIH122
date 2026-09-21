@@ -1,0 +1,52 @@
+{
+  "files": {
+    "evidence.csv": {
+      "rows": 4,
+      "bytes": 9411,
+      "sha256": "65a334dd151b7dc2c3d115cc6eb4c4ccaf084904f195f1fff3e81054f6a4b721"
+    },
+    "snapshot.json": {
+      "rows": 149,
+      "bytes": 537707,
+      "sha256": "1aca5bfec4cbef14caa1adebc557ae4d9e530b1753ee1d41b34f6b6a66b3f045"
+    },
+    "activities.csv": {
+      "rows": 149,
+      "bytes": 49156,
+      "sha256": "4a49d32e497d0272bb38c0a83180cce89e549a7d5e6fe7aed903f1324e34c969"
+    },
+    "exceptions.csv": {
+      "rows": 143,
+      "bytes": 58409,
+      "sha256": "6445224e851b17055d1a0d7c48c40b31f19432eee8d6129933f256030c7dc72d"
+    }
+  },
+  "counts": {
+    "activities": 149,
+    "exceptions": 143,
+    "acceptedEvents": 4
+  },
+  "asOfDate": "2026-09-21",
+  "exportId": "7139b6f5-732a-446a-9a1a-ddd721281db2",
+  "timezone": "Asia/Kolkata",
+  "projectId": "10000000-0000-4000-8000-000000000005",
+  "semantics": {
+    "csv": "UTF-8, CRLF, quoted fields. Formula-like text receives an apostrophe; unmodified evidence remains in snapshot.json.",
+    "zero": "A numeric zero is an explicit value only when supported by accepted evidence.",
+    "percent": "Independent reported value with explicit basis; never inferred from quantity.",
+    "baseline": "Original activity baseline retained; newly added activity uses its first approved planned dates.",
+    "duration": "Elapsed calendar days and inclusive working dates are separate. Working dates only for the stated Mon–Sat calendar; no productivity inference.",
+    "quantity": "Cumulative projection, never add to a destination total.",
+    "emptyCells": "Not recorded / not applicable. Never an instruction to clear a destination field.",
+    "milestones": "Single occurrence with equal actual start/finish; zero working duration.",
+    "corrections": "Evidence includes all accepted events; effective=false marks a superseded contribution. Snapshot is current accepted projection."
+  },
+  "capturedAt": "2026-09-21T05:58:26.936508+05:30",
+  "revisionId": "bb1f537e-0345-41f5-a55d-094758696e37",
+  "asOfMeaning": "Capture date, not a filter on historical or synthetic future work dates",
+  "generatedBy": "e4c2cb84-3b27-4fd2-9be4-f4e7d93fdfa2",
+  "projectName": "Urban Garbage Treatment Plant · Town XYZ",
+  "compatibility": "Generic planner exchange. Native Primavera/P6 import not verified. Download is not external delivery.",
+  "schemaVersion": "planner-exchange-v1",
+  "scheduleVersion": 5
+}

@@ -55,3 +55,7 @@ The supplied schedule retains the formal top navigation and icons, baseline swit
 ## Phase 5B review evidence
 
 Compared approved PDF pages 5 and 8 and the retained schedule reference with the final production screenshots. Source provenance, cumulative/percentage basis, explicit approval preview and per-claim question context extend the same formal layout. The review inbox now scrolls independently for the 82-row corpus. Submitted rows retain their outcomes; accepted milestone actuals are points. Mobile questions and receipts were checked at 390px and 320px. See `reports/phase-05b.md`; speech and photo capture remain Phase 6B.
+
+## Phase 6A review evidence
+
+Compared the approved page-7 execution-history design against rendered desktop and narrow screens. Completed dates use a table; accepted wording is linked to source decisions and audit references below it. Those examples are evidence, not automatically verified vocabulary. The top navigation now enables Execution history with its outline icon. Exchange uses formal registers, explicit status and checksum details; revision review uses a readable before/after list and a separate confirmation. Original masthead, navigation order, schedule controls and field reporting hierarchy remain. Desktop, 390px and 320px checks and selected screenshots are in `reports/phase-06a.md`. Voice/photo stays at Phase 6B.

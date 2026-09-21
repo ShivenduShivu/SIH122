@@ -9,6 +9,13 @@ export async function apiSession(request?: Request) {
   return { db, user: data.user } as const;
 }
 const messages: Record<string, string> = {
+  STALE_EXPORT: 'Accepted progress changed. Refresh the schedule before creating an export.',
+  STALE_REVISION_DIFF:
+    'The schedule, accepted progress or access policy changed. Preview the revision again.',
+  REVISION_BLOCKED:
+    'Resolve the blocked ID, scope or accepted-history changes before activating this revision.',
+  REVISION_REQUIRES_IMPORTED_PLAN:
+    'Revision replacement requires an imported source catalogue. This fixture project does not have one.',
   CHANGE_PREVIEW_REQUIRED: 'Preview the proposed change before accepting it.',
   STALE_CHANGE_PREVIEW: 'The proposed change is no longer current. Preview it again.',
   SOURCE_CONTRACTOR_MISMATCH:

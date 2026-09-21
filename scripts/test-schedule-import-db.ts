@@ -346,7 +346,7 @@ try {
   );
   check((await getSnapshot()).scheduleVersion === 1, 'activation retry does not increment version');
   check(
-    !!(
+    !(
       await planner.rpc('reserve_schedule_import', {
         p_project: project,
         p_command: randomUUID(),
@@ -354,7 +354,7 @@ try {
         p_files: sourceFiles().map((f) => f.meta),
       })
     ).error,
-    'active schedule cannot be replaced by initial importer',
+    'active schedule allows a draft replacement reservation without activation',
   );
   check(
     must(await admin.from('schedule_revisions').select('id').eq('project_id', project)).length ===

@@ -4,6 +4,7 @@ import Link from 'next/link';
 import { useRouter } from 'next/navigation';
 import type { ImportFile, ParsedImport } from '@intelligrid/contracts/imports';
 import { Icon } from './icon';
+import { RevisionPreview } from './revision-preview';
 type Batch = {
   id: string;
   status: string;
@@ -41,7 +42,7 @@ export function ScheduleImport({
   projectName: string;
   activeRevision: string | null;
   contractors: { id: string; label: string }[];
-  history: { id: string; status: string; created_at: string }[];
+  history: { id: string; status: string; created_at: string; files: ImportFile[] }[];
 }) {
   const [files, setFiles] = useState<LocalFile[]>([]),
     [contractor, setContractor] = useState(contractors[0]?.id ?? ''),
@@ -51,6 +52,7 @@ export function ScheduleImport({
     [confirmed, setConfirmed] = useState(false),
     [page, setPage] = useState(0),
     [query, setQuery] = useState('');
+  const previewPanel = useRef<HTMLElement>(null);
   const reservation = useRef<{
       commandId: string;
       contractorId: string;
@@ -66,6 +68,12 @@ export function ScheduleImport({
       setMessage((e as Error).message);
     }
   };
+  useEffect(() => {
+    if (batch?.id) {
+      previewPanel.current?.focus({ preventScroll: true });
+      previewPanel.current?.scrollIntoView({ block: 'start' });
+    }
+  }, [batch?.id]);
   useEffect(() => {
     if (!batch || !['queued', 'running'].includes(batch.status)) return;
     let cancelled = false;
@@ -179,7 +187,7 @@ export function ScheduleImport({
       <div className="page-heading">
         <div>
           <h1>Import schedule</h1>
-          <p>Preview the source records before making the first schedule active.</p>
+          <p>Preview source records and review changes before activation.</p>
         </div>
         <Link className="button" href="/planner/schedule">
           <Icon name="calendar" /> Back to schedule
@@ -190,117 +198,120 @@ export function ScheduleImport({
           {message}
         </p>
       )}
-      {activeRevision ? (
+      {activeRevision && (
         <div className="validation-notice">
-          This project already has an active schedule. Initial imports cannot replace it. You can
-          inspect earlier previews below.
+          This project has an active schedule. Upload the complete replacement catalogue, then
+          review the revision diff. Original baselines and accepted field progress are protected.
         </div>
-      ) : (
-        <section className="panel import-setup">
-          <h2>Source files</h2>
-          <p>
-            Use the supplied construction workbook, optionally with its L3 workbook, or a canonical
-            CSV. Up to two files, 5 MB each. Imported dates are preserved; the sample runs in
-            2027–2028.
-          </p>
-          <label>
-            Schedule files
-            <input
-              type="file"
-              accept=".xlsx,.csv"
-              multiple
-              disabled={busy}
-              onChange={(e) => {
-                reservation.current = null;
-                setBatch(null);
-                setFiles(
-                  [...(e.target.files ?? [])]
-                    .slice(0, 3)
-                    .map((file) => ({
-                      file,
-                      profile: file.name.endsWith('.csv')
-                        ? 'canonical_csv'
-                        : file.name.includes('L4-L6')
-                          ? 'gwp_construction'
-                          : 'gwp_l3',
-                    })),
-                );
-                setMessage('');
-              }}
-            />
-          </label>
-          {files.length > 2 && <p role="alert">Choose no more than two files.</p>}
-          {files.map((f, i) => (
-            <div className="import-file" key={`${i}-${f.file.name}`}>
-              <span>
-                {f.file.name} <small>({Math.ceil(f.file.size / 1024)} KB)</small>
-              </span>
-              <label>
-                File profile
-                <select
-                  aria-label={`Profile for ${f.file.name}`}
-                  value={f.profile}
-                  disabled={busy}
-                  onChange={(e) => {
-                    reservation.current = null;
-                    setFiles(
-                      files.map((x, j) =>
-                        j === i ? { ...x, profile: e.target.value as LocalFile['profile'] } : x,
-                      ),
-                    );
-                  }}
-                >
-                  <option value="gwp_construction">GWP construction + L3 reference</option>
-                  <option value="gwp_l3">GWP full-project L3 context</option>
-                  <option value="canonical_csv">Canonical schedule CSV</option>
-                </select>
-              </label>
-            </div>
-          ))}
-          <label>
-            Responsible contractor
-            <select
-              value={contractor}
-              disabled={busy}
-              onChange={(e) => {
-                reservation.current = null;
-                setContractor(e.target.value);
-              }}
-            >
-              {contractors.map((c) => (
-                <option value={c.id} key={c.id}>
-                  {c.label}
-                </option>
-              ))}
-            </select>
-          </label>
-          {!contractors.length && (
-            <p className="validation-notice">
-              An operator must provision a contractor-scoped project member before importing.
-            </p>
-          )}
-          <p className="muted">
-            All reporting leaves in this initial import belong to the selected contractor. Summary
-            rows remain context. Calendar: Monday–Saturday; Sunday off; no holidays. No imported
-            actuals are applied in this phase.
-          </p>
-          <div className="form-actions">
-            <button
-              className="button primary"
-              onClick={upload}
-              disabled={busy || !files.length || files.length > 2 || !contractor}
-            >
-              <Icon name="reports" />
-              {busy ? 'Working…' : 'Upload and preview'}
-            </button>
-            <a className="button" href="/templates/schedule.csv" download>
-              CSV template
-            </a>
-          </div>
-        </section>
       )}
+      <section className="panel import-setup">
+        <h2>Source files</h2>
+        <p>
+          Use the supplied construction workbook, optionally with its L3 workbook, or a canonical
+          CSV. Up to two files, 5 MB each. Imported dates are preserved; the sample runs in
+          2027–2028.
+        </p>
+        <label>
+          Schedule files
+          <input
+            type="file"
+            accept=".xlsx,.csv"
+            multiple
+            disabled={busy}
+            onChange={(e) => {
+              reservation.current = null;
+              setBatch(null);
+              setFiles(
+                [...(e.target.files ?? [])].slice(0, 3).map((file) => ({
+                  file,
+                  profile: file.name.endsWith('.csv')
+                    ? 'canonical_csv'
+                    : file.name.includes('L4-L6')
+                      ? 'gwp_construction'
+                      : 'gwp_l3',
+                })),
+              );
+              setMessage('');
+            }}
+          />
+        </label>
+        {files.length > 2 && <p role="alert">Choose no more than two files.</p>}
+        {files.map((f, i) => (
+          <div className="import-file" key={`${i}-${f.file.name}`}>
+            <span>
+              {f.file.name} <small>({Math.ceil(f.file.size / 1024)} KB)</small>
+            </span>
+            <label>
+              File profile
+              <select
+                aria-label={`Profile for ${f.file.name}`}
+                value={f.profile}
+                disabled={busy}
+                onChange={(e) => {
+                  reservation.current = null;
+                  setFiles(
+                    files.map((x, j) =>
+                      j === i ? { ...x, profile: e.target.value as LocalFile['profile'] } : x,
+                    ),
+                  );
+                }}
+              >
+                <option value="gwp_construction">GWP construction + L3 reference</option>
+                <option value="gwp_l3">GWP full-project L3 context</option>
+                <option value="canonical_csv">Canonical schedule CSV</option>
+              </select>
+            </label>
+          </div>
+        ))}
+        <label>
+          Responsible contractor
+          <select
+            value={contractor}
+            disabled={busy}
+            onChange={(e) => {
+              reservation.current = null;
+              setContractor(e.target.value);
+            }}
+          >
+            {contractors.map((c) => (
+              <option value={c.id} key={c.id}>
+                {c.label}
+              </option>
+            ))}
+          </select>
+        </label>
+        {!contractors.length && (
+          <p className="validation-notice">
+            An operator must provision a contractor-scoped project member before importing.
+          </p>
+        )}
+        <p className="muted">
+          All reporting leaves in this import belong to the selected contractor. Existing contractor
+          scope must stay unchanged. Summary rows remain context. Calendar: Monday–Saturday; Sunday
+          off; no holidays. Populated actual-date or completion columns are rejected; accepted field
+          progress stays protected.
+        </p>
+        <div className="form-actions">
+          <button
+            className="button primary"
+            onClick={upload}
+            disabled={busy || !files.length || files.length > 2 || !contractor}
+          >
+            <Icon name="reports" />
+            {busy ? 'Working…' : 'Upload and preview'}
+          </button>
+          <a className="button" href="/templates/schedule.csv" download>
+            CSV template
+          </a>
+        </div>
+      </section>
       {batch && (
-        <section className="panel import-preview" aria-label="Import preview">
+        <section
+          ref={previewPanel}
+          tabIndex={-1}
+          className="panel import-preview"
+          aria-label="Import preview"
+        >
           <div className="section-heading">
             <h2>Import preview</h2>
             <span className="tag" role="status">
@@ -308,6 +319,16 @@ export function ScheduleImport({
             </span>
           </div>
           <div className="import-body">
+            {batch.status === 'ready' && activeRevision && (
+              <RevisionPreview
+                key={`${batch.id}:${batch.preview_hash}`}
+                importId={batch.id}
+                onActivated={async () => {
+                  await open(batch.id);
+                  router.refresh();
+                }}
+              />
+            )}
             {['queued', 'running'].includes(batch.status) && (
               <p>
                 Checking source files and parent relationships. This page refreshes the result
@@ -459,7 +480,7 @@ export function ScheduleImport({
         </section>
       )}
       <section className="panel import-history">
-        <h2>Recent imports</h2>
+        <h2>Recent schedule imports</h2>
         <p className="muted">
           Latest 20 reservations for this project, including unsuccessful attempts.
         </p>
@@ -467,10 +488,16 @@ export function ScheduleImport({
           history.map((h) => (
             <button key={h.id} className="import-history-row" onClick={() => open(h.id)}>
               <span>
+                <strong>{h.files.map((f) => f.name).join(' + ')}</strong>
+                <br />
                 {new Date(h.created_at).toLocaleString('en-IN', { timeZone: 'Asia/Kolkata' })} IST
               </span>
               <span className="tag">{h.status}</span>
-              <span>Open preview →</span>
+              <span>
+                {h.status === 'ready' && activeRevision
+                  ? 'Review schedule revision →'
+                  : 'Open schedule preview →'}
+              </span>
             </button>
           ))
         ) : (

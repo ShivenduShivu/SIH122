@@ -232,6 +232,11 @@ export async function parseSchedules(
       const sheet = book.getWorksheet(sheetName);
       if (!sheet) throw new Error(`Missing worksheet: ${sheetName}`);
       if (sheet.rowCount > MAX_NODES + 5) throw new Error('Worksheet exceeds the 2,500-row limit.');
+      const progressColumns: number[] = [];
+      sheet.getRow(5).eachCell((cell, column) => {
+        if (/actual|%\s*complete|percent\s*complete/i.test(text(value(cell))))
+          progressColumns.push(column);
+      });
       if (
         !/Activity ID/i.test(text(value(sheet.getCell('A5')))) ||
         !/WBS/i.test(text(value(sheet.getCell('B5'))))
@@ -246,6 +251,10 @@ export async function parseSchedules(
         if (!construction && text(v(3)) === 'Phase') phase = text(v(1));
         const parentPhase = phase;
         consume(file, sheetName, row, raw, () => {
+          if (progressColumns.some((column) => text(v(column))))
+            throw new Error(
+              'Schedule import cannot apply existing actuals or progress. Preserve this row for reviewed field ingestion.',
+            );
           const level = text(v(3));
           let node: Partial<ImportNode>;
           if (construction) {

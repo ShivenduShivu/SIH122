@@ -180,6 +180,11 @@ export function FieldImport({
         </Link>
       </div>
       <section className="panel import-setup">
+        <p>
+          Looking for schedule revision changes?{' '}
+          <Link href="/planner/schedule/import">Open schedule imports</Link>. This page imports
+          field reports for review.
+        </p>
         <h2>Source workbook</h2>
         <p>
           Supported sheets: Text_Reports, Civil_DPR, Fabrication_Log and Electrical_Log. Original

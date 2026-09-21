@@ -2444,6 +2444,93 @@ textarea:focus-visible {
   margin: 0;
   min-width: 0;
 }
+.exchange-register {
+  margin-top: 22px;
+}
+.exchange-create .choice-row {
+  display: flex;
+  align-items: flex-start;
+  gap: 10px;
+  margin: 16px 0;
+}
+.exchange-create .choice-row input {
+  flex: 0 0 auto;
+  width: auto;
+  margin-top: 4px;
+}
+.history-completed + .muted {
+  margin: 12px 0 20px;
+}
+.exchange-register .import-body,
+.checksum,
+.history-event,
+.revision-review {
+  overflow-wrap: anywhere;
+}
+.exchange-register .button {
+  margin: 6px 6px 6px 0;
+}
+.import-history-row small,
+.history-event small {
+  display: block;
+  color: var(--muted);
+  margin-top: 5px;
+}
+.import-history-row[aria-pressed='true'] {
+  background: #eaf3f7;
+}
+.revision-review {
+  padding-top: 20px;
+  border-top: 1px solid var(--line);
+  margin-top: 20px;
+}
+.revision-review label {
+  display: grid;
+  gap: 8px;
+  margin: 16px 0;
+}
+.revision-review .choice-row {
+  display: flex;
+}
+.revision-review input[type='search'],
+.revision-review textarea {
+  width: 100%;
+  padding: 10px;
+  border: 1px solid var(--line);
+  font: inherit;
+}
+.revision-changes {
+  max-height: 420px;
+  overflow: auto;
+}
+.revision-changes details {
+  padding: 12px;
+  border-bottom: 1px solid var(--line);
+}
+.revision-changes dd {
+  margin: 4px 0 12px;
+}
+.history-completed .actuals-table {
+  min-width: 760px;
+}
+.history-event {
+  border-top: 1px solid var(--line);
+  padding: 20px 0;
+}
+.history-event .section-heading {
+  padding: 0;
+  border: 0;
+  flex-wrap: wrap;
+}
+.history-event pre {
+  white-space: pre-wrap;
+  font-size: 12px;
+}
+.history-evidence select {
+  padding: 8px;
+  border: 1px solid var(--line);
+  max-width: 100%;
+}
 .field-report-filters label {
   display: grid;
   gap: 6px;

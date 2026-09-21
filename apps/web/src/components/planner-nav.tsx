@@ -30,9 +30,9 @@ export function PlannerNav({ pendingCount = 0 }: { pendingCount?: number }) {
         <Icon name="clipboard" /> Review queue{' '}
         {pendingCount > 0 && <small className="review-badge">{pendingCount}</small>}
       </Link>
-      <span aria-disabled="true" title="Available after the history phase">
+      <Link href="/planner/history" aria-current={path === '/planner/history' ? 'page' : undefined}>
         <Icon name="history" /> Execution history
-      </span>
+      </Link>
       <Link className="field-link" href="/field">
         Open field view <Icon name="external" />
       </Link>

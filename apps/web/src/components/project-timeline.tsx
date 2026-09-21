@@ -106,6 +106,9 @@ function TimelineView({
           <p>Baseline and accepted field progress, in one view.</p>
         </div>
         <div className="form-actions">
+          <Link className="button" href="/planner/schedule/export">
+            <Icon name="reports" /> Planner exchange
+          </Link>
           <Link className="button" href="/planner/schedule/import">
             <Icon name="reports" /> Import schedule
           </Link>

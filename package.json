@@ -42,7 +42,9 @@
     "test:observations-db": "tsx scripts/test-observations-db.ts",
     "test:browser:field-import": "tsx tests/browser/field-import.ts",
     "evaluate:field": "tsx scripts/evaluate-field-corpus.ts",
-    "test:browser:observations": "tsx tests/browser/observations.ts"
+    "test:browser:observations": "tsx tests/browser/observations.ts",
+    "test:exchange-db": "tsx scripts/test-exchange-db.ts",
+    "test:browser:exchange": "tsx tests/browser/exchange.ts"
   },
   "devDependencies": {
     "@playwright/test": "1.63.0",

@@ -104,6 +104,7 @@ export function ReviewPanel({
       '',
     a = reviewSnapshot.activities.find((a) => a.id === chosen);
   const staleReview =
+    c.plan_revision_id !== snapshot.revisionId ||
     reviewSnapshot.revisionId !== snapshot.revisionId ||
     reviewSnapshot.policyVersion !== snapshot.policyVersion ||
     a?.actualsVersion !== snapshot.activities.find((row) => row.id === chosen)?.actualsVersion;
@@ -302,6 +303,13 @@ export function ReviewPanel({
             {c.facts.discipline && <span className="tag">{c.facts.discipline}</span>}
           </div>
           <div className="review-detail-body">
+            {c.plan_revision_id !== snapshot.revisionId && (
+              <p className="validation-notice">
+                This record belongs to an earlier schedule revision. Accepted history is retained.
+                Unresolved work must be revalidated using a new mapping proposal before approval;
+                existing supervisor checks must also be resolved or renewed.
+              </p>
+            )}
             <p className="eyebrow">ORIGINAL FIELD REPORT</p>
             <p className="source-meta">
               {entry.reporter} · Received {entry.received} IST

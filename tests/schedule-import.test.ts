@@ -124,6 +124,29 @@ describe('import failure conservation', () => {
     expect(r.errors).toEqual([]);
     expect(r.nodes).toHaveLength(260);
   });
+  it('refuses populated imported actuals instead of silently overwriting local progress', async () => {
+    const original = source('03-GWP_Construction_L4-L6_Schedule.xlsx', 'gwp_construction');
+    const workbook = new ExcelJS.Workbook();
+    await workbook.xlsx.load(original.buffer as unknown as ExcelJS.Buffer);
+    const sheet = workbook.getWorksheet('L4-L6 Schedule')!;
+    sheet.getCell('AA5').value = 'Actual Start';
+    sheet.getCell('AA6').value = '2027-11-01';
+    const buffer = Buffer.from(await workbook.xlsx.writeBuffer());
+    const result = await parseSchedules([
+      {
+        buffer,
+        file: {
+          ...original.file,
+          bytes: buffer.length,
+          sha256: createHash('sha256').update(buffer).digest('hex'),
+        },
+      },
+    ]);
+    expect(result.errors.some((e) => e.row === 6 && e.message.includes('existing actuals'))).toBe(
+      true,
+    );
+    expect(result.rows.some((r) => r.row === 6 && r.status === 'error')).toBe(true);
+  });
   it('pages complete catalogues and rejects truncated/changing reads', async () => {
     const rows = Array.from({ length: 460 }, (_, id) => ({ id }));
     expect(
