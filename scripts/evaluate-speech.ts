@@ -1,14 +1,19 @@
-import { readFileSync, writeFileSync } from 'node:fs';
+import { readFileSync, writeFileSync, existsSync, mkdirSync } from 'node:fs';
 import { resolve, dirname } from 'node:path';
 import { z } from 'zod';
-import { OpenAITranscriber } from '@intelligrid/adapters/transcription';
+import { createTranscriber, providerConfiguration } from '@intelligrid/adapters/providers';
 import { inspectWav } from '@intelligrid/adapters/wav';
 import { speechWords, wordError } from '../packages/adapters/src/speech-metrics';
 const manifest = process.argv[2],
   output = process.argv[3] ?? 'test-results/speech-evaluation.json';
 if (!manifest) throw new Error('Usage: tsx scripts/evaluate-speech.ts manifest.json [output.json]');
-if (!process.env.OPENAI_API_KEY)
-  throw new Error('OPENAI_API_KEY is required in the process environment');
+for (const path of ['.env.local', 'apps/worker/.env.local'])
+  if (existsSync(path)) process.loadEnvFile(path);
+if (providerConfiguration(process.env).transcriptionProvider === 'disabled')
+  throw new Error('Choose an enabled TRANSCRIPTION_PROVIDER before speech evaluation');
+if (existsSync(output))
+  throw new Error('Choose a new output path to preserve earlier speech results');
+mkdirSync(dirname(resolve(output)), { recursive: true });
 const cases = z
   .array(
     z.object({
@@ -31,7 +36,7 @@ const cases = z
   .parse(JSON.parse(readFileSync(manifest, 'utf8')));
 if (new Set(cases.map((c) => c.id)).size !== cases.length)
   throw new Error('Case IDs must be unique');
-const transcriber = new OpenAITranscriber(process.env.OPENAI_API_KEY),
+const transcriber = createTranscriber(),
   results: any[] = [];
 for (const c of cases) {
   const bytes = readFileSync(resolve(dirname(manifest), c.file));

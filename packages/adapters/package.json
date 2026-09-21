@@ -5,6 +5,7 @@
   "type": "module",
   "exports": {
     ".": "./src/openai.ts",
+    "./providers": "./src/providers.ts",
     "./schedule-import": "./src/schedule-import.ts",
     "./field-import": "./src/field-import.ts",
     "./transcription": "./src/transcription.ts",

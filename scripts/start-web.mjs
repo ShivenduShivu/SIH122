@@ -10,7 +10,8 @@ cpSync(`${app}/public`, `${destination}/public`, { recursive: true });
 cpSync(`${app}/.next/static`, `${destination}/.next/static`, { recursive: true });
 const webEnvironment = { ...process.env };
 for (const key of Object.keys(webEnvironment)) {
-  if (key.startsWith('OPENAI_') || key === 'SUPABASE_SERVICE_ROLE_KEY') delete webEnvironment[key];
+  if (/^(OPENAI_|GEMINI_|ANTHROPIC_|OPENROUTER_)/.test(key) || key === 'SUPABASE_SERVICE_ROLE_KEY')
+    delete webEnvironment[key];
 }
 const child = spawn(process.execPath, [`${destination}/server.js`], {
   cwd: root,

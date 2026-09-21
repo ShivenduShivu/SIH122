@@ -1,4 +1,5 @@
 import { pathToFileURL } from 'node:url';
+import { providerConfiguration } from '../packages/adapters/src/provider-config.mjs';
 export function checkDeployment(env) {
   const errors = [];
   for (const name of ['APP_ORIGIN', 'NEXT_PUBLIC_SUPABASE_URL']) {
@@ -19,19 +20,27 @@ export function checkDeployment(env) {
       errors.push(`${name}: invalid URL`);
     }
   }
-  for (const name of [
-    'NEXT_PUBLIC_SUPABASE_PUBLISHABLE_KEY',
-    'SUPABASE_SERVICE_ROLE_KEY',
-    'OPENAI_API_KEY',
-  ]) {
+  for (const name of ['NEXT_PUBLIC_SUPABASE_PUBLISHABLE_KEY', 'SUPABASE_SERVICE_ROLE_KEY']) {
     if (!env[name] || env[name].startsWith('replace-'))
       errors.push(`${name}: configure this value`);
+  }
+  try {
+    providerConfiguration(env);
+  } catch (error) {
+    errors.push(error.message);
   }
   const publicKey = env.NEXT_PUBLIC_SUPABASE_PUBLISHABLE_KEY ?? '';
   if (
     publicKey.startsWith('sb_secret_') ||
     publicKey.startsWith('sk-') ||
-    (publicKey && [env.SUPABASE_SERVICE_ROLE_KEY, env.OPENAI_API_KEY].includes(publicKey))
+    (publicKey &&
+      [
+        env.SUPABASE_SERVICE_ROLE_KEY,
+        env.OPENAI_API_KEY,
+        env.GEMINI_API_KEY,
+        env.ANTHROPIC_API_KEY,
+        env.OPENROUTER_API_KEY,
+      ].includes(publicKey))
   )
     errors.push('Public key must not contain a private credential');
   if (!publicKey.startsWith('sb_publishable_')) {

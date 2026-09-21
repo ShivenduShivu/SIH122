@@ -11,6 +11,25 @@ describe('deployment credential boundary', () => {
   };
   it('allows a separated HTTPS configuration shape', () =>
     expect(checkDeployment(valid)).toEqual([]));
+  it('accepts Gemini-only configuration and catches every private key in a public slot', () => {
+    const gemini = {
+      ...valid,
+      OPENAI_API_KEY: '',
+      EXTRACTION_PROVIDER: 'gemini',
+      GEMINI_API_KEY: 'gemini-fixture',
+      GEMINI_MODEL: 'model-fixture',
+    };
+    expect(checkDeployment(gemini)).toEqual([]);
+    for (const key of ['GEMINI_API_KEY', 'ANTHROPIC_API_KEY', 'OPENROUTER_API_KEY']) {
+      const errors = checkDeployment({
+        ...gemini,
+        [key]: 'private-fixture',
+        NEXT_PUBLIC_SUPABASE_PUBLISHABLE_KEY: 'private-fixture',
+      });
+      expect(errors.join(' ')).toContain('private credential');
+      expect(errors.join(' ')).not.toContain('private-fixture');
+    }
+  });
   it('rejects a service-role JWT in the browser key', () => {
     const jwt = `header.${Buffer.from(JSON.stringify({ role: 'service_role' })).toString('base64url')}.signature`;
     expect(

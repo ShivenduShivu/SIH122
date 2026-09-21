@@ -4,13 +4,13 @@
 
 ## What runs where
 
-The web process serves the planner and field interfaces. It uses the public Supabase key and the signed-in user's session. Database policies still decide which records that user may read or change. The worker handles extraction, transcription, imports and exports. Only the worker receives the privileged database key and the OpenAI key. Do not put either private key in a `NEXT_PUBLIC_*` variable, Docker build argument, GitHub repository or screenshot.
+The web process serves the planner and field interfaces. It uses the public Supabase key and the signed-in user's session. Database policies still decide which records that user may read or change. The worker handles extraction, transcription, imports and exports. Only the worker receives the privileged database key and selected AI provider keys. Do not put private keys in a `NEXT_PUBLIC_*` variable, Docker build argument, GitHub repository or screenshot. The later [provider-selection addition](providers.md) supports OpenAI, Gemini, Claude and OpenRouter without changing the Phase 7 evidence.
 
 `deploy/Dockerfile` has separate `web` and `worker` targets. Both run as user `node`, not root. The web target uses Next.js standalone output. The worker currently includes the repository's runtime tooling and development dependencies; it is a prototype image, not a minimal production image. Dependency audits cover both production-only and full dependency sets.
 
 Local `npm start` now launches that same standalone server and copies its static assets. It binds to `127.0.0.1:3000`. Docker binds inside its container and Compose exposes the web port on host loopback only. The worker has no public port.
 
-The local standalone launcher strips `OPENAI_*` and `SUPABASE_SERVICE_ROLE_KEY` from its web child process even if the operator's terminal environment contains worker credentials.
+The local standalone launcher strips `OPENAI_*`, `GEMINI_*`, `ANTHROPIC_*`, `OPENROUTER_*` and `SUPABASE_SERVICE_ROLE_KEY` from its web child process even if the operator's terminal environment contains worker credentials.
 
 ## Deployment order after hosting is selected
 

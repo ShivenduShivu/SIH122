@@ -72,6 +72,10 @@ const mediaErrors: Record<string, string> = {
     'Transcription could not connect or timed out. Retry the saved recording.',
   transcription_rate_limit: 'Transcription is busy. Wait briefly, then retry.',
   transcription_credentials: 'Transcription is unavailable. Contact the project operator.',
+  transcription_not_configured:
+    'Voice transcription is not enabled. Start a text report, or ask the project operator to enable it.',
+  transcription_invalid_response:
+    'The recording could not be transcribed clearly. Retry, or start a text report.',
   media_validation_failed: 'The file could not be read. Choose another photo or recording.',
   media_retry_limit: 'This file reached its retry limit. Start a new draft or report in text.',
 };

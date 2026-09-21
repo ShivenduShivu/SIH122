@@ -1,17 +1,20 @@
 import { existsSync, writeFileSync } from 'node:fs';
 import { resolve } from 'node:path';
-import { OpenAIExtractor } from '@intelligrid/adapters';
+import {
+  createExtractor,
+  createTranscriber,
+  providerConfiguration,
+} from '@intelligrid/adapters/providers';
 import { processOne, workerDatabase } from './processor';
 import { processImport } from './imports';
 import { processMedia } from './media';
-import { OpenAITranscriber } from '@intelligrid/adapters/transcription';
 if (process.argv.includes('--check')) {
   console.log(
     JSON.stringify({
       service: 'worker',
       mode: 'configuration-check',
       pipelineVersion: 'observations-v2',
-      provider: 'openai',
+      ...providerConfiguration(process.env, false),
       consumesJobs: false,
     }),
   );
@@ -19,15 +22,13 @@ if (process.argv.includes('--check')) {
   for (const path of [resolve('.env.local'), resolve('apps/worker/.env.local')])
     if (existsSync(path)) process.loadEnvFile(path);
   const url = process.env.SUPABASE_URL,
-    key = process.env.SUPABASE_SERVICE_ROLE_KEY,
-    apiKey = process.env.OPENAI_API_KEY;
-  if (!url || !key || !apiKey)
-    throw new Error(
-      'Configure SUPABASE_URL, SUPABASE_SERVICE_ROLE_KEY and OPENAI_API_KEY for the worker.',
-    );
+    key = process.env.SUPABASE_SERVICE_ROLE_KEY;
+  if (!url || !key)
+    throw new Error('Configure SUPABASE_URL and SUPABASE_SERVICE_ROLE_KEY for the worker.');
   const db = workerDatabase(url, key),
-    extractor = new OpenAIExtractor(apiKey),
-    transcriber = new OpenAITranscriber(apiKey);
+    extractor = createExtractor(),
+    transcriber = createTranscriber();
+  console.log(JSON.stringify({ service: 'worker', ...providerConfiguration(process.env) }));
   let stopping = false;
   process.on('SIGINT', () => {
     stopping = true;
