@@ -1,4 +1,4 @@
-import { describe, expect, it } from 'vitest';
+import { describe, expect, it, vi } from 'vitest';
 // @ts-expect-error operator CLI is intentionally JavaScript
 import { checkDeployment } from '../scripts/deploy-preflight.mjs';
 describe('deployment credential boundary', () => {
@@ -52,5 +52,31 @@ describe('deployment credential boundary', () => {
       'https://demo.test/',
     ])
       expect(checkDeployment({ ...valid, APP_ORIGIN }).length).toBeGreaterThan(0);
+  });
+});
+
+describe('transport security headers', () => {
+  async function headerKeys(appOrigin: string | undefined) {
+    vi.resetModules();
+    const previous = process.env.APP_ORIGIN;
+    if (appOrigin === undefined) delete process.env.APP_ORIGIN;
+    else process.env.APP_ORIGIN = appOrigin;
+    try {
+      const config = (await import('../apps/web/next.config')).default;
+      const groups = await config.headers!();
+      return groups.flatMap((group) => group.headers.map((header) => header.key));
+    } finally {
+      if (previous === undefined) delete process.env.APP_ORIGIN;
+      else process.env.APP_ORIGIN = previous;
+    }
+  }
+  it('pins HSTS only for an HTTPS deployment origin', async () => {
+    expect(await headerKeys('https://demo.intelligrid.test')).toContain(
+      'Strict-Transport-Security',
+    );
+  });
+  it('never pins HSTS for local HTTP or an unset origin', async () => {
+    expect(await headerKeys('http://localhost:3000')).not.toContain('Strict-Transport-Security');
+    expect(await headerKeys(undefined)).not.toContain('Strict-Transport-Security');
   });
 });

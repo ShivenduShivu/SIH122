@@ -23,6 +23,7 @@
     "test:browser": "node tests/browser/smoke.mjs",
     "seed:local": "tsx scripts/seed-local.ts",
     "test:database": "node scripts/test-database.mjs",
+    "deploy:check": "node scripts/deploy-preflight.mjs",
     "test:seed": "node scripts/test-seed-idempotency.mjs",
     "admin:member": "node scripts/admin-member.mjs",
     "local:bind": "node scripts/bind-local-docker.mjs",

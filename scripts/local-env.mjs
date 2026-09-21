@@ -27,3 +27,19 @@ export async function signIn(account) {
   must(await c.auth.signInWithPassword({ email: account.email, password: account.password }));
   return c;
 }
+
+// Suites that lease from the shared queue assume the next job is their own. A job left
+// queued or running by an interrupted run silently breaks that assumption, so fail with
+// an instruction instead of a mismatched-UUID assertion much later in the run.
+export async function assertQueueDrained() {
+  const { data, error } = await admin
+    .from('jobs')
+    .select('id,status')
+    .in('status', ['queued', 'running']);
+  if (error) throw new Error(`Could not inspect the job queue: ${error.message}`);
+  if (data.length)
+    throw new Error(
+      `${data.length} report job(s) are still queued or running. Stop the worker and run ` +
+        'npm run db:reset:local, then re-seed before running this suite.',
+    );
+}

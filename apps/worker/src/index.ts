@@ -49,8 +49,16 @@ if (process.argv.includes('--check')) {
         );
       if (process.argv.includes('--once')) break;
       if (!worked) await new Promise((r) => setTimeout(r, 2000));
-    } catch {
-      console.error('Worker database unavailable; retrying in 5 seconds.');
+    } catch (error) {
+      // The loop body also covers import and media work, so never assume the database failed.
+      console.error(
+        JSON.stringify({
+          service: 'worker',
+          status: 'loop_failed',
+          retryInSeconds: 5,
+          reason: error instanceof Error ? error.message : 'unknown worker loop failure',
+        }),
+      );
       await new Promise((r) => setTimeout(r, 5000));
     }
   } while (!stopping);

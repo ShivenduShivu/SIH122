@@ -81,8 +81,8 @@ try {
     await page.goto(`${base}/field`);
     await page.getByRole('heading', { name: 'Namaste, Arun.' }).waitFor();
     assert.equal(
-      await page.getByRole('button', { name: /Speak a progress report/ }).isDisabled(),
-      true,
+      await page.getByRole('link', { name: /Speak a progress report/ }).getAttribute('href'),
+      '/field/report?mode=voice',
     );
     assert.equal(
       await page.evaluate(() => document.documentElement.scrollWidth <= window.innerWidth),

@@ -5,8 +5,8 @@ const { parse } = createRequire(new URL('../packages/adapters/package.json', imp
 import { csvColumns } from '@intelligrid/adapters/schedule-import';
 import assert from 'node:assert/strict';
 import { randomUUID, createHash } from 'node:crypto';
-import { readFileSync, writeFileSync } from 'node:fs';
-import { admin, must, signIn } from './local-env.mjs';
+import { mkdirSync, readFileSync, writeFileSync } from 'node:fs';
+import { admin, assertQueueDrained, must, signIn } from './local-env.mjs';
 import { ids } from '../fixtures/development';
 import { Discipline } from '@intelligrid/contracts';
 import { processImport } from '../apps/worker/src/imports';
@@ -345,6 +345,8 @@ const baseRows: (string | number)[][] = [
   ],
 ];
 async function csvImport(rows: (string | number)[][]) {
+  // tmp/ is ignored by Git, so a fresh clone has no such directory.
+  mkdirSync('tmp', { recursive: true });
   const path = `tmp/exchange-${randomUUID()}.csv`;
   writeFileSync(
     path,
@@ -371,6 +373,7 @@ const fileRows = (e: any, name: string) =>
 const copyRows = () => structuredClone(baseRows);
 let completed = false;
 try {
+  await assertQueueDrained();
   const initial = await csvImport(baseRows);
   must(
     await planner.rpc('activate_schedule_import', {
