@@ -1,7 +1,7 @@
 'use client';
 import { useState, useRef, useEffect } from 'react';
 import { useRouter } from 'next/navigation';
-import type { ExtractedClaim } from '@intelligrid/contracts/reports';
+import { scriptedFixtureQualifier, type ExtractedClaim } from '@intelligrid/contracts/reports';
 import { useSchedule } from './schedule-context';
 import { RematchAction } from './rematch-action';
 import { TranscriptEvidence } from './transcript-evidence';
@@ -356,8 +356,17 @@ export function ReviewPanel({
               </div>
               <div>
                 <dt>Still pending</dt>
-                <dd>{c.facts.qualifiers.join('; ') || 'No qualification reported'}</dd>
+                <dd>
+                  {c.facts.qualifiers.filter((q) => q !== scriptedFixtureQualifier).join('; ') ||
+                    'No qualification reported'}
+                </dd>
               </div>
+              {c.facts.qualifiers.includes(scriptedFixtureQualifier) && (
+                <div>
+                  <dt>Extraction source</dt>
+                  <dd>Scripted demonstration fixture. This reading was not produced by a model.</dd>
+                </div>
+              )}
             </dl>
             {c.facts.observation && (
               <section className="source-provenance">

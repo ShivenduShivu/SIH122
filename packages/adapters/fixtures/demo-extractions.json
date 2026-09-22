@@ -1,0 +1,145 @@
+{
+  "set": "scripted-demo-v1",
+  "note": "Hand-authored extractions for the seeded demo reports. These are written by the team, not produced by any language model, and exist so the review, clarification and acceptance flow can be demonstrated without a provider key.",
+  "recordings": [
+    {
+      "sourceText": "Started excavation for the pump foundations at the pump bay today. Both foundations are marked out and digging has begun.",
+      "extraction": {
+        "claims": [
+          {
+            "kind": "START",
+            "activityHint": "Excavate pump foundations",
+            "assetTag": null,
+            "location": "Pump bay",
+            "stage": "excavation",
+            "discipline": "Civil",
+            "scope": "activity",
+            "fullScope": false,
+            "eventDate": "2026-09-14",
+            "dateOrigin": "source_work_date",
+            "quantity": null,
+            "evidenceQuote": "Started excavation for the pump foundations at the pump bay today.",
+            "qualifiers": [],
+            "missingFields": []
+          }
+        ]
+      }
+    },
+    {
+      "sourceText": "Pump foundation pour is complete at the pump bay. Thirty cubic metres of concrete placed today, full scope finished.",
+      "extraction": {
+        "claims": [
+          {
+            "kind": "FINISH",
+            "activityHint": "Pour pump foundation",
+            "assetTag": null,
+            "location": "Pump bay",
+            "stage": "concrete",
+            "discipline": "Civil",
+            "scope": "activity",
+            "fullScope": true,
+            "eventDate": "2026-09-21",
+            "dateOrigin": "source_work_date",
+            "quantity": null,
+            "evidenceQuote": "Pump foundation pour is complete at the pump bay.",
+            "qualifiers": [],
+            "missingFields": []
+          },
+          {
+            "kind": "ITEM_PROGRESS",
+            "activityHint": "Pour pump foundation",
+            "assetTag": null,
+            "location": "Pump bay",
+            "stage": "concrete",
+            "discipline": "Civil",
+            "scope": "item",
+            "fullScope": false,
+            "eventDate": "2026-09-21",
+            "dateOrigin": "source_work_date",
+            "quantity": {
+              "value": 30,
+              "unit": "m3",
+              "mode": "cumulative"
+            },
+            "evidenceQuote": "Thirty cubic metres of concrete placed today, full scope finished.",
+            "qualifiers": [],
+            "missingFields": []
+          }
+        ]
+      }
+    },
+    {
+      "sourceText": "Erected two spools on the 24-inch process line today. Fit-up looks good.",
+      "extraction": {
+        "claims": [
+          {
+            "kind": "ITEM_PROGRESS",
+            "activityHint": "Erect 24-inch process line",
+            "assetTag": null,
+            "location": null,
+            "stage": "erection",
+            "discipline": "Piping",
+            "scope": "item",
+            "fullScope": false,
+            "eventDate": "2026-09-22",
+            "dateOrigin": "source_work_date",
+            "quantity": {
+              "value": 2,
+              "unit": "spool",
+              "mode": "delta"
+            },
+            "evidenceQuote": "Erected two spools on the 24-inch process line today.",
+            "qualifiers": [],
+            "missingFields": ["location"]
+          }
+        ]
+      }
+    },
+    {
+      "sourceText": "Cable tray installation on the rack B route is about sixty percent done.",
+      "extraction": {
+        "claims": [
+          {
+            "kind": "PERCENT_PROGRESS",
+            "activityHint": "Install cable trays",
+            "assetTag": null,
+            "location": "Rack B",
+            "stage": "tray_installation",
+            "discipline": "Electrical",
+            "scope": "activity",
+            "fullScope": false,
+            "eventDate": null,
+            "dateOrigin": "unknown",
+            "quantity": null,
+            "evidenceQuote": "Cable tray installation on the rack B route is about sixty percent done.",
+            "qualifiers": [],
+            "missingFields": ["eventDate"]
+          }
+        ]
+      }
+    },
+    {
+      "sourceText": "Welded joints on line 24-P-1201 are ready but NDT clearance is still pending, so the line is held.",
+      "extraction": {
+        "claims": [
+          {
+            "kind": "BLOCKED",
+            "activityHint": "Inspect welded joints",
+            "assetTag": "24-P-1201",
+            "location": "Line 24-P-1201",
+            "stage": "inspection",
+            "discipline": "Piping",
+            "scope": "activity",
+            "fullScope": false,
+            "eventDate": "2026-09-24",
+            "dateOrigin": "source_work_date",
+            "quantity": null,
+            "evidenceQuote": "Welded joints on line 24-P-1201 are ready but NDT clearance is still pending, so the line is held.",
+            "qualifiers": ["NDT clearance pending", "Line held"],
+            "missingFields": []
+          }
+        ]
+      }
+    }
+  ]
+}

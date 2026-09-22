@@ -10,6 +10,7 @@ import {
   type ExtractionResult,
 } from './openai';
 import { OpenAITranscriber, type Transcriber } from './transcription';
+import { FixtureExtractor, defaultFixturePath, loadFixtureSet } from './fixture';
 import { providerConfiguration } from './provider-config.mjs';
 export { providerConfiguration } from './provider-config.mjs';
 
@@ -325,7 +326,11 @@ export class GeminiTranscriber implements Transcriber {
 
 export function createExtractor(env: Record<string, string | undefined> = process.env): Extractor {
   const config = providerConfiguration(env);
-  const key = env[config.keyName]!.trim();
+  if (config.provider === 'fixture') {
+    const path = env.FIXTURE_EXTRACTION_PATH?.trim();
+    return new FixtureExtractor(loadFixtureSet(path || defaultFixturePath()));
+  }
+  const key = env[config.keyName!]!.trim();
   return config.provider === 'openai'
     ? new OpenAIExtractor(key, config.model)
     : new StructuredExtractor(config.provider, key, config.model);

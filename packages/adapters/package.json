@@ -9,7 +9,8 @@
     "./schedule-import": "./src/schedule-import.ts",
     "./field-import": "./src/field-import.ts",
     "./transcription": "./src/transcription.ts",
-    "./wav": "./src/wav.ts"
+    "./wav": "./src/wav.ts",
+    "./fixture": "./src/fixture.ts"
   },
   "dependencies": {
     "@intelligrid/contracts": "0.1.0",

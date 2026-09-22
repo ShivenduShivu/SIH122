@@ -2,6 +2,9 @@ import { z } from 'zod';
 import { EventKind, Id, WorkDate, Discipline, PlannedActivity } from './index';
 import { Observation } from './observations';
 export const extractionVersion = 'observations-v2';
+// Marks a claim replayed from the scripted demonstration fixture rather than produced by a
+// model. Shared so the worker can attach it and the review panel can label it distinctly.
+export const scriptedFixtureQualifier = 'Scripted demo fixture, not model output';
 export const ExtractedClaim = z
   .object({
     kind: EventKind,

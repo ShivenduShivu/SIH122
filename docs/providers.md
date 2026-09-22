@@ -58,3 +58,16 @@ Gemini audio is prompted for a verbatim transcript, including mixed languages an
 Transport tests use mocked HTTP responses, including malformed output, refusal, truncation, unsupported quotes, invalid dates, rate limits and key separation. They do not prove live model quality. No Gemini/Claude/OpenRouter account credentials were supplied or used for this change; their live extraction and Gemini speech checks remain pending. The historical OpenAI accuracy results cannot be applied to these providers.
 
 Official API references checked 21 September 2026: [Gemini generation](https://ai.google.dev/api/generate-content), [Gemini audio](https://ai.google.dev/gemini-api/docs/audio), [Claude structured outputs](https://platform.claude.com/docs/en/build-with-claude/structured-outputs), [OpenRouter structured outputs](https://openrouter.ai/docs/guides/features/structured-outputs).
+
+## Scripted demonstration mode
+
+`EXTRACTION_PROVIDER=fixture` needs no key, makes no network call and spends nothing. It replays
+hand-authored readings for the report texts in `packages/adapters/fixtures/demo-extractions.json`
+and refuses anything else with `fixture_not_recorded` rather than generating a substitute. Claims
+are stored with `provider = fixture` and are labelled **Extraction source: Scripted demonstration
+fixture** in the planner's review panel.
+
+Transcription has no fixture and stays disabled in this mode, so voice capture is unavailable and
+the browser shows the existing plain-language message. Use it as a rehearsal and fallback path for
+a demonstration, never as evidence of extraction quality: it measures nothing about any model.
+[Demonstration runbook](demo-runbook.md).
