@@ -8,7 +8,7 @@ Phase 7 adds frozen synthetic evaluation, security checks, separate web/worker c
 
 ## Run locally
 
-Use Node.js **24 LTS** (`.node-version`), npm and Docker Desktop. First follow [local setup and seed](docs/local-development.md). Then:
+Use Node.js **24 LTS**, npm and Docker. The version is pinned in both `.nvmrc` and `.node-version`, and `engine-strict=true` makes `npm ci` fail on any other major version. First follow [local setup and seed](docs/local-development.md). Then:
 
 ```sh
 npm run dev
@@ -61,7 +61,8 @@ For no hosting budget, the recommended demo arrangement is **Vercel Hobby + Supa
 - `fixtures`: synthetic development fixtures, source-format expectations and the separately hashed `evaluation` experiment.
 - `tests`: contracts/domain/browser checks.
 - `planning/07-technical-architecture.md`: architecture version 1.1.
+- `planning/09-architecture-alignment-v1.2.md`: the version 1.2 alignment that supersedes it.
 - `docs/implementation-phases.md`: detailed phase instructions, gates and commit messages.
 - `docs/reports`: phase completion evidence and review status.
 
-Only approved phases are staged and committed. Do not commit `.env`, provider keys, backups, `node_modules`, raw browser output or scratch files. Selected reviewed evidence belongs in phase reports. Package patches are pinned by `package-lock.json`. `.github/workflows/checks.yml` repeats foundation checks on GitHub. Phase 7 was committed and pushed as `4c23bcc`. The user authorized provider selection, its documentation, commit and push on 21 September 2026. Deployment and physical-device checks remain separate open steps; Phase 8 has not begun.
+Only approved phases are staged and committed. Do not commit `.env`, provider keys, backups, `node_modules`, raw browser output or scratch files. Selected reviewed evidence belongs in phase reports. Package patches are pinned by `package-lock.json`. `.github/workflows/checks.yml` repeats foundation checks on GitHub. Phase 7 was committed and pushed as `4c23bcc`, and configurable providers followed in `e036935`. The user authorized provider selection, its documentation, commit and push on 21 September 2026. Deployment and physical-device checks remain separate open steps; Phase 8 has not begun.

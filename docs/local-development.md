@@ -1,8 +1,20 @@
 # Local development and project access
 
-Use Node 24, npm and Docker Desktop with Linux containers. This environment contains synthetic project data only. IntelliGrid's web server uses the public Supabase key and the signed-in user's session; it never uses the service-role key.
+Use Node 24, npm and Docker with Linux containers. This environment contains synthetic project data only. IntelliGrid's web server uses the public Supabase key and the signed-in user's session; it never uses the service-role key.
 
-## First start (PowerShell)
+Node 24 is required, not preferred. `.npmrc` sets `engine-strict=true`, so on any other major version `npm ci` stops before installing anything:
+
+```
+npm error code EBADENGINE
+npm error notsup Required: {"node":">=24 <25"}
+npm error notsup Actual:   {"node":"v26.8.1","npm":"12.0.2"}
+```
+
+Switch versions first: `nvm use` reads `.nvmrc`, while `fnm`, `asdf` and `nodenv` read `.node-version`. Both files pin 24. Only override with `npm ci --engine-strict=false` when you are deliberately testing another runtime; nothing else in the project is checked against one.
+
+## First start
+
+PowerShell:
 
 ```powershell
 npm ci
@@ -16,9 +28,30 @@ npm run seed:local
 npm run dev
 ```
 
+bash or zsh, on Linux and macOS:
+
+```sh
+npm ci
+# Start Docker however this machine does it, for example: systemctl --user start docker
+docker network create --driver bridge --opt com.docker.network.bridge.host_binding_ipv4=127.0.0.1 intelligrid-local
+npx supabase start --network-id intelligrid-local -x realtime,imgproxy,mailpit,postgres-meta,studio,edge-runtime,logflare,vector,supavisor
+mkdir -p .cache
+npx supabase status -o env > .cache/supabase.env
+npm run local:bind
+npm run seed:local
+npm run dev
+```
+
 If the network already exists, reuse it. `local:bind` restricts the database and gateway ports to `127.0.0.1`; the CLI currently publishes explicit wildcard addresses even on a network configured for loopback. It preserves volumes and the gateway configuration, verifies container health, and restores the original container if replacement fails. It touches only `supabase_db_intelligrid` and `supabase_kong_intelligrid`. Re-run it after any CLI operation that recreates these containers. Do not expose Docker's control socket over TCP.
 
 The web app is at `http://localhost:3000`. Open `/login`. `APP_ORIGIN` must match the browser origin exactly; `localhost` and `127.0.0.1` are different origins. Use the localhost URL for form submissions. API port: 56321; PostgreSQL port: 56322. No hosted Supabase account is needed for this phase.
+
+If port 3000 is already taken, `next dev` prints a warning and quietly moves to the next free port. `seed:local` has already written `APP_ORIGIN=http://localhost:3000`, so the origins no longer match and every mutation fails with `403 Origin rejected` while pages still render normally. Either free port 3000, or set the port and origin together and point the browser checks at the same place:
+
+```sh
+PORT=3100 APP_ORIGIN=http://localhost:3100 npm run dev
+BASE_URL=http://localhost:3100 npm run test:browser
+```
 
 `seed:local` writes `apps/web/.env.local` with the URL, public key and application origin. Operator credentials stay in ignored `.cache/supabase.env`. Random local account passwords are in ignored `.cache/demo-accounts.json`; open that file locally to sign in. Never paste or commit either file. There is no public signup or browser role switch.
 
@@ -38,7 +71,9 @@ Main-project ID: `10000000-0000-4000-8000-000000000001`. Isolation-project ID en
 
 This removes this project's local database contents. Use it only for the disposable IntelliGrid development stack, never a shared or hosted database.
 
-```powershell
+The same commands work in PowerShell, bash and zsh:
+
+```sh
 npm run db:reset:local
 npx supabase status -o env > .cache/supabase.env
 npm run local:bind
@@ -51,15 +86,25 @@ Both startup and reset must use `--network-id intelligrid-local`. A reset withou
 
 ## Checks
 
-```powershell
+```sh
 npm run check
 npm run test:seed
 npm run test:database
 npm run build
 npm start
-# In another terminal, with the app running:
+```
+
+In another terminal, with the app running. PowerShell:
+
+```powershell
 $env:BROWSER_EXECUTABLE='C:/Program Files (x86)/Microsoft/Edge/Application/msedge.exe'
 npm run test:browser
+```
+
+bash or zsh:
+
+```sh
+BROWSER_EXECUTABLE=/usr/bin/google-chrome-stable npm run test:browser
 ```
 
 Alternatively install Playwright Chromium with `npx playwright install chromium`. Browser checks require the local seed accounts and write screenshots to ignored `test-results/`. Database checks intentionally append assignment and audit records; membership changes are restored and temporary evidence is removed in `finally`. Run them only against this disposable local stack. All operator scripts reject non-local Supabase URLs. The ordinary CI job runs types, foundation tests and the production build; local database/browser tests are separate, not claimed as CI coverage.
