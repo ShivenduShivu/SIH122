@@ -1,7 +1,7 @@
 export type ProviderConfiguration = {
-  provider: 'openai' | 'gemini' | 'anthropic' | 'openrouter';
+  provider: 'openai' | 'gemini' | 'anthropic' | 'openrouter' | 'fixture';
   model: string;
-  keyName: string;
+  keyName: string | null;
   transcriptionProvider: 'openai' | 'gemini' | 'disabled';
   transcriptionModel: string | null;
   transcriptionKeyName: string | null;

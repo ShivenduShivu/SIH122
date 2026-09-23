@@ -4,12 +4,15 @@ const providers = {
   gemini: { key: 'GEMINI_API_KEY', model: 'GEMINI_MODEL' },
   anthropic: { key: 'ANTHROPIC_API_KEY', model: 'ANTHROPIC_MODEL' },
   openrouter: { key: 'OPENROUTER_API_KEY', model: 'OPENROUTER_MODEL' },
+  // Replays hand-authored extractions for the seeded demo reports. No credential, no network
+  // call, and no generation: an unrecorded report fails instead of producing something.
+  fixture: { key: null, model: 'FIXTURE_EXTRACTION_SET', defaultModel: 'scripted-demo-v1' },
 };
 export function providerConfiguration(env, requireCredentials = true) {
   const requested = env.EXTRACTION_PROVIDER?.trim().toLowerCase() || 'openai';
   const provider = requested === 'claude' ? 'anthropic' : requested;
   if (!Object.hasOwn(providers, provider))
-    throw new Error('EXTRACTION_PROVIDER must be openai, gemini, anthropic or openrouter');
+    throw new Error('EXTRACTION_PROVIDER must be openai, gemini, anthropic, openrouter or fixture');
   const spec = providers[provider];
   const model = env[spec.model]?.trim() || spec.defaultModel;
   if (!model || model.startsWith('replace-'))

@@ -23,6 +23,7 @@ npm run check        # strict types, domain/contracts, fixtures, worker boundary
 npm run test:database # real-user RLS, assignment and Storage checks; local seed required
 npm run test:reconciliation-db # acceptance/worker invariants; local synthetic test data
 npm run test:browser:live # real OpenAI + browser approval; consumes API tokens
+npm run seed:demo    # submit the recorded demonstration reports; needs the local seed
 npm run seed:clarification # separate room demo; ignored local credentials
 npm run test:clarification-db # question, verification, correction and withdrawal checks
 npm run test:browser:clarification # real provider room flow; fresh uncompleted demo required
@@ -45,7 +46,7 @@ Browser checks use Playwright and Chromium. Install it once with `npx playwright
 
 ## AI provider choices and free hosting
 
-Report extraction supports **OpenAI, Gemini, Anthropic Claude and OpenRouter**. Set `EXTRACTION_PROVIDER` and the matching key/model in ignored `apps/worker/.env.local`; restart the worker to switch. OpenAI remains the default. Voice uses OpenAI or Gemini separately; Claude/OpenRouter can use either for voice or run with text/photo reporting only. There is no automatic provider fallback, and all schedule changes still require planner approval.
+Report extraction supports **OpenAI, Gemini, Anthropic Claude and OpenRouter**, plus a keyless **`fixture`** mode that replays recorded readings for a fixed set of demonstration reports and labels every claim as scripted. See the [demonstration runbook](docs/demo-runbook.md). Set `EXTRACTION_PROVIDER` and the matching key/model in ignored `apps/worker/.env.local`; restart the worker to switch. OpenAI remains the default. Voice uses OpenAI or Gemini separately; Claude/OpenRouter can use either for voice or run with text/photo reporting only. There is no automatic provider fallback, and all schedule changes still require planner approval.
 
 See [provider setup and examples](docs/providers.md) for the exact settings and a configuration check that makes no API calls. New provider integrations have mocked transport tests; live quality and account compatibility remain to be verified with your own key. Existing OpenAI evaluation scores do not apply to other models.
 
@@ -63,6 +64,7 @@ For no hosting budget, the recommended demo arrangement is **Vercel Hobby + Supa
 - `planning/07-technical-architecture.md`: architecture version 1.1.
 - `planning/09-architecture-alignment-v1.2.md`: the version 1.2 alignment that supersedes it.
 - `docs/implementation-phases.md`: detailed phase instructions, gates and commit messages.
+- `docs/demo-runbook.md`: the rehearsed demonstration path and its keyless fallback.
 - `docs/reports`: phase completion evidence and review status.
 
 Only approved phases are staged and committed. Do not commit `.env`, provider keys, backups, `node_modules`, raw browser output or scratch files. Selected reviewed evidence belongs in phase reports. Package patches are pinned by `package-lock.json`. `.github/workflows/checks.yml` repeats foundation checks on GitHub. Phase 7 was committed and pushed as `4c23bcc`, and configurable providers followed in `e036935`. The user authorized provider selection, its documentation, commit and push on 21 September 2026. Deployment and physical-device checks remain separate open steps; Phase 8 has not begun.

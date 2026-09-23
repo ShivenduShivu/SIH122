@@ -22,6 +22,7 @@
     "check": "npm run typecheck && npm test && npm run check:fixtures && npm run worker:check",
     "test:browser": "node tests/browser/smoke.mjs",
     "seed:local": "tsx scripts/seed-local.ts",
+    "seed:demo": "tsx scripts/seed-demo-reports.ts",
     "test:database": "node scripts/test-database.mjs",
     "deploy:check": "node scripts/deploy-preflight.mjs",
     "test:seed": "node scripts/test-seed-idempotency.mjs",
