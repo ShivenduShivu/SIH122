@@ -1,8 +1,8 @@
-import { describe, it, expect } from 'vitest';
+import { describe, it, expect, vi } from 'vitest';
 import { inspectWav } from '@nirmaan/adapters/wav';
 import { pcmWav } from '../apps/web/src/lib/wav-encoder';
 import { ReserveCapture } from '@nirmaan/contracts/media';
-import { readDraft, draftKey } from '../apps/web/src/lib/field-draft';
+import { clearUserDrafts, readDraft, draftKey } from '../apps/web/src/lib/field-draft';
 const user = '30000000-0000-4000-8000-000000000001',
   project = '10000000-0000-4000-8000-000000000001';
 async function wave(seconds = 1) {
@@ -81,6 +81,40 @@ describe('recoverable text draft isolation', () => {
   }
   it('restores exact text and stable capture ID', () => {
     expect(readDraft(storage(draft), user, project, 1000000100)).toEqual(draft);
+  });
+  it('restores drafts saved before the Nirmaan rebrand', () => {
+    const legacyKey = `intelligrid:field-draft:v1:${user}:${project}`;
+    const entries = new Map([[legacyKey, JSON.stringify(draft)]]);
+    expect(
+      readDraft(
+        {
+          getItem: (key: string) => entries.get(key) ?? null,
+          removeItem: (key: string) => {
+            entries.delete(key);
+          },
+        },
+        user,
+        project,
+        1000000100,
+      ),
+    ).toEqual(draft);
+  });
+  it('removes pre-rebrand drafts when the user signs out', () => {
+    const legacyKey = `intelligrid:field-draft:v1:${user}:${project}`;
+    const entries = new Map([[legacyKey, JSON.stringify(draft)]]);
+    vi.stubGlobal('localStorage', {
+      get length() {
+        return entries.size;
+      },
+      key: (index: number) => Array.from(entries.keys())[index] ?? null,
+      removeItem: (key: string) => entries.delete(key),
+    });
+    try {
+      clearUserDrafts(user);
+      expect(entries.has(legacyKey)).toBe(false);
+    } finally {
+      vi.unstubAllGlobals();
+    }
   });
   it('never reads another user or project draft', () => {
     expect(readDraft(storage(draft), project, user, 1000000100)).toBeNull();

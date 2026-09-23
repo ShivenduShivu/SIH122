@@ -1,5 +1,6 @@
 import { LocalFieldDraft } from '@nirmaan/contracts/media';
 export const draftPrefix = 'nirmaan:field-draft:v1:';
+const legacyDraftPrefix = 'intelligrid:field-draft:v1:';
 export function draftKey(user: string, project: string) {
   return `${draftPrefix}${user}:${project}`;
 }
@@ -9,8 +10,12 @@ export function readDraft(
   project: string,
   now = Date.now(),
 ) {
-  const key = draftKey(user, project),
+  let key = draftKey(user, project),
     raw = storage.getItem(key);
+  if (!raw) {
+    key = `${legacyDraftPrefix}${user}:${project}`;
+    raw = storage.getItem(key);
+  }
   if (!raw) return null;
   let parsed;
   try {
@@ -34,6 +39,10 @@ export function readDraft(
 export function clearUserDrafts(user: string) {
   for (let i = localStorage.length - 1; i >= 0; i--) {
     const key = localStorage.key(i);
-    if (key?.startsWith(`${draftPrefix}${user}:`)) localStorage.removeItem(key);
+    if (
+      key?.startsWith(`${draftPrefix}${user}:`) ||
+      key?.startsWith(`${legacyDraftPrefix}${user}:`)
+    )
+      localStorage.removeItem(key);
   }
 }

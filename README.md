@@ -1,6 +1,6 @@
 # Nirmaan - planning-to-execution bridge
 
-BITS Pilani / SIH 26122. Synthetic oil/gas and supplied waste-plant project data. This is a student prototype, not an official Oil India service. The team selected Nirmaan on 20 September 2026; earlier planning PDFs retain the previous name, Nirmaan.
+BITS Pilani / SIH 26122. Synthetic oil/gas and supplied waste-plant project data. This is a student prototype, not an official Oil India service. The product is named Nirmaan; some earlier implementation records retain the former name, IntelliGrid.
 
 ## Current scope
 
