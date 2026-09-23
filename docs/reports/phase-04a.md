@@ -1,6 +1,6 @@
 # Phase 4A — reference alignment and revised architecture
 
-21 September 2026 · IntelliGrid · BITS Pilani · SIH 26122
+21 September 2026 · Nirmaan · BITS Pilani · SIH 26122
 
 **Status: approved by the user on 21 September 2026 for commit/push and progression to Phase 5A. This phase contains documentation and code review only; no application implementation or migration.** Phase 4 remains the last implemented and published phase (`d9fb8ea`).
 
@@ -90,7 +90,7 @@ Static reviewed vocabulary is core. Editable learned aliases, reporting-coverage
 - Bring schedule import and correct progress semantics ahead of offline media. Produce planner exchange before spending time on a mock live connector.
 - Use the supplied 82 records as development/conformance evidence, not a blind benchmark. Label our expected outputs as team-reviewed, not official answers.
 - Keep auto-acceptance off. A clean manual approval path with measured matching quality is stronger than unvalidated automation.
-- Preserve the approved Nirmaan design structure with IntelliGrid branding; richer hierarchy and evidence are extensions within that layout.
+- Preserve the approved Nirmaan design structure with Nirmaan branding; richer hierarchy and evidence are extensions within that layout.
 - Keep the next gates bounded: 5A schedule foundation, 5B field semantics, 6A exchange/history, 6B voice, 7 evaluation, 8 freeze. Each requires its own report and approval before commit/push and progression.
 
 ## Verification and limits of this phase
@@ -103,4 +103,4 @@ No new code tests were run because this phase changes documentation only. Requir
 
 ## Review gate
 
-The user approved the proposed scope, added product details and revised phase order. Before starting Phase 5A, stage the intended documentation only, check the staged diff, commit as `docs: align IntelliGrid architecture with Oil India reference pack`, push, and begin **Phase 5A only**. Phase 5A has its own completion report and review gate.
+The user approved the proposed scope, added product details and revised phase order. Before starting Phase 5A, stage the intended documentation only, check the staged diff, commit as `docs: align Nirmaan architecture with Oil India reference pack`, push, and begin **Phase 5A only**. Phase 5A has its own completion report and review gate.

@@ -4,7 +4,7 @@ import { createHash } from 'node:crypto';
 import { createRequire } from 'node:module';
 import { admin, must } from '../../scripts/local-env.mjs';
 import { processImport } from '../../apps/worker/src/imports';
-import { csvColumns } from '@intelligrid/adapters/schedule-import';
+import { csvColumns } from '@nirmaan/adapters/schedule-import';
 const JSZip = createRequire(new URL('../../apps/web/package.json', import.meta.url))('jszip');
 const accounts = JSON.parse(readFileSync('.cache/demo-accounts.json', 'utf8'));
 const account = accounts['30000000-0000-4000-8000-000000000005'];

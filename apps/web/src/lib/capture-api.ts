@@ -1,5 +1,5 @@
-import { ReserveCapture, SubmitCapture } from '@intelligrid/contracts/media';
-import { Id } from '@intelligrid/contracts';
+import { ReserveCapture, SubmitCapture } from '@nirmaan/contracts/media';
+import { Id } from '@nirmaan/contracts';
 import { apiJson, apiSession, rpcResponse } from './api';
 export async function reserveCapture(request: Request, projectId: string) {
   const s = await apiSession(request);

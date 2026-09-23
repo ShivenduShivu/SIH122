@@ -3,7 +3,7 @@
 // leaves every claim pending for the planner.
 import { readFileSync } from 'node:fs';
 import { createHash } from 'node:crypto';
-import { loadFixtureSet } from '@intelligrid/adapters/fixture';
+import { loadFixtureSet } from '@nirmaan/adapters/fixture';
 import { must, signIn } from './local-env.mjs';
 import { ids } from '../fixtures/development';
 

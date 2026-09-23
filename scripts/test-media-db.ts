@@ -5,7 +5,7 @@ import { readFileSync } from 'node:fs';
 import sharp from 'sharp';
 import { admin, must, signIn } from './local-env.mjs';
 import { ids } from '../fixtures/development';
-import { Discipline } from '@intelligrid/contracts';
+import { Discipline } from '@nirmaan/contracts';
 import { processMedia } from '../apps/worker/src/media';
 const accounts = JSON.parse(readFileSync('.cache/demo-accounts.json', 'utf8'));
 const author = await signIn(accounts[ids.civilReporter]),

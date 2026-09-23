@@ -32,7 +32,7 @@ jobs:
       - run: npm audit --audit-level=high
       - run: npm run deploy:check
         env:
-          APP_ORIGIN: https://deploy.intelligrid.test
+          APP_ORIGIN: https://deploy.nirmaan.test
           NEXT_PUBLIC_SUPABASE_URL: https://project.supabase.co
           NEXT_PUBLIC_SUPABASE_PUBLISHABLE_KEY: sb_publishable_ci_fixture
           SUPABASE_SERVICE_ROLE_KEY: ci-service-role-fixture
@@ -49,8 +49,8 @@ jobs:
           node-version: 24
           cache: npm
       - run: npm ci
-      - run: docker network create --driver bridge --opt com.docker.network.bridge.host_binding_ipv4=127.0.0.1 intelligrid-local
-      - run: npx supabase start --network-id intelligrid-local -x realtime,imgproxy,mailpit,postgres-meta,studio,edge-runtime,logflare,vector,supavisor
+      - run: docker network create --driver bridge --opt com.docker.network.bridge.host_binding_ipv4=127.0.0.1 nirmaan-local
+      - run: npx supabase start --network-id nirmaan-local -x realtime,imgproxy,mailpit,postgres-meta,studio,edge-runtime,logflare,vector,supavisor
       - run: mkdir -p .cache
       - run: npx supabase status -o env > .cache/supabase.env
       - run: npm run local:bind

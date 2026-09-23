@@ -2,7 +2,7 @@ import { readFileSync } from 'node:fs';
 try {
   const heartbeat = JSON.parse(
     readFileSync(
-      process.env.WORKER_HEARTBEAT_PATH ?? '/tmp/intelligrid-worker-heartbeat.json',
+      process.env.WORKER_HEARTBEAT_PATH ?? '/tmp/nirmaan-worker-heartbeat.json',
       'utf8',
     ),
   );

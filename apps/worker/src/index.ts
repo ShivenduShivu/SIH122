@@ -4,7 +4,7 @@ import {
   createExtractor,
   createTranscriber,
   providerConfiguration,
-} from '@intelligrid/adapters/providers';
+} from '@nirmaan/adapters/providers';
 import { processOne, workerDatabase } from './processor';
 import { processImport } from './imports';
 import { processMedia } from './media';

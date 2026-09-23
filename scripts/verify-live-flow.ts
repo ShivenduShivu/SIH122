@@ -2,7 +2,7 @@ import { readFileSync, writeFileSync } from 'node:fs';
 import { randomUUID } from 'node:crypto';
 import { admin, must, signIn } from './local-env.mjs';
 import { processOne } from '../apps/worker/src/processor';
-import { OpenAIExtractor } from '@intelligrid/adapters';
+import { OpenAIExtractor } from '@nirmaan/adapters';
 const accounts = JSON.parse(readFileSync('.cache/demo-accounts.json', 'utf8'));
 const reporter = await signIn(accounts['30000000-0000-4000-8000-000000000001']);
 const planner = await signIn(accounts['30000000-0000-4000-8000-000000000005']);

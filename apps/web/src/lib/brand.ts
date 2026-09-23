@@ -1,5 +1,5 @@
 export const brand = {
-  name: 'IntelliGrid',
+  name: 'Nirmaan',
   tagline: 'Field evidence. Verified progress.',
-  institution: 'BITS Pilani',
+  institution: 'SIH 2026',
 };

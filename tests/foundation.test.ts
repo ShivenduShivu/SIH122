@@ -6,13 +6,13 @@ import {
   ReportDraft,
   ReviewCommand,
   WorkDate,
-} from '@intelligrid/contracts';
+} from '@nirmaan/contracts';
 import {
   assignedActivities,
   assignmentConflict,
   formatDateOnly,
   locationQuestion,
-} from '@intelligrid/domain';
+} from '@nirmaan/domain';
 import {
   activities,
   ids,

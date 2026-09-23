@@ -1,5 +1,5 @@
 import { followupPost } from '../../../../../../lib/followup-api';
-import { ReplyCommand } from '@intelligrid/contracts/followups';
+import { ReplyCommand } from '@nirmaan/contracts/followups';
 export async function POST(
   request: Request,
   { params }: { params: Promise<{ questionId: string }> },

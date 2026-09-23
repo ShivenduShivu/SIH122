@@ -1,4 +1,4 @@
-# IntelliGrid — Phase 4 completion report
+# Nirmaan — Phase 4 completion report
 
 **Status: approved by the user on 21 September 2026 for commit and push. Further implementation is on hold pending new information from the user.**
 

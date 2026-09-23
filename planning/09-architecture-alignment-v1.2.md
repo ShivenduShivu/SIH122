@@ -1,4 +1,4 @@
-# IntelliGrid — architecture alignment v1.2
+# Nirmaan — architecture alignment v1.2
 
 21 September 2026 · BITS Pilani · SIH 26122
 
@@ -6,7 +6,7 @@
 
 ## 1. Product outcome and boundaries
 
-IntelliGrid turns supervisor reports and discipline spreadsheets into traceable activity-level updates for the planning engineer. It should save reconciliation effort without hiding missing information. The primary demonstration will use the supplied garbage-treatment-plant schedule; existing Duliajan and room fixtures remain regression cases. All are labelled synthetic. The supplied project is a test case, not an assertion that OIL operates that plant.
+Nirmaan turns supervisor reports and discipline spreadsheets into traceable activity-level updates for the planning engineer. It should save reconciliation effort without hiding missing information. The primary demonstration will use the supplied garbage-treatment-plant schedule; existing Duliajan and room fixtures remain regression cases. All are labelled synthetic. The supplied project is a test case, not an assertion that OIL operates that plant.
 
 The essential demonstration is: import a schedule → capture varied reports → split and interpret the facts → propose activity links → ask short questions where needed → planner accepts valid changes → Gantt and accepted records converge → produce a planner exchange file. Unresolved items remain searchable. No live OIL connection is required.
 

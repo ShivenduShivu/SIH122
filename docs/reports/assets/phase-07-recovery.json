@@ -1,9 +1,9 @@
 {
   "createdAt": "2026-09-21T05:47:42.880Z",
   "backupDirectory": ".cache/backups/1789969586313_04f293",
-  "targetDatabase": "intelligrid_restore_1789969586313_04f293",
-  "storageVolume": "intelligrid_restore_1789969586313_04f293",
-  "migrationDatabase": "intelligrid_restore_1789969586313_04f293_migrations",
+  "targetDatabase": "nirmaan_restore_1789969586313_04f293",
+  "storageVolume": "nirmaan_restore_1789969586313_04f293",
+  "migrationDatabase": "nirmaan_restore_1789969586313_04f293_migrations",
   "databaseSha256": "e85a4605ceef4f550cd1bd15adb6b327f826597bb231dc8f6ff6c554e7ddaf80",
   "storageSha256": "7692c89ec8908ec51f1121345e2e479aa3ce8e3218f945fb9a5d61545fc79dc4",
   "tablesCompared": 37,

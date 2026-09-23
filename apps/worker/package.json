@@ -1,5 +1,5 @@
 {
-  "name": "@intelligrid/worker",
+  "name": "@nirmaan/worker",
   "version": "0.1.0",
   "private": true,
   "type": "module",
@@ -8,9 +8,9 @@
     "start": "tsx src/index.ts"
   },
   "dependencies": {
-    "@intelligrid/adapters": "0.1.0",
-    "@intelligrid/contracts": "0.1.0",
-    "@intelligrid/domain": "0.1.0",
+    "@nirmaan/adapters": "0.1.0",
+    "@nirmaan/contracts": "0.1.0",
+    "@nirmaan/domain": "0.1.0",
     "@supabase/supabase-js": "2.116.0",
     "sharp": "0.35.4",
     "tsx": "4.23.15"

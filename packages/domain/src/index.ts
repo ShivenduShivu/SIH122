@@ -1,4 +1,4 @@
-import type { Member, PlannedActivity } from '@intelligrid/contracts';
+import type { Member, PlannedActivity } from '@nirmaan/contracts';
 
 export type LocationQuestion = {
   code: 'MISSING_LOCATION' | 'AMBIGUOUS_SCOPE';

@@ -1,6 +1,6 @@
 # Implementation phases and review gates
 
-Authority for completed phases: architecture v1.1 and their approved reports. Approved authority for remaining work: `planning/09-architecture-alignment-v1.2.md`. Institution: BITS Pilani. The approved product name is IntelliGrid. All prototype data is synthetic. GitHub origin: https://github.com/ShivenduShivu/SIH122.git.
+Authority for completed phases: architecture v1.1 and their approved reports. Approved authority for remaining work: `planning/09-architecture-alignment-v1.2.md`. Institution: BITS Pilani. The approved product name is Nirmaan. All prototype data is synthetic. GitHub origin: https://github.com/ShivenduShivu/SIH122.git.
 
 ## Mandatory phase workflow
 
@@ -22,7 +22,7 @@ Each phase or lettered subphase is a separate review boundary. The original seve
 
 **Review:** repository boundaries, visual direction, task terminology, fixtures and command results. No cloud account is required here.
 
-**Commit after approval:** `chore: establish IntelliGrid foundation and phase workflow`
+**Commit after approval:** `chore: establish Nirmaan foundation and phase workflow`
 
 ## Phase 2 - Database, identity and project boundaries
 
@@ -62,7 +62,7 @@ Each phase or lettered subphase is a separate review boundary. The original seve
 
 **Review:** `docs/reports/phase-04a.md` and architecture v1.2. Stop before implementation or commit pending approval.
 
-**Commit:** `docs: align IntelliGrid architecture with Oil India reference pack`
+**Commit:** `docs: align Nirmaan architecture with Oil India reference pack`
 
 ## Phase 5A - Supplied schedule import and catalogue foundation
 

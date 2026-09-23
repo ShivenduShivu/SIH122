@@ -12,7 +12,7 @@ const accounts: Record<string, { id: string; email: string; password: string }> 
   : {};
 const authUsers = must(await admin.auth.admin.listUsers({ perPage: 1000 })).users;
 for (const m of members) {
-  const email = `${m.name.toLowerCase().replaceAll(' ', '.')}@intelligrid.example.test`;
+  const email = `${m.name.toLowerCase().replaceAll(' ', '.')}@nirmaan.example.test`;
   const existing = authUsers.find((u: { email: string }) => u.email === email);
   if (existing && !accounts[m.id])
     throw new Error('Existing demo user has no local credential record; refuse password reset');

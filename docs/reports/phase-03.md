@@ -1,4 +1,4 @@
-# IntelliGrid — Phase 3 completion report
+# Nirmaan — Phase 3 completion report
 
 **Status: approved by the user on 21 September 2026. Committed and pushed as `d2feff5` before Phase 4 began.**
 
@@ -50,7 +50,7 @@ The live ambiguous input **“Painting is finished.”** produced missing-date/l
 
 ## Visual review
 
-Compared with the approved **Nirmaan | Website and Field PWA Design** pages 2–6 and mobile layout on page 8. IntelliGrid branding, real seeded identities, dates and counts replace illustration content. Screenshots contain only synthetic data.
+Compared with the approved **Nirmaan | Website and Field PWA Design** pages 2–6 and mobile layout on page 8. Nirmaan branding, real seeded identities, dates and counts replace illustration content. Screenshots contain only synthetic data.
 
 | Screen                                   | Evidence                                                                                                            |
 | ---------------------------------------- | ------------------------------------------------------------------------------------------------------------------- |

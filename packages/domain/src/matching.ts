@@ -1,5 +1,5 @@
-import type { PlannedActivity } from '@intelligrid/contracts';
-import type { ExtractedClaim } from '@intelligrid/contracts/reports';
+import type { PlannedActivity } from '@nirmaan/contracts';
+import type { ExtractedClaim } from '@nirmaan/contracts/reports';
 import { vocabulary, inferredStages } from './vocabulary';
 const normalize = (s: string) =>
   s

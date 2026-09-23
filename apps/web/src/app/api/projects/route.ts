@@ -21,7 +21,7 @@ export async function POST(request: Request) {
   if (!id.success) return new Response('Invalid project', { status: 422 });
   const { data: project } = await db.from('projects').select('id').eq('id', id.data).maybeSingle();
   if (!project) return new Response('Project access denied', { status: 403 });
-  (await cookies()).set('intelligrid-project', project.id, {
+  (await cookies()).set('nirmaan-project', project.id, {
     httpOnly: true,
     sameSite: 'lax',
     secure: process.env.APP_ORIGIN?.startsWith('https://'),

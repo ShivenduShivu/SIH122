@@ -1,7 +1,7 @@
 import { describe, it, expect } from 'vitest';
-import { inspectWav } from '@intelligrid/adapters/wav';
+import { inspectWav } from '@nirmaan/adapters/wav';
 import { pcmWav } from '../apps/web/src/lib/wav-encoder';
-import { ReserveCapture } from '@intelligrid/contracts/media';
+import { ReserveCapture } from '@nirmaan/contracts/media';
 import { readDraft, draftKey } from '../apps/web/src/lib/field-draft';
 const user = '30000000-0000-4000-8000-000000000001',
   project = '10000000-0000-4000-8000-000000000001';

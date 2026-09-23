@@ -4,9 +4,9 @@ import { readFileSync, writeFileSync, mkdirSync } from 'node:fs';
 import { admin, must, signIn } from './local-env.mjs';
 import { ids } from '../fixtures/development';
 import { processImport } from '../apps/worker/src/imports';
-import { ScheduleSnapshot } from '@intelligrid/contracts/reports';
-import { csvColumns } from '@intelligrid/adapters/schedule-import';
-import { Discipline } from '@intelligrid/contracts';
+import { ScheduleSnapshot } from '@nirmaan/contracts/reports';
+import { csvColumns } from '@nirmaan/adapters/schedule-import';
+import { Discipline } from '@nirmaan/contracts';
 const accounts = JSON.parse(readFileSync('.cache/demo-accounts.json', 'utf8'));
 const planner = await signIn(accounts[ids.planner]),
   foreign = await signIn(accounts[ids.otherReporter]),

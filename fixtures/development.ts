@@ -1,5 +1,5 @@
 import { z } from 'zod';
-import { Member, PlannedActivity, Project } from '@intelligrid/contracts';
+import { Member, PlannedActivity, Project } from '@nirmaan/contracts';
 
 export const ids = {
   project: '10000000-0000-4000-8000-000000000001',

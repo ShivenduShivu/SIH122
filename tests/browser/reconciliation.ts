@@ -3,7 +3,7 @@ import assert from 'node:assert/strict';
 import { readFileSync, writeFileSync, mkdirSync } from 'node:fs';
 import { admin, must } from '../../scripts/local-env.mjs';
 import { processOne } from '../../apps/worker/src/processor';
-import { OpenAIExtractor } from '@intelligrid/adapters';
+import { OpenAIExtractor } from '@nirmaan/adapters';
 
 // Live synthetic-data test. Uses the real local database, web API and OpenAI provider.
 const base = process.env.BASE_URL ?? 'http://localhost:3000';

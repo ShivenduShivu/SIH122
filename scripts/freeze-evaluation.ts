@@ -2,7 +2,7 @@
 import { mkdirSync, existsSync, writeFileSync } from 'node:fs';
 import { createHash } from 'node:crypto';
 import { activities } from '../fixtures/development';
-import { prompt } from '@intelligrid/adapters';
+import { prompt } from '@nirmaan/adapters';
 const destination = 'fixtures/evaluation/frozen.json';
 if (existsSync(destination))
   throw new Error('Freeze exists. Create a separately versioned experiment instead.');

@@ -1,6 +1,6 @@
 import type { z } from 'zod';
 import { apiSession, apiJson, rpcResponse } from './api';
-import { Id } from '@intelligrid/contracts';
+import { Id } from '@nirmaan/contracts';
 export async function followupPost(
   request: Request,
   id: string,

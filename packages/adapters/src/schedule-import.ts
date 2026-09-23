@@ -9,8 +9,8 @@ import {
   MAX_FILE_BYTES,
   MAX_NODES,
   type ImportFile,
-} from '@intelligrid/contracts/imports';
-import { WorkDate } from '@intelligrid/contracts';
+} from '@nirmaan/contracts/imports';
+import { WorkDate } from '@nirmaan/contracts';
 
 const disciplines: Record<string, string> = {
   CIV: 'Civil',

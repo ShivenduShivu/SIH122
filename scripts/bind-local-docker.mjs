@@ -37,7 +37,7 @@ function request(method, path, body, raw = false) {
     req.end(bytes);
   });
 }
-for (const name of ['supabase_db_intelligrid', 'supabase_kong_intelligrid']) {
+for (const name of ['supabase_db_nirmaan', 'supabase_kong_nirmaan']) {
   const old = await request('GET', `/containers/${name}/json`);
   const bindings = old.HostConfig.PortBindings;
   if (
@@ -48,18 +48,18 @@ for (const name of ['supabase_db_intelligrid', 'supabase_kong_intelligrid']) {
     console.log(`${name}: already localhost-only`);
     continue;
   }
-  if (old.HostConfig.NetworkMode !== 'intelligrid-local')
+  if (old.HostConfig.NetworkMode !== 'nirmaan-local')
     throw new Error('Unexpected network; refusing container replacement');
   // Kong's declarative configuration and local certificate were injected by the CLI.
   const archive = name.includes('kong')
     ? await request('GET', `/containers/${name}/archive?path=/home/kong`, undefined, true)
     : null;
   for (const values of Object.values(bindings)) for (const b of values) b.HostIp = '127.0.0.1';
-  const network = old.NetworkSettings.Networks['intelligrid-local'];
+  const network = old.NetworkSettings.Networks['nirmaan-local'];
   const config = {
     ...old.Config,
     HostConfig: { ...old.HostConfig, PortBindings: bindings },
-    NetworkingConfig: { EndpointsConfig: { 'intelligrid-local': { Aliases: network.Aliases } } },
+    NetworkingConfig: { EndpointsConfig: { 'nirmaan-local': { Aliases: network.Aliases } } },
   };
   const backup = `${name}_before_local_binding`;
   await request('POST', `/containers/${name}/stop?t=20`);

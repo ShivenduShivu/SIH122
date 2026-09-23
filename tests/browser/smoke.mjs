@@ -71,7 +71,7 @@ try {
   checks.push('Planner saves an audited assignment through the protected API');
   const health = await (await page.request.get(`${base}/api/health`)).json();
   assert.equal(health.mode, 'authenticated-synthetic-project');
-  assert.equal(health.service, 'intelligrid-web');
+  assert.equal(health.service, 'nirmaan-web');
   checks.push('Health endpoint distinguishes web liveness from database readiness');
 
   await page.getByRole('button', { name: 'Sign out', exact: true }).click();

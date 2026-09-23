@@ -1,8 +1,8 @@
 import { readFileSync, writeFileSync, existsSync, mkdirSync } from 'node:fs';
 import { resolve, dirname } from 'node:path';
 import { z } from 'zod';
-import { createTranscriber, providerConfiguration } from '@intelligrid/adapters/providers';
-import { inspectWav } from '@intelligrid/adapters/wav';
+import { createTranscriber, providerConfiguration } from '@nirmaan/adapters/providers';
+import { inspectWav } from '@nirmaan/adapters/wav';
 import { speechWords, wordError } from '../packages/adapters/src/speech-metrics';
 const manifest = process.argv[2],
   output = process.argv[3] ?? 'test-results/speech-evaluation.json';

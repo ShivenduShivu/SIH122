@@ -1,11 +1,11 @@
 import { it, expect, describe } from 'vitest';
 import { readFileSync } from 'node:fs';
 import { createHash } from 'node:crypto';
-import { parseFieldWorkbook, itemCoverage } from '@intelligrid/adapters/field-import';
-import { Extraction, ExtractedClaim } from '@intelligrid/contracts/reports';
-import { rankClaim } from '@intelligrid/domain/matching';
-import { parseSchedules } from '@intelligrid/adapters/schedule-import';
-import { PlannedActivity } from '@intelligrid/contracts';
+import { parseFieldWorkbook, itemCoverage } from '@nirmaan/adapters/field-import';
+import { Extraction, ExtractedClaim } from '@nirmaan/contracts/reports';
+import { rankClaim } from '@nirmaan/domain/matching';
+import { parseSchedules } from '@nirmaan/adapters/schedule-import';
+import { PlannedActivity } from '@nirmaan/contracts';
 const buffer = readFileSync('fixtures/field/07-Sample_Field_Inputs.xlsx'),
   hash = createHash('sha256').update(buffer).digest('hex');
 describe('supplied field source conservation', () => {

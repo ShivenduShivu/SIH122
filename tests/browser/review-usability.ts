@@ -187,7 +187,7 @@ try {
   await page.evaluate(() => {
     for (const key of Object.keys(sessionStorage)) {
       if (
-        key.startsWith('intelligrid:schedule-view:') &&
+        key.startsWith('nirmaan:schedule-view:') &&
         key.includes('10000000-0000-4000-8000-000000000005')
       )
         sessionStorage.setItem(key, '{broken');

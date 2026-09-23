@@ -1,6 +1,6 @@
 # Phase 5B — source observations and reviewed progress
 
-21 September 2026 · IntelliGrid · BITS Pilani · SIH 26122
+21 September 2026 · Nirmaan · BITS Pilani · SIH 26122
 
 This phase builds on approved Phase 5A, commit `522af77`. Migration `202609210008_field_observations.sql` extends the existing PostgreSQL transaction and worker queue. The service does not connect to a live Primavera instance.
 

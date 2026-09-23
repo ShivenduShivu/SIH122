@@ -1,4 +1,4 @@
-# IntelliGrid: deployment, monitoring and recovery
+# Nirmaan: deployment, monitoring and recovery
 
 21 September 2026. Preparation for a synthetic-data demonstration. No hosting account, domain or public deployment has been configured.
 
@@ -49,7 +49,7 @@ Stop the web process, worker and every other writer first. Keep them stopped unt
 node scripts/rehearse-recovery.mjs --quiesced
 ```
 
-The script is deliberately local-only. It names the known IntelliGrid containers, creates a fresh timestamped database and a fresh Docker volume, and never restores over `postgres` or the active Storage volume. It performs these checks:
+The script is deliberately local-only. It names the known Nirmaan containers, creates a fresh timestamped database and a fresh Docker volume, and never restores over `postgres` or the active Storage volume. It performs these checks:
 
 1. Fingerprint all public tables plus Auth users and Storage buckets/objects.
 2. Write a PostgreSQL custom-format dump and a tar archive of Storage bytes to ignored `.cache/backups/<run>/`.

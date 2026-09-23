@@ -1,8 +1,8 @@
 import { describe, expect, it } from 'vitest';
 import { readFileSync } from 'node:fs';
 import { createHash, randomUUID } from 'node:crypto';
-import { parseSchedules, csvColumns, validateArchive } from '@intelligrid/adapters/schedule-import';
-import type { ImportFile } from '@intelligrid/contracts/imports';
+import { parseSchedules, csvColumns, validateArchive } from '@nirmaan/adapters/schedule-import';
+import type { ImportFile } from '@nirmaan/contracts/imports';
 import { readComplete } from '../apps/worker/src/read-complete';
 import ExcelJS from 'exceljs';
 const source = (name: string, profile: ImportFile['profile']) => {

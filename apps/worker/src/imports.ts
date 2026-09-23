@@ -1,7 +1,7 @@
 import type { SupabaseClient } from '@supabase/supabase-js';
-import { parseSchedules } from '@intelligrid/adapters/schedule-import';
-import { parseFieldWorkbook } from '@intelligrid/adapters/field-import';
-import { ImportFile } from '@intelligrid/contracts/imports';
+import { parseSchedules } from '@nirmaan/adapters/schedule-import';
+import { parseFieldWorkbook } from '@nirmaan/adapters/field-import';
+import { ImportFile } from '@nirmaan/contracts/imports';
 export async function processImport(db: SupabaseClient) {
   const leased = await db.rpc('lease_schedule_import');
   if (leased.error) throw new Error('Import queue unavailable');

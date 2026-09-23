@@ -1,5 +1,5 @@
-import { LocalFieldDraft } from '@intelligrid/contracts/media';
-export const draftPrefix = 'intelligrid:field-draft:v1:';
+import { LocalFieldDraft } from '@nirmaan/contracts/media';
+export const draftPrefix = 'nirmaan:field-draft:v1:';
 export function draftKey(user: string, project: string) {
   return `${draftPrefix}${user}:${project}`;
 }

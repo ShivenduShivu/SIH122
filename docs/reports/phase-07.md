@@ -1,6 +1,6 @@
 # Phase 7 — local evaluation, security and recovery
 
-21 September 2026 · IntelliGrid · BITS Pilani · SIH 26122
+21 September 2026 · Nirmaan · BITS Pilani · SIH 26122
 
 **Status: user authorized close review and local commit on 21 September 2026; hosting, physical-phone and human-speech gates remain open.** Approved Phase 6B and its layout/scroll fixes were committed and pushed as `57270e6`. The current request covers a local Phase 7 commit. No service was purchased, no public site was deployed and Phase 8 has not begun.
 

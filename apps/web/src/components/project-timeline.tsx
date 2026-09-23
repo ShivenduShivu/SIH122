@@ -1,8 +1,8 @@
 'use client';
 import { useLayoutEffect, type SetStateAction } from 'react';
 import Link from 'next/link';
-import type { ScheduleActivity } from '@intelligrid/contracts/reports';
-import { formatDateOnly } from '@intelligrid/domain';
+import type { ScheduleActivity } from '@nirmaan/contracts/reports';
+import { formatDateOnly } from '@nirmaan/domain';
 import { useSchedule } from './schedule-context';
 import { Icon } from './icon';
 import { HierarchyTimeline } from './hierarchy-timeline';
@@ -36,7 +36,7 @@ const status = (a: ScheduleActivity) =>
         : 'Not started';
 export function ProjectTimeline(props: { events: RecordEvent[]; today: string; userId: string }) {
   const { snapshot } = useSchedule();
-  const storageKey = `intelligrid:schedule-view:v1:${props.userId}:${snapshot.projectId}:${snapshot.revisionId}`;
+  const storageKey = `nirmaan:schedule-view:v1:${props.userId}:${snapshot.projectId}:${snapshot.revisionId}`;
   return <TimelineView key={storageKey} {...props} storageKey={storageKey} />;
 }
 function TimelineView({

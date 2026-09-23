@@ -1,5 +1,5 @@
 import { apiSession, rpcResponse, apiJson } from '../../../../../../lib/api';
-import { ReportDraft } from '@intelligrid/contracts';
+import { ReportDraft } from '@nirmaan/contracts';
 export async function POST(
   request: Request,
   { params }: { params: Promise<{ projectId: string }> },

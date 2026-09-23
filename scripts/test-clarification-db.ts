@@ -3,7 +3,7 @@ import { randomUUID, createHash } from 'node:crypto';
 import { writeFileSync, readFileSync } from 'node:fs';
 import { admin, must, signIn } from './local-env.mjs';
 import { seedLab, lab } from './seed-clarification-lab';
-import { rankClaim } from '@intelligrid/domain/matching';
+import { rankClaim } from '@nirmaan/domain/matching';
 import { processOne } from '../apps/worker/src/processor';
 const accounts = await seedLab(lab);
 const reporter = await signIn(accounts.reporter),

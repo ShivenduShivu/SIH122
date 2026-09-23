@@ -26,18 +26,14 @@ export default async function PlannerLayout({ children }: { children: React.Reac
       </a>
       <div className="utility">
         <span>PROJECT EXECUTION &amp; MONITORING</span>
-        <span>{brand.institution} / SIH 26122</span>
       </div>
       <header className="masthead">
         <div className="identity">
           <span className="brand-mark" aria-hidden="true">
-            IG
+            N
           </span>
           <div>
-            <div className="brand">
-              {brand.name}
-              <b>.</b>
-            </div>
+            <div className="brand">{brand.name}</div>
             <div className="tagline">{brand.tagline}</div>
           </div>
         </div>

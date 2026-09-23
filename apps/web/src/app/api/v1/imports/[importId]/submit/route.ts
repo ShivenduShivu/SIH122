@@ -1,5 +1,5 @@
 import { apiSession, apiJson, rpcResponse } from '../../../../../../lib/api';
-import { Id } from '@intelligrid/contracts';
+import { Id } from '@nirmaan/contracts';
 import { z } from 'zod';
 const Input = z
   .object({

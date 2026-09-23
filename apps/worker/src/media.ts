@@ -1,8 +1,8 @@
 import { createHash } from 'node:crypto';
 import sharp from 'sharp';
 import type { SupabaseClient } from '@supabase/supabase-js';
-import type { Transcriber } from '@intelligrid/adapters/transcription';
-import { inspectWav } from '@intelligrid/adapters/wav';
+import type { Transcriber } from '@nirmaan/adapters/transcription';
+import { inspectWav } from '@nirmaan/adapters/wav';
 export async function processMedia(db: SupabaseClient, transcriber: Transcriber) {
   const leased = await db.rpc('lease_field_media');
   if (leased.error) throw new Error('Media queue unavailable');

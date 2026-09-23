@@ -4,10 +4,10 @@ import {
   fixtureQualifier,
   loadFixtureSet,
   fixtureKey,
-} from '@intelligrid/adapters/fixture';
-import { createExtractor, providerConfiguration } from '@intelligrid/adapters/providers';
-import { ProviderError } from '@intelligrid/adapters';
-import { Extraction } from '@intelligrid/contracts/reports';
+} from '@nirmaan/adapters/fixture';
+import { createExtractor, providerConfiguration } from '@nirmaan/adapters/providers';
+import { ProviderError } from '@nirmaan/adapters';
+import { Extraction } from '@nirmaan/contracts/reports';
 
 const fixtures = loadFixtureSet();
 const extractor = new FixtureExtractor(fixtures);

@@ -1,7 +1,7 @@
 'use client';
 import { useState } from 'react';
-import type { PlannedActivity } from '@intelligrid/contracts';
-import { formatDateOnly } from '@intelligrid/domain';
+import type { PlannedActivity } from '@nirmaan/contracts';
+import { formatDateOnly } from '@nirmaan/domain';
 
 export function ScheduleRegister({
   activities,

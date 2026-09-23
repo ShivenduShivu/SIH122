@@ -3,10 +3,10 @@ import { randomUUID, createHash } from 'node:crypto';
 import { readFileSync, writeFileSync } from 'node:fs';
 import { admin, must, signIn } from './local-env.mjs';
 import { ids } from '../fixtures/development';
-import { Discipline } from '@intelligrid/contracts';
+import { Discipline } from '@nirmaan/contracts';
 import { processImport } from '../apps/worker/src/imports';
 import { processOne } from '../apps/worker/src/processor';
-import type { ExtractedClaim } from '@intelligrid/contracts/reports';
+import type { ExtractedClaim } from '@nirmaan/contracts/reports';
 const accounts = JSON.parse(readFileSync('.cache/demo-accounts.json', 'utf8'));
 const planner = await signIn(accounts[ids.planner]),
   supervisor = await signIn(accounts[ids.supervisor]),

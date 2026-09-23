@@ -3,7 +3,7 @@ import { useState, useEffect, useRef } from 'react';
 import { useRouter } from 'next/navigation';
 import Link from 'next/link';
 import { Icon } from './icon';
-import type { SourceEnvelope } from '@intelligrid/contracts/observations';
+import type { SourceEnvelope } from '@nirmaan/contracts/observations';
 type FieldPreview = {
   rows: {
     key: string;

@@ -1,5 +1,5 @@
 import { apiJson, apiSession } from '../../../../../lib/api';
-import { Id } from '@intelligrid/contracts';
+import { Id } from '@nirmaan/contracts';
 import { readRows } from '../../../../../lib/read-rows';
 export async function GET(
   _request: Request,

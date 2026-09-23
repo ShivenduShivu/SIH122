@@ -1,6 +1,6 @@
 # Phase 3 implementation notes
 
-This document records the implemented text-report slice of IntelliGrid. It supplements `planning/07-technical-architecture.md`; it does not claim that later phases are complete. BITS Pilani / SIH 26122. All development reports are synthetic.
+This document records the implemented text-report slice of Nirmaan. It supplements `planning/07-technical-architecture.md`; it does not claim that later phases are complete. BITS Pilani / SIH 26122. All development reports are synthetic.
 
 ## Provider decision
 

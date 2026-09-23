@@ -1,7 +1,7 @@
 import { createHash } from 'node:crypto';
 import { readFileSync } from 'node:fs';
 import { z } from 'zod';
-import { Extraction, scriptedFixtureQualifier } from '@intelligrid/contracts/reports';
+import { Extraction, scriptedFixtureQualifier } from '@nirmaan/contracts/reports';
 import {
   ProviderError,
   type Extractor,

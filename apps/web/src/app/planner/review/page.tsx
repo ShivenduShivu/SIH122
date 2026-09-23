@@ -1,4 +1,4 @@
-import { replySummary } from '@intelligrid/contracts/followups';
+import { replySummary } from '@nirmaan/contracts/followups';
 import { plannerContext } from '../../../lib/project';
 import { reportWorkbench } from '../../../lib/reports';
 import { ReviewPanel } from '../../../components/review-panel';

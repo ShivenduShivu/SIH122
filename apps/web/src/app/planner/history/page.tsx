@@ -11,7 +11,7 @@ export default async function HistoryPage() {
       <AcceptedHistory
         key={`${user.id}:${project.id}`}
         entries={result.data}
-        storageKey={`intelligrid:history:v1:${user.id}:${project.id}`}
+        storageKey={`nirmaan:history:v1:${user.id}:${project.id}`}
       />
     </>
   );

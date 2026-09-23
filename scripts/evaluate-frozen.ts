@@ -1,7 +1,7 @@
 import { readFileSync, writeFileSync, mkdirSync, existsSync } from 'node:fs';
 import { createHash } from 'node:crypto';
-import { OpenAIExtractor, prompt } from '@intelligrid/adapters';
-import { rankClaim } from '@intelligrid/domain/matching';
+import { OpenAIExtractor, prompt } from '@nirmaan/adapters';
+import { rankClaim } from '@nirmaan/domain/matching';
 for (const f of ['.env.local', 'apps/worker/.env.local']) if (existsSync(f)) process.loadEnvFile(f);
 const bytes = readFileSync('fixtures/evaluation/frozen.json');
 const sha = createHash('sha256').update(bytes).digest('hex');

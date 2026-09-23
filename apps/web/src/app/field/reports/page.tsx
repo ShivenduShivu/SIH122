@@ -14,7 +14,7 @@ export default async function ReportsPage() {
       </div>
       <FieldReportList
         key={`${w.user.id}:${w.project.id}`}
-        storageKey={`intelligrid:field-reports:v1:${w.user.id}:${w.project.id}`}
+        storageKey={`nirmaan:field-reports:v1:${w.user.id}:${w.project.id}`}
         records={w.reports.map((r) => {
           const original = w.versions.find((v) => v.report_id === r.id && v.version === 1);
           return {

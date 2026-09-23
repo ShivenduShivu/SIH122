@@ -1,6 +1,6 @@
 # Approved interface fidelity checklist
 
-Authority: `output/pdf/Nirmaan-Website-and-Mobile-Design.pdf` (12 pages), the original desktop/mobile references, and the user's Phase 1 review. Product identity is now IntelliGrid. The Phase 1 scaffold is not a new design baseline.
+Authority: `output/pdf/Nirmaan-Website-and-Mobile-Design.pdf` (12 pages), the original desktop/mobile references, and the user's Phase 1 review. Product identity is now Nirmaan. The Phase 1 scaffold is not a new design baseline.
 
 ## Rules for every UI phase
 

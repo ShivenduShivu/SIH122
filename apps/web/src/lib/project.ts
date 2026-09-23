@@ -3,7 +3,7 @@ import { readRows } from './read-rows';
 import { cache } from 'react';
 import { cookies } from 'next/headers';
 import { redirect } from 'next/navigation';
-import { ScheduleSnapshot } from '@intelligrid/contracts/reports';
+import { ScheduleSnapshot } from '@nirmaan/contracts/reports';
 import { database } from './supabase';
 
 export const projectContext = cache(async () => {
@@ -18,7 +18,7 @@ export const projectContext = cache(async () => {
     .order('project_id');
   if (memberError) throw new Error('Could not load project access. Please retry.');
   if (!members?.length) redirect('/login?error=no-access');
-  const selected = (await cookies()).get('intelligrid-project')?.value;
+  const selected = (await cookies()).get('nirmaan-project')?.value;
   const member = members.find((m) => m.project_id === selected) ?? members[0]!;
   const { data: project, error: projectError } = await db
     .from('projects')

@@ -1,7 +1,7 @@
 import { readFileSync } from 'node:fs';
 import { admin, must } from './local-env.mjs';
 import { ids, members } from '../fixtures/development';
-import { Discipline } from '@intelligrid/contracts';
+import { Discipline } from '@nirmaan/contracts';
 const project = '10000000-0000-4000-8000-000000000005';
 const accounts = JSON.parse(readFileSync('.cache/demo-accounts.json', 'utf8'));
 must(

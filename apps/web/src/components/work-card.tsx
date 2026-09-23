@@ -1,6 +1,6 @@
-import type { PlannedActivity } from '@intelligrid/contracts';
-import { formatDateOnly } from '@intelligrid/domain';
-import type { ScheduleActivity } from '@intelligrid/contracts/reports';
+import type { PlannedActivity } from '@nirmaan/contracts';
+import { formatDateOnly } from '@nirmaan/domain';
+import type { ScheduleActivity } from '@nirmaan/contracts/reports';
 export function WorkCard({
   activity: a,
   assignment: x,

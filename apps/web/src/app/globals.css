@@ -19,7 +19,7 @@ body {
   background: var(--ground);
   font:
     14px/1.5 'Segoe UI',
-    Arial,
+    Roboto,
     sans-serif;
 }
 a {
@@ -59,7 +59,7 @@ p {
 }
 h1,
 h2 {
-  font-family: Georgia, 'Times New Roman', serif;
+  font-family: 'Segoe UI', Roboto, sans-serif;
   color: var(--navy);
 }
 h1 {
@@ -73,6 +73,7 @@ h2 {
 }
 small {
   font-size: 12px;
+  font-weight: 700;
 }
 .muted {
   color: var(--muted);
@@ -114,6 +115,7 @@ small {
   justify-content: space-between;
   font-size: 10px;
   letter-spacing: 1px;
+  font-weight: 700;
 }
 .masthead {
   background: var(--paper);
@@ -134,16 +136,16 @@ small {
   display: grid;
   place-items: center;
   font:
-    700 20px Georgia,
-    serif;
+    700 20px 'Segoe UI',
+    sans-serif;
   color: var(--navy);
   background: #f5f8f9;
   border-top: 3px solid var(--gold);
 }
 .brand {
   font:
-    700 32px/1 Georgia,
-    serif;
+    700 32px/1 'Segoe UI',
+    sans-serif;
   letter-spacing: -0.8px;
   color: var(--navy);
 }
@@ -154,16 +156,19 @@ small {
   font-size: 11px;
   color: var(--muted);
   margin-top: 8px;
+  font-weight: 700;
 }
 .project-identity {
   margin-left: auto;
   border-left: 1px solid var(--line);
   padding-left: 27px;
   font-size: 12px;
+  font-weight: 700;
 }
 .project-identity .eyebrow {
   margin-bottom: 3px;
   font-size: 9px;
+  font-weight: 700;
 }
 .project-identity strong {
   font-size: 14px;
@@ -173,11 +178,13 @@ small {
   align-items: center;
   gap: 10px;
   font-size: 12px;
+  font-weight: 700;
 }
 .viewer small {
   display: block;
   font-size: 10px;
   color: var(--muted);
+  font-weight: 700;
 }
 .avatar {
   width: 35px;
@@ -204,7 +211,7 @@ small {
 .planner-nav > span {
   padding: 14px 13px;
   font-size: 12px;
-  font-weight: 600;
+  font-weight: 700;
   display: flex;
   align-items: center;
   gap: 7px;
@@ -226,7 +233,7 @@ small {
   font-size: 9px;
   background: #eff2f4;
   padding: 1px 5px;
-  font-weight: 400;
+  font-weight: 700;
 }
 .planner-nav .field-link {
   margin-left: auto;
@@ -240,6 +247,7 @@ small {
   font-size: 10px;
   color: #4e6577;
   gap: 15px;
+  font-weight: 700;
 }
 .context-strip span:first-child {
   display: flex;
@@ -263,6 +271,7 @@ small {
   font-size: 11px;
   color: var(--muted);
   margin-bottom: 22px;
+  font-weight: 700;
 }
 .page-heading {
   display: flex;
@@ -275,6 +284,7 @@ small {
   font-size: 12px;
   color: var(--muted);
   margin-top: 9px;
+  font-weight: 700;
 }
 .button {
   display: inline-flex;
@@ -288,7 +298,7 @@ small {
   color: var(--navy);
   border-radius: 3px;
   font-size: 12px;
-  font-weight: 600;
+  font-weight: 700;
 }
 .button:hover {
   background: #eaf0f4;
@@ -320,18 +330,20 @@ small {
   font-size: 11px;
   color: var(--muted);
   display: block;
+  font-weight: 700;
 }
 .stats strong {
   display: block;
   font:
-    32px/1.4 Georgia,
-    serif;
+    32px/1.4 'Segoe UI',
+    sans-serif;
   color: var(--navy);
   margin: 4px 0;
 }
 .stats small {
   color: var(--muted);
   font-size: 10px;
+  font-weight: 700;
 }
 .stats .quiet-value {
   color: #a3b2bb;
@@ -368,6 +380,7 @@ small {
   padding: 4px 7px;
   border-radius: 2px;
   white-space: nowrap;
+  font-weight: 700;
 }
 .discipline-row {
   display: flex;
@@ -381,8 +394,8 @@ small {
 }
 .discipline-number {
   font:
-    20px Georgia,
-    serif;
+    20px 'Segoe UI',
+    sans-serif;
   color: #92a5b2;
   align-self: flex-start;
 }
@@ -393,12 +406,14 @@ small {
   font-size: 11px;
   color: var(--muted);
   margin-top: 4px;
+  font-weight: 700;
 }
 .row-count {
   margin-left: auto;
   font-size: 10px;
   white-space: nowrap;
   color: var(--muted);
+  font-weight: 700;
 }
 .row-count span {
   margin-left: 8px;
@@ -409,6 +424,7 @@ small {
   font-size: 10px;
   color: var(--muted);
   background: #fafbfc;
+  font-weight: 700;
 }
 .workbench {
   padding: 23px;
@@ -433,15 +449,18 @@ small {
   place-items: center;
   flex-shrink: 0;
   background: #f4f8fa;
+  font-weight: 700;
 }
 .workflow strong {
   font-size: 12px;
+  font-weight: 700;
 }
 .workflow p {
   font-size: 11px;
   color: var(--muted);
   margin-top: 4px;
   max-width: 300px;
+  font-weight: 700;
 }
 .build-note {
   background: #f1f5f7;
@@ -449,6 +468,7 @@ small {
   padding: 12px;
   font-size: 11px;
   color: var(--muted);
+  font-weight: 700;
 }
 .field-banner {
   border: 1px solid var(--line);
@@ -468,6 +488,7 @@ small {
   font-size: 12px;
   color: var(--muted);
   margin-top: 8px;
+  font-weight: 700;
 }
 .footer {
   padding: 16px 36px;
@@ -478,6 +499,7 @@ small {
   gap: 12px;
   font-size: 10px;
   color: var(--muted);
+  font-weight: 700;
 }
 .register-tools {
   padding: 16px 20px;
@@ -489,6 +511,7 @@ small {
 .register-tools label {
   font-size: 10px;
   color: var(--muted);
+  font-weight: 700;
 }
 .filter-field {
   display: flex;
@@ -504,6 +527,7 @@ small {
   padding: 8px 10px;
   height: 37px;
   font-size: 12px;
+  font-weight: 700;
 }
 .register-tools select {
   min-width: 150px;
@@ -517,6 +541,7 @@ small {
   color: var(--muted);
   font-size: 11px;
   padding-bottom: 8px;
+  font-weight: 700;
 }
 .table-scroll {
   overflow: auto;
@@ -527,11 +552,13 @@ table {
   border-collapse: collapse;
   text-align: left;
   font-size: 12px;
+  font-weight: 700;
 }
 thead {
   background: #f2f5f7;
   font-size: 10px;
   color: #536d7e;
+  font-weight: 700;
 }
 th {
   padding: 13px 17px;
@@ -553,16 +580,18 @@ td small {
 td strong {
   font-size: 12px;
   margin: 3px 0;
+  font-weight: 700;
 }
 td small {
   color: var(--muted);
   font-size: 10px;
+  font-weight: 700;
 }
 .activity-id {
   font-size: 10px;
   letter-spacing: 0.4px;
   color: var(--accent);
-  font-weight: 600;
+  font-weight: 700;
 }
 .discipline-tag {
   display: inline-block;
@@ -571,6 +600,7 @@ td small {
   border-radius: 2px;
   background: #eef1f4;
   color: #4f6879;
+  font-weight: 700;
 }
 .discipline-tag.piping {
   background: #eaf3ef;
@@ -586,6 +616,7 @@ td small {
   padding: 9px 14px;
   font-size: 11px;
   color: var(--muted);
+  font-weight: 700;
 }
 .empty-state {
   text-align: center;
@@ -619,6 +650,7 @@ td small {
   font-size: 9px;
   letter-spacing: 1px;
   text-align: center;
+  font-weight: 700;
 }
 .field-header {
   display: flex;
@@ -635,8 +667,8 @@ td small {
 }
 .field-header .identity strong {
   font:
-    700 23px Georgia,
-    serif;
+    700 23px 'Segoe UI',
+    sans-serif;
   color: var(--navy);
 }
 .field-header small {
@@ -644,6 +676,7 @@ td small {
   color: var(--muted);
   font-size: 10px;
   margin-top: 2px;
+  font-weight: 700;
 }
 .field-main {
   padding: 24px 20px;
@@ -656,6 +689,7 @@ td small {
   font-size: 12px;
   color: var(--muted);
   margin-top: 8px;
+  font-weight: 700;
 }
 .site-card {
   background: #fff;
@@ -672,6 +706,7 @@ td small {
 .site-card .eyebrow {
   font-size: 9px;
   letter-spacing: 1px;
+  font-weight: 700;
 }
 .site-card-bottom {
   display: flex;
@@ -680,6 +715,7 @@ td small {
   border-top: 1px solid #edf1f3;
   padding-top: 13px;
   color: var(--muted);
+  font-weight: 700;
 }
 .site-card-bottom strong {
   color: var(--navy);
@@ -707,6 +743,7 @@ td small {
   font-size: 10px;
   color: #d3e0e8;
   margin-top: 4px;
+  font-weight: 700;
 }
 .field-section-heading {
   display: flex;
@@ -718,7 +755,7 @@ td small {
 .field-section-heading h2 {
   font:
     600 11px/1.4 'Segoe UI',
-    Arial,
+    Roboto,
     sans-serif;
   text-transform: uppercase;
   letter-spacing: 0.35px;
@@ -727,6 +764,7 @@ td small {
   font-size: 10px;
   color: var(--muted);
   display: inline;
+  font-weight: 700;
 }
 .capture-options {
   display: grid;
@@ -752,11 +790,13 @@ td small {
 .capture-options strong {
   display: block;
   font-size: 12px;
+  font-weight: 700;
 }
 .capture-options small {
   font-size: 10px;
   display: block;
   margin-top: 4px;
+  font-weight: 700;
 }
 .capture-options .voice-primary {
   grid-column: 1/-1;
@@ -788,6 +828,7 @@ td small {
   line-height: 1.6;
   color: var(--muted);
   margin-top: 12px;
+  font-weight: 700;
 }
 .field-callout {
   margin-top: 23px;
@@ -799,11 +840,13 @@ td small {
 .field-callout strong {
   font-size: 12px;
   color: var(--navy);
+  font-weight: 700;
 }
 .field-callout p {
   font-size: 11px;
   color: #69716f;
   margin-top: 6px;
+  font-weight: 700;
 }
 .field-disclaimer {
   text-align: center;
@@ -811,6 +854,7 @@ td small {
   font-size: 10px;
   margin: 23px 0 0;
   line-height: 1.8;
+  font-weight: 700;
 }
 .field-nav {
   position: sticky;
@@ -833,6 +877,7 @@ td small {
   color: var(--muted);
   font-size: 10px;
   padding: 8px 5px;
+  font-weight: 700;
 }
 .field-nav > span {
   color: #87969f;
@@ -848,6 +893,7 @@ td small {
   color: var(--muted);
   font-size: 11px;
   margin: 25px 0 12px;
+  font-weight: 700;
 }
 .field-tasks {
   display: grid;
@@ -869,17 +915,19 @@ td small {
 .field-task h2 {
   font:
     600 15px/1.4 'Segoe UI',
-    Arial,
+    Roboto,
     sans-serif;
 }
 .field-task p {
   font-size: 11px;
   color: var(--muted);
   margin-top: 5px;
+  font-weight: 700;
 }
 .field-task .tag {
   font-size: 9px;
   padding: 2px 6px;
+  font-weight: 700;
 }
 .task-date {
   border-top: 1px solid #e8edf1;
@@ -889,6 +937,7 @@ td small {
   justify-content: space-between;
   font-size: 10px;
   color: var(--muted);
+  font-weight: 700;
 }
 @media (min-width: 1450px) {
   .planner-main {
@@ -933,7 +982,8 @@ td small {
   }
   .row-count {
     font-size: 11px;
-  }
+  font-weight: 700;
+}
   .utility,
   .masthead,
   .context-strip,
@@ -946,10 +996,8 @@ td small {
   .utility {
     font-size: 8px;
     padding: 7px 16px;
-  }
-  .utility > span:last-child {
-    display: none;
-  }
+  font-weight: 700;
+}
   .masthead {
     padding: 19px 16px;
   }
@@ -963,7 +1011,8 @@ td small {
   }
   .tagline {
     font-size: 10px;
-  }
+  font-weight: 700;
+}
   .viewer > div {
     display: none;
   }
@@ -974,13 +1023,15 @@ td small {
   .planner-nav > span {
     font-size: 11px;
     padding: 13px 10px;
-  }
+  font-weight: 700;
+}
   .context-strip {
     padding: 8px 16px;
     font-size: 9px;
     flex-wrap: wrap;
     gap: 4px;
-  }
+  font-weight: 700;
+}
   .planner-main {
     padding: 20px 16px;
   }
@@ -1053,7 +1104,8 @@ td small {
   }
   .register-tools label {
     font-size: 11px;
-  }
+  font-weight: 700;
+}
   .register-tools input,
   .register-tools select {
     font-size: 16px;
@@ -1138,6 +1190,7 @@ td small {
   font-size: 11px;
   text-decoration: underline;
   cursor: pointer;
+  font-weight: 700;
 }
 .field-session {
   display: flex;
@@ -1148,6 +1201,7 @@ td small {
   background: #eaf0f2;
   color: #526976;
   font-size: 10px;
+  font-weight: 700;
 }
 .field-empty {
   border: 1px solid var(--line);
@@ -1156,6 +1210,7 @@ td small {
   font-size: 12px;
   line-height: 1.6;
   background: white;
+  font-weight: 700;
 }
 .work-group {
   margin-bottom: 22px;
@@ -1166,13 +1221,16 @@ td small {
   padding-top: 10px;
   font-size: 10px;
   color: #667e8a;
+  font-weight: 700;
 }
 .small-heading {
   font-size: 12px;
   margin: 16px 0 10px;
+  font-weight: 700;
 }
 .field-section-heading a {
   font-size: 11px;
+  font-weight: 700;
 }
 .field-callout > svg {
   display: inline-block;
@@ -1201,6 +1259,7 @@ td small {
   display: block;
   font-size: 12px;
   margin: 16px 0 6px;
+  font-weight: 700;
 }
 .assignment-panel input,
 .assignment-panel select {
@@ -1233,6 +1292,7 @@ textarea {
   padding: 5px 10px;
   min-height: 30px;
   font-size: 11px;
+  font-weight: 700;
 }
 .review-badge,
 .attention-tag {
@@ -1242,9 +1302,10 @@ textarea {
   font-size: 10px;
   border-radius: 1px;
   display: inline-block;
+  font-weight: 700;
 }
 .operational-stats strong {
-  font-family: Georgia, serif;
+  font-family: 'Segoe UI', sans-serif;
   font-weight: 400;
   font-size: 34px;
   line-height: 1.1;
@@ -1253,6 +1314,7 @@ textarea {
   margin-top: 8px;
   font-size: 11px;
   color: var(--muted);
+  font-weight: 700;
 }
 .operational-stats > div:last-child strong {
   color: var(--gold);
@@ -1277,11 +1339,13 @@ textarea {
 }
 .attention-row strong {
   font-size: 12px;
+  font-weight: 700;
 }
 .attention-row p {
   color: var(--muted);
   font-size: 11px;
   margin: 8px 0 12px;
+  font-weight: 700;
 }
 .accepted-records {
   padding: 0 20px 20px;
@@ -1297,12 +1361,14 @@ textarea {
 }
 .accepted-record strong {
   font-size: 12px;
+  font-weight: 700;
 }
 .accepted-record p,
 .accepted-record small,
 .record-source {
   font-size: 11px;
   color: var(--muted);
+  font-weight: 700;
 }
 .record-source {
   display: inline-block;
@@ -1313,6 +1379,7 @@ textarea {
   font-size: 9px;
   padding: 3px 6px;
   display: inline-block;
+  font-weight: 700;
 }
 .discipline-tag.civil {
   background: #e1eee8;
@@ -1329,6 +1396,7 @@ textarea {
 .source-retained {
   padding-top: 18px;
   font-size: 11px;
+  font-weight: 700;
 }
 .source-retained > svg {
   margin-bottom: 6px;
@@ -1345,11 +1413,13 @@ textarea {
   color: var(--muted);
   font-size: 12px;
   line-height: 1.7;
+  font-weight: 700;
 }
 .snapshot-note {
   margin-top: 18px;
   font-size: 11px;
   color: var(--muted);
+  font-weight: 700;
 }
 .gantt-panel {
   background: white;
@@ -1364,6 +1434,7 @@ textarea {
   border-bottom: 1px solid var(--line);
   font-size: 11px;
   flex-wrap: wrap;
+  font-weight: 700;
 }
 .gantt-tools label {
   display: flex;
@@ -1393,6 +1464,7 @@ textarea {
   align-items: center;
   gap: 6px;
   font-size: 11px;
+  font-weight: 700;
 }
 .segmented button + button {
   border-left: 1px solid var(--line);
@@ -1408,6 +1480,7 @@ textarea {
   padding: 9px 16px;
   border-bottom: 1px solid var(--line);
   font-size: 11px;
+  font-weight: 700;
 }
 .gantt-range > div {
   display: flex;
@@ -1452,6 +1525,7 @@ textarea {
   display: flex;
   align-items: end;
   padding-bottom: 14px;
+  font-weight: 700;
 }
 .day-track {
   display: grid;
@@ -1463,11 +1537,13 @@ textarea {
   font-size: 10px;
   padding: 8px 0;
   color: var(--muted);
+  font-weight: 700;
 }
 .day-track strong {
   display: block;
   font-size: 11px;
   margin-top: 5px;
+  font-weight: 700;
 }
 .day-track .today-day {
   background: #fff0d0;
@@ -1484,11 +1560,13 @@ textarea {
   align-items: center;
   padding: 7px 14px;
   font-size: 11px;
+  font-weight: 700;
 }
 .gantt-group small {
   font-size: 10px;
   margin-left: 18px;
   color: var(--muted);
+  font-weight: 700;
 }
 .discipline-swatch {
   display: inline-block;
@@ -1517,6 +1595,7 @@ textarea {
   border-bottom: 0;
   font-size: 10px;
   min-width: 0;
+  font-weight: 700;
 }
 .activity-label > span {
   color: var(--muted);
@@ -1525,6 +1604,7 @@ textarea {
 .activity-label > strong {
   font-size: 11px;
   line-height: 1.3;
+  font-weight: 700;
 }
 .status-dot {
   width: 5px;
@@ -1564,6 +1644,7 @@ textarea {
   white-space: nowrap;
   text-overflow: ellipsis;
   z-index: 2;
+  font-weight: 700;
 }
 .baseline-bar {
   position: absolute;
@@ -1603,6 +1684,7 @@ textarea {
   padding: 11px 15px;
   color: var(--muted);
   font-size: 10px;
+  font-weight: 700;
 }
 .gantt-legend > span {
   display: flex;
@@ -1634,6 +1716,7 @@ textarea {
   margin-top: 16px;
   font-size: 11px;
   color: var(--muted);
+  font-weight: 700;
 }
 .schedule-status > span:first-child {
   display: flex;
@@ -1645,12 +1728,13 @@ textarea {
   width: 100%;
   min-width: 760px;
   font-size: 12px;
+  font-weight: 700;
 }
 .actuals-table th {
   text-align: left;
   padding: 12px 15px;
   font-size: 10px;
-  font-weight: 500;
+  font-weight: 700;
   text-transform: uppercase;
   letter-spacing: 0.4px;
   color: var(--muted);
@@ -1669,6 +1753,7 @@ textarea {
 .actuals-table small {
   font-size: 10px;
   color: var(--muted);
+  font-weight: 700;
 }
 .report-register td:nth-child(2) {
   max-width: 420px;
@@ -1714,6 +1799,7 @@ textarea {
   font-size: 10px;
   color: var(--muted);
   margin-bottom: 12px;
+  font-weight: 700;
 }
 .drawer-body h2 {
   font-size: 23px;
@@ -1730,6 +1816,7 @@ textarea {
   font-size: 11px;
   padding: 12px 4px;
   color: var(--muted);
+  font-weight: 700;
 }
 .drawer-tabs [aria-selected='true'] {
   border-bottom: 2px solid var(--accent);
@@ -1741,10 +1828,12 @@ textarea {
   color: var(--muted);
   text-transform: uppercase;
   margin-top: 16px;
+  font-weight: 700;
 }
 .record-facts dd {
   font-size: 12px;
   margin: 4px 0 0;
+  font-weight: 700;
 }
 .quantity-record {
   border-top: 1px solid var(--line);
@@ -1753,6 +1842,7 @@ textarea {
   display: flex;
   justify-content: space-between;
   font-size: 11px;
+  font-weight: 700;
 }
 .drawer-body progress {
   width: 100%;
@@ -1763,6 +1853,7 @@ textarea {
 .drawer-body [role='tabpanel'] > .muted {
   font-size: 10px;
   margin-top: 8px;
+  font-weight: 700;
 }
 .drawer-link {
   margin-top: 24px;
@@ -1772,11 +1863,13 @@ textarea {
   padding: 15px 0;
   font-size: 12px;
   overflow-wrap: anywhere;
+  font-weight: 700;
 }
 .record-evidence p,
 .record-evidence small {
   font-size: 10px;
   color: var(--muted);
+  font-weight: 700;
 }
 .record-evidence blockquote {
   margin: 10px 0;
@@ -1787,6 +1880,7 @@ textarea {
   color: var(--accent);
   display: block;
   margin-top: 10px;
+  font-weight: 700;
 }
 .review-workspace {
   display: grid;
@@ -1819,9 +1913,11 @@ textarea {
 .review-inbox small {
   font-size: 10px;
   color: var(--muted);
+  font-weight: 700;
 }
 .review-inbox strong {
   font-size: 12px;
+  font-weight: 700;
 }
 .review-inbox .attention-tag {
   width: fit-content;
@@ -1833,13 +1929,14 @@ textarea {
   font-size: 11px;
   color: var(--muted);
   margin: 8px 0;
+  font-weight: 700;
 }
 .source-quote {
   white-space: pre-wrap;
   overflow-wrap: anywhere;
   font:
-    16px/1.6 Georgia,
-    serif;
+    16px/1.6 'Segoe UI',
+    sans-serif;
   background: #f5f8fa;
   border-left: 3px solid #9cb7c8;
   padding: 18px;
@@ -1858,6 +1955,7 @@ textarea {
 .review-facts dd {
   margin: 5px 0 0;
   font-size: 12px;
+  font-weight: 700;
 }
 .validation-notice {
   padding: 13px 16px;
@@ -1868,10 +1966,12 @@ textarea {
   line-height: 1.6;
   margin: 15px 0;
   overflow-wrap: anywhere;
+  font-weight: 700;
 }
 .review-detail h3 {
   font-size: 13px;
   margin: 23px 0 12px;
+  font-weight: 700;
 }
 .candidate-list {
   display: grid;
@@ -1885,6 +1985,7 @@ textarea {
   font-size: 12px;
   background: #fafcfd;
   align-items: start;
+  font-weight: 700;
 }
 .candidate.selected {
   background: #edf5f9;
@@ -1902,6 +2003,7 @@ textarea {
   font-size: 10px;
   color: var(--muted);
   margin-top: 5px;
+  font-weight: 700;
 }
 .candidate small {
   display: block;
@@ -1913,15 +2015,18 @@ textarea {
   font-size: 10px;
   color: var(--muted);
   margin: 10px 0 25px;
+  font-weight: 700;
 }
 .review-label {
   display: block;
   margin: 15px 0 6px;
   font-size: 12px;
+  font-weight: 700;
 }
 .review-label span {
   color: var(--muted);
   font-size: 10px;
+  font-weight: 700;
 }
 .review-detail input[type='date'],
 .review-detail textarea {
@@ -1936,12 +2041,14 @@ textarea {
 .review-help {
   font-size: 10px;
   margin-top: 12px;
+  font-weight: 700;
 }
 .decision-record {
   padding: 16px;
   background: #edf5f1;
   border: 1px solid #cfe2d8;
   font-size: 12px;
+  font-weight: 700;
 }
 .decision-record p {
   margin-top: 8px;
@@ -1956,6 +2063,7 @@ textarea {
 .text-report-form label {
   font-size: 12px;
   margin-top: 10px;
+  font-weight: 700;
 }
 .text-report-form textarea,
 .text-report-form select,
@@ -1980,15 +2088,18 @@ textarea {
   white-space: pre-wrap;
   overflow-wrap: anywhere;
   font-size: 13px;
+  font-weight: 700;
 }
 .text-report-form dt {
   font-size: 10px;
   color: var(--muted);
   margin-top: 14px;
+  font-weight: 700;
 }
 .text-report-form dd {
   margin: 4px 0;
   font-size: 12px;
+  font-weight: 700;
 }
 .capture-options .capture-link {
   display: flex;
@@ -2072,6 +2183,7 @@ textarea {
   margin-bottom: 18px;
   color: var(--accent);
   font-size: 12px;
+  font-weight: 700;
 }
 .attention-text {
   color: #956f2b !important;
@@ -2145,11 +2257,12 @@ textarea:focus-visible {
   font-size: 13px;
   line-height: 1.6;
   overflow-wrap: anywhere;
+  font-weight: 700;
 }
 .question-text {
   font:
-    18px/1.45 Georgia,
-    serif;
+    18px/1.45 'Segoe UI',
+    sans-serif;
   margin-bottom: 18px;
   color: var(--navy);
 }
@@ -2185,6 +2298,7 @@ textarea:focus-visible {
 .followup-body legend {
   padding: 0 5px;
   font-size: 12px;
+  font-weight: 700;
 }
 .choice-row {
   display: flex;
@@ -2209,18 +2323,21 @@ textarea:focus-visible {
   display: grid;
   gap: 6px;
   font-size: 12px;
+  font-weight: 700;
 }
 .followup-history {
   font-size: 12px;
   padding: 10px;
   background: #f5f8fa;
   margin: 8px 0;
+  font-weight: 700;
 }
 .report-corrections {
   border: 1px solid var(--line);
   padding: 15px;
   margin-top: 24px;
   font-size: 12px;
+  font-weight: 700;
 }
 .report-corrections summary {
   font-weight: 600;
@@ -2241,6 +2358,7 @@ textarea:focus-visible {
   display: block;
   margin-top: 6px;
   font-size: 12px;
+  font-weight: 700;
 }
 .button:disabled {
   opacity: 0.55;
@@ -2329,6 +2447,7 @@ textarea:focus-visible {
   font-size: 11px;
   white-space: pre-wrap;
   overflow-wrap: anywhere;
+  font-weight: 700;
 }
 .import-history-row {
   display: flex;
@@ -2352,6 +2471,7 @@ textarea:focus-visible {
   background: #f5f8f9;
   padding: 9px 14px;
   font-size: 11px;
+  font-weight: 700;
 }
 .hierarchy-tools button {
   background: white;
@@ -2371,6 +2491,7 @@ textarea:focus-visible {
   background: #edf2f4;
   font-size: 11px;
   color: var(--text);
+  font-weight: 700;
 }
 .hierarchy-label strong {
   flex: 1;
@@ -2379,6 +2500,7 @@ textarea:focus-visible {
   font-size: 9px;
   color: var(--muted);
   white-space: nowrap;
+  font-weight: 700;
 }
 .hierarchy-label:disabled {
   opacity: 1;
@@ -2420,6 +2542,7 @@ textarea:focus-visible {
   align-items: center;
   gap: 7px;
   font-size: 11px;
+  font-weight: 700;
 }
 .jump-date input {
   border: 1px solid var(--line);
@@ -2439,7 +2562,8 @@ textarea:focus-visible {
   .import-totals {
     gap: 10px;
     font-size: 12px;
-  }
+  font-weight: 700;
+}
   .import-history-row {
     flex-wrap: wrap;
     gap: 8px;
@@ -2491,6 +2615,7 @@ textarea:focus-visible {
 .review-filters span {
   color: var(--muted);
   font-size: 12px;
+  font-weight: 700;
 }
 .review-search {
   display: grid;
@@ -2590,6 +2715,7 @@ textarea:focus-visible {
 .history-event pre {
   white-space: pre-wrap;
   font-size: 12px;
+  font-weight: 700;
 }
 .history-evidence select {
   padding: 8px;
@@ -2614,6 +2740,7 @@ textarea:focus-visible {
 .followup-routing {
   color: var(--muted);
   font-size: 12px;
+  font-weight: 700;
 }
 .followup-routing {
   line-height: 1.7;
@@ -2676,16 +2803,19 @@ textarea:focus-visible {
   gap: 6px;
   font-size: 11px;
   min-width: 0;
+  font-weight: 700;
 }
 .capture-help {
   margin: 12px 0;
   font-size: 12px;
   color: var(--muted);
+  font-weight: 700;
 }
 .capture-result > a {
   display: inline-block;
   margin-top: 8px;
   font-size: 12px;
+  font-weight: 700;
 }
 .capture-mode [aria-pressed='true'] {
   background: var(--navy);
@@ -2696,6 +2826,7 @@ textarea:focus-visible {
   background: #eaf1f3;
   border-left: 3px solid var(--accent);
   font-size: 12px;
+  font-weight: 700;
 }
 .field-capture label {
   display: grid;
@@ -2772,6 +2903,7 @@ textarea:focus-visible {
   font-size: 12px;
   color: var(--muted);
   margin: 12px 0 22px;
+  font-weight: 700;
 }
 .capture-steps [aria-current='step'] {
   color: var(--navy);

@@ -1,6 +1,6 @@
 # Local development and project access
 
-Use Node 24, npm and Docker with Linux containers. This environment contains synthetic project data only. IntelliGrid's web server uses the public Supabase key and the signed-in user's session; it never uses the service-role key.
+Use Node 24, npm and Docker with Linux containers. This environment contains synthetic project data only. Nirmaan's web server uses the public Supabase key and the signed-in user's session; it never uses the service-role key.
 
 Node 24 is required, not preferred. `.npmrc` sets `engine-strict=true`, so on any other major version `npm ci` stops before installing anything:
 
@@ -19,8 +19,8 @@ PowerShell:
 ```powershell
 npm ci
 docker desktop start
-docker network create --driver bridge --opt com.docker.network.bridge.host_binding_ipv4=127.0.0.1 intelligrid-local
-npx supabase start --network-id intelligrid-local -x realtime,imgproxy,mailpit,postgres-meta,studio,edge-runtime,logflare,vector,supavisor
+docker network create --driver bridge --opt com.docker.network.bridge.host_binding_ipv4=127.0.0.1 nirmaan-local
+npx supabase start --network-id nirmaan-local -x realtime,imgproxy,mailpit,postgres-meta,studio,edge-runtime,logflare,vector,supavisor
 New-Item -ItemType Directory -Force .cache | Out-Null
 npx supabase status -o env > .cache/supabase.env
 npm run local:bind
@@ -33,8 +33,8 @@ bash or zsh, on Linux and macOS:
 ```sh
 npm ci
 # Start Docker however this machine does it, for example: systemctl --user start docker
-docker network create --driver bridge --opt com.docker.network.bridge.host_binding_ipv4=127.0.0.1 intelligrid-local
-npx supabase start --network-id intelligrid-local -x realtime,imgproxy,mailpit,postgres-meta,studio,edge-runtime,logflare,vector,supavisor
+docker network create --driver bridge --opt com.docker.network.bridge.host_binding_ipv4=127.0.0.1 nirmaan-local
+npx supabase start --network-id nirmaan-local -x realtime,imgproxy,mailpit,postgres-meta,studio,edge-runtime,logflare,vector,supavisor
 mkdir -p .cache
 npx supabase status -o env > .cache/supabase.env
 npm run local:bind
@@ -42,7 +42,7 @@ npm run seed:local
 npm run dev
 ```
 
-If the network already exists, reuse it. `local:bind` restricts the database and gateway ports to `127.0.0.1`; the CLI currently publishes explicit wildcard addresses even on a network configured for loopback. It preserves volumes and the gateway configuration, verifies container health, and restores the original container if replacement fails. It touches only `supabase_db_intelligrid` and `supabase_kong_intelligrid`. Re-run it after any CLI operation that recreates these containers. Do not expose Docker's control socket over TCP.
+If the network already exists, reuse it. `local:bind` restricts the database and gateway ports to `127.0.0.1`; the CLI currently publishes explicit wildcard addresses even on a network configured for loopback. It preserves volumes and the gateway configuration, verifies container health, and restores the original container if replacement fails. It touches only `supabase_db_nirmaan` and `supabase_kong_nirmaan`. Re-run it after any CLI operation that recreates these containers. Do not expose Docker's control socket over TCP.
 
 The web app is at `http://localhost:3000`. Open `/login`. `APP_ORIGIN` must match the browser origin exactly; `localhost` and `127.0.0.1` are different origins. Use the localhost URL for form submissions. API port: 56321; PostgreSQL port: 56322. No hosted Supabase account is needed for this phase.
 
@@ -57,19 +57,19 @@ BASE_URL=http://localhost:3100 npm run test:browser
 
 | Synthetic user     | Email                                       | Access                                                                |
 | ------------------ | ------------------------------------------- | --------------------------------------------------------------------- |
-| Priya Kalita       | priya.kalita@intelligrid.example.test       | Planner; all 12 main-project activities; can assign work              |
-| Arun Saikia        | arun.saikia@intelligrid.example.test        | Reporter; four assigned civil activities                              |
-| Ravi Das           | ravi.das@intelligrid.example.test           | Reporter; four assigned piping activities                             |
-| Meera Ali          | meera.ali@intelligrid.example.test          | Reporter; four assigned electrical activities, contractor B           |
-| Anita Bora         | anita.bora@intelligrid.example.test         | Supervisor; contractor A's civil and piping scope; cannot assign work |
-| Dev Sharma         | dev.sharma@intelligrid.example.test         | Manager; explicitly provisioned into both test projects               |
-| Isolation Reporter | isolation.reporter@intelligrid.example.test | Reporter; only the second project's one activity                      |
+| Priya Kalita       | priya.kalita@nirmaan.example.test       | Planner; all 12 main-project activities; can assign work              |
+| Arun Saikia        | arun.saikia@nirmaan.example.test        | Reporter; four assigned civil activities                              |
+| Ravi Das           | ravi.das@nirmaan.example.test           | Reporter; four assigned piping activities                             |
+| Meera Ali          | meera.ali@nirmaan.example.test          | Reporter; four assigned electrical activities, contractor B           |
+| Anita Bora         | anita.bora@nirmaan.example.test         | Supervisor; contractor A's civil and piping scope; cannot assign work |
+| Dev Sharma         | dev.sharma@nirmaan.example.test         | Manager; explicitly provisioned into both test projects               |
+| Isolation Reporter | isolation.reporter@nirmaan.example.test | Reporter; only the second project's one activity                      |
 
 Main-project ID: `10000000-0000-4000-8000-000000000001`. Isolation-project ID ends in `0002`. Auth user IDs are generated by Auth; they are not the fixture's member IDs. The credential file maps fixture IDs to real Auth IDs. Seed accounts use confirmed synthetic email addresses; no email is sent.
 
 ## Rebuild the synthetic database
 
-This removes this project's local database contents. Use it only for the disposable IntelliGrid development stack, never a shared or hosted database.
+This removes this project's local database contents. Use it only for the disposable Nirmaan development stack, never a shared or hosted database.
 
 The same commands work in PowerShell, bash and zsh:
 
@@ -82,7 +82,7 @@ npm run test:seed
 npm run test:database
 ```
 
-Both startup and reset must use `--network-id intelligrid-local`. A reset without it can recreate the database on another network while Auth/Storage remain on the first. The supplied reset script includes the network ID. The seed preserves existing assignments and immutable history on repeat runs. If Auth accounts exist but their local credential file is missing, it refuses to silently reset their passwords.
+Both startup and reset must use `--network-id nirmaan-local`. A reset without it can recreate the database on another network while Auth/Storage remain on the first. The supplied reset script includes the network ID. The seed preserves existing assignments and immutable history on repeat runs. If Auth accounts exist but their local credential file is missing, it refuses to silently reset their passwords.
 
 ## Checks
 
@@ -159,7 +159,7 @@ No direct actual-progress writes are granted to browser roles, including planner
 
 ## Phase 3 worker and text reporting
 
-Apply all four migrations before starting the current app. On a disposable local database, `npm run db:reset:local` applies them in order, then `npm run local:bind` restores loopback-only published ports and `npm run seed:local` creates synthetic accounts. Reset erases existing local reports and decisions; do not use it merely to restart the app. Preserve the `intelligrid-local` Docker network setting described above.
+Apply all four migrations before starting the current app. On a disposable local database, `npm run db:reset:local` applies them in order, then `npm run local:bind` restores loopback-only published ports and `npm run seed:local` creates synthetic accounts. Reset erases existing local reports and decisions; do not use it merely to restart the app. Preserve the `nirmaan-local` Docker network setting described above.
 
 Set `OPENAI_API_KEY` in the worker process environment or ignored `apps/worker/.env.local`. Never put it in `NEXT_PUBLIC_*`, web source, screenshots, or Git. The local launcher loads Supabase credentials from ignored `.cache/supabase.env`; the standalone worker instead requires `SUPABASE_URL` and `SUPABASE_SERVICE_ROLE_KEY`. See `apps/worker/.env.example`. Default model: `gpt-5.4-mini-2026-03-17`; change `OPENAI_MODEL` only after testing.
 
