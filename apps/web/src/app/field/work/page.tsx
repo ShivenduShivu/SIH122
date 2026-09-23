@@ -32,7 +32,7 @@ export default async function FieldWorkPage() {
         <p>Confirm the work area before reporting.</p>
       </div>
       <div className="field-work-count">
-        {mine.length} assigned activities<span>India Standard Time</span>
+        {mine.length} assigned activities<span>Indian Standard Time (IST)</span>
       </div>
       {!mine.length && (
         <section className="field-empty assignment-empty">

@@ -37,6 +37,14 @@ try {
   await page.getByLabel('Password', { exact: true }).fill(account.password);
   await page.getByRole('button', { name: 'Sign in', exact: true }).click();
   await page.waitForURL('**/planner');
+  await check('Workspace uses the correct time-zone name', async () => {
+    assert.equal(
+      await page
+        .getByText('Synthetic project · Indian Standard Time (IST)', { exact: true })
+        .textContent(),
+      'Synthetic project · Indian Standard Time (IST)',
+    );
+  });
   await page.goto(base + '/field/report');
   await page
     .getByLabel('What happened at the site?')
@@ -76,6 +84,18 @@ try {
       fullPage: true,
     });
   });
+  await page.getByRole('button', { name: 'Edit details', exact: true }).click();
+  await page.setViewportSize({ width: 1440, height: 1080 });
+  await check('Desktop report form fits the workspace frame', async () => {
+    assert.equal(
+      await page.evaluate(() => document.documentElement.scrollHeight <= innerHeight),
+      true,
+    );
+  });
+  await page.screenshot({
+    path: 'test-results/usability/field-report-desktop.png',
+    fullPage: true,
+  });
   await page.goto(base + '/field/work');
   await check('Planner with no personal work receives useful guidance', async () => {
     await page
@@ -99,6 +119,16 @@ try {
   await page.setViewportSize({ width: 1440, height: 1000 });
   await page.goto(base + '/planner/schedule');
   await page.getByRole('heading', { name: 'Project schedule', exact: true }).waitFor();
+  await check('Calendar opens with visible task bars', async () => {
+    assert.equal(
+      await page.getByRole('button', { name: 'Tasks', exact: true }).getAttribute('aria-pressed'),
+      'true',
+    );
+    assert.ok(
+      (await page.locator('.plan-bar:visible').count()) > 0,
+      'no planned task bars visible',
+    );
+  });
   await check('Timeline can return to its planned date range', async () => {
     await page.getByRole('button', { name: 'Today', exact: true }).click();
     await page.getByRole('button', { name: 'Plan start', exact: true }).click();
