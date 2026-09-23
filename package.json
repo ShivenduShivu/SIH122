@@ -34,6 +34,7 @@
     "db:reset:local": "supabase db reset --local --network-id nirmaan-local --yes",
     "worker:start": "tsx scripts/run-local-worker.ts",
     "test:reconciliation-db": "tsx scripts/test-reconciliation-db.ts",
+    "test:queue-priority-db": "tsx scripts/test-queue-priority-db.ts",
     "test:live": "tsx scripts/verify-live-flow.ts",
     "test:browser:live": "tsx tests/browser/reconciliation.ts",
     "seed:clarification": "tsx scripts/seed-clarification-lab.ts",

@@ -8,7 +8,7 @@ import {
 import { processOne, workerDatabase } from './processor';
 import { processImport } from './imports';
 import { processMedia } from './media';
-import { workerFailureLimit } from './supervision';
+import { workerFailureLimit, workerRunLoopLimit } from './supervision';
 if (process.argv.includes('--check')) {
   console.log(
     JSON.stringify({
@@ -30,9 +30,19 @@ if (process.argv.includes('--check')) {
     extractor = createExtractor(),
     transcriber = createTranscriber();
   const maxConsecutiveFailures = workerFailureLimit(process.env.WORKER_MAX_CONSECUTIVE_FAILURES);
-  console.log(JSON.stringify({ service: 'worker', ...providerConfiguration(process.env) }));
+  const runOnce = process.argv.includes('--once');
+  const maxLoopsPerRun = workerRunLoopLimit(process.env.WORKER_MAX_LOOPS_PER_RUN);
+  console.log(
+    JSON.stringify({
+      service: 'worker',
+      ...providerConfiguration(process.env),
+      runOnce,
+      maxLoopsPerRun: runOnce ? maxLoopsPerRun : null,
+    }),
+  );
   let stopping = false;
   let consecutiveFailures = 0;
+  let completedLoops = 0;
   process.on('SIGINT', () => {
     stopping = true;
   });
@@ -45,13 +55,14 @@ if (process.argv.includes('--check')) {
       const media = await processMedia(db, transcriber);
       const worked = (await processOne(db, extractor)) || imported || media;
       consecutiveFailures = 0;
+      completedLoops += 1;
       // A successful database loop; not proof that every provider job succeeded.
       if (process.env.WORKER_HEARTBEAT_PATH)
         writeFileSync(
           process.env.WORKER_HEARTBEAT_PATH,
           JSON.stringify({ completedAt: new Date().toISOString() }),
         );
-      if (process.argv.includes('--once')) break;
+      if (runOnce && (!worked || completedLoops >= maxLoopsPerRun)) break;
       if (!worked) await new Promise((r) => setTimeout(r, 2000));
     } catch (error) {
       consecutiveFailures += 1;

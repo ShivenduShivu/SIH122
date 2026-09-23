@@ -163,7 +163,7 @@ Apply all four migrations before starting the current app. On a disposable local
 
 Set `OPENAI_API_KEY` in the worker process environment or ignored `apps/worker/.env.local`. Never put it in `NEXT_PUBLIC_*`, web source, screenshots, or Git. The local launcher loads Supabase credentials from ignored `.cache/supabase.env`; the standalone worker instead requires `SUPABASE_URL` and `SUPABASE_SERVICE_ROLE_KEY`. See `apps/worker/.env.example`. Default model: `gpt-5.4-mini-2026-03-17`; change `OPENAI_MODEL` only after testing.
 
-Run `npm run worker:start` alongside the web server. `npm run worker:start -- --once` handles at most one available job. The worker's `--check` path validates configuration boundaries without consuming jobs or calling the provider. The web process never receives the privileged worker credentials through application imports.
+Run `npm run worker:start` alongside the web server. `npm run worker:start -- --once` handles one queue loop by default. Set `WORKER_MAX_LOOPS_PER_RUN` from 1 to 20 to let a scheduled `--once` execution process a bounded batch; each loop handles at most one import, one media item and one report job. The worker's `--check` path validates configuration boundaries without consuming jobs or calling the provider. The web process never receives the privileged worker credentials through application imports.
 
 For a manual demo:
 

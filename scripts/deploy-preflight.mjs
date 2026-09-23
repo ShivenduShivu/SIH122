@@ -34,6 +34,11 @@ export function checkDeployment(env) {
     if (!Number.isSafeInteger(failureLimit) || failureLimit < 1)
       errors.push('WORKER_MAX_CONSECUTIVE_FAILURES: use a positive safe integer');
   }
+  if (env.WORKER_MAX_LOOPS_PER_RUN !== undefined) {
+    const loopLimit = Number(env.WORKER_MAX_LOOPS_PER_RUN);
+    if (!Number.isSafeInteger(loopLimit) || loopLimit < 1 || loopLimit > 20)
+      errors.push('WORKER_MAX_LOOPS_PER_RUN: use an integer from 1 to 20');
+  }
   const publicKey = env.NEXT_PUBLIC_SUPABASE_PUBLISHABLE_KEY ?? '';
   if (
     publicKey.startsWith('sb_secret_') ||

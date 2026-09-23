@@ -1,6 +1,6 @@
 import { describe, expect, it, vi } from 'vitest';
 import { spawn } from 'node:child_process';
-import { workerFailureLimit } from '../apps/worker/src/supervision';
+import { workerFailureLimit, workerRunLoopLimit } from '../apps/worker/src/supervision';
 // @ts-expect-error operator CLI is intentionally JavaScript
 import { checkDeployment } from '../scripts/deploy-preflight.mjs';
 describe('deployment credential boundary', () => {
@@ -65,11 +65,22 @@ describe('deployment credential boundary', () => {
       checkDeployment({ ...valid, WORKER_MAX_CONSECUTIVE_FAILURES: '9'.repeat(400) }).join(' '),
     ).toContain('WORKER_MAX_CONSECUTIVE_FAILURES');
   });
+  it('rejects an unsafe scheduled worker batch size', () => {
+    for (const value of ['0', '21', '1.5', '9'.repeat(400)])
+      expect(checkDeployment({ ...valid, WORKER_MAX_LOOPS_PER_RUN: value }).join(' ')).toContain(
+        'WORKER_MAX_LOOPS_PER_RUN',
+      );
+  });
 });
 
 describe('worker supervision configuration', () => {
   it('uses the default for unsafe failure limits', () => {
     expect(workerFailureLimit('9'.repeat(400))).toBe(12);
+  });
+  it('keeps scheduled runs bounded', () => {
+    expect(workerRunLoopLimit(undefined)).toBe(1);
+    expect(workerRunLoopLimit('4')).toBe(4);
+    expect(workerRunLoopLimit('21')).toBe(1);
   });
 });
 
@@ -89,9 +100,7 @@ describe('transport security headers', () => {
     }
   }
   it('pins HSTS only for an HTTPS deployment origin', async () => {
-    expect(await headerKeys('https://demo.nirmaan.test')).toContain(
-      'Strict-Transport-Security',
-    );
+    expect(await headerKeys('https://demo.nirmaan.test')).toContain('Strict-Transport-Security');
   });
   it('never pins HSTS for local HTTP or an unset origin', async () => {
     expect(await headerKeys('http://localhost:3000')).not.toContain('Strict-Transport-Security');
