@@ -6,3 +6,4 @@ export function must<T>(result: {
   error: { code?: string; message: string } | null;
 }): NonNullable<T>;
 export function signIn(account: { email: string; password: string }): Promise<SupabaseClient>;
+export function assertQueueDrained(): Promise<void>;
