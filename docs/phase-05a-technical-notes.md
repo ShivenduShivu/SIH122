@@ -1,6 +1,6 @@
 # Phase 5A — source schedules and catalogue foundation
 
-21 September 2026 · IntelliGrid · BITS Pilani · SIH 26122
+21 September 2026 · Nirmaan · BITS Pilani · SIH 26122
 
 This implements the schedule foundation in architecture v1.2. It does not implement the supplied field-report workbook or the revised progress calculations; those belong to Phase 5B. The schedule parser makes no model call.
 

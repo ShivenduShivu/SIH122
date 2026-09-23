@@ -5,9 +5,9 @@ import { randomUUID } from 'node:crypto';
 import sharp from 'sharp';
 import { admin, must } from '../../scripts/local-env.mjs';
 import { ids } from '../../fixtures/development';
-import { Discipline } from '@intelligrid/contracts';
+import { Discipline } from '@nirmaan/contracts';
 import { processMedia } from '../../apps/worker/src/media';
-import { OpenAITranscriber } from '@intelligrid/adapters/transcription';
+import { OpenAITranscriber } from '@nirmaan/adapters/transcription';
 
 // Real browser microphone API, fed synthetic speech. This is NOT a phone or human ASR benchmark.
 const accounts = JSON.parse(readFileSync('.cache/demo-accounts.json', 'utf8'));
@@ -75,7 +75,7 @@ try {
   await page.getByLabel('Password', { exact: true }).fill(account.password);
   await page.getByRole('button', { name: 'Sign in', exact: true }).click();
   await page.waitForURL('**/field');
-  await context.addCookies([{ name: 'intelligrid-project', value: project, url: base }]);
+  await context.addCookies([{ name: 'nirmaan-project', value: project, url: base }]);
   await page.goto(base + '/field/report?mode=voice');
   await page.getByRole('button', { name: 'Start recording', exact: true }).click();
   await expect(page.getByRole('button', { name: 'Stop recording', exact: true })).toBeVisible();
@@ -128,7 +128,7 @@ try {
   );
   await page.evaluate(() => {
     for (const k of Object.keys(localStorage))
-      if (k.startsWith('intelligrid:field-draft:v1:')) localStorage.removeItem(k);
+      if (k.startsWith('nirmaan:field-draft:v1:')) localStorage.removeItem(k);
   });
   await page.reload();
   await page.getByText('Resume a saved upload (1)', { exact: true }).click();
@@ -243,7 +243,7 @@ try {
   await page.evaluate(() => {
     const original = Storage.prototype.setItem;
     Storage.prototype.setItem = function (k, v) {
-      if (k.startsWith('intelligrid:field-draft:v1:'))
+      if (k.startsWith('nirmaan:field-draft:v1:'))
         throw new DOMException('Test quota', 'QuotaExceededError');
       return original.call(this, k, v);
     };
@@ -272,7 +272,7 @@ try {
   expect(
     await page.evaluate(
       () =>
-        Object.keys(localStorage).filter((k) => k.startsWith('intelligrid:field-draft:v1:')).length,
+        Object.keys(localStorage).filter((k) => k.startsWith('nirmaan:field-draft:v1:')).length,
     ),
   ).toBe(0);
   pass('Sign out clears this user’s local drafts');

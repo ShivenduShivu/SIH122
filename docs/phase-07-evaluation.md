@@ -1,4 +1,4 @@
-# IntelliGrid: how to interpret the evaluation
+# Nirmaan: how to interpret the evaluation
 
 The frozen fixture in `fixtures/evaluation/frozen.json` was written and hashed before the first provider call. It contains 80 agent-authored examples in 20 scenario groups. Ten groups form the 40-case development split; ten different groups form the 40-case challenge split. Each group has four closely related variants. The labels are neither an Oil India answer key nor human-reviewed ground truth. The catalogue has only 12 activities. These limits make the experiment a useful regression probe, not proof of real-site accuracy.
 

@@ -1,6 +1,6 @@
 'use client';
 import type { Dispatch, SetStateAction } from 'react';
-import type { ScheduleSnapshot, ScheduleActivity } from '@intelligrid/contracts/reports';
+import type { ScheduleSnapshot, ScheduleActivity } from '@nirmaan/contracts/reports';
 const diff = (a: string, b: string) =>
   (Date.parse(b + 'T00:00:00Z') - Date.parse(a + 'T00:00:00Z')) / 86400000;
 export function HierarchyTimeline({

@@ -1,6 +1,6 @@
 # Demonstration runbook
 
-A rehearsed path through IntelliGrid for a judging session, and the setup that lets it run when
+A rehearsed path through Nirmaan for a judging session, and the setup that lets it run when
 there is no provider key, no quota and no reliable network.
 
 Everything here uses the synthetic local stack. No Oil India record, no live service and no real
@@ -100,7 +100,7 @@ The report says two spools were erected on the 24-inch line. The plan contains t
 `PIP-1201` in Unit 2 and `PIP-1202` in Unit 3. Both score **0.350**. There is no tie to break.
 
 This is the moment worth dwelling on. A system that guesses here writes the wrong actual date into
-a schedule that a contractor eventually gets paid against. IntelliGrid does not guess: the claim
+a schedule that a contractor eventually gets paid against. Nirmaan does not guess: the claim
 sits in `clarification`, and the planner asks the reporter a specific question.
 
 Use **Question to ask → Work location → Ask reporter**. Then switch to the field app and show the

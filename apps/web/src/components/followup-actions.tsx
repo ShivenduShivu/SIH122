@@ -2,7 +2,7 @@
 import { useRef, useState } from 'react';
 import Link from 'next/link';
 import { useRouter } from 'next/navigation';
-import { replySummary, type Question, type Verification } from '@intelligrid/contracts/followups';
+import { replySummary, type Question, type Verification } from '@nirmaan/contracts/followups';
 function useCommand() {
   const router = useRouter(),
     retry = useRef<{ data: string; id: string } | null>(null);

@@ -1,18 +1,28 @@
+import { redirect } from 'next/navigation';
 import { brand } from '../../lib/brand';
+import { database } from '../../lib/supabase';
 export default async function Login({
   searchParams,
 }: {
   searchParams: Promise<{ error?: string }>;
 }) {
+  const db = await database();
+  const { data: userData } = await db.auth.getUser();
+  if (userData.user) {
+    const { data: members } = await db
+      .from('project_members')
+      .select('user_id')
+      .eq('user_id', userData.user.id)
+      .eq('active', true)
+      .limit(1);
+    if (members?.length) redirect('/planner');
+  }
   const { error } = await searchParams;
   return (
     <main className="login-shell">
-      <div className="utility">PROJECT EXECUTION &amp; MONITORING · BITS Pilani</div>
+      <div className="utility">PROJECT EXECUTION &amp; MONITORING · {brand.institution}</div>
       <section className="panel login-panel">
-        <div className="brand">
-          {brand.name}
-          <b>.</b>
-        </div>
+        <div className="brand">{brand.name}</div>
         <p className="eyebrow">SYNTHETIC DEMONSTRATION</p>
         <h1>Sign in to your workspace</h1>
         <p>Your account controls which projects and assignments you can view.</p>

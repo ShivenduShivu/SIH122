@@ -3,7 +3,7 @@ import {
   ReplyCommand,
   AttestationCommand,
   AmendmentCommand,
-} from '@intelligrid/contracts/followups';
+} from '@nirmaan/contracts/followups';
 import { readRows } from '../apps/web/src/lib/read-rows';
 const id = '70000000-0000-4000-8000-000000000001';
 describe('Follow-up command boundaries', () => {

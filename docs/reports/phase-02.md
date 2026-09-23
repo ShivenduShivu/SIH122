@@ -1,8 +1,8 @@
-# IntelliGrid — Phase 2 completion report
+# Nirmaan — Phase 2 completion report
 
 **Status: approved by the user on 20 September 2026. Committed and pushed as `23d13e1` before Phase 3 began.**
 
-Date: 20 September 2026. Previous approved commit: `0c9b3df` — `chore: establish IntelliGrid foundation and phase workflow`.
+Date: 20 September 2026. Previous approved commit: `0c9b3df` — `chore: establish Nirmaan foundation and phase workflow`.
 
 ## What you can use now
 
@@ -20,7 +20,7 @@ Assignments do not create actual progress. Report capture controls remain visibl
 
 | Area                   | Result                                                                                                                                                                                                                                                           |
 | ---------------------- | ---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
-| Local infrastructure   | Supabase Auth, PostgreSQL 17, Data API and private Storage run in the dedicated IntelliGrid Docker network. Database/API bind to `127.0.0.1:56322` and `127.0.0.1:56321`. The unrelated existing container was preserved.                                        |
+| Local infrastructure   | Supabase Auth, PostgreSQL 17, Data API and private Storage run in the dedicated Nirmaan Docker network. Database/API bind to `127.0.0.1:56322` and `127.0.0.1:56321`. The unrelated existing container was preserved.                                        |
 | Schema                 | Projects, scoped memberships, immutable schedule revisions/WBS/plan versions, activities, execution items, actuals projection, immutable assignment history, idempotency records and append-only admin audit. Same-project foreign keys protect related records. |
 | Identity               | Real Auth users; HTTP-only session cookies; server-side identity verification; token refresh through the Next.js proxy; current membership checked on requests. No browser role switch or public signup.                                                         |
 | Authorization          | PostgreSQL row-level security applies project, role, contractor, discipline, location and assignment boundaries. Browser roles cannot directly edit memberships, plans, assignments or actual progress.                                                          |
@@ -53,7 +53,7 @@ Database/browser tests append genuine synthetic assignment/audit history. They r
 
 ## Interface comparison and screenshots
 
-Compared the field screens with page 8 of **Nirmaan | Website and Field PWA Design**. IntelliGrid keeps the approved navy/white styling, serif page titles, outline navigation icons, current-work card, primary voice action, secondary text/photo actions and Home/Report/My work/My reports navigation. The mobile section labels were reduced to the reference's compact uppercase style. No illustrative completion percentages, fake sync state, shift details or accepted quantities were copied into the app.
+Compared the field screens with page 8 of **Nirmaan | Website and Field PWA Design**. Nirmaan keeps the approved navy/white styling, serif page titles, outline navigation icons, current-work card, primary voice action, secondary text/photo actions and Home/Report/My work/My reports navigation. The mobile section labels were reduced to the reference's compact uppercase style. No illustrative completion percentages, fake sync state, shift details or accepted quantities were copied into the app.
 
 | Screen                                | Evidence                                              |
 | ------------------------------------- | ----------------------------------------------------- |

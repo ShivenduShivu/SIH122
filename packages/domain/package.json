@@ -1,5 +1,5 @@
 {
-  "name": "@intelligrid/domain",
+  "name": "@nirmaan/domain",
   "version": "0.1.0",
   "private": true,
   "type": "module",
@@ -8,6 +8,6 @@
     "./matching": "./src/matching.ts"
   },
   "dependencies": {
-    "@intelligrid/contracts": "0.1.0"
+    "@nirmaan/contracts": "0.1.0"
   }
 }

@@ -29,7 +29,7 @@ export async function seedLab(config = demoLab) {
     ['planner', 'Priya Sen', 'manager'],
   ];
   for (const [key, name, role] of members) {
-    const email = `${key}.clarification@intelligrid.example.test`;
+    const email = `${key}.clarification@nirmaan.example.test`;
     const old = users.find((u) => u.email === email);
     if (old && !accounts[key!])
       throw new Error(

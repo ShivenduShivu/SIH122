@@ -1,7 +1,7 @@
 export function GET() {
   return Response.json(
     {
-      service: 'intelligrid-web',
+      service: 'nirmaan-web',
       status: 'ok',
       pipelineVersion: 'observations-v2',
       mode: 'authenticated-synthetic-project',

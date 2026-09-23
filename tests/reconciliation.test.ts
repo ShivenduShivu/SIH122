@@ -1,7 +1,7 @@
 import { describe, it, expect, vi, afterEach } from 'vitest';
-import { rankClaim } from '@intelligrid/domain/matching';
-import { Extraction, type ExtractedClaim, ScheduleSnapshot } from '@intelligrid/contracts/reports';
-import { OpenAIExtractor, ProviderError } from '@intelligrid/adapters';
+import { rankClaim } from '@nirmaan/domain/matching';
+import { Extraction, type ExtractedClaim, ScheduleSnapshot } from '@nirmaan/contracts/reports';
+import { OpenAIExtractor, ProviderError } from '@nirmaan/adapters';
 import { activities } from '../fixtures/development';
 const source = 'CIV-0401 excavation at Pump bay / P-101 started on 2026-09-14.';
 const claim: ExtractedClaim = {

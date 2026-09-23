@@ -1,6 +1,6 @@
 # Phase 4 — clarification and independent verification
 
-IntelliGrid / BITS Pilani / SIH 26122. Implemented locally on 21 September 2026. All examples and test data are synthetic. This extends the [Phase 3 acceptance contract](phase-03-technical-notes.md); it does not replace the accepted schedule with model output.
+Nirmaan / BITS Pilani / SIH 26122. Implemented locally on 21 September 2026. All examples and test data are synthetic. This extends the [Phase 3 acceptance contract](phase-03-technical-notes.md); it does not replace the accepted schedule with model output.
 
 ## The two room cases
 

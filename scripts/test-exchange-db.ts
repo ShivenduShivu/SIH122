@@ -2,16 +2,16 @@ import { createRequire } from 'node:module';
 const { parse } = createRequire(new URL('../packages/adapters/package.json', import.meta.url))(
   'csv-parse/sync',
 );
-import { csvColumns } from '@intelligrid/adapters/schedule-import';
+import { csvColumns } from '@nirmaan/adapters/schedule-import';
 import assert from 'node:assert/strict';
 import { randomUUID, createHash } from 'node:crypto';
 import { mkdirSync, readFileSync, writeFileSync } from 'node:fs';
 import { admin, assertQueueDrained, must, signIn } from './local-env.mjs';
 import { ids } from '../fixtures/development';
-import { Discipline } from '@intelligrid/contracts';
+import { Discipline } from '@nirmaan/contracts';
 import { processImport } from '../apps/worker/src/imports';
 import { processOne } from '../apps/worker/src/processor';
-import type { ExtractedClaim } from '@intelligrid/contracts/reports';
+import type { ExtractedClaim } from '@nirmaan/contracts/reports';
 import { processMedia } from '../apps/worker/src/media';
 const accounts = JSON.parse(readFileSync('.cache/demo-accounts.json', 'utf8'));
 const planner = await signIn(accounts[ids.planner]),

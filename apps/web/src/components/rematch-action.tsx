@@ -1,7 +1,7 @@
 'use client';
 import { useState, useRef } from 'react';
 import { useRouter } from 'next/navigation';
-import type { ScheduleActivity } from '@intelligrid/contracts/reports';
+import type { ScheduleActivity } from '@nirmaan/contracts/reports';
 export function RematchAction({
   claimId,
   version,

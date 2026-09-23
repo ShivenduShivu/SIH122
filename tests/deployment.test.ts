@@ -5,7 +5,7 @@ import { workerFailureLimit } from '../apps/worker/src/supervision';
 import { checkDeployment } from '../scripts/deploy-preflight.mjs';
 describe('deployment credential boundary', () => {
   const valid = {
-    APP_ORIGIN: 'https://demo.intelligrid.test',
+    APP_ORIGIN: 'https://demo.nirmaan.test',
     NEXT_PUBLIC_SUPABASE_URL: 'https://project.supabase.co',
     NEXT_PUBLIC_SUPABASE_PUBLISHABLE_KEY: 'sb_publishable_fixture',
     SUPABASE_SERVICE_ROLE_KEY: 'sb_secret_fixture',
@@ -89,7 +89,7 @@ describe('transport security headers', () => {
     }
   }
   it('pins HSTS only for an HTTPS deployment origin', async () => {
-    expect(await headerKeys('https://demo.intelligrid.test')).toContain(
+    expect(await headerKeys('https://demo.nirmaan.test')).toContain(
       'Strict-Transport-Security',
     );
   });

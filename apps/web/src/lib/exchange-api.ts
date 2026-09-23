@@ -1,7 +1,7 @@
 import { createHash } from 'node:crypto';
 import JSZip from 'jszip';
 import { z } from 'zod';
-import { Id } from '@intelligrid/contracts';
+import { Id } from '@nirmaan/contracts';
 import { apiJson, apiSession, rpcResponse } from './api';
 
 export async function createExport(request: Request, projectId: string) {
@@ -68,7 +68,7 @@ export async function readExport(id: string, download = false) {
   return new Response(bytes as BodyInit, {
     headers: {
       'Content-Type': 'application/zip',
-      'Content-Disposition': `attachment; filename="IntelliGrid-exchange-${id}.zip"`,
+      'Content-Disposition': `attachment; filename="Nirmaan-exchange-${id}.zip"`,
       'Cache-Control': 'private, no-store',
       'X-Content-Type-Options': 'nosniff',
     },

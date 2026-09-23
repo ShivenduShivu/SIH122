@@ -1,12 +1,12 @@
 'use client';
 import { useState, useRef, useEffect } from 'react';
 import { useRouter } from 'next/navigation';
-import { scriptedFixtureQualifier, type ExtractedClaim } from '@intelligrid/contracts/reports';
+import { scriptedFixtureQualifier, type ExtractedClaim } from '@nirmaan/contracts/reports';
 import { useSchedule } from './schedule-context';
 import { RematchAction } from './rematch-action';
 import { TranscriptEvidence } from './transcript-evidence';
 import { PlannerFollowup, EvidenceLink } from './followup-actions';
-import type { Question, Verification } from '@intelligrid/contracts/followups';
+import type { Question, Verification } from '@nirmaan/contracts/followups';
 type Candidate = {
   activity_id: string;
   rank: number;

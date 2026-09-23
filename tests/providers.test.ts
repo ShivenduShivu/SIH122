@@ -1,5 +1,5 @@
 import { afterEach, describe, expect, it, vi } from 'vitest';
-import { OpenAIExtractor } from '@intelligrid/adapters';
+import { OpenAIExtractor } from '@nirmaan/adapters';
 import {
   createExtractor,
   createTranscriber,
@@ -7,7 +7,7 @@ import {
   StructuredExtractor,
   providerConfiguration,
   portableSchema,
-} from '@intelligrid/adapters/providers';
+} from '@nirmaan/adapters/providers';
 import { createHash } from 'node:crypto';
 const source = 'Excavation at Pump bay started on 2026-09-14.';
 const claim = {

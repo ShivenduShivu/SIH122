@@ -1,8 +1,8 @@
 'use client';
 import { useEffect, useLayoutEffect, useState, useRef } from 'react';
 import { useRouter } from 'next/navigation';
-import type { PlannedActivity } from '@intelligrid/contracts';
-import { type LocalFieldDraft, ReserveCapture } from '@intelligrid/contracts/media';
+import type { PlannedActivity } from '@nirmaan/contracts';
+import { type LocalFieldDraft, ReserveCapture } from '@nirmaan/contracts/media';
 import { draftKey, readDraft } from '../lib/field-draft';
 import { VoiceRecorder } from './voice-recorder';
 import { EvidenceLink } from './followup-actions';
@@ -48,12 +48,13 @@ async function api(url: string, body?: unknown) {
   return value;
 }
 function LocalPreview({ file }: { file: File }) {
-  const [url, setUrl] = useState('');
+  const [url, setUrl] = useState<string | null>(null);
   useEffect(() => {
     const u = URL.createObjectURL(file);
     setUrl(u);
     return () => URL.revokeObjectURL(u);
   }, [file]);
+  if (!url) return null;
   return file.type === 'audio/wav' ? (
     <audio controls src={url} aria-label="Listen to your recording" />
   ) : (

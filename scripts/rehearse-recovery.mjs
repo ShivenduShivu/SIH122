@@ -8,12 +8,12 @@ if (!process.argv.includes('--quiesced'))
   throw new Error(
     'Stop web, worker and all writers, then pass --quiesced. Do not run concurrent tests.',
   );
-const dbContainer = 'supabase_db_intelligrid',
-  storageContainer = 'supabase_storage_intelligrid';
+const dbContainer = 'supabase_db_nirmaan',
+  storageContainer = 'supabase_storage_nirmaan';
 const suffix = `${Date.now()}_${randomBytes(3).toString('hex')}`;
-const target = `intelligrid_restore_${suffix}`,
-  volume = `intelligrid_restore_${suffix}`;
-assert.match(target, /^intelligrid_restore_\d+_[a-f0-9]{6}$/);
+const target = `nirmaan_restore_${suffix}`,
+  volume = `nirmaan_restore_${suffix}`;
+assert.match(target, /^nirmaan_restore_\d+_[a-f0-9]{6}$/);
 assert.notEqual(target, 'postgres');
 const dir = resolve(`.cache/backups/${suffix}`);
 mkdirSync(dir, { recursive: true });
@@ -69,8 +69,8 @@ function fingerprints(db) {
   );
 }
 const before = fingerprints('postgres');
-const dumpName = `/tmp/intelligrid_${suffix}.dump`,
-  tarName = `/tmp/intelligrid_${suffix}.tar.gz`;
+const dumpName = `/tmp/nirmaan_${suffix}.dump`,
+  tarName = `/tmp/nirmaan_${suffix}.tar.gz`;
 docker(['exec', dbContainer, 'pg_dump', '-U', 'postgres', '-d', 'postgres', '-Fc', '-f', dumpName]);
 docker(['cp', `${dbContainer}:${dumpName}`, `${dir}/database.dump`]);
 docker(['exec', storageContainer, 'tar', '-C', '/mnt', '-czf', tarName, '.']);
@@ -125,7 +125,7 @@ assert.equal(restoredFiles, sourceFiles, 'Restored evidence bytes differ');
 const restoreMs = Date.now() - start;
 // Replay application migrations in a second isolated database with platform schemas retained.
 const migrationDb = `${target}_migrations`;
-assert.match(migrationDb, /^intelligrid_restore_\d+_[a-f0-9]{6}_migrations$/);
+assert.match(migrationDb, /^nirmaan_restore_\d+_[a-f0-9]{6}_migrations$/);
 docker(['exec', dbContainer, 'createdb', '-U', 'postgres', '-T', target, migrationDb]);
 sql(
   migrationDb,

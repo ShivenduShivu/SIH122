@@ -1,5 +1,5 @@
 import { followupPost } from '../../../../../../lib/followup-api';
-import { AmendmentCommand } from '@intelligrid/contracts/followups';
+import { AmendmentCommand } from '@nirmaan/contracts/followups';
 export async function POST(
   request: Request,
   { params }: { params: Promise<{ reportId: string }> },

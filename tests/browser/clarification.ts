@@ -4,7 +4,7 @@ import { readFileSync, writeFileSync, mkdirSync } from 'node:fs';
 import { randomUUID } from 'node:crypto';
 import { seedLab, demoLab as lab } from '../../scripts/seed-clarification-lab';
 import { admin, must, signIn } from '../../scripts/local-env.mjs';
-import { OpenAIExtractor } from '@intelligrid/adapters';
+import { OpenAIExtractor } from '@nirmaan/adapters';
 import { processOne } from '../../apps/worker/src/processor';
 const accounts = await seedLab();
 const base = process.env.BASE_URL ?? 'http://localhost:3000',

@@ -2,10 +2,10 @@ import assert from 'node:assert/strict';
 import { spawnSync } from 'node:child_process';
 
 const suffix = `${process.pid}-${Date.now()}`;
-const webImage = `intelligrid-web-test:${suffix}`;
-const workerImage = `intelligrid-worker-test:${suffix}`;
-const webContainer = `intelligrid-web-test-${suffix}`;
-const appOrigin = 'https://deploy.intelligrid.test';
+const webImage = `nirmaan-web-test:${suffix}`;
+const workerImage = `nirmaan-worker-test:${suffix}`;
+const webContainer = `nirmaan-web-test-${suffix}`;
+const appOrigin = 'https://deploy.nirmaan.test';
 const publicUrl = 'https://project.supabase.co';
 const publicKey = 'sb_publishable_container_test';
 

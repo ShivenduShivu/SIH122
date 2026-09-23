@@ -1,6 +1,6 @@
 import { createHash } from 'node:crypto';
 import { z } from 'zod';
-import { Extraction, ProviderExtraction } from '@intelligrid/contracts/reports';
+import { Extraction, ProviderExtraction } from '@nirmaan/contracts/reports';
 import {
   OpenAIExtractor,
   ProviderError,

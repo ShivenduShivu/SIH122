@@ -1,6 +1,6 @@
 # Phase 5A — supplied schedule import and hierarchy
 
-21 September 2026 · IntelliGrid · BITS Pilani · SIH 26122
+21 September 2026 · Nirmaan · BITS Pilani · SIH 26122
 
 **Status: approved by the user on 21 September 2026 for commit/push and progression to Phase 5B.** Approved Phase 4A documentation was committed and pushed as `7d07770`.
 

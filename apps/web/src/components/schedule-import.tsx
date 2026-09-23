@@ -2,7 +2,7 @@
 import { useEffect, useRef, useState } from 'react';
 import Link from 'next/link';
 import { useRouter } from 'next/navigation';
-import type { ImportFile, ParsedImport } from '@intelligrid/contracts/imports';
+import type { ImportFile, ParsedImport } from '@nirmaan/contracts/imports';
 import { Icon } from './icon';
 import { RevisionPreview } from './revision-preview';
 type Batch = {

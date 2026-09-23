@@ -1,5 +1,5 @@
 import { followupPost } from '../../../../../../lib/followup-api';
-import { WithdrawalCommand } from '@intelligrid/contracts/followups';
+import { WithdrawalCommand } from '@nirmaan/contracts/followups';
 export async function POST(
   request: Request,
   { params }: { params: Promise<{ reportId: string }> },

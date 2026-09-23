@@ -40,13 +40,13 @@ COPY apps/worker/package.json apps/worker/package.json
 COPY packages/adapters/package.json packages/adapters/package.json
 COPY packages/contracts/package.json packages/contracts/package.json
 COPY packages/domain/package.json packages/domain/package.json
-RUN npm ci --omit=dev --no-audit --no-fund --workspace=@intelligrid/worker --include-workspace-root=false
+RUN npm ci --omit=dev --no-audit --no-fund --workspace=@nirmaan/worker --include-workspace-root=false
 
 FROM worker-dependencies AS worker
 COPY --chown=node:node apps/worker apps/worker
 COPY --chown=node:node packages packages
 COPY --chown=node:node scripts/check-worker-heartbeat.mjs scripts/check-worker-heartbeat.mjs
-ENV NODE_ENV=production WORKER_HEARTBEAT_PATH=/tmp/intelligrid-worker-heartbeat.json
+ENV NODE_ENV=production WORKER_HEARTBEAT_PATH=/tmp/nirmaan-worker-heartbeat.json
 USER node
 HEALTHCHECK --interval=30s --timeout=5s --start-period=180s --retries=3 CMD node scripts/check-worker-heartbeat.mjs
 CMD ["node", "node_modules/tsx/dist/cli.mjs", "apps/worker/src/index.ts"]

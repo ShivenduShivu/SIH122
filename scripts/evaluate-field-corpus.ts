@@ -2,7 +2,7 @@ import { readFileSync, writeFileSync, existsSync } from 'node:fs';
 import { admin, must } from './local-env.mjs';
 import { processOne } from '../apps/worker/src/processor';
 import { readComplete } from '../apps/worker/src/read-complete';
-import { OpenAIExtractor } from '@intelligrid/adapters';
+import { OpenAIExtractor } from '@nirmaan/adapters';
 if (existsSync('apps/worker/.env.local')) process.loadEnvFile('apps/worker/.env.local');
 const { project, importId } = JSON.parse(
   readFileSync('test-results/phase-05b-field-import.json', 'utf8'),

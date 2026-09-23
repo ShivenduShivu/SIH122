@@ -1,4 +1,4 @@
-project_id = "intelligrid"
+project_id = "nirmaan"
 [api]
 enabled = true
 port = 56321

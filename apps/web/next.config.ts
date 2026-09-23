@@ -5,7 +5,7 @@ const httpsOrigin = process.env.APP_ORIGIN?.startsWith('https://') ?? false;
 const config: NextConfig = {
   output: 'standalone',
   outputFileTracingRoot: resolve(import.meta.dirname, '../..'),
-  transpilePackages: ['@intelligrid/contracts', '@intelligrid/domain'],
+  transpilePackages: ['@nirmaan/contracts', '@nirmaan/domain'],
   poweredByHeader: false,
   headers: async () => [
     {

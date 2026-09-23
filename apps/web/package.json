@@ -1,5 +1,5 @@
 {
-  "name": "@intelligrid/web",
+  "name": "@nirmaan/web",
   "version": "0.1.0",
   "private": true,
   "scripts": {
@@ -9,8 +9,8 @@
     "typecheck": "next typegen && tsc --noEmit"
   },
   "dependencies": {
-    "@intelligrid/contracts": "0.1.0",
-    "@intelligrid/domain": "0.1.0",
+    "@nirmaan/contracts": "0.1.0",
+    "@nirmaan/domain": "0.1.0",
     "@supabase/ssr": "0.12.7",
     "@supabase/supabase-js": "2.116.0",
     "@tailwindcss/postcss": "4.3.3",

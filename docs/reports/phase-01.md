@@ -1,4 +1,4 @@
-# IntelliGrid - Phase 1 completion report
+# Nirmaan - Phase 1 completion report
 
 Date: 20 September 2026. Status: **approved with design-fidelity corrections and explicitly tracked follow-up work**.
 
@@ -6,7 +6,7 @@ The user accepted the Phase 1 foundation and allowed the remaining approved-desi
 
 ## Outcome
 
-The repository now contains a runnable Next.js application, shared runtime contracts and pure domain helpers, a worker configuration boundary, development fixtures and repeatable checks. The name is IntelliGrid, as selected by the team. The planner uses the approved institutional top navigation and restrained navy styling; the mobile shell emphasizes assigned work and locations.
+The repository now contains a runnable Next.js application, shared runtime contracts and pure domain helpers, a worker configuration boundary, development fixtures and repeatable checks. The name is Nirmaan, as selected by the team. The planner uses the approved institutional top navigation and restrained navy styling; the mobile shell emphasizes assigned work and locations.
 
 The eight-phase plan is in `docs/implementation-phases.md`. Every phase ends with a report and user review. Approval triggers staging, a descriptive commit and a normal push to origin/main before the next phase begins.
 
@@ -14,7 +14,7 @@ The eight-phase plan is in `docs/implementation-phases.md`. Every phase ends wit
 
 - npm workspace structure: `apps/web`, `apps/worker`, `packages/contracts`, `packages/domain`.
 - Node 24 requirement, pinned dependency lockfile, strict TypeScript, Prettier configuration and GitHub CI definition.
-- IntelliGrid branding module and icon; overview, filtered schedule register, field home and assigned-work screens.
+- Nirmaan branding module and icon; overview, filtered schedule register, field home and assigned-work screens.
 - Twelve planned facility activities across three disciplines, two fixture projects, two contractor identifiers, seven sample members and three ambiguity scenarios.
 - Zod validation for planned activities, date-only evidence, initial text drafts, claims, lifecycle states and versioned review commands.
 - Domain helpers that preserve missing location, propose short clarification questions and flag assignment differences without overwriting the reported activity.
@@ -74,7 +74,7 @@ User review accepted the phase with the design corrections described above. Proc
 
 After approval, inspect and stage the intended foundation files plus existing project planning/design artifacts (excluding ignored scratch/build files), then commit:
 
-`chore: establish IntelliGrid foundation and phase workflow`
+`chore: establish Nirmaan foundation and phase workflow`
 
 Push that commit to `https://github.com/ShivenduShivu/SIH122.git` on `main`, without force. Inspect remote state again before pushing. If author identity or authentication is missing, request the specific missing setup rather than inventing it. Record the resulting commit hash in the next phase's report.
 

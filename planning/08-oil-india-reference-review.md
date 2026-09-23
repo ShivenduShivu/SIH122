@@ -1,6 +1,6 @@
 # Oil India reference pack — reading notes
 
-Reviewed 21 September 2026 for IntelliGrid, BITS Pilani, SIH 26122.
+Reviewed 21 September 2026 for Nirmaan, BITS Pilani, SIH 26122.
 
 These notes retain the supplied source material for the next alignment discussion. They do not approve an architecture change or start Phase 5. Application code, source attachments and accepted project records were not changed. The email response is a draft, not a sent message.
 
@@ -97,7 +97,7 @@ Physical, duration and units percent complete are distinct concepts in Primavera
 
 The supplied hierarchy is GWP-L3-030 (Civil Works — Process Buildings) → GWP-CIV-1230 (Receiving/Tipping Hall B) → GWP-CIV-1240 (Foundations) → GWP-CIV-1250 (Excavate for footings).
 
-The workflow's report received 30 November 2027 at 18:20 says receiving-hall excavation is complete, 12 footings. With the earlier start report, the expected actual dates are 22 November and 30 November; the plan was 18–24 November. The workflow describes a three-working-day late start and five-working-day late finish. The foundation parent remains in progress while other child work remains. This is a worked example from the source, not a measured IntelliGrid result.
+The workflow's report received 30 November 2027 at 18:20 says receiving-hall excavation is complete, 12 footings. With the earlier start report, the expected actual dates are 22 November and 30 November; the plan was 18–24 November. The workflow describes a three-working-day late start and five-working-day late finish. The foundation parent remains in progress while other child work remains. This is a worked example from the source, not a measured Nirmaan result.
 
 ## Questions retained for our next discussion — no decisions yet
 

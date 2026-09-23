@@ -1,9 +1,9 @@
 import { createClient, type SupabaseClient } from '@supabase/supabase-js';
-import { rankClaim } from '@intelligrid/domain/matching';
-import { PlannedActivity } from '@intelligrid/contracts';
+import { rankClaim } from '@nirmaan/domain/matching';
+import { PlannedActivity } from '@nirmaan/contracts';
 import { readComplete } from './read-complete';
-import { Extraction } from '@intelligrid/contracts/reports';
-import { ProviderError, type Extractor } from '@intelligrid/adapters';
+import { Extraction } from '@nirmaan/contracts/reports';
+import { ProviderError, type Extractor } from '@nirmaan/adapters';
 const must = <T>(r: {
   data: T;
   error: { message: string } | null;

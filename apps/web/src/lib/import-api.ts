@@ -1,6 +1,6 @@
 import { apiJson, apiSession, rpcResponse } from './api';
-import { Id } from '@intelligrid/contracts';
-import { ReserveImport } from '@intelligrid/contracts/imports';
+import { Id } from '@nirmaan/contracts';
+import { ReserveImport } from '@nirmaan/contracts/imports';
 import { z } from 'zod';
 export async function reserveImport(request: Request, projectId: string) {
   const session = await apiSession(request);

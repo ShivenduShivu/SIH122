@@ -1,7 +1,7 @@
 import 'server-only';
 import { readRows } from './read-rows';
 import { cache } from 'react';
-import { ScheduleSnapshot } from '@intelligrid/contracts/reports';
+import { ScheduleSnapshot } from '@nirmaan/contracts/reports';
 import { projectContext } from './project';
 export const scheduleSnapshot = cache(async () => {
   const c = await projectContext();

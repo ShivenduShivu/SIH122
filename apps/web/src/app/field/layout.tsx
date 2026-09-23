@@ -1,3 +1,4 @@
+import Link from 'next/link';
 import { SignOut } from '../../components/sign-out';
 import { FieldNav } from '../../components/field-nav';
 import { brand } from '../../lib/brand';
@@ -14,7 +15,7 @@ export default async function FieldLayout({ children }: { children: React.ReactN
         <header className="field-header">
           <div className="identity">
             <span className="brand-mark small" aria-hidden="true">
-              IG
+              N
             </span>
             <div>
               <strong>{brand.name}</strong>
@@ -30,6 +31,9 @@ export default async function FieldLayout({ children }: { children: React.ReactN
         </header>
         <div className="field-session">
           <span>{member.role} · Project access verified</span>
+          <Link href="/planner" className="text-button">
+            Web version
+          </Link>
           <SignOut userId={member.user_id} />
         </div>
         <main id="field-main" className="field-main">

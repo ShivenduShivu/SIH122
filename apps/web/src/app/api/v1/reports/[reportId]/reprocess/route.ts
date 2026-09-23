@@ -1,6 +1,6 @@
 import { followupPost } from '../../../../../../lib/followup-api';
 import { z } from 'zod';
-import { Id } from '@intelligrid/contracts';
+import { Id } from '@nirmaan/contracts';
 const Command = z
   .object({
     commandId: Id,

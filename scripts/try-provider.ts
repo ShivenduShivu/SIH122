@@ -1,5 +1,5 @@
 import { existsSync } from 'node:fs';
-import { createExtractor, providerConfiguration } from '@intelligrid/adapters/providers';
+import { createExtractor, providerConfiguration } from '@nirmaan/adapters/providers';
 for (const path of ['.env.local', 'apps/worker/.env.local'])
   if (existsSync(path)) process.loadEnvFile(path);
 // No provider request unless the operator explicitly opts in.

@@ -1,5 +1,5 @@
 import { apiSession, apiJson, rpcResponse } from '../../../../../../lib/api';
-import { Decision } from '@intelligrid/contracts/reports';
+import { Decision } from '@nirmaan/contracts/reports';
 export async function POST(request: Request, { params }: { params: Promise<{ claimId: string }> }) {
   const session = await apiSession(request);
   if ('response' in session) return session.response;

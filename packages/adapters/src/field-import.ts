@@ -1,9 +1,9 @@
 import ExcelJS from 'exceljs';
 import { createHash } from 'node:crypto';
 import { validateArchive } from './schedule-import';
-import { SourceEnvelope, type Observation } from '@intelligrid/contracts/observations';
-import { ExtractedClaim } from '@intelligrid/contracts/reports';
-import { WorkDate } from '@intelligrid/contracts';
+import { SourceEnvelope, type Observation } from '@nirmaan/contracts/observations';
+import { ExtractedClaim } from '@nirmaan/contracts/reports';
+import { WorkDate } from '@nirmaan/contracts';
 const profiles: Record<string, string[]> = {
   Text_Reports: ['Msg ID', 'Date', 'Time', 'Channel', 'From (role)', 'Message'],
   Civil_DPR: [

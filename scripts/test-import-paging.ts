@@ -6,7 +6,7 @@ import { ids } from '../fixtures/development';
 import { processImport } from '../apps/worker/src/imports';
 import { readComplete } from '../apps/worker/src/read-complete';
 import { readRows } from '../apps/web/src/lib/read-rows';
-import { csvColumns } from '@intelligrid/adapters/schedule-import';
+import { csvColumns } from '@nirmaan/adapters/schedule-import';
 const accounts = JSON.parse(readFileSync('.cache/demo-accounts.json', 'utf8'));
 const planner = await signIn(accounts[ids.planner]);
 const project = randomUUID(),

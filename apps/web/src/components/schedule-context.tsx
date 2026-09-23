@@ -1,6 +1,6 @@
 'use client';
 import { createContext, useContext, useEffect, useState, useCallback } from 'react';
-import { ScheduleSnapshot } from '@intelligrid/contracts/reports';
+import { ScheduleSnapshot } from '@nirmaan/contracts/reports';
 const Context = createContext<{
   snapshot: ScheduleSnapshot;
   refresh: () => Promise<void>;

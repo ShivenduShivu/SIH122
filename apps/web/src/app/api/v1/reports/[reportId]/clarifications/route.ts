@@ -1,5 +1,5 @@
 import { apiSession, apiJson } from '../../../../../../lib/api';
-import { Id } from '@intelligrid/contracts';
+import { Id } from '@nirmaan/contracts';
 export async function GET(
   _request: Request,
   { params }: { params: Promise<{ reportId: string }> },
