@@ -35,4 +35,17 @@ describe('workspace UI defaults', () => {
       }).rows,
     ).toBe('tasks');
   });
+
+  it('renders every discipline present in an imported schedule', () => {
+    const source = readFileSync(
+      new URL('../apps/web/src/components/project-timeline.tsx', import.meta.url),
+      'utf8',
+    );
+
+    expect(source).toContain(
+      'const disciplines = [...new Set(all.map((activity) => activity.discipline))]',
+    );
+    expect(source).toContain('disciplineStart(a).localeCompare(disciplineStart(b))');
+    expect(source).not.toContain("(['Civil', 'Piping', 'Electrical'] as const)");
+  });
 });

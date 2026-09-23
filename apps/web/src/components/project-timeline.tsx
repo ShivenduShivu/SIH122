@@ -97,8 +97,19 @@ function TimelineView({
     } else dialog.current?.close();
   }, [selected, ready]);
   const all = snapshot.activities,
-    rows = all.filter((a) => discipline === 'All' || a.discipline === discipline),
-    start = addDay(all.map((a) => a.plannedStart).sort()[0] ?? today, offset),
+    rows = all.filter((a) => discipline === 'All' || a.discipline === discipline);
+  const disciplineStart = (name: string) =>
+    all.reduce(
+      (earliest, activity) =>
+        activity.discipline === name && activity.plannedStart < earliest
+          ? activity.plannedStart
+          : earliest,
+      '9999-12-31',
+    );
+  const disciplines = [...new Set(all.map((activity) => activity.discipline))].sort((a, b) =>
+    disciplineStart(a).localeCompare(disciplineStart(b)),
+  );
+  const start = addDay(all.map((a) => a.plannedStart).sort()[0] ?? today, offset),
     end = addDay(start, 16 * step - 1),
     days = Array.from({ length: 16 }, (_, i) => addDay(start, i * step));
   const activity = all.find((a) => a.id === selected);
@@ -299,7 +310,7 @@ function TimelineView({
                     onSelect={selectActivity}
                   />
                 ) : (
-                  (['Civil', 'Piping', 'Electrical'] as const)
+                  disciplines
                     .filter((d) => rows.some((a) => a.discipline === d))
                     .map((d) => (
                       <div key={d} className={`discipline-group ${d.toLowerCase()}`}>
