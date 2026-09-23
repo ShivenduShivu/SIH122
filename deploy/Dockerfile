@@ -14,8 +14,10 @@ COPY packages packages
 COPY tsconfig.json ./
 ARG NEXT_PUBLIC_SUPABASE_URL
 ARG NEXT_PUBLIC_SUPABASE_PUBLISHABLE_KEY
+ARG APP_ORIGIN
 ENV NEXT_PUBLIC_SUPABASE_URL=$NEXT_PUBLIC_SUPABASE_URL
 ENV NEXT_PUBLIC_SUPABASE_PUBLISHABLE_KEY=$NEXT_PUBLIC_SUPABASE_PUBLISHABLE_KEY
+ENV APP_ORIGIN=$APP_ORIGIN
 ENV NEXT_TELEMETRY_DISABLED=1
 RUN npm run build
 
@@ -30,7 +32,17 @@ EXPOSE 3000
 HEALTHCHECK --interval=30s --timeout=5s --start-period=20s --retries=3 CMD node -e "fetch('http://127.0.0.1:3000/api/health').then(r=>{if(!r.ok)process.exit(1)}).catch(()=>process.exit(1))"
 CMD ["node", "apps/web/server.js"]
 
-FROM dependencies AS worker
+FROM node:24-bookworm-slim AS worker-dependencies
+WORKDIR /app
+COPY package.json package-lock.json ./
+COPY apps/web/package.json apps/web/package.json
+COPY apps/worker/package.json apps/worker/package.json
+COPY packages/adapters/package.json packages/adapters/package.json
+COPY packages/contracts/package.json packages/contracts/package.json
+COPY packages/domain/package.json packages/domain/package.json
+RUN npm ci --omit=dev --no-audit --no-fund --workspace=@intelligrid/worker --include-workspace-root=false
+
+FROM worker-dependencies AS worker
 COPY --chown=node:node apps/worker apps/worker
 COPY --chown=node:node packages packages
 COPY --chown=node:node scripts/check-worker-heartbeat.mjs scripts/check-worker-heartbeat.mjs

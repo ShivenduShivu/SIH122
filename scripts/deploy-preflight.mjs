@@ -29,6 +29,11 @@ export function checkDeployment(env) {
   } catch (error) {
     errors.push(error.message);
   }
+  if (env.WORKER_MAX_CONSECUTIVE_FAILURES !== undefined) {
+    const failureLimit = Number(env.WORKER_MAX_CONSECUTIVE_FAILURES);
+    if (!Number.isSafeInteger(failureLimit) || failureLimit < 1)
+      errors.push('WORKER_MAX_CONSECUTIVE_FAILURES: use a positive safe integer');
+  }
   const publicKey = env.NEXT_PUBLIC_SUPABASE_PUBLISHABLE_KEY ?? '';
   if (
     publicKey.startsWith('sb_secret_') ||

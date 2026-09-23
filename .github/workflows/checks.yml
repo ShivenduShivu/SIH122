@@ -1,8 +1,14 @@
 name: Phase checks
 on: [push, pull_request]
+permissions:
+  contents: read
+concurrency:
+  group: checks-${{ github.ref }}
+  cancel-in-progress: true
 jobs:
   foundation:
     runs-on: ubuntu-latest
+    timeout-minutes: 15
     steps:
       - uses: actions/checkout@v4
       - uses: actions/setup-node@v4
@@ -12,3 +18,51 @@ jobs:
       - run: npm ci
       - run: npm run check
       - run: npm run build
+  deployment:
+    runs-on: ubuntu-latest
+    timeout-minutes: 25
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 24
+          cache: npm
+      - run: npm ci
+      - run: npm audit --omit=dev --audit-level=high
+      - run: npm audit --audit-level=high
+      - run: npm run deploy:check
+        env:
+          APP_ORIGIN: https://deploy.intelligrid.test
+          NEXT_PUBLIC_SUPABASE_URL: https://project.supabase.co
+          NEXT_PUBLIC_SUPABASE_PUBLISHABLE_KEY: sb_publishable_ci_fixture
+          SUPABASE_SERVICE_ROLE_KEY: ci-service-role-fixture
+          EXTRACTION_PROVIDER: fixture
+          WORKER_MAX_CONSECUTIVE_FAILURES: 12
+      - run: npm run test:containers
+  database:
+    runs-on: ubuntu-latest
+    timeout-minutes: 40
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 24
+          cache: npm
+      - run: npm ci
+      - run: docker network create --driver bridge --opt com.docker.network.bridge.host_binding_ipv4=127.0.0.1 intelligrid-local
+      - run: npx supabase start --network-id intelligrid-local -x realtime,imgproxy,mailpit,postgres-meta,studio,edge-runtime,logflare,vector,supavisor
+      - run: mkdir -p .cache
+      - run: npx supabase status -o env > .cache/supabase.env
+      - run: npm run local:bind
+      - run: npm run seed:local
+      - run: npm run test:seed
+      - run: npm run test:database
+      - run: npm run test:reconciliation-db
+      - run: npm run test:clarification-db
+      - run: npm run test:import-db
+      - run: npm run test:import-paging
+      - run: npm run test:observations-db
+      - run: npm run test:exchange-db
+      - run: npm run test:media-db
+      - if: always()
+        run: npx supabase stop --no-backup

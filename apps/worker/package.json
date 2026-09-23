@@ -12,6 +12,7 @@
     "@intelligrid/contracts": "0.1.0",
     "@intelligrid/domain": "0.1.0",
     "@supabase/supabase-js": "2.116.0",
-    "sharp": "0.35.4"
+    "sharp": "0.35.4",
+    "tsx": "4.23.15"
   }
 }
