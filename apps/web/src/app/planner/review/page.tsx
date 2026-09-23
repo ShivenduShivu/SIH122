@@ -3,27 +3,25 @@ import { plannerContext } from '../../../lib/project';
 import { reportWorkbench } from '../../../lib/reports';
 import { ReviewPanel } from '../../../components/review-panel';
 import { followupWorkbench } from '../../../lib/followups';
-import { RefreshPage } from '../../../components/refresh-page';
 import Link from 'next/link';
 export default async function ReviewPage({
   searchParams,
 }: {
   searchParams: Promise<{ claim?: string; source?: string; from?: string }>;
 }) {
-  await plannerContext();
-  const w = await reportWorkbench();
-  const followups = await followupWorkbench();
-  const params = await searchParams;
+  const c = await plannerContext();
+  const [w, followups, params, members, decisions] = await Promise.all([
+    reportWorkbench(),
+    followupWorkbench(),
+    searchParams,
+    c.db.from('project_members').select('user_id,display_name').eq('project_id', c.project.id),
+    c.db.from('review_decisions').select('*').eq('project_id', c.project.id),
+  ]);
   const claim = typeof params.claim === 'string' ? params.claim : undefined;
   const source = typeof params.source === 'string' ? params.source.trim().slice(0, 160) : '';
-  const [members, decisions] = await Promise.all([
-    w.db.from('project_members').select('user_id,display_name').eq('project_id', w.project.id),
-    w.db.from('review_decisions').select('*').eq('project_id', w.project.id),
-  ]);
   if (members.error || decisions.error) throw new Error('Could not load review records.');
   return (
     <>
-      <RefreshPage />
       {params.from === 'schedule' && (
         <Link className="back-link" href="/planner/schedule">
           ← Return to schedule
@@ -56,7 +54,8 @@ export default async function ReviewPage({
             );
             return {
               claim: c,
-              media: w.versions.find(v=>v.report_id===r.id&&v.version===1)?.context?.media,
+              media: w.versions.find((v) => v.report_id === r.id && v.version === 1)?.context
+                ?.media,
               attachments: followups.attachments.filter(
                 (a) => a.report_id === c.report_id && a.state === 'received',
               ),

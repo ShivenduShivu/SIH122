@@ -1,5 +1,5 @@
 'use client';
-import { useRef, useState } from 'react';
+import { useEffect, useRef, useState } from 'react';
 import Link from 'next/link';
 import { useRouter } from 'next/navigation';
 import { useSchedule } from './schedule-context';
@@ -25,7 +25,15 @@ export function PlannerExchange({
     [selected, setSelected] = useState<string | null>(null),
     [confirmed, setConfirmed] = useState(false);
   const retry = useRef<{ input: string; id: string } | null>(null);
+  const downloadLink = useRef<HTMLAnchorElement>(null);
+  const [createdId, setCreatedId] = useState<string | null>(null);
   const current = history.find((h) => h.id === selected) ?? history[0];
+  useEffect(() => {
+    if (!createdId || current?.id !== createdId) return;
+    downloadLink.current?.focus({ preventScroll: true });
+    downloadLink.current?.scrollIntoView({ block: 'center', behavior: 'instant' });
+    setCreatedId(null);
+  }, [createdId, current?.id]);
   async function generate() {
     const input = JSON.stringify({
       revisionId: snapshot.revisionId,
@@ -46,6 +54,7 @@ export function PlannerExchange({
         throw new Error(result.error);
       }
       setSelected(result);
+      setCreatedId(result);
       setMessage('Exchange package created. No external system has been updated.');
       router.refresh();
     } catch (e) {
@@ -86,23 +95,35 @@ export function PlannerExchange({
             checksum manifest. Blank cells mean “not recorded”; they never instruct another system
             to clear a value.
           </p>
-          <label className="choice-row">
+          <label className="choice-row export-confirmation">
             <input
               type="checkbox"
               checked={confirmed}
               onChange={(e) => setConfirmed(e.target.checked)}
             />{' '}
-            I understand this is planner exchange, not a verified native Primavera import or
-            external delivery.
+            <span>
+              Prepare a ZIP download for this schedule. I will review the files before importing
+              them into another planning tool.
+            </span>
           </label>
           <button
             className="button primary"
+            aria-describedby="export-help"
             disabled={busy || !confirmed || stale || !snapshot.revisionId}
             onClick={generate}
           >
             <Icon name="reports" />
             {busy ? 'Creating…' : 'Create exchange package'}
           </button>
+          <p id="export-help" className="export-help" role="status">
+            {!snapshot.revisionId
+              ? 'Import and activate a schedule before creating a download.'
+              : !confirmed
+                ? 'Confirm the checkbox above to create your download.'
+                : busy
+                  ? 'Preparing the files. Your download link will appear below.'
+                  : 'The ZIP contains CSV files, evidence and a schedule snapshot. It does not update external systems automatically.'}
+          </p>
           {stale && (
             <p role="alert">
               Schedule refresh is unavailable. Reconnect before creating a package.
@@ -154,6 +175,7 @@ export function PlannerExchange({
                   {current.manifest.counts.exceptions} exceptions
                 </p>
                 <a
+                  ref={downloadLink}
                   className="button primary"
                   href={`/api/v1/exports/${current.id}/access`}
                   download

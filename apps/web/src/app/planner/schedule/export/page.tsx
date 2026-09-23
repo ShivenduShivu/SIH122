@@ -1,6 +1,5 @@
 import { plannerContext } from '../../../../lib/project';
 import { PlannerExchange } from '../../../../components/planner-exchange';
-import { RefreshPage } from '../../../../components/refresh-page';
 export default async function ExportPage() {
   const { db, project } = await plannerContext();
   const result = await db
@@ -12,7 +11,6 @@ export default async function ExportPage() {
   if (result.error) throw new Error('Could not load export register.');
   return (
     <>
-      <RefreshPage />
       <PlannerExchange history={result.data} />
     </>
   );

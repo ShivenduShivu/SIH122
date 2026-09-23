@@ -1,19 +1,18 @@
 import { plannerContext } from '../../lib/project';
 import { reportWorkbench } from '../../lib/reports';
 import { ExecutionOverview } from '../../components/execution-overview';
-import { RefreshPage } from '../../components/refresh-page';
 export default async function OverviewPage() {
-  await plannerContext();
-  const w = await reportWorkbench();
-  const [events, decisions, members] = await Promise.all([
-    w.db
+  const c = await plannerContext();
+  const [w, events, decisions, members] = await Promise.all([
+    reportWorkbench(),
+    c.db
       .from('accepted_events')
       .select('*')
-      .eq('project_id', w.project.id)
+      .eq('project_id', c.project.id)
       .order('created_at', { ascending: false })
       .limit(8),
-    w.db.from('review_decisions').select('id,actor_id').eq('project_id', w.project.id),
-    w.db.from('project_members').select('user_id,display_name').eq('project_id', w.project.id),
+    c.db.from('review_decisions').select('id,actor_id').eq('project_id', c.project.id),
+    c.db.from('project_members').select('user_id,display_name').eq('project_id', c.project.id),
   ]);
   if (events.error || decisions.error || members.error)
     throw new Error('Could not load accepted field records.');
@@ -22,7 +21,6 @@ export default async function OverviewPage() {
   );
   return (
     <>
-      <RefreshPage />
       <ExecutionOverview
         pendingReports={new Set(pending.map((c) => c.report_id)).size}
         attention={pending.slice(0, 8).map((c) => {

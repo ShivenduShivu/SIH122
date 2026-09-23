@@ -1,11 +1,15 @@
-import { projectSchedule } from '../../../lib/project';
+import { projectContext } from '../../../lib/project';
+import { scheduleSnapshot } from '../../../lib/reports';
 import { ReportForm } from '../../../components/report-form';
 export default async function ReportPage({
   searchParams,
 }: {
   searchParams: Promise<{ mode?: string }>;
 }) {
-  const { activities, project, user } = await projectSchedule();
+  const [{ project, user }, { activities }] = await Promise.all([
+    projectContext(),
+    scheduleSnapshot(),
+  ]);
   const mode = (await searchParams).mode;
   return (
     <>
@@ -18,7 +22,12 @@ export default async function ReportPage({
         key={`${user.id}:${project.id}`}
         userId={user.id}
         projectId={project.id}
-        activities={activities}
+        activities={activities.map(({ id, externalId, name, location }) => ({
+          id,
+          externalId,
+          name,
+          location,
+        }))}
         initialMode={['voice', 'photo'].includes(mode ?? '') ? mode : 'text'}
       />
     </>

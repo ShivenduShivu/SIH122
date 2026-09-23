@@ -2,20 +2,17 @@ import Link from 'next/link';
 import { plannerContext } from '../../../lib/project';
 import { reportWorkbench } from '../../../lib/reports';
 import { reportStatus } from '../../../lib/report-status';
-import { RefreshPage } from '../../../components/refresh-page';
 import { Icon } from '../../../components/icon';
 import { ReprocessReport } from '../../../components/followup-actions';
 export default async function ReportsPage() {
-  await plannerContext();
-  const w = await reportWorkbench();
-  const { data: members, error } = await w.db
-    .from('project_members')
-    .select('user_id,display_name')
-    .eq('project_id', w.project.id);
+  const c = await plannerContext();
+  const [w, { data: members, error }] = await Promise.all([
+    reportWorkbench(),
+    c.db.from('project_members').select('user_id,display_name').eq('project_id', c.project.id),
+  ]);
   if (error) throw new Error('Could not load report authors.');
   return (
     <>
-      <RefreshPage />
       <div className="breadcrumb">{w.project.name} › Field reports</div>
       <div className="page-heading">
         <div>

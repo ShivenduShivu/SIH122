@@ -33,10 +33,16 @@ export async function plannerContext() {
   if (!['planner', 'manager'].includes(context.member.role)) redirect('/field');
   return context;
 }
+export const scheduleSnapshot = cache(async () => {
+  const c = await projectContext();
+  const { data, error } = await c.db.rpc('schedule_snapshot', { p_project: c.project.id });
+  if (error) throw new Error('Could not load the accepted schedule.');
+  return ScheduleSnapshot.parse(data);
+});
 export const projectSchedule = cache(async () => {
   const c = await projectContext();
   const [schedule, assignmentRows] = await Promise.all([
-    c.db.rpc('schedule_snapshot', { p_project: c.project.id }),
+    scheduleSnapshot(),
     readRows((from, to) =>
       c.db
         .from('assignment_versions')
@@ -47,9 +53,8 @@ export const projectSchedule = cache(async () => {
         .range(from, to),
     ),
   ]);
-  if (schedule.error) throw new Error('Could not load the complete authorized schedule.');
   const assignments = { data: assignmentRows };
-  const snapshot = ScheduleSnapshot.parse(schedule.data);
+  const snapshot = schedule;
   const currentAssignments = new Map<string, NonNullable<typeof assignments.data>[number]>();
   for (const row of assignments.data ?? [])
     if (!currentAssignments.has(row.activity_id)) currentAssignments.set(row.activity_id, row);
