@@ -1,4 +1,6 @@
 import { describe, expect, it, vi } from 'vitest';
+import { spawn } from 'node:child_process';
+import { workerFailureLimit } from '../apps/worker/src/supervision';
 // @ts-expect-error operator CLI is intentionally JavaScript
 import { checkDeployment } from '../scripts/deploy-preflight.mjs';
 describe('deployment credential boundary', () => {
@@ -53,6 +55,22 @@ describe('deployment credential boundary', () => {
     ])
       expect(checkDeployment({ ...valid, APP_ORIGIN }).length).toBeGreaterThan(0);
   });
+  it('rejects a non-positive worker failure limit', () => {
+    expect(checkDeployment({ ...valid, WORKER_MAX_CONSECUTIVE_FAILURES: '0' }).join(' ')).toContain(
+      'WORKER_MAX_CONSECUTIVE_FAILURES',
+    );
+  });
+  it('rejects a worker failure limit larger than a safe integer', () => {
+    expect(
+      checkDeployment({ ...valid, WORKER_MAX_CONSECUTIVE_FAILURES: '9'.repeat(400) }).join(' '),
+    ).toContain('WORKER_MAX_CONSECUTIVE_FAILURES');
+  });
+});
+
+describe('worker supervision configuration', () => {
+  it('uses the default for unsafe failure limits', () => {
+    expect(workerFailureLimit('9'.repeat(400))).toBe(12);
+  });
 });
 
 describe('transport security headers', () => {
@@ -79,4 +97,38 @@ describe('transport security headers', () => {
     expect(await headerKeys('http://localhost:3000')).not.toContain('Strict-Transport-Security');
     expect(await headerKeys(undefined)).not.toContain('Strict-Transport-Security');
   });
+});
+
+describe('worker supervision boundary', () => {
+  it('exits non-zero after the configured number of consecutive loop failures', async () => {
+    const result = await new Promise<{ code: number | null; stderr: string }>((resolve) => {
+      const child = spawn(
+        process.execPath,
+        ['node_modules/tsx/dist/cli.mjs', 'apps/worker/src/index.ts'],
+        {
+          cwd: new URL('..', import.meta.url),
+          env: {
+            ...process.env,
+            SUPABASE_URL: 'http://127.0.0.1:1',
+            SUPABASE_SERVICE_ROLE_KEY: 'test-only-key',
+            EXTRACTION_PROVIDER: 'fixture',
+            WORKER_MAX_CONSECUTIVE_FAILURES: '1',
+          },
+          stdio: ['ignore', 'ignore', 'pipe'],
+        },
+      );
+      let stderr = '';
+      child.stderr.on('data', (chunk) => {
+        stderr += chunk;
+      });
+      const timer = setTimeout(() => child.kill('SIGKILL'), 3000);
+      child.on('exit', (code) => {
+        clearTimeout(timer);
+        resolve({ code, stderr });
+      });
+    });
+    expect(result.code).toBe(1);
+    expect(result.stderr).toContain('loop_failed');
+    expect(result.stderr).toContain('stopped_after_failures');
+  }, 5000);
 });

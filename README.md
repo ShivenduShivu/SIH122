@@ -4,7 +4,7 @@ BITS Pilani / SIH 26122. Synthetic oil/gas and supplied waste-plant project data
 
 ## Current scope
 
-Phase 7 adds frozen synthetic evaluation, security checks, separate web/worker container builds and an isolated database/evidence recovery rehearsal. The user authorized review and commit on 21 September 2026; hosting, human speech and physical Android/iPhone checks remain pending. See the [Phase 7 report](docs/reports/phase-07.md), [operations guide](docs/phase-07-operations.md) and [evaluation definitions](docs/phase-07-evaluation.md). Voice, private evidence, clarification, progress reconciliation and planner exchange remain review-led. This is not a fully offline PWA or verified native Primavera integration.
+Phase 7 adds frozen synthetic evaluation, security checks, separate web/worker container builds and an isolated database/evidence recovery rehearsal. Deployment hardening after Phase 7 adds built-image header/login checks, a production-only worker image, supervised worker failure exits and CI coverage for the database authorization suites. Hosting, human speech and physical Android/iPhone checks remain pending. See the [Phase 7 report](docs/reports/phase-07.md), [operations guide](docs/phase-07-operations.md) and [evaluation definitions](docs/phase-07-evaluation.md). Voice, private evidence, clarification, progress reconciliation and planner exchange remain review-led. This is not a fully offline PWA or verified native Primavera integration.
 
 ## Run locally
 
@@ -39,6 +39,8 @@ npm run test:browser:media # running app, synthetic mic + real OpenAI; consumes 
 npm run evaluate:speech -- fixtures/speech/synthetic.json # synthetic smoke metrics only
 npm run test:seed     # verify repeated seed has no database changes
 npm run build        # production Next.js build
+npm run deploy:check # production origin, credential and worker configuration shape
+npm run test:containers # build and run the production web/worker images; Docker required
 npm run test:browser # running app on :3000; see browser prerequisites below
 ```
 
@@ -67,4 +69,4 @@ For no hosting budget, the recommended demo arrangement is **Vercel Hobby + Supa
 - `docs/demo-runbook.md`: the rehearsed demonstration path and its keyless fallback.
 - `docs/reports`: phase completion evidence and review status.
 
-Only approved phases are staged and committed. Do not commit `.env`, provider keys, backups, `node_modules`, raw browser output or scratch files. Selected reviewed evidence belongs in phase reports. Package patches are pinned by `package-lock.json`. `.github/workflows/checks.yml` repeats foundation checks on GitHub. Phase 7 was committed and pushed as `4c23bcc`, and configurable providers followed in `e036935`. The user authorized provider selection, its documentation, commit and push on 21 September 2026. Deployment and physical-device checks remain separate open steps; Phase 8 has not begun.
+Only approved phases are staged and committed. Do not commit `.env`, provider keys, backups, `node_modules`, raw browser output or scratch files. Selected reviewed evidence belongs in phase reports. Package patches are pinned by `package-lock.json`. `.github/workflows/checks.yml` runs foundation, dependency/container/preflight and fresh-database authorization gates. Phase 7 was committed and pushed as `4c23bcc`, and configurable providers followed in `e036935`. Deployment and physical-device checks remain separate open steps; Phase 8 has not begun.

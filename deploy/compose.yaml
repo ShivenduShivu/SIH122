@@ -6,6 +6,7 @@ services:
       dockerfile: deploy/Dockerfile
       target: web
       args:
+        APP_ORIGIN: ${APP_ORIGIN:?Set the exact HTTPS application origin}
         NEXT_PUBLIC_SUPABASE_URL: ${NEXT_PUBLIC_SUPABASE_URL:?Set the HTTPS Supabase URL}
         NEXT_PUBLIC_SUPABASE_PUBLISHABLE_KEY: ${NEXT_PUBLIC_SUPABASE_PUBLISHABLE_KEY:?Set the public key}
     environment:
@@ -38,6 +39,7 @@ services:
       TRANSCRIPTION_PROVIDER: ${TRANSCRIPTION_PROVIDER:-}
       OPENAI_TRANSCRIPTION_MODEL: ${OPENAI_TRANSCRIPTION_MODEL:-gpt-4o-mini-transcribe-2025-12-15}
       GEMINI_TRANSCRIPTION_MODEL: ${GEMINI_TRANSCRIPTION_MODEL:-}
+      WORKER_MAX_CONSECUTIVE_FAILURES: ${WORKER_MAX_CONSECUTIVE_FAILURES:-12}
     restart: unless-stopped
     init: true
     stop_grace_period: 180s
