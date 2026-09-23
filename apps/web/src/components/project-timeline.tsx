@@ -54,7 +54,18 @@ function TimelineView({
     scheduleViewSchema,
     scheduleViewDefaults,
   );
-  const { discipline, mode, baseline, collapsed, closed, selected, tab, offset, step } = view;
+  const {
+    discipline,
+    mode,
+    rows: rowMode,
+    baseline,
+    collapsed,
+    closed,
+    selected,
+    tab,
+    offset,
+    step,
+  } = view;
   function setter<K extends keyof ScheduleView>(key: K) {
     return (value: SetStateAction<ScheduleView[K]>) =>
       setView((v) => ({
@@ -67,6 +78,7 @@ function TimelineView({
   }
   const setDiscipline = setter('discipline'),
     setMode = setter('mode'),
+    setRowMode = setter('rows'),
     setBaseline = setter('baseline'),
     setCollapsed = setter('collapsed'),
     setClosed = setter('closed'),
@@ -176,6 +188,22 @@ function TimelineView({
                   <Icon name="table" /> Table
                 </button>
               </div>
+              <div className="schedule-row-mode" aria-label="Timeline rows">
+                <span>Rows</span>
+                <div className="segmented">
+                  <button aria-pressed={rowMode === 'tasks'} onClick={() => setRowMode('tasks')}>
+                    Tasks
+                  </button>
+                  <button
+                    aria-pressed={rowMode === 'hierarchy'}
+                    disabled={!snapshot.nodes.length}
+                    title={snapshot.nodes.length ? 'Show source hierarchy' : 'No source hierarchy'}
+                    onClick={() => setRowMode('hierarchy')}
+                  >
+                    Hierarchy
+                  </button>
+                </div>
+              </div>
             </div>
           </div>
           <div className="gantt-range">
@@ -257,7 +285,7 @@ function TimelineView({
                     ))}
                   </div>
                 </div>
-                {snapshot.nodes.length ? (
+                {snapshot.nodes.length && rowMode === 'hierarchy' ? (
                   <HierarchyTimeline
                     nodes={snapshot.nodes}
                     activities={rows}

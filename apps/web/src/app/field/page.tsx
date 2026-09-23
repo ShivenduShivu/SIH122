@@ -28,7 +28,7 @@ export default async function FieldPage() {
   return (
     <>
       <div className="field-greeting">
-        <p className="eyebrow">{today} · INDIA STANDARD TIME</p>
+        <p className="eyebrow">{today} · INDIAN STANDARD TIME (IST)</p>
         <h1>Namaste, {member.display_name.split(' ')[0]}.</h1>
         <p>
           {member.role === 'reporter'

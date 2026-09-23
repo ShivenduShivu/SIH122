@@ -4,6 +4,7 @@ import { z } from 'zod';
 export const scheduleViewSchema = z.object({
   discipline: z.string().max(80),
   mode: z.enum(['timeline', 'table']),
+  rows: z.enum(['tasks', 'hierarchy']).default('tasks'),
   baseline: z.boolean(),
   collapsed: z.array(z.string()).max(5000),
   closed: z.array(z.string()).max(5000),
@@ -16,6 +17,7 @@ export type ScheduleView = z.infer<typeof scheduleViewSchema>;
 export const scheduleViewDefaults: ScheduleView = {
   discipline: 'All',
   mode: 'timeline',
+  rows: 'tasks',
   baseline: true,
   collapsed: [],
   closed: [],

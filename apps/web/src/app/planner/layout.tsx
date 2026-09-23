@@ -43,7 +43,7 @@ export default async function PlannerLayout({ children }: { children: React.Reac
         <div className="project-identity">
           <div className="eyebrow">DEMONSTRATION PROJECT</div>
           <strong>{project.name}</strong>
-          <div className="muted">Synthetic project · India Standard Time</div>
+          <div className="muted">Synthetic project · Indian Standard Time (IST)</div>
         </div>
         <div className="viewer">
           <span className="avatar" aria-hidden="true">
