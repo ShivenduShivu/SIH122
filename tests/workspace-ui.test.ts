@@ -6,15 +6,17 @@ import {
 } from '../apps/web/src/components/schedule-view-state';
 
 describe('workspace UI defaults', () => {
-  it('renders a branded, descriptive loading surface', () => {
+  it('renders a restrained loading indicator', () => {
     const source = readFileSync(
       new URL('../apps/web/src/app/loading.tsx', import.meta.url),
       'utf8',
     );
 
-    expect(source).toContain('loading-brand-mark');
-    expect(source).toContain('loading-progress-track');
-    expect(source).toContain('Preparing your project view');
+    expect(source).toContain('loading-spinner');
+    expect(source).toContain('Loading workspace');
+    expect(source).not.toContain('loading-brand-mark');
+    expect(source).not.toContain('loading-progress-track');
+    expect(source).not.toContain('Preparing your project view');
   });
 
   it('opens schedules with task rows while preserving older saved views', () => {
