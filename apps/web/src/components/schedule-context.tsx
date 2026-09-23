@@ -21,6 +21,7 @@ export function ScheduleProvider({
         ? initial
         : current,
     );
+    setStale(false);
   }, [initial]);
   const refresh = useCallback(async () => {
     try {
@@ -39,19 +40,15 @@ export function ScheduleProvider({
       setStale(true);
     }
   }, [initial.projectId]);
+  // The planner layout refreshes the route, including `initial`. Keep this fetch
+  // for explicit refreshes after mutations; a second polling loop duplicated
+  // the same large schedule on every page.
   useEffect(() => {
-    const timer = setInterval(() => {
-      if (document.visibilityState === 'visible') void refresh();
-    }, 5000);
-    const visible = () => {
-      if (document.visibilityState === 'visible') void refresh();
-    };
-    document.addEventListener('visibilitychange', visible);
-    return () => {
-      clearInterval(timer);
-      document.removeEventListener('visibilitychange', visible);
-    };
-  }, [refresh]);
+    const offline = () => setStale(true);
+    if (!navigator.onLine) offline();
+    window.addEventListener('offline', offline);
+    return () => window.removeEventListener('offline', offline);
+  }, []);
   return (
     <Context.Provider value={{ snapshot, refresh, stale }}>
       {stale && (

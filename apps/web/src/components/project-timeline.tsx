@@ -125,6 +125,10 @@ function TimelineView({
           No active reporting schedule. Import and activate the initial schedule to begin.
         </p>
       )}
+      <p className="schedule-guide">
+        Use Table for a readable task list, or Timeline to compare dates. Select a task to see its
+        details and evidence.
+      </p>
       <fieldset className="schedule-controls" disabled={!ready}>
         <section className="gantt-panel" aria-label="Project schedule">
           <div className="gantt-tools">
@@ -209,6 +213,7 @@ function TimelineView({
               <button aria-label="Next dates" onClick={() => setOffset((o) => o + 14 * step)}>
                 →
               </button>
+              <button onClick={() => setOffset(0)}>Plan start</button>
               <button
                 onClick={() =>
                   setOffset(
@@ -220,6 +225,14 @@ function TimelineView({
               </button>
             </div>
           </div>
+          {all.length > 0 &&
+            !rows.some((a) => a.plannedStart <= end && a.plannedFinish >= start) &&
+            mode === 'timeline' && (
+              <p className="timeline-empty">
+                No planned tasks fall in this date window. Use <strong>Plan start</strong>, choose a
+                date, or switch to Table.
+              </p>
+            )}
           {mode === 'timeline' ? (
             <div className="gantt-scroll" ref={scrollArea}>
               <div className="gantt-grid">

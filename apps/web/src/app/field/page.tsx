@@ -4,7 +4,10 @@ import { Icon } from '../../components/icon';
 import { WorkCard } from '../../components/work-card';
 import { projectSchedule, siteToday } from '../../lib/project';
 export default async function FieldPage() {
-  const { member, activities, currentAssignments, user } = await projectSchedule();
+  const [{ member, activities, currentAssignments, user }, followups] = await Promise.all([
+    projectSchedule(),
+    followupWorkbench(),
+  ]);
   const today = siteToday();
   const mine = activities.filter((a) => a.assignedReporterId === user.id);
   const current = mine.find((a) => {
@@ -18,7 +21,6 @@ export default async function FieldPage() {
         .get(a.id)!
         .effective_from.localeCompare(currentAssignments.get(b.id)!.effective_from),
     )[0];
-  const followups = await followupWorkbench();
   const questions = followups.questions.filter((q) => q.status === 'open');
   const verifications = followups.verifications.filter(
     (v) => v.verifier_id === member.user_id && ['open', 'needs_info'].includes(v.status),
@@ -60,7 +62,11 @@ export default async function FieldPage() {
           <WorkCard activity={current} assignment={currentAssignments.get(current.id)!} />
         ) : (
           <p className="field-empty">
-            No assignment scheduled for today. Check My work for upcoming and earlier assignments.
+            {mine.length
+              ? 'No assignment scheduled for today. Check My work for upcoming and earlier assignments.'
+              : ['planner', 'manager'].includes(member.role)
+                ? 'This field view shows your personal assignments. Open Assign work in the planner workspace to allocate project tasks.'
+                : 'No tasks have been assigned to your account yet. Ask your planner to assign your work area. You can still report other work below.'}
           </p>
         )}
         {!current && next && (
@@ -90,7 +96,8 @@ export default async function FieldPage() {
           </Link>
         </div>
         <p className="field-explanation">
-          Check your words and evidence before sending. Submission and acceptance are separate steps.
+          Check your words and evidence before sending. Submission and acceptance are separate
+          steps.
         </p>
       </section>
       <div className="field-callout">

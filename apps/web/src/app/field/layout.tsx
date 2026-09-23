@@ -11,7 +11,7 @@ export default async function FieldLayout({ children }: { children: React.ReactN
         <a className="skip-link" href="#field-main">
           Skip to content
         </a>
-        <div className="field-preview-label">SYNTHETIC PROJECT · SIGNED-IN WORKSPACE</div>
+        <div className="field-preview-label">SYNTHETIC PROJECT · WORKSPACE</div>
         <header className="field-header">
           <div className="identity">
             <span className="brand-mark small" aria-hidden="true">
@@ -30,10 +30,14 @@ export default async function FieldLayout({ children }: { children: React.ReactN
           </span>
         </header>
         <div className="field-session">
-          <span>{member.role} · Project access verified</span>
-          <Link href="/planner" className="text-button">
-            Web version
-          </Link>
+          <span>
+            {member.display_name} · {member.role}
+          </span>
+          {['planner', 'manager'].includes(member.role) && (
+            <Link href="/planner" className="text-button">
+              Planner workspace
+            </Link>
+          )}
           <SignOut userId={member.user_id} />
         </div>
         <main id="field-main" className="field-main">

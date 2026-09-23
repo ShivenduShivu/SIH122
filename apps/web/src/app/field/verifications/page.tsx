@@ -5,13 +5,15 @@ import { reportWorkbench } from '../../../lib/reports';
 import { VerificationCard } from '../../../components/followup-actions';
 import { RefreshPage } from '../../../components/refresh-page';
 export default async function VerificationsPage() {
-  const c = await projectContext(),
-    f = await followupWorkbench(),
-    w = await reportWorkbench();
+  const c = await projectContext();
+  const [f, w, contexts] = await Promise.all([
+    followupWorkbench(),
+    reportWorkbench(),
+    c.db.rpc('verification_context', { p_project: c.project.id }),
+  ]);
   const requests = f.verifications.filter(
     (q) => q.verifier_id === c.user.id && !['superseded', 'cancelled'].includes(q.status),
   );
-  const contexts = await c.db.rpc('verification_context', { p_project: c.project.id });
   if (contexts.error) throw new Error('Could not load verification reporter details.');
   return (
     <>

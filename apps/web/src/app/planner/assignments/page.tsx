@@ -2,13 +2,15 @@ import Link from 'next/link';
 import { plannerContext, projectSchedule } from '../../../lib/project';
 import { AssignmentForm } from '../../../components/assignment-form';
 export default async function AssignmentPage() {
-  await plannerContext();
-  const { db, project, activities, currentAssignments } = await projectSchedule();
-  const { data: members, error } = await db
-    .from('project_members')
-    .select('user_id,display_name,role')
-    .eq('project_id', project.id)
-    .eq('active', true);
+  const { db, project } = await plannerContext();
+  const [{ activities, currentAssignments }, { data: members, error }] = await Promise.all([
+    projectSchedule(),
+    db
+      .from('project_members')
+      .select('user_id,display_name,role')
+      .eq('project_id', project.id)
+      .eq('active', true),
+  ]);
   if (error) throw new Error('Could not load project members.');
   return (
     <>

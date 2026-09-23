@@ -1,14 +1,8 @@
 import 'server-only';
 import { readRows } from './read-rows';
 import { cache } from 'react';
-import { ScheduleSnapshot } from '@nirmaan/contracts/reports';
 import { projectContext } from './project';
-export const scheduleSnapshot = cache(async () => {
-  const c = await projectContext();
-  const { data, error } = await c.db.rpc('schedule_snapshot', { p_project: c.project.id });
-  if (error) throw new Error('Could not load the accepted schedule.');
-  return ScheduleSnapshot.parse(data);
-});
+export { scheduleSnapshot } from './project';
 export const reportWorkbench = cache(async () => {
   const c = await projectContext();
   const reports = await readRows((from, to) =>

@@ -11,11 +11,13 @@ import {
 } from '../../../../components/followup-actions';
 import { RefreshPage } from '../../../../components/refresh-page';
 export default async function ReportDetail({ params }: { params: Promise<{ reportId: string }> }) {
-  const { reportId } = await params;
-  const w = await reportWorkbench(),
-    r = w.reports.find((r) => r.id === reportId);
+  const [{ reportId }, w, followups] = await Promise.all([
+    params,
+    reportWorkbench(),
+    followupWorkbench(),
+  ]);
+  const r = w.reports.find((r) => r.id === reportId);
   if (!r) notFound();
-  const followups = await followupWorkbench();
   const version = w.versions.find((v) => v.report_id === reportId && v.version === 1),
     claims = w.claims.filter((c) => c.report_id === reportId);
   return (

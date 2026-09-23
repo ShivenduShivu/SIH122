@@ -1,7 +1,7 @@
 'use client';
 import { useEffect, useLayoutEffect, useState, useRef } from 'react';
 import { useRouter } from 'next/navigation';
-import type { PlannedActivity } from '@nirmaan/contracts';
+import { TaskPicker, type ReportTask } from './task-picker';
 import { type LocalFieldDraft, ReserveCapture } from '@nirmaan/contracts/media';
 import { draftKey, readDraft } from '../lib/field-draft';
 import { VoiceRecorder } from './voice-recorder';
@@ -88,7 +88,7 @@ export function ReportForm({
 }: {
   projectId: string;
   userId: string;
-  activities: PlannedActivity[];
+  activities: ReportTask[];
   initialMode?: string;
 }) {
   const router = useRouter();
@@ -655,34 +655,26 @@ export function ReportForm({
             placeholder="Include the activity, location, work done and when it happened."
           />
           <label htmlFor="work-date">
-            Report work date <span className="muted">(optional)</span>
+            Report work date <span className="optional-label">(optional)</span>
           </label>
           <input
             id="work-date"
             type="date"
+            aria-describedby="work-date-help"
             value={d.date}
             disabled={locked}
             onChange={(e) => change({ date: e.target.value })}
           />
-          <p className="field-explanation">
-            This helps interpret “today” or “yesterday”. Leave it blank if you are unsure.
+          <p id="work-date-help" className="field-explanation">
+            Choose the date this report refers to. Leave it blank if you are unsure; the planner can
+            confirm it.
           </p>
-          <label htmlFor="report-activity">
-            Related assigned task <span className="muted">(optional)</span>
-          </label>
-          <select
-            id="report-activity"
+          <TaskPicker
+            tasks={activities}
             value={d.activity}
             disabled={locked}
-            onChange={(e) => change({ activity: e.target.value })}
-          >
-            <option value="">Let the planner match the report</option>
-            {activities.map((a) => (
-              <option key={a.id} value={a.id}>
-                {a.externalId} · {a.name} · {a.location}
-              </option>
-            ))}
-          </select>
+            onChange={(activity) => change({ activity })}
+          />
           <button
             className="button primary"
             type="submit"

@@ -6,19 +6,22 @@ import { plannerContext } from '../../lib/project';
 import { ProjectSwitcher } from '../../components/project-switcher';
 import { scheduleSnapshot } from '../../lib/reports';
 import { ScheduleProvider } from '../../components/schedule-context';
+import { RefreshPage } from '../../components/refresh-page';
 
 export default async function PlannerLayout({ children }: { children: React.ReactNode }) {
   const { db, member, project } = await plannerContext();
-  const snapshot = await scheduleSnapshot();
-  const pending = await readRows((from, to) =>
-    db
-      .from('claims')
-      .select('id,report_id', { count: 'exact' })
-      .eq('project_id', project.id)
-      .in('state', ['pending', 'clarification', 'verification', 'disputed'])
-      .order('id')
-      .range(from, to),
-  );
+  const [snapshot, pending] = await Promise.all([
+    scheduleSnapshot(),
+    readRows((from, to) =>
+      db
+        .from('claims')
+        .select('id,report_id', { count: 'exact' })
+        .eq('project_id', project.id)
+        .in('state', ['pending', 'clarification', 'verification', 'disputed'])
+        .order('id')
+        .range(from, to),
+    ),
+  ]);
   return (
     <div className="desktop-shell">
       <a className="skip-link" href="#main-content">
@@ -67,7 +70,10 @@ export default async function PlannerLayout({ children }: { children: React.Reac
         <span>Protected workspace · Accepted progress only</span>
       </div>
       <main id="main-content" className="planner-main">
-        <ScheduleProvider initial={snapshot}>{children}</ScheduleProvider>
+        <ScheduleProvider initial={snapshot}>
+          <RefreshPage />
+          {children}
+        </ScheduleProvider>
       </main>
       <footer className="footer">
         <span>{brand.name} / Planning-to-execution bridge</span>
