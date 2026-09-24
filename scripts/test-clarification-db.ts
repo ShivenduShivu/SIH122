@@ -77,7 +77,7 @@ async function pair() {
   }
   return rooms;
 }
-async function assign(activity: string, who: string) {
+async function assign(activity: string, who: string, supervisorId = accounts.supervisor.id) {
   const version =
     must(
       await admin
@@ -94,12 +94,50 @@ async function assign(activity: string, who: string) {
       p_command: randomUUID(),
       p_expected_version: version,
       p_reporter: who,
-      p_supervisor: accounts.supervisor.id,
+      p_supervisor: supervisorId,
       p_from: '2026-09-20',
       p_to: '2026-09-25',
       p_reason: 'Synthetic scoped test allocation',
     }),
   );
+}
+async function scopeSupervisor(fronts: string[]) {
+  const row = must(
+    await admin
+      .from('project_members')
+      .select('*')
+      .eq('project_id', lab.project)
+      .eq('user_id', accounts.supervisor.id)
+      .single(),
+  );
+  if (JSON.stringify(row.work_front_scope) === JSON.stringify(fronts)) return;
+  must(
+    await admin.rpc('set_project_member', {
+      p_project: lab.project,
+      p_user: row.user_id,
+      p_expected_version: row.version,
+      p_member: { ...row, work_front_scope: fronts },
+      p_actor: 'phase4-test',
+      p_reason: 'Validate current verifier work-front authority',
+    }),
+  );
+}
+async function restoreRoomTwoAssignment() {
+  await scopeSupervisor([]);
+  const current = must(
+    await admin
+      .from('assignment_versions')
+      .select('reporter_id,supervisor_id')
+      .eq('project_id', lab.project)
+      .eq('activity_id', lab.rooms[1]!)
+      .order('version', { ascending: false })
+      .limit(1),
+  )[0];
+  if (
+    current?.reporter_id !== accounts.colleague.id ||
+    current.supervisor_id !== accounts.supervisor.id
+  )
+    await assign(lab.rooms[1]!, accounts.colleague.id);
 }
 async function capture(facts: any, client = reporter, who = accounts.reporter.id) {
   const source = facts.evidenceQuote;
@@ -253,6 +291,7 @@ async function attest(
     },
   });
 }
+await restoreRoomTwoAssignment();
 try {
   const [room1, room2] = await pair();
   await accept(await known(room1!), room1!);
@@ -613,35 +652,7 @@ try {
   );
   const [scopedChild] = await child(scoped);
   const scopedRequest = await verify(scopedChild, lab.rooms[1]!);
-  const member = must(
-    await admin
-      .from('project_members')
-      .select('*')
-      .eq('project_id', lab.project)
-      .eq('user_id', accounts.supervisor.id)
-      .single(),
-  );
-  async function scopeMember(fronts: string[]) {
-    const row = must(
-      await admin
-        .from('project_members')
-        .select('*')
-        .eq('project_id', lab.project)
-        .eq('user_id', accounts.supervisor.id)
-        .single(),
-    );
-    must(
-      await admin.rpc('set_project_member', {
-        p_project: lab.project,
-        p_user: row.user_id,
-        p_expected_version: row.version,
-        p_member: { ...row, work_front_scope: fronts },
-        p_actor: 'phase4-test',
-        p_reason: 'Validate current verifier work-front authority',
-      }),
-    );
-  }
-  await scopeMember(['Control building / Room 1']);
+  await scopeSupervisor(['Control building / Room 1']);
   check(
     (
       await supervisor.rpc('decide_verification', {
@@ -657,7 +668,7 @@ try {
     ).error?.code === '42501',
     'same-project supervisor with the wrong work front cannot attest',
   );
-  await scopeMember([]);
+  await scopeSupervisor([]);
   check(
     (await attest(scopedRequest.verificationId)).error?.code === '40001',
     'restoring authority does not revive an attestation request under an old policy',
@@ -716,18 +727,60 @@ try {
     'other reporters cannot enumerate evidence attachments',
   );
   check(
+    must(await supervisor.rpc('verification_context_v2', { p_project: lab.project })).some(
+      (row: any) =>
+        row.request_id === refreshed.verificationId &&
+        row.reporter_name === 'Ravi Das' &&
+        row.assignment_is_current === true,
+    ),
+    'routed supervisor sees reporter name and authoritative current-assignment state',
+  );
+  check(
     must(await supervisor.rpc('verification_context', { p_project: lab.project })).some(
       (row: any) => row.request_id === refreshed.verificationId && row.reporter_name === 'Ravi Das',
     ),
-    'routed supervisor sees the reporter name without member-directory access',
+    'existing verification_context remains available to older web clients',
+  );
+  const previousAssignmentVersion = must(
+    await admin
+      .from('verification_requests')
+      .select('assignment_version')
+      .eq('id', refreshed.verificationId)
+      .single(),
+  ).assignment_version;
+  await assign(lab.rooms[1]!, accounts.colleague.id, accounts.planner.id);
+  check(
+    must(
+      await supervisor
+        .from('assignment_versions')
+        .select('version')
+        .eq('project_id', lab.project)
+        .eq('activity_id', lab.rooms[1]!)
+        .order('version', { ascending: false })
+        .limit(1),
+    )[0]?.version === previousAssignmentVersion,
+    'RLS hides the later planner-routed assignment from the former verifier',
+  );
+  check(
+    must(await supervisor.rpc('verification_context_v2', { p_project: lab.project })).some(
+      (row: any) =>
+        row.request_id === refreshed.verificationId &&
+        row.reporter_name === 'Ravi Das' &&
+        row.assignment_is_current === false,
+    ),
+    'authoritative context reports reassignment even when RLS hides the newer row',
   );
   check(
     must(await foreign.rpc('verification_context', { p_project: lab.project })).length === 0,
     'foreign project cannot read verification reporter names',
   );
-  await scopeMember(['Control building / Room 1']);
   check(
-    must(await supervisor.rpc('verification_context', { p_project: lab.project })).every(
+    must(await foreign.rpc('verification_context_v2', { p_project: lab.project })).length === 0,
+    'foreign project cannot read verification freshness context',
+  );
+  await scopeSupervisor(['Control building / Room 1']);
+  check(
+    must(await supervisor.rpc('verification_context_v2', { p_project: lab.project })).every(
       (row: any) => row.request_id !== refreshed.verificationId,
     ),
     'revoked work-front authority hides the routed reporter context',
@@ -736,7 +789,7 @@ try {
     (await supervisor.storage.from('evidence').createSignedUrl(objectPath, 60)).error != null,
     'revoked work-front authority blocks newly requested evidence URLs',
   );
-  await scopeMember([]);
+  await scopeSupervisor([]);
   check(
     (await reporter.from('clarification_responses').update({ input: {} }).eq('request_id', q.id))
       .error != null,
@@ -750,6 +803,7 @@ try {
   writeFileSync('.cache/phase-04-database-checks.json', JSON.stringify(result, null, 2));
   console.log(`PASS ${checks} clarification/verification checks.`);
 } finally {
+  await restoreRoomTwoAssignment();
   if (captured.length)
     must(
       await admin
