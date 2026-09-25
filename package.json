@@ -27,6 +27,7 @@
     "seed:local": "tsx scripts/seed-local.ts",
     "seed:demo": "tsx scripts/seed-demo-reports.ts",
     "test:database": "node scripts/test-database.mjs",
+    "test:zero-claim-db": "tsx scripts/test-zero-claim-db.ts",
     "deploy:check": "node scripts/deploy-preflight.mjs",
     "test:seed": "node scripts/test-seed-idempotency.mjs",
     "admin:member": "node scripts/admin-member.mjs",

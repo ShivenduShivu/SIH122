@@ -40,14 +40,11 @@ export const ExtractedClaim = z
   })
   .strict();
 export const Extraction = z
-  .object({ claims: z.array(ExtractedClaim).min(1).max(100), overflow: z.boolean().optional() })
+  .object({ claims: z.array(ExtractedClaim).max(100), overflow: z.boolean().optional() })
   .strict();
 export const ProviderExtraction = z
   .object({
-    claims: z
-      .array(ExtractedClaim.safeExtend({ observation: Observation.nullable() }))
-      .min(1)
-      .max(100),
+    claims: z.array(ExtractedClaim.safeExtend({ observation: Observation.nullable() })).max(100),
     overflow: z.boolean(),
   })
   .strict();

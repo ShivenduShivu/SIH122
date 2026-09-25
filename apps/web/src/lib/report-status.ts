@@ -6,6 +6,7 @@ export function reportStatus(
     report_version?: number;
     status: string;
     error_code?: string | null;
+    claim_count?: number | null;
   }>,
 ) {
   const rows = claims.filter((c) => c.report_id === reportId && c.state !== 'superseded');
@@ -26,6 +27,8 @@ export function reportStatus(
   const job = jobs
     .filter((j) => j.report_id === reportId)
     .sort((a, b) => (b.report_version ?? 0) - (a.report_version ?? 0))[0];
+  if (job?.status === 'succeeded' && job.claim_count === 0)
+    return 'No construction claims identified';
   return job?.status === 'failed'
     ? 'Processing needs attention'
     : job?.status === 'retry_wait'

@@ -39,7 +39,9 @@ export const reportWorkbench = cache(async () => {
     readRows((from, to) =>
       c.db
         .from('jobs')
-        .select('id,report_id,report_version,status,attempts,error_code', { count: 'exact' })
+        .select('id,report_id,report_version,status,attempts,error_code,claim_count', {
+          count: 'exact',
+        })
         .in('report_id', ids)
         .order('id')
         .range(from, to),

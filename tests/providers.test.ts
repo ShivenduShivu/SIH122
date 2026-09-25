@@ -162,10 +162,17 @@ describe.each(providers)('%s extraction transport and safety', (provider) => {
       'provider_invalid_schema',
     ],
     ['overflow', { ...output, overflow: true }, 'manual_review_event_overflow'],
-    ['empty claims', { claims: [], overflow: false }, 'provider_invalid_schema'],
   ])('rejects %s before persistence', async (_name, data, code) => {
     vi.stubGlobal('fetch', vi.fn().mockResolvedValue(Response.json(envelope(provider, data))));
     await expect(extract()).rejects.toMatchObject({ code, retryable: false });
+  });
+  it('keeps a no-event report without inventing construction work', async () => {
+    vi.stubGlobal(
+      'fetch',
+      vi.fn().mockResolvedValue(Response.json(envelope(provider, { claims: [], overflow: false }))),
+    );
+    const result = await extract();
+    expect(result.output).toEqual({ claims: [], overflow: false });
   });
   it('rejects truncated output even if its JSON is valid', async () => {
     vi.stubGlobal(
@@ -210,14 +217,12 @@ describe.each(providers)('%s extraction transport and safety', (provider) => {
     await expect(extract()).rejects.toMatchObject({ code: 'provider_refusal' });
   });
   it('classifies rate limits without leaking bodies or silently retrying', async () => {
-    const fetcher = vi
-      .fn()
-      .mockResolvedValue(
-        new Response('private response contents', {
-          status: 429,
-          headers: { 'retry-after': '30' },
-        }),
-      );
+    const fetcher = vi.fn().mockResolvedValue(
+      new Response('private response contents', {
+        status: 429,
+        headers: { 'retry-after': '30' },
+      }),
+    );
     vi.stubGlobal('fetch', fetcher);
     await expect(extract()).rejects.toMatchObject({
       code: 'provider_http_429',
