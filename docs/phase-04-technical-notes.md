@@ -64,7 +64,7 @@ All paths below have the `/api/v1` prefix. Mutations require a verified session,
 | `GET /projects/:id/verifications`    | Checks visible under current row-level permissions                                |
 | `GET /attachments/:id/access`        | Received evidence only; filename, signed URL and expiry                           |
 
-The existing claim-decision endpoint also accepts `expectedVerificationId` and `expectedVerificationVersion`. They must match the exact current required check before acceptance. `verification_context(project)` is a narrow authenticated database lookup used by the supervisor UI to display the reporter name. It exposes names only for checks visible to that caller; it does not open the project member directory.
+The existing claim-decision endpoint also accepts `expectedVerificationId` and `expectedVerificationVersion`. They must match the exact current required check before acceptance. `verification_context(project)` remains the narrow authenticated lookup used by the web supervisor UI to display the reporter name. The additive `verification_context_v2(project)` returns the same visible requests with an `assignment_is_current` boolean computed under server authority. This lets mobile detect reassignment when row-level security hides the newer assignment row from the former verifier; neither RPC opens the project member directory.
 
 ## Evidence and UI
 
