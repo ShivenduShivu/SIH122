@@ -87,11 +87,9 @@ export default async function ReportsPage() {
                           Open
                         </Link>
                       ) : (
-                        <span className="muted">
-                          {w.jobs.some((j) => j.report_id === r.id && j.status === 'failed')
-                            ? 'Processing needs attention'
-                            : 'Extracting…'}
-                        </span>
+                        <Link className="button compact" href={`/field/reports/${r.id}`}>
+                          View report
+                        </Link>
                       )}
                       {r.lifecycle === 'submitted' &&
                         !reportClaims.some((c) => c.state === 'accepted') &&

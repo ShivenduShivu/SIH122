@@ -55,6 +55,8 @@ export async function processOne(db: SupabaseClient, extractor: Extractor): Prom
     const run = must(await db.from('processing_runs').select('output').eq('id', runId).single());
     const extraction = Extraction.parse(run.output);
     if (extraction.overflow) throw new ProviderError('manual_review_event_overflow', false);
+    if (job.parent_claim_id && extraction.claims.length === 0)
+      throw new ProviderError('provider_no_followup_claims', false);
     const project = must(
       await db.from('projects').select('*').eq('id', report.project_id).single(),
     );

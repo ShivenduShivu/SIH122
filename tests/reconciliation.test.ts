@@ -112,6 +112,29 @@ describe('Evidence-driven matching', () => {
 });
 describe('Provider boundary (mock transport, not live model evaluation)', () => {
   afterEach(() => vi.unstubAllGlobals());
+  it('accepts a completed no-event extraction from OpenAI', async () => {
+    vi.stubGlobal(
+      'fetch',
+      vi.fn().mockResolvedValue(
+        Response.json({
+          status: 'completed',
+          output: [
+            {
+              type: 'message',
+              content: [
+                { type: 'output_text', text: JSON.stringify({ claims: [], overflow: false }) },
+              ],
+            },
+          ],
+        }),
+      ),
+    );
+    const result = await new OpenAIExtractor('test-only-key').extract({
+      sourceText: 'No construction progress claimed.',
+      workDate: null,
+    });
+    expect(result.output).toEqual({ claims: [], overflow: false });
+  });
   it('rejects unsupported source quotes', async () => {
     vi.stubGlobal(
       'fetch',

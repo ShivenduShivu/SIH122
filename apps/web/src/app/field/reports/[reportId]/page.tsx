@@ -20,6 +20,10 @@ export default async function ReportDetail({ params }: { params: Promise<{ repor
   if (!r) notFound();
   const version = w.versions.find((v) => v.report_id === reportId && v.version === 1),
     claims = w.claims.filter((c) => c.report_id === reportId);
+  const currentJob = w.jobs.find(
+    (j) => j.report_id === reportId && j.report_version === r.current_version,
+  );
+  const noCurrentClaims = currentJob?.status === 'succeeded' && currentJob.claim_count === 0;
   return (
     <>
       <RefreshPage />
@@ -102,9 +106,15 @@ export default async function ReportDetail({ params }: { params: Promise<{ repor
           ))}
         </article>
       ))}
-      {!claims.length && (
+      {noCurrentClaims && (
         <p className="field-empty">
-          {w.jobs.some((j) => j.report_id === reportId && j.status === 'failed')
+          Your text is safely stored. No construction claims were identified in the current report
+          version. The schedule has not changed.
+        </p>
+      )}
+      {!claims.length && !noCurrentClaims && (
+        <p className="field-empty">
+          {currentJob?.status === 'failed'
             ? 'Your text is safely stored. Processing needs attention; please tell your project planner. The schedule has not changed.'
             : 'Your text is safely stored. Extraction and matching are pending. The schedule has not changed.'}
         </p>
