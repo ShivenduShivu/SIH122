@@ -1,3 +1,8 @@
 import { defineConfig } from 'vitest/config';
 
-export default defineConfig({ test: { include: ['tests/**/*.test.ts'], environment: 'node' } });
+export default defineConfig({
+  test: { include: ['tests/**/*.test.ts'], environment: 'node' },
+  resolve: {
+    alias: { 'server-only': new URL('./tests/stubs/server-only.ts', import.meta.url).pathname },
+  },
+});

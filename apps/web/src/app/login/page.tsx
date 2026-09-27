@@ -1,6 +1,7 @@
 import { redirect } from 'next/navigation';
 import { brand } from '../../lib/brand';
 import { database } from '../../lib/supabase';
+import { demoAccounts } from '../../lib/demo-accounts';
 export default async function Login({
   searchParams,
 }: {
@@ -18,6 +19,7 @@ export default async function Login({
     if (members?.length) redirect('/planner');
   }
   const { error } = await searchParams;
+  const demos = demoAccounts();
   return (
     <main className="login-shell">
       <div className="utility">PROJECT EXECUTION &amp; MONITORING · {brand.institution}</div>
@@ -59,6 +61,37 @@ export default async function Login({
         <p className="muted">
           Accounts are provisioned by an administrator. This is not an official Oil India service.
         </p>
+        {demos.length > 0 && (
+          <section className="demo-access" aria-labelledby="demo-access-heading">
+            <h2 id="demo-access-heading">Exploring this demonstration?</h2>
+            <p className="demo-access-intro">
+              Open a prepared account, or sign in with it above. Each role sees a different part of
+              the project, which is the point worth comparing.
+            </p>
+            <ul className="demo-account-list">
+              {demos.map((account) => (
+                <li key={account.email}>
+                  <form method="post" action="/api/auth/login">
+                    <input type="hidden" name="email" value={account.email} />
+                    <input type="hidden" name="password" value={account.password} />
+                    <button className="button demo-open" type="submit">
+                      Open as {account.role.toLowerCase()}
+                    </button>
+                  </form>
+                  <div className="demo-credentials">
+                    {account.note && <span className="demo-note">{account.note}</span>}
+                    <code>{account.email}</code>
+                    <code>{account.password}</code>
+                  </div>
+                </li>
+              ))}
+            </ul>
+            <p className="demo-access-warning">
+              Synthetic project data only. These sign-ins are published deliberately, so treat
+              anything recorded here as public and expect the workspace to be reset.
+            </p>
+          </section>
+        )}
       </section>
     </main>
   );
