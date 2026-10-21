@@ -1,0 +1,52 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1200 300" width="1200" height="300" role="img" aria-label="Nirmaan — field evidence, verified progress">
+  <defs>
+    <linearGradient id="bg" x1="0" y1="0" x2="1" y2="1">
+      <stop offset="0" stop-color="#12293c"/>
+      <stop offset="0.55" stop-color="#17354c"/>
+      <stop offset="1" stop-color="#1d4460"/>
+    </linearGradient>
+    <linearGradient id="accent" x1="0" y1="0" x2="1" y2="0">
+      <stop offset="0" stop-color="#2f86ad"/>
+      <stop offset="1" stop-color="#aa823d"/>
+    </linearGradient>
+    <clipPath id="panel"><rect width="1200" height="300" rx="10"/></clipPath>
+  </defs>
+
+  <g clip-path="url(#panel)">
+    <rect width="1200" height="300" fill="url(#bg)"/>
+
+    <!-- schedule grid: the plan -->
+    <g stroke="#ffffff" stroke-opacity="0.07" stroke-width="1">
+      <path d="M680 0V300M760 0V300M840 0V300M920 0V300M1000 0V300M1080 0V300M1160 0V300"/>
+      <path d="M660 70H1200M660 118H1200M660 166H1200M660 214H1200"/>
+    </g>
+
+    <!-- baseline bars, then the accepted actual sitting under them -->
+    <g>
+      <rect x="690" y="52" width="210" height="16" rx="3" fill="#ffffff" fill-opacity="0.16"/>
+      <rect x="690" y="74" width="150" height="8"  rx="4" fill="#2f86ad"/>
+
+      <rect x="770" y="100" width="260" height="16" rx="3" fill="#ffffff" fill-opacity="0.16"/>
+      <rect x="770" y="122" width="260" height="8"  rx="4" fill="#4fae72"/>
+
+      <rect x="850" y="148" width="190" height="16" rx="3" fill="#ffffff" fill-opacity="0.16"/>
+      <rect x="850" y="170" width="78"  height="8"  rx="4" fill="#aa823d"/>
+
+      <rect x="700" y="196" width="300" height="16" rx="3" fill="#ffffff" fill-opacity="0.16"/>
+      <rect x="700" y="218" width="196" height="8"  rx="4" fill="#2f86ad"/>
+    </g>
+
+    <!-- monogram -->
+    <g transform="translate(72 96)">
+      <rect x="0" y="0" width="108" height="108" rx="8" fill="none" stroke="#aa823d" stroke-width="3"/>
+      <path d="M26 82V26l56 56V26" fill="none" stroke="#ffffff" stroke-width="11"
+            stroke-linecap="square" stroke-linejoin="miter"/>
+    </g>
+
+    <text x="214" y="150" font-family="Georgia,'Times New Roman',serif" font-size="78" fill="#ffffff" letter-spacing="1.5">Nirmaan</text>
+    <text x="217" y="190" font-family="'Segoe UI',Roboto,Helvetica,Arial,sans-serif" font-size="23" fill="#c6d6e2" letter-spacing="0.6">Field evidence. Verified progress.</text>
+    <rect x="217" y="212" width="300" height="3" rx="1.5" fill="url(#accent)"/>
+    <text x="217" y="244" font-family="'Segoe UI',Roboto,Helvetica,Arial,sans-serif" font-size="16" fill="#8fa7ba" letter-spacing="1.8">SMART INDIA HACKATHON 2026 &#183; PS 26122 &#183; OIL INDIA LIMITED</text>
+  </g>
+  <rect x="0.5" y="0.5" width="1199" height="299" rx="10" fill="none" stroke="#2a4f6b"/>
+</svg>
