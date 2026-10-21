@@ -12,7 +12,7 @@
     "@nirmaan/contracts": "0.1.0",
     "@nirmaan/domain": "0.1.0",
     "@supabase/supabase-js": "2.116.0",
-    "sharp": "0.35.4",
+    "sharp": "0.35.5",
     "tsx": "4.23.15"
   }
 }
