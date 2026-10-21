@@ -1,5 +1,5 @@
 import { describe, expect, it } from 'vitest';
-import { parseDemoAccounts } from '../apps/web/src/lib/demo-accounts';
+import { parseDemoAccounts, demoRoleSlug } from '../apps/web/src/lib/demo-accounts';
 
 const valid = [
   { role: 'Planner', email: 'planner.demo@nirmaan.example.test', password: 'x', note: 'Full view' },
@@ -57,5 +57,21 @@ describe('published demonstration accounts', () => {
       email: `demo${i}@nirmaan.example.test`,
     }));
     expect(parseDemoAccounts(json(many)).accounts).toEqual([]);
+  });
+});
+
+describe('demo role slugs', () => {
+  it('produces a stable identifier the sign-in button can post', () => {
+    expect(demoRoleSlug('Project manager')).toBe('project-manager');
+    expect(demoRoleSlug('Field reporter')).toBe('field-reporter');
+    expect(demoRoleSlug('  Planner  ')).toBe('planner');
+  });
+  it('keeps the four configured roles distinct', () => {
+    const roles = ['Project manager', 'Planner', 'Supervisor', 'Field reporter'];
+    expect(new Set(roles.map(demoRoleSlug)).size).toBe(4);
+  });
+  it('never emits a slug that could collide with an empty post', () => {
+    expect(demoRoleSlug('!!!')).toBe('');
+    expect(demoRoleSlug('a!b')).toBe('a-b');
   });
 });

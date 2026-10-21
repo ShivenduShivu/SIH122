@@ -1,7 +1,7 @@
 import { redirect } from 'next/navigation';
 import { brand } from '../../lib/brand';
 import { database } from '../../lib/supabase';
-import { demoAccounts } from '../../lib/demo-accounts';
+import { demoAccounts, demoRoleSlug } from '../../lib/demo-accounts';
 export default async function Login({
   searchParams,
 }: {
@@ -32,7 +32,9 @@ export default async function Login({
           <p role="alert" className="login-error">
             {error === 'no-access'
               ? 'This account has no active project membership. Contact your project administrator.'
-              : 'Sign-in failed. Check your email and password, then try again.'}
+              : error === 'demo'
+                ? 'That demonstration account is not available. Try another role or sign in above.'
+                : 'Sign-in failed. Check your email and password, then try again.'}
           </p>
         )}
         <form method="post" action="/api/auth/login">
@@ -63,32 +65,27 @@ export default async function Login({
         </p>
         {demos.length > 0 && (
           <section className="demo-access" aria-labelledby="demo-access-heading">
-            <h2 id="demo-access-heading">Exploring this demonstration?</h2>
+            <h2 id="demo-access-heading">Open the demonstration</h2>
             <p className="demo-access-intro">
-              Open a prepared account, or sign in with it above. Each role sees a different part of
-              the project, which is the point worth comparing.
+              No credentials needed. Each role sees a different part of the same project, which is
+              the comparison worth making.
             </p>
             <ul className="demo-account-list">
               {demos.map((account) => (
-                <li key={account.email}>
-                  <form method="post" action="/api/auth/login">
-                    <input type="hidden" name="email" value={account.email} />
-                    <input type="hidden" name="password" value={account.password} />
+                <li key={account.role}>
+                  <form method="post" action="/api/auth/demo">
+                    <input type="hidden" name="role" value={demoRoleSlug(account.role)} />
                     <button className="button demo-open" type="submit">
-                      Open as {account.role.toLowerCase()}
+                      Open as {account.role}
                     </button>
                   </form>
-                  <div className="demo-credentials">
-                    {account.note && <span className="demo-note">{account.note}</span>}
-                    <code>{account.email}</code>
-                    <code>{account.password}</code>
-                  </div>
+                  {account.note && <span className="demo-note">{account.note}</span>}
                 </li>
               ))}
             </ul>
             <p className="demo-access-warning">
-              Synthetic project data only. These sign-ins are published deliberately, so treat
-              anything recorded here as public and expect the workspace to be reset.
+              Synthetic project data only. These sign-ins are open deliberately, so treat anything
+              recorded here as public and expect the workspace to be reset.
             </p>
           </section>
         )}
