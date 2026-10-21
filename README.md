@@ -56,59 +56,20 @@ So the design question is not _"how do we extract more?"_ It is _"what do we do 
 
 ## ⭐ What makes it different
 
-Ten things we built that a generic "AI reads your reports" tool does not do.
+Ten things a generic "AI reads your reports" tool does not do.
 
-### 1. It refuses to guess
-
-When two planned activities fit a report equally well, Nirmaan does **not** pick the higher score. The claim stops in `clarification` and the planner asks the reporter one specific question.
-
-In the live demo, a report about _"the 24-inch process line"_ matches two planned lines at an identical **0.350**. There is no tie to break, so the product does not invent one.
-
-### 2. Evidence, never a bare score
-
-Every candidate shows **why** it was proposed: the matched location, stage, discipline, and the exact quote it came from — plus an explicit line that _"scores rank matches; they are not probabilities."_
-
-A planner audits reasoning. Nobody is asked to trust a confidence bar.
-
-### 3. Authorisation lives in Postgres, not in the UI
-
-**All 34 tables** have row-level security enabled and **all 69 `SECURITY DEFINER` functions** pin `search_path`. The web server only ever holds the signed-in user's session and the publishable key — the service-role key exists solely inside the worker.
-
-A bug in the interface cannot widen access, because the interface was never what was enforcing it.
-
-### 4. Append-only history, versioned against the plan
-
-Every accepted event records who approved it, when, against **which schedule revision** and **which policy version**. History rows cannot be updated or deleted — a database trigger blocks it, even for the operator.
-
-### 5. The model extracts; it never decides
-
-The language model turns prose into candidate facts. **Ranking is a reviewed, hand-weighted scorer** in `packages/domain` with no network access, and acceptance is a human action.
-
-No model ever chooses a database activity ID or authorises a change.
-
-### 6. It runs with no model at all
-
-An `EXTRACTION_PROVIDER=fixture` mode replays hand-authored readings with **no API key and no network call**, so a dead venue connection cannot end a demonstration.
-
-It cannot be mistaken for inference: matching is exact, an unrecorded report **fails** rather than being answered, and every claim it produces is labelled _"not produced by a model"_ in the review panel and stored as `provider = fixture`.
-
-### 7. It reads the planner's own files, unmodified
-
-Source row values and formula caches are **preserved, never recalculated or rewritten**. Imports are previewed and activated as an explicit revision, with blocked IDs and scope changes surfaced before anything is applied.
-
-### 8. The reporter speaks their own language
-
-Voice, text or photo. Hindi, English or code-mixed — _"Line 24 ka spool erection ho gaya"_. No forms, no activity codes to memorise, nothing to type if they would rather talk.
-
-### 9. It models ambiguity instead of flattening it
-
-The observation contract carries **date basis**, **quantity coverage**, **component scope**, **percent basis** (physical / duration / test result) and **inspection relation**.
-
-So _"98% density"_ is recorded as a test result, not as 98% progress — a distinction that silently corrupts a schedule when a tool gets it wrong.
-
-### 10. Independent verification, properly scoped
-
-A supervisor confirms work **they did not report**, limited to their own contractor, disciplines and work fronts. After a denial, **only a project manager** can order a fresh check — a supervisor cannot simply be asked again until they agree.
+| #      |                                            |                                                                                                                                                                                       |
+| :----- | :----------------------------------------- | :------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------ |
+| **1**  | **Refuses to guess**                       | Two activities fitting equally well stops the claim and raises a question. In the live demo, two 24-inch lines tie at **0.350** — the product does not break the tie itself.          |
+| **2**  | **Evidence, never a bare score**           | Every candidate shows the location, stage, discipline and exact quote behind it, and the page states outright that scores rank matches and are not probabilities.                     |
+| **3**  | **Authorisation in Postgres, not the UI**  | **34 of 34** tables under row-level security; **69 of 69** `SECURITY DEFINER` functions with `search_path` pinned. A bug in the interface cannot widen access.                        |
+| **4**  | **Append-only history**                    | Every acceptance records who, when, and against which schedule revision and policy version. A trigger blocks updates and deletes, including for the operator.                         |
+| **5**  | **The model extracts; it never decides**   | Ranking is a hand-weighted scorer with no network access, and acceptance is a human action. No model ever picks an activity ID.                                                       |
+| **6**  | **Runs with no model at all**              | `EXTRACTION_PROVIDER=fixture` replays recorded readings with no key and no network call. Unrecorded reports fail rather than being answered, and every claim is labelled as scripted. |
+| **7**  | **Reads planner workbooks unmodified**     | Row values and formula caches are preserved, never recalculated. Imports preview as an explicit revision before anything is applied.                                                  |
+| **8**  | **The reporter speaks their own language** | Voice, text or photo — Hindi, English or code-mixed. No forms, no activity codes to memorise.                                                                                         |
+| **9**  | **Models ambiguity, not averages**         | Date basis, quantity coverage, percent basis and inspection relation are each recorded, so _"98% density"_ stays a test result instead of becoming 98% progress.                      |
+| **10** | **Verification that cannot be worn down**  | A supervisor confirms work they did not report, inside their own scope. After a denial, only a project manager can order a fresh check.                                               |
 
 ---
 
@@ -236,6 +197,12 @@ We parse them **unmodified**, preserving source row values and formula caches. T
 ---
 
 ## 🏗️ Architecture
+
+<div align="center">
+
+<img src=".github/assets/architecture.svg" alt="Nirmaan system architecture: clients, Vercel application tier, Supabase data tier, worker container and extraction providers" width="100%">
+
+</div>
 
 ```
 apps/web            Next.js planner and field interfaces · 36 API routes

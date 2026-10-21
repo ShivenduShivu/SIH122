@@ -1,0 +1,159 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1440 860" width="1440" height="860" role="img" aria-label="Nirmaan system architecture">
+<defs>
+  <linearGradient id="bg" x1="0" y1="0" x2="1" y2="1">
+    <stop offset="0" stop-color="#101f2d"/><stop offset="1" stop-color="#16314a"/>
+  </linearGradient>
+  <marker id="ar" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse">
+    <path d="M0 0 L10 5 L0 10 z" fill="#7fa6c0"/>
+  </marker>
+  <marker id="arg" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse">
+    <path d="M0 0 L10 5 L0 10 z" fill="#c8a059"/>
+  </marker>
+  <style>
+    .z  { fill:#ffffff; fill-opacity:.035; stroke:#2c536f; stroke-width:1.2; rx:10 }
+    .zt { font:600 13px 'Segoe UI',Roboto,Helvetica,Arial,sans-serif; fill:#7fa6c0; letter-spacing:2.2px }
+
+    .t  { font:600 16px 'Segoe UI',Roboto,Helvetica,Arial,sans-serif; fill:#ffffff }
+    .s  { font:400 12.5px 'Segoe UI',Roboto,Helvetica,Arial,sans-serif; fill:#a9c2d4 }
+    .m  { font:400 11.5px 'Segoe UI',Roboto,Helvetica,Arial,sans-serif; fill:#8fb0c6 }
+    .lbl{ font:600 11.5px 'Segoe UI',Roboto,Helvetica,Arial,sans-serif; fill:#bcd3e2 }
+    .key{ font:700 11px 'Segoe UI',Roboto,Helvetica,Arial,sans-serif; fill:#0f1f2d }
+    .ln { stroke:#5b87a5; stroke-width:1.8; fill:none; marker-end:url(#ar) }
+    .lg { stroke:#aa823d; stroke-width:1.8; fill:none; marker-end:url(#arg); stroke-dasharray:6 4 }
+  </style>
+</defs>
+
+<rect width="1440" height="860" fill="url(#bg)"/>
+<text x="48" y="54" font-family="Georgia,serif" font-size="30" fill="#ffffff">Nirmaan — system architecture</text>
+<text x="48" y="80" class="s">Every schedule change passes a human. The web tier never holds a privileged key.</text>
+
+<!-- ============ CLIENTS ============ -->
+<rect class="z" x="48" y="112" width="300" height="300"/>
+<text class="zt" x="68" y="140">CLIENTS</text>
+
+<rect x="72" y="162" width="252" height="104" rx="8" fill="#1d3b54" stroke="#2f86ad" stroke-width="1.6"/>
+<text class="t" x="92" y="190">Field app</text>
+<text class="s" x="92" y="212">Supervisor, on a phone</text>
+<text class="m" x="92" y="234">Voice · text · photo</text>
+<text class="m" x="92" y="252">Hindi · English · code-mixed</text>
+
+<rect x="72" y="284" width="252" height="104" rx="8" fill="#1d3b54" stroke="#2f86ad" stroke-width="1.6"/>
+<text class="t" x="92" y="312">Planner workspace</text>
+<text class="s" x="92" y="334">Desktop review and schedule</text>
+<text class="m" x="92" y="356">Gantt · review queue</text>
+<text class="m" x="92" y="374">assignments · exports</text>
+
+<!-- ============ APPLICATION ============ -->
+<rect class="z" x="408" y="112" width="372" height="300"/>
+<text class="zt" x="428" y="140">APPLICATION · VERCEL</text>
+
+<rect x="432" y="162" width="324" height="70" rx="8" fill="#1d3b54" stroke="#4e7f9e" stroke-width="1.4"/>
+<text class="t" x="452" y="188">proxy.ts</text>
+<text class="m" x="452" y="210">Session refresh · private cache · origin scope</text>
+
+<rect x="432" y="246" width="324" height="70" rx="8" fill="#1d3b54" stroke="#4e7f9e" stroke-width="1.4"/>
+<text class="t" x="452" y="272">Server components</text>
+<text class="m" x="452" y="294">Read through the signed-in user's session</text>
+
+<rect x="432" y="330" width="324" height="58" rx="8" fill="#1d3b54" stroke="#4e7f9e" stroke-width="1.4"/>
+<text class="t" x="452" y="356">36 API routes</text>
+<text class="m" x="452" y="376">Zod validated · same-origin · RPC only</text>
+
+<!-- ============ DATA ============ -->
+<rect class="z" x="840" y="112" width="552" height="300"/>
+<text class="zt" x="860" y="140">DATA · SUPABASE</text>
+
+<rect x="864" y="162" width="504" height="130" rx="8" fill="#17354c" stroke="#4fae72" stroke-width="1.8"/>
+<text class="t" x="884" y="190">PostgreSQL — the authorisation boundary</text>
+<text class="s" x="884" y="214">34 tables · row-level security on every one</text>
+<text class="s" x="884" y="236">69 SECURITY DEFINER functions · search_path pinned</text>
+<text class="m" x="884" y="260">decide_claim · request_clarification · request_verification</text>
+<text class="m" x="884" y="278">activate_schedule_import · create_planner_export</text>
+
+<rect x="864" y="306" width="244" height="82" rx="8" fill="#1d3b54" stroke="#4e7f9e" stroke-width="1.4"/>
+<text class="t" x="884" y="332">Auth</text>
+<text class="m" x="884" y="354">Provisioned accounts only</text>
+<text class="m" x="884" y="372">No public signup</text>
+
+<rect x="1124" y="306" width="244" height="82" rx="8" fill="#1d3b54" stroke="#4e7f9e" stroke-width="1.4"/>
+<text class="t" x="1144" y="332">Storage</text>
+<text class="m" x="1144" y="354">Private evidence bucket</text>
+<text class="m" x="1144" y="372">Short-lived signed URLs</text>
+
+<!-- ============ WORKER ============ -->
+<rect class="z" x="408" y="452" width="372" height="330"/>
+<text class="zt" x="428" y="480">WORKER · CONTAINER</text>
+
+<rect x="432" y="502" width="324" height="92" rx="8" fill="#23405c" stroke="#aa823d" stroke-width="1.8"/>
+<text class="t" x="452" y="528">Lease loop</text>
+<text class="m" x="452" y="550">lease_report_job · lease_field_media</text>
+<text class="m" x="452" y="568">lease_schedule_import · heartbeat · backoff</text>
+<text class="m" x="452" y="586">Live reports preferred over bulk imports</text>
+
+<rect x="432" y="608" width="324" height="78" rx="8" fill="#1d3b54" stroke="#4e7f9e" stroke-width="1.4"/>
+<text class="t" x="452" y="634">packages/domain — matching</text>
+<text class="m" x="452" y="656">Hand-weighted scorer · no network, no database</text>
+<text class="m" x="452" y="674">Depends only on contracts, which depends only on zod</text>
+
+<rect x="432" y="700" width="324" height="60" rx="8" fill="#2a1f12" stroke="#aa823d" stroke-width="1.4"/>
+<text class="lbl" x="452" y="724">Holds the service-role key and every provider key</text>
+<text class="m" x="452" y="744">The web tier never sees either</text>
+
+<!-- ============ PROVIDERS ============ -->
+<rect class="z" x="840" y="452" width="552" height="330"/>
+<text class="zt" x="860" y="480">EXTRACTION · NO AUTOMATIC FALLBACK</text>
+
+<rect x="864" y="502" width="504" height="110" rx="8" fill="#1d3b54" stroke="#4e7f9e" stroke-width="1.4"/>
+<text class="t" x="884" y="528">OpenAI · Gemini · Anthropic · OpenRouter</text>
+<text class="s" x="884" y="552">Prose to candidate facts, with an exact source quote</text>
+<text class="m" x="884" y="576">Never selects an activity ID. Never authorises a change.</text>
+<text class="m" x="884" y="594">Switching vendor is an explicit configuration change.</text>
+
+<rect x="864" y="626" width="504" height="100" rx="8" fill="#17354c" stroke="#4fae72" stroke-width="1.8"/>
+<text class="t" x="884" y="652">fixture — keyless demonstration mode</text>
+<text class="s" x="884" y="676">Replays hand-authored readings. No key, no network call.</text>
+<text class="m" x="884" y="698">Exact match only; an unrecorded report fails rather than being answered.</text>
+<text class="m" x="884" y="716">Every claim it produces is labelled "not produced by a model".</text>
+
+<!-- ============ FLOWS ============ -->
+<path class="ln" d="M324 214 H408"/>
+<text class="lbl" x="330" y="204">HTTPS</text>
+<path class="ln" d="M324 336 H408"/>
+<text class="lbl" x="330" y="326">HTTPS</text>
+
+<path class="ln" d="M756 226 H864"/>
+<text class="lbl" x="762" y="216">user session</text>
+<text class="m"   x="762" y="246">publishable key</text>
+
+<path class="ln" d="M594 412 V502"/>
+<text class="lbl" x="606" y="452">queued job</text>
+
+<path class="lg" d="M756 548 H864"/>
+<text class="lbl" x="770" y="538">extract</text>
+
+<path class="lg" d="M756 540 C 812 540 820 330 862 300" />
+<text class="lbl" x="790" y="420">service-role writes</text>
+<text class="m"   x="790" y="440">record_extraction · finish_report_job</text>
+
+<path class="ln" d="M1246 306 V266" />
+<text class="lbl" x="1180" y="300">signed URL</text>
+
+<!-- legend -->
+<rect x="48" y="452" width="300" height="330" class="z"/>
+<text class="zt" x="68" y="480">THE RULE</text>
+<rect x="72" y="502" width="252" height="120" rx="8" fill="#17354c" stroke="#4fae72" stroke-width="1.8"/>
+<text class="t" x="92" y="530">Nothing moves alone</text>
+<text class="s" x="92" y="554">A claim becomes schedule</text>
+<text class="s" x="92" y="574">progress only when a named</text>
+<text class="s" x="92" y="594">person accepts it, recorded</text>
+<text class="s" x="92" y="614">append-only.</text>
+
+<rect x="72" y="640" width="252" height="120" rx="8" fill="#2a1f12" stroke="#aa823d" stroke-width="1.4"/>
+<text class="t" x="92" y="668">When it is unsure</text>
+<text class="s" x="92" y="692">Equal candidates stop the</text>
+<text class="s" x="92" y="712">claim and raise a question</text>
+<text class="s" x="92" y="732">to the reporter, rather than</text>
+<text class="s" x="92" y="752">picking the higher score.</text>
+
+<rect x="0.5" y="0.5" width="1439" height="859" fill="none" stroke="#2a4f6b"/>
+</svg>
