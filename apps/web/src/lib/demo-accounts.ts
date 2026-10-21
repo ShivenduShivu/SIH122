@@ -17,10 +17,19 @@ export const DemoAccount = z
         message: 'Demonstration accounts must use a reserved domain such as .test or .example',
       }),
     password: z.string().min(1).max(256),
-    note: z.string().trim().max(120).optional(),
+    note: z.string().trim().max(200).optional(),
   })
   .strict();
 export const DemoAccounts = z.array(DemoAccount).max(6);
+
+// Stable identifier posted by the sign-in buttons, so the role label stays free text.
+export function demoRoleSlug(role: string) {
+  return role
+    .trim()
+    .toLowerCase()
+    .replace(/[^a-z0-9]+/g, '-')
+    .replace(/^-|-$/g, '');
+}
 export type DemoAccount = z.infer<typeof DemoAccount>;
 
 export function parseDemoAccounts(raw: string | undefined): {

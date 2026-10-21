@@ -24,24 +24,31 @@ const domain = process.env.DEMO_EMAIL_DOMAIN?.trim() || 'nirmaan.example.test';
 
 const roles = [
   {
+    role: 'Project manager',
+    local: 'manager.demo',
+    name: 'Demo Project Manager',
+    note: 'Everything the planner sees, plus verification on any work front. Only this role can order a fresh check after a supervisor denies one.',
+    member: { role: 'manager', discipline_scope: ['Civil', 'Piping', 'Electrical'] },
+  },
+  {
     role: 'Planner',
     local: 'planner.demo',
     name: 'Demo Planner',
-    note: 'Full schedule, review queue and exports',
+    note: 'Schedule, review queue, assignments and exports. Accepts or rejects every reported event.',
     member: { role: 'planner', discipline_scope: ['Civil', 'Piping', 'Electrical'] },
   },
   {
     role: 'Supervisor',
     local: 'supervisor.demo',
     name: 'Demo Supervisor',
-    note: 'Independent checks on assigned work fronts',
+    note: 'Independently confirms work, limited to their own contractor, disciplines and work fronts. Cannot assign work.',
     member: { role: 'supervisor', discipline_scope: ['Civil', 'Piping'] },
   },
   {
     role: 'Field reporter',
     local: 'reporter.demo',
     name: 'Demo Reporter',
-    note: 'Only the work assigned to this reporter',
+    note: 'Submits progress from the site and sees only the work assigned to them.',
     member: { role: 'reporter', discipline_scope: ['Civil'] },
   },
 ];
@@ -94,6 +101,9 @@ for (const spec of roles) {
       p_reason: 'Published demonstration account',
     }),
   );
+  // Keep in step with the note limit in apps/web/src/lib/demo-accounts.ts: a longer
+  // description would be refused at render time and the block would silently vanish.
+  if (spec.note.length > 200) throw new Error(`Note for ${spec.role} exceeds 200 characters.`);
   published.push({ role: spec.role, email, password, note: spec.note });
 }
 
