@@ -2,77 +2,240 @@
 
 <img src=".github/assets/nirmaan-banner.svg" alt="Nirmaan — field evidence, verified progress" width="100%">
 
+# Nirmaan
+
 ### Turn what a supervisor says on site into a schedule update somebody signed for.
 
-[![Live demo](https://img.shields.io/badge/Live_demo-open_by_role-17354c?style=for-the-badge&logo=vercel&logoColor=white)](https://intelligrid-sih122.vercel.app/login)
+**Smart India Hackathon 2026 · Problem Statement 26122 · Oil India Limited**
+
+<br>
+
+[![Live demo](https://img.shields.io/badge/▶_Live_demo-open_by_role-17354c?style=for-the-badge&logoColor=white)](https://intelligrid-sih122.vercel.app/login)
 [![Watch the video](https://img.shields.io/badge/Watch-product_video-FF0000?style=for-the-badge&logo=youtube&logoColor=white)](https://youtu.be/mEQVCm0IRXY)
+[![Runbook](https://img.shields.io/badge/Read-demo_runbook-266b8c?style=for-the-badge&logoColor=white)](docs/demo-runbook.md)
+
+<br>
+
+[![Phase checks](https://github.com/ShivenduShivu/SIH122/actions/workflows/checks.yml/badge.svg)](https://github.com/ShivenduShivu/SIH122/actions/workflows/checks.yml)
+[![Tests](https://img.shields.io/badge/tests-171_passing-4fae72)](#-verification)
+[![RLS](https://img.shields.io/badge/RLS-34%2F34_tables-4fae72)](#-security-model)
+[![Audit](https://img.shields.io/badge/npm_audit-0_vulnerabilities-4fae72)](#-verification)
 
 [![Next.js](https://img.shields.io/badge/Next.js-16.4-000000?logo=nextdotjs&logoColor=white)](https://nextjs.org)
 [![React](https://img.shields.io/badge/React-19-087ea4?logo=react&logoColor=white)](https://react.dev)
 [![TypeScript](https://img.shields.io/badge/TypeScript-strict-3178c6?logo=typescript&logoColor=white)](https://www.typescriptlang.org)
 [![Supabase](https://img.shields.io/badge/Supabase-Postgres_+_RLS-3ecf8e?logo=supabase&logoColor=white)](https://supabase.com)
 [![Node](https://img.shields.io/badge/Node-24_LTS-5fa04e?logo=nodedotjs&logoColor=white)](https://nodejs.org)
-[![Tests](https://img.shields.io/badge/tests-171_passing-4fae72)](#verification)
-[![Phase checks](https://github.com/ShivenduShivu/SIH122/actions/workflows/checks.yml/badge.svg)](https://github.com/ShivenduShivu/SIH122/actions/workflows/checks.yml)
+[![Tailwind](https://img.shields.io/badge/Tailwind-4-06b6d4?logo=tailwindcss&logoColor=white)](https://tailwindcss.com)
+
+<br>
+
+[**The problem**](#-the-problem) · [**What makes it different**](#-what-makes-it-different) · [**How it works**](#-how-it-works) · [**Try it**](#-try-it-no-signup) · [**Features**](#-feature-map) · [**Architecture**](#-architecture) · [**Security**](#-security-model) · [**Run it**](#-run-it-locally) · [**Limits**](#-honest-limits)
 
 </div>
 
 ---
 
-## The problem
+## 🧩 The problem
 
-On an EPC site, work happens in sentences. _"Spool erection on the 24-inch line finished today, two joints still pending NDT."_
+On an EPC site, work happens in sentences.
+
+> _"Spool erection on the 24-inch line finished today, two joints still pending NDT."_
 
 That sentence has to become a dated row in a schedule a contractor eventually gets paid against. Today a planner retypes it, guesses what it matched, and the schedule drifts from the site a little more every week.
 
-Automating the typing is the easy part. **The hard part is that a wrong guess is worse than no guess** — it writes a false actual date into a commercial record.
+Automating the typing is the easy part.
 
-## What Nirmaan does
+> ### **The hard part is that a wrong guess is worse than no guess.**
+>
+> It writes a false actual date into a commercial record, and nobody notices until a claim is disputed.
 
-It reads the report, proposes a match against the planned activity, shows the reasoning, and then **stops**. A human accepts or rejects. Nothing reaches the schedule without a name against it.
+So the design question is not _"how do we extract more?"_ It is _"what do we do when we are not sure?"_
+
+---
+
+## ⭐ What makes it different
+
+Ten things we built that a generic "AI reads your reports" tool does not do.
+
+### 1. It refuses to guess
+
+When two planned activities fit a report equally well, Nirmaan does **not** pick the higher score. The claim stops in `clarification` and the planner asks the reporter one specific question.
+
+In the live demo, a report about _"the 24-inch process line"_ matches two planned lines at an identical **0.350**. There is no tie to break, so the product does not invent one.
+
+### 2. Evidence, never a bare score
+
+Every candidate shows **why** it was proposed: the matched location, stage, discipline, and the exact quote it came from — plus an explicit line that _"scores rank matches; they are not probabilities."_
+
+A planner audits reasoning. Nobody is asked to trust a confidence bar.
+
+### 3. Authorisation lives in Postgres, not in the UI
+
+**All 34 tables** have row-level security enabled and **all 69 `SECURITY DEFINER` functions** pin `search_path`. The web server only ever holds the signed-in user's session and the publishable key — the service-role key exists solely inside the worker.
+
+A bug in the interface cannot widen access, because the interface was never what was enforcing it.
+
+### 4. Append-only history, versioned against the plan
+
+Every accepted event records who approved it, when, against **which schedule revision** and **which policy version**. History rows cannot be updated or deleted — a database trigger blocks it, even for the operator.
+
+### 5. The model extracts; it never decides
+
+The language model turns prose into candidate facts. **Ranking is a reviewed, hand-weighted scorer** in `packages/domain` with no network access, and acceptance is a human action.
+
+No model ever chooses a database activity ID or authorises a change.
+
+### 6. It runs with no model at all
+
+An `EXTRACTION_PROVIDER=fixture` mode replays hand-authored readings with **no API key and no network call**, so a dead venue connection cannot end a demonstration.
+
+It cannot be mistaken for inference: matching is exact, an unrecorded report **fails** rather than being answered, and every claim it produces is labelled _"not produced by a model"_ in the review panel and stored as `provider = fixture`.
+
+### 7. It reads the planner's own files, unmodified
+
+Source row values and formula caches are **preserved, never recalculated or rewritten**. Imports are previewed and activated as an explicit revision, with blocked IDs and scope changes surfaced before anything is applied.
+
+### 8. The reporter speaks their own language
+
+Voice, text or photo. Hindi, English or code-mixed — _"Line 24 ka spool erection ho gaya"_. No forms, no activity codes to memorise, nothing to type if they would rather talk.
+
+### 9. It models ambiguity instead of flattening it
+
+The observation contract carries **date basis**, **quantity coverage**, **component scope**, **percent basis** (physical / duration / test result) and **inspection relation**.
+
+So _"98% density"_ is recorded as a test result, not as 98% progress — a distinction that silently corrupts a schedule when a tool gets it wrong.
+
+### 10. Independent verification, properly scoped
+
+A supervisor confirms work **they did not report**, limited to their own contractor, disciplines and work fronts. After a denial, **only a project manager** can order a fresh check — a supervisor cannot simply be asked again until they agree.
+
+---
+
+## ⚙️ How it works
+
+```mermaid
+flowchart LR
+    A["🗣️ Field report<br/><i>voice · text · photo</i>"] --> B["📝 Extraction<br/><i>prose → candidate facts</i>"]
+    B --> C["🎯 Matching<br/><i>hand-weighted scorer</i>"]
+    C --> D{"Confident<br/>enough?"}
+    D -- "No / tie" --> E["❓ Clarification<br/><i>planner asks reporter</i>"]
+    E --> C
+    D -- "Yes" --> F["👤 Planner review<br/><i>evidence shown</i>"]
+    F -- "Reject" --> G["🗄️ Recorded, no change"]
+    F -- "Accept" --> H["✅ Accepted event<br/><i>append-only</i>"]
+    H --> I["📊 Schedule actuals"]
+    I --> J["📤 Exchange package<br/><i>CSV · JSON · manifest</i>"]
+
+    style A fill:#17354c,color:#fff,stroke:#2f86ad
+    style H fill:#4fae72,color:#fff,stroke:#3d8f5c
+    style E fill:#aa823d,color:#fff,stroke:#8a6a31
+    style J fill:#266b8c,color:#fff,stroke:#1d5470
+```
+
+The schedule only ever moves at the **Accept** step, and that step always has a name attached.
+
+---
+
+## 🚀 Try it, no signup
+
+### **[intelligrid-sih122.vercel.app](https://intelligrid-sih122.vercel.app/login)**
+
+Four buttons. No credentials to type, no account to create.
 
 <div align="center">
-
-<img src=".github/assets/demo.gif" alt="Walkthrough: role-based sign-in, project overview, schedule, review queue, execution history" width="100%">
-
+<img src=".github/assets/screen-login.png" alt="Login page with four role buttons and no credentials" width="80%">
 </div>
 
-|                                      |                                                                                                                                        |
-| ------------------------------------ | -------------------------------------------------------------------------------------------------------------------------------------- |
-| 🗣️ **Report in plain words**         | Speak, type or photograph. Hindi, English or a mix. No forms, no activity codes to memorise.                                           |
-| 🔍 **Evidence, not a score**         | Every proposed match shows the location, stage, discipline and quote it came from. The planner checks reasoning, not a confidence bar. |
-| ✋ **Refuses to guess**              | When two activities fit equally well, the claim stops and the planner asks the reporter a specific question.                           |
-| 🔐 **Authorisation in the database** | Row-level security and `SECURITY DEFINER` functions. The web app holds no privileged key and cannot bypass a policy.                   |
-| 📜 **Append-only history**           | Who accepted what, when, against which schedule revision and policy version.                                                           |
-| 📤 **Hands back to the planner**     | Exchange package of activity rows, evidence and exceptions, with a hash manifest.                                                      |
+| Open as                | Sees                             | Can do                                                                                                                       | Cannot do                             |
+| ---------------------- | -------------------------------- | ---------------------------------------------------------------------------------------------------------------------------- | ------------------------------------- |
+| 👔 **Project manager** | Whole project                    | Everything a planner can, plus verification on **any** work front; the only role that can order a fresh check after a denial | —                                     |
+| 📋 **Planner**         | Whole project                    | Schedule, review queue, assignments, exports; accepts or rejects every reported event                                        | Override a supervisor denial          |
+| 🔍 **Supervisor**      | Their contractor and work fronts | Independently confirm work they did not report                                                                               | Assign work; act outside their scope  |
+| 🦺 **Field reporter**  | Only their assigned work         | Submit progress by voice, text or photo                                                                                      | See other reporters' work or evidence |
 
-## See it yourself
+Opening each in turn is the fastest way to see the point: **one project, four genuinely different views**, enforced in Postgres rather than in the interface.
 
-**[intelligrid-sih122.vercel.app](https://intelligrid-sih122.vercel.app/login)** — four buttons, no credentials, no sign-up.
+> ⚠️ Synthetic project data only. Those sign-ins are published deliberately — treat anything recorded there as public, and expect the workspace to be reset.
 
-| Open as             | What that role can do                                                                                                                       |
-| ------------------- | ------------------------------------------------------------------------------------------------------------------------------------------- |
-| **Project manager** | Everything the planner sees, plus verification on any work front. The only role that can order a fresh check after a supervisor denies one. |
-| **Planner**         | Schedule, review queue, assignments and exports. Accepts or rejects every reported event.                                                   |
-| **Supervisor**      | Independently confirms work, limited to their own contractor, disciplines and work fronts. Cannot assign work.                              |
-| **Field reporter**  | Submits progress from the site and sees only the work assigned to them.                                                                     |
+---
 
-Opening each in turn is the quickest way to see the point: one project, four genuinely different views, enforced in Postgres rather than in the interface.
+## 🗂️ Feature map
 
-> Synthetic project data only. Those sign-ins are published deliberately — treat anything recorded there as public.
+<table>
+<tr><td width="25%" valign="top">
+
+**🎙️ Field capture**
+
+</td><td valign="top">
+
+Voice recording with on-device WAV encoding · Typed reports · Photo evidence with private storage · Recoverable drafts · Code-mixed Hindi/English · Per-reporter task list
+
+</td></tr>
+<tr><td valign="top">
+
+**🧠 Understanding**
+
+</td><td valign="top">
+
+11 event kinds — `START` `FINISH` `ITEM_PROGRESS` `PERCENT_PROGRESS` `MILESTONE` `INSPECTION` `BLOCKED` `RESUMED` `CORRECTION` `PLANNED_INTENT` `UNKNOWN` · Observation contract v2 with date basis, quantity coverage, component scope, percent basis and inspection relation · Exact-quote evidence for every claim · Vocabulary normalisation over the supplied corpus
+
+</td></tr>
+<tr><td valign="top">
+
+**👤 Review & control**
+
+</td><td valign="top">
+
+Ranked candidates with match reasons · Change preview before acceptance · Clarification questions back to the reporter · Independent supervisor attestation · Re-match and reprocess · Report withdrawal and scoped correction · Optimistic concurrency on every decision
+
+</td></tr>
+<tr><td valign="top">
+
+**📅 Schedule & exchange**
+
+</td><td valign="top">
+
+Gantt timeline, table and hierarchy views · Baseline versus accepted actuals · Discipline filter · Workbook and CSV import with preview and activation · Immutable revisions · Export package of `activities.csv`, `evidence.csv`, `exceptions.csv`, `snapshot.json` and a hash `manifest.json`
+
+</td></tr>
+<tr><td valign="top">
+
+**🔐 Platform**
+
+</td><td valign="top">
+
+Row-level security on all 34 tables · Private evidence storage with short-lived signed URLs · Append-only audit · Leased worker jobs with heartbeat and backoff · Four AI vendors plus a keyless fixture mode · Container builds for web and worker
+
+</td></tr>
+</table>
 
 <div align="center">
 <img src=".github/assets/screen-schedule.png" alt="Project schedule showing baseline and accepted field progress" width="49%">
 <img src=".github/assets/screen-review.png" alt="Review queue showing a reported event beside its original field report" width="49%">
 </div>
 
-## The data was supplied, not invented
+<div align="center"><i>Schedule with baseline versus accepted progress · Review queue with the original report preserved</i></div>
 
-Oil India answered our SIH 26122 questions with three workbooks: an L4–L6 construction schedule, an L3 schedule and a field-input corpus. They describe a conceptual garbage-treatment plant, not a live project.
+---
 
-We parse them unmodified — source row values and formula caches preserved, never recalculated or rewritten. The running demonstration carries **149 reporting activities** and **147 claims across 83 reports** drawn from that corpus.
+## 📊 The data was supplied, not invented
 
-## How it is put together
+Oil India answered our SIH 26122 questions with three workbooks — an L4–L6 construction schedule, an L3 schedule and a field-input corpus. They describe a conceptual garbage-treatment plant, not a live project.
+
+We parse them **unmodified**, preserving source row values and formula caches. The running demonstration carries:
+
+<div align="center">
+
+|         149          |  147   |       83       |      9      |
+| :------------------: | :----: | :------------: | :---------: |
+| reporting activities | claims | source reports | disciplines |
+
+</div>
+
+---
+
+## 🏗️ Architecture
 
 ```
 apps/web            Next.js planner and field interfaces · 36 API routes
@@ -80,18 +243,33 @@ apps/worker         leased extraction and matching jobs · holds the private key
 packages/domain     pure matching rules · no React, no database, no model calls
 packages/contracts  runtime-validated shapes shared by both ends
 packages/adapters   providers, transcription, workbook import
-supabase/           15 migrations · 34 tables · every one RLS-enabled
+supabase/           15 migrations · 34 tables · 69 SECURITY DEFINER functions
 ```
 
-Three decisions worth knowing about:
+**Boundaries are enforced by the dependency graph, not by convention.** `packages/domain` declares exactly one dependency — `@nirmaan/contracts`, which in turn declares only `zod`. It therefore _cannot_ import React, a database client or a model SDK; the import would not resolve and the build would fail.
 
-**Authorisation lives in Postgres, not the application.** All 34 tables have row-level security enabled, and all 69 `SECURITY DEFINER` functions pin `search_path`. The web server only ever uses the signed-in user's session and the publishable key; the service-role key exists solely in the worker.
+The worker is the only component that ever holds a provider key or the service-role key. The standalone web launcher strips every provider prefix and the service-role key from its child process, even when the operator's own shell has them set.
 
-**The language model extracts; it never decides.** It turns prose into candidate facts. Ranking against the plan is a reviewed, hand-weighted scorer in `packages/domain`, and acceptance is a human action written to an append-only table.
+---
 
-**Nothing silently falls back.** Extraction supports OpenAI, Gemini, Anthropic and OpenRouter, and changing vendor is an explicit configuration change. There is also a **`fixture`** provider that replays hand-authored readings with no key and no network call, so a dead venue connection cannot end a demonstration. Every claim it produces is labelled _"not produced by a model"_ in the review panel and stored as `provider = fixture`.
+## 🔐 Security model
 
-## Run it locally
+| Control                                      | Status                                                         |
+| -------------------------------------------- | -------------------------------------------------------------- |
+| Row-level security                           | **34 of 34** tables                                            |
+| `SECURITY DEFINER` with pinned `search_path` | **69 of 69** functions                                         |
+| Service-role key in the web app              | **Never** — worker only                                        |
+| Public signup                                | **Disabled** — accounts are provisioned                        |
+| Cross-origin mutations                       | Rejected on every route                                        |
+| Evidence storage                             | Private bucket, short-lived signed URLs, owner or planner only |
+| History tables                               | Append-only, enforced by trigger                               |
+| Dependency advisories                        | **0** high or critical                                         |
+
+Three tables are deliberately left with RLS on and **no policy at all** — they are reachable only through audited `SECURITY DEFINER` routines, never by direct query.
+
+---
+
+## 💻 Run it locally
 
 Node 24 LTS, npm and Docker. The version is pinned in `.nvmrc` and `.node-version`, and `engine-strict` makes `npm ci` fail on anything else.
 
@@ -102,9 +280,13 @@ npm run dev          # http://localhost:3000/login
 npm run worker:start # second terminal, after choosing a provider
 ```
 
-Sign in with the generated local credentials in ignored `.cache/demo-accounts.json`. Full setup, for both bash and PowerShell: **[docs/local-development.md](docs/local-development.md)**.
+Sign in with the generated local credentials in ignored `.cache/demo-accounts.json`.
 
-## Verification
+📖 Full setup for both bash and PowerShell: **[docs/local-development.md](docs/local-development.md)**
+
+---
+
+## ✅ Verification
 
 ```sh
 npm run check          # strict types, 171 unit tests, fixtures, worker boundary
@@ -113,7 +295,13 @@ npm run test:browser   # Playwright, including 320 px and 390 px layouts
 npm run deploy:check   # credential separation and origin shape
 ```
 
-CI runs three jobs on every push — **foundation** (types, tests, production build), **deployment** (`npm audit`, credential preflight, container build with header and login checks) and **database**, which boots a real Supabase and runs the full authorisation, reconciliation, clarification, import, observation, exchange and media suites.
+CI runs **three jobs on every push**:
+
+| Job            | What it proves                                                                                                                       |
+| -------------- | ------------------------------------------------------------------------------------------------------------------------------------ |
+| **foundation** | Strict types, 171 unit tests, production build                                                                                       |
+| **deployment** | `npm audit`, credential preflight, container build with header and login checks                                                      |
+| **database**   | Boots a real Supabase and runs the full authorisation, reconciliation, clarification, import, observation, exchange and media suites |
 
 <details>
 <summary><b>Every command, including the ones that cost API tokens</b></summary>
@@ -153,19 +341,25 @@ Browser checks use Playwright and Chromium. Install once with `npx playwright in
 
 </details>
 
-## Honest limits
+---
 
-Stated here so nobody has to go looking:
+## ⚠️ Honest limits
 
-- **No native Primavera writer.** Import accepts four explicit workbook and CSV profiles, capped at 2,500 rows; export is CSV and JSON with a manifest. No XER or PMXML round-trip yet.
-- **Not an offline PWA.** Drafts survive in local storage as text; a voice recording made with no network is not preserved.
-- **The matcher is a hand-weighted scorer**, not a learned model, and it has not been scored against an organiser-provided answer key. Figures in `docs/` are row-level candidate coverage, not final-link accuracy.
-- **Provider quality is per-vendor.** Existing OpenAI evaluation numbers do not transfer to Gemini, Claude or OpenRouter; new adapters have mocked transport tests only.
-- **Deployment is CLI-driven**, and hosted speech quality and physical Android/iPhone checks are still open.
+Stated here so nobody has to go looking.
 
-## Documentation
+| Limit                              | Detail                                                                                                                                                        |
+| ---------------------------------- | ------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| **No native Primavera writer**     | Import accepts four explicit workbook and CSV profiles, capped at 2,500 rows. Export is CSV and JSON with a manifest. No XER or PMXML round-trip yet.         |
+| **Not an offline PWA**             | Drafts survive in local storage as text. A voice recording made with no network is not preserved.                                                             |
+| **Matcher is not learned**         | A reviewed, hand-weighted scorer, never scored against an organiser answer key. Figures in `docs/` are row-level candidate coverage, not final-link accuracy. |
+| **Provider quality is per-vendor** | OpenAI evaluation numbers do not transfer to Gemini, Claude or OpenRouter. New adapters have mocked transport tests only.                                     |
+| **Deployment is CLI-driven**       | Hosted speech quality and physical Android/iPhone checks are still open.                                                                                      |
 
-|                                                                 |                                                                                            |
+---
+
+## 📚 Documentation
+
+| Document                                                        | What is in it                                                                              |
 | --------------------------------------------------------------- | ------------------------------------------------------------------------------------------ |
 | [Demonstration runbook](docs/demo-runbook.md)                   | The rehearsed path, failure table, and limits to state aloud                               |
 | [Local development](docs/local-development.md)                  | Setup, seeding, roles and checks — bash and PowerShell                                     |
@@ -188,10 +382,14 @@ The product is named **Nirmaan**; some earlier implementation records retain the
 
 <div align="center">
 
+### Nirmaan
+
 **Smart India Hackathon 2026 · Problem Statement 26122 · Oil India Limited**
 
 BITS Pilani
 
-Student prototype on synthetic data. Not an official Oil India service.
+<sub>Student prototype on synthetic data. Not an official Oil India service.</sub>
+
+[![Live demo](https://img.shields.io/badge/▶_Open_the_demo-17354c?style=for-the-badge)](https://intelligrid-sih122.vercel.app/login)
 
 </div>
